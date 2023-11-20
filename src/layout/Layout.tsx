@@ -1,15 +1,16 @@
+import RadixScrollArea from "../themes/RadixScrollArea";
 import SideBar from "./SideBar";
 import { Outlet } from "react-router-dom";
 
 const Layout = () => {
 	return (
-		<div className="flex bg-realblue">
-			<div className="w-[300px]">
+		<div className="flex bg-red-400">
+			<RadixScrollArea styles="pt-20 w-[300px] h-screen">
 				<SideBar />
-			</div>
-			<div className="w-full overflow-x-hidden px-8 pb-4">
+			</RadixScrollArea>
+			<RadixScrollArea styles="w-full h-screen">
 				<Outlet />
-			</div>
+			</RadixScrollArea>
 		</div>
 	);
 };

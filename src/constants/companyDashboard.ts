@@ -22,7 +22,7 @@ export const companyDashboard = [
 	{
 		menu: "Applicants Jobs",
 		icon: "",
-		src: "",
+		src: "/recruit/applicants_jobs",
 	},
 	{
 		menu: "Shortlisted Candidates",

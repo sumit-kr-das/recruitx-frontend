@@ -8,3 +8,4 @@ export { default as UserHomePage } from "./mnjuser/UserHomePage";
 export { default as CompanyHome } from "./company/CompantHome";
 export { default as SubmitJobs } from "./company/SubmitJobs";
 export { default as MyJobs } from "./company/MyJobs";
+export { default as ApplicantsJobs } from "./company/ApplicantsJobs";
