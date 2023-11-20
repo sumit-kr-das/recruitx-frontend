@@ -1,5 +1,3 @@
-// import { Home } from "lucide-react";
-
 export const companyDashboard = [
 	{
 		menu: "Employer Dashboard",
@@ -14,7 +12,7 @@ export const companyDashboard = [
 	{
 		menu: "My Jobs",
 		icon: "",
-		src: "",
+		src: "/recruit/my_jobs",
 	},
 	{
 		menu: "Submit Jobs",
