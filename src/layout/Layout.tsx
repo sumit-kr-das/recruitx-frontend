@@ -1,4 +1,5 @@
 import SideBar from "./SideBar";
+import { Outlet } from "react-router-dom";
 
 const Layout = () => {
 	return (
@@ -7,7 +8,7 @@ const Layout = () => {
 				<SideBar />
 			</div>
 			<div className="w-full overflow-x-hidden px-8 pb-4">
-				<div>Hello World</div>
+				<Outlet />
 			</div>
 		</div>
 	);
