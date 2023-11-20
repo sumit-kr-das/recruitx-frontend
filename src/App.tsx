@@ -1,5 +1,5 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { HomePage, UserHomePage, CompanyHome } from "./pages";
+import { HomePage, UserHomePage, CompanyHome,SubmitJobs } from "./pages";
 import TopHeader from "./components/navigation/TopHeader";
 import Layout from "./layout/Layout";
 
@@ -15,6 +15,7 @@ const App = () => {
 				{/* company */}
 				<Route path="recruit" element={<Layout />}>
 					<Route path="/recruit" element={<CompanyHome />} />
+					<Route path="/recruit/submit_jobs" element={<SubmitJobs />} />
 				</Route>
 			</Routes>
 		</BrowserRouter>

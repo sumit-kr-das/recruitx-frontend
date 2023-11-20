@@ -19,7 +19,7 @@ export const companyDashboard = [
 	{
 		menu: "Submit Jobs",
 		icon: "",
-		src: "",
+		src: "/recruit/submit_jobs",
 	},
 	{
 		menu: "Applicants Jobs",
