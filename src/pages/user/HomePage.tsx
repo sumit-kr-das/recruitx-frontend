@@ -1,7 +1,12 @@
 import ArrowImg from "../../assets/categories/arrow.svg";
 import catagoriesData from "../../constants/categoriesData";
+import { useSearchDataQuery } from "../../features/user/getSearchData";
 
 const HomePage = () => {
+	const {data} = useSearchDataQuery()
+	console.log('====================================');
+	console.log(data);
+	console.log('====================================');
 	return (
 		<div className="max-w-screen-xl mx-auto pb-40">
 			{/* title */}
