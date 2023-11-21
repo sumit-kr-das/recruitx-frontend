@@ -1,11 +1,23 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { HomePage, UserHomePage, CompanyHome,SubmitJobs, MyJobs, ApplicantsJobs } from "./pages";
+import {
+	HomePage,
+	UserHomePage,
+	CompanyHome,
+	SubmitJobs,
+	MyJobs,
+	ApplicantsJobs,
+	CompanyRegister,
+	CompanyLogin,
+} from "./pages";
 import TopHeader from "./components/navigation/TopHeader";
 import Layout from "./layout/Layout";
+import Footer from "./components/footer/Footer";
+import { Toaster } from "react-hot-toast";
 
 const App = () => {
 	return (
 		<BrowserRouter>
+			<Toaster position="bottom-right" reverseOrder={false} />
 			<TopHeader />
 			<Routes>
 				{/* default */}
@@ -13,6 +25,8 @@ const App = () => {
 				{/* user */}
 				<Route path="/userHome" element={<UserHomePage />} />
 				{/* company */}
+				<Route path="/cRegister" element={<CompanyRegister />} />
+				<Route path="/cLogin" element={<CompanyLogin />} />
 				<Route path="recruit" element={<Layout />}>
 					<Route path="/recruit" element={<CompanyHome />} />
 					<Route path="/recruit/submit_jobs" element={<SubmitJobs />} />
@@ -20,6 +34,7 @@ const App = () => {
 					<Route path="/recruit/applicants_jobs" element={<ApplicantsJobs />} />
 				</Route>
 			</Routes>
+			<Footer />
 		</BrowserRouter>
 	);
 };

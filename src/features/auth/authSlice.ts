@@ -1,20 +1,20 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
-import { RootState } from "../../app/store"; 
-import { AuthState } from "../../@types/features/authSlice"; 
+import { RootState } from "../../app/store";
+import { AuthState } from "../../@types/features/authSlice";
 
 // let isExist = null;
 // if (typeof window !== "undefined") {
 // 	isExist = JSON.parse(localStorage.getItem("user") || "{}");
 // }
 
-// const isExist = JSON.parse(localStorage.getItem("user") || "{}")
-// 	? JSON.parse(localStorage.getItem("user") || "{}")
-// 	: null;
+const isExist = JSON.parse(localStorage.getItem("user") || "{}")
+	? JSON.parse(localStorage.getItem("user") || "{}")
+	: null;
 
 const initialState: AuthState = {
-	user: null,
-	role: null,
-	token: null,
+	user: isExist ? isExist.user : null,
+	role: isExist ? isExist.role : null,
+	token: isExist ? isExist.token : null,
 };
 
 const authSlice = createSlice({

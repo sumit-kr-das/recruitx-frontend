@@ -27,7 +27,7 @@ const SubmitJob = () => {
 					<button
 						onClick={() => setCurrentStepIndex(0)}
 						className={` px-4 py-2 rounded-md bg-cyan-200 ${
-							currentStepIndex == 1 && "bg-cyan-400 text-white"
+							currentStepIndex == 0 && "bg-cyan-400 text-white"
 						}`}
 					>
 						Basic Information
@@ -35,7 +35,7 @@ const SubmitJob = () => {
 					<button
 						onClick={() => setCurrentStepIndex(1)}
 						className={` px-4 py-2 rounded-md bg-cyan-200 ${
-							currentStepIndex == 0 && "bg-cyan-400 text-white"
+							currentStepIndex == 1 && "bg-cyan-400 text-white"
 						}`}
 					>
 						Technical Information
