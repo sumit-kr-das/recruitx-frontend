@@ -1,27 +1,12 @@
-import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { Link, useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
 import MainLogo from "../../assets/logo.svg";
 import { selectCurrentUser } from "../../features/auth/authSlice";
 import RadixMenu from "../../themes/RadixMenu";
 
 const TopHeader = () => {
-	const [show, setShow] = useState(true);
-	const location = useLocation().pathname;
-	const restrictedPaths = ["/cLogin", "/cRegister"];
-	useEffect(() => {
-		if (restrictedPaths.includes(location)) {
-			console.log(show);
-
-			setShow(false);
-		} else {
-			setShow(true);
-		}
-	}, [location]);
-
 	const user = useSelector(selectCurrentUser);
-
-	const header = (
+	return (
 		<header className="bg-white shadow-sm fixed w-full z-20">
 			<nav className="max-w-screen-xl mx-auto py-5 flex items-center justify-between">
 				<div className="flex items-center gap-12">
@@ -81,8 +66,6 @@ const TopHeader = () => {
 			</nav>
 		</header>
 	);
-
-	return show && header;
 };
 
 export default TopHeader;

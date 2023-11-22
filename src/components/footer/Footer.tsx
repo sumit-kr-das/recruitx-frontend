@@ -1,24 +1,10 @@
-import { Link, useLocation } from "react-router-dom";
-import MainLogo from "../../assets/logo.svg";
+import { Link } from "react-router-dom";
 import AndroidLogo from "../../assets/icons/android.png";
 import IosLogo from "../../assets/icons/ios.png";
-import { useEffect, useState } from "react";
+import MainLogo from "../../assets/logo.svg";
 
 const Footer = () => {
-	const [show, setShow] = useState(true);
-	const location = useLocation().pathname;
-	const restrictedPaths = ["/cLogin", "/cRegister"];
-	useEffect(() => {
-		if (restrictedPaths.includes(location)) {
-			console.log(show);
-			
-			setShow(false);
-		} else {
-			setShow(true);
-		}
-	}, [location]);
-
-	const footer = (
+	return (
 		<footer className="bg-white">
 			<div className="max-w-screen-xl mx-auto py-10 flex justify-between">
 				<div>
@@ -152,7 +138,6 @@ const Footer = () => {
 			</div>
 		</footer>
 	);
-    return show && footer;
 };
 
 export default Footer;

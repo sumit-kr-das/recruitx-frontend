@@ -16,7 +16,7 @@ const RadixMenu = () => {
 	return (
 		<Menubar.Root className="flex">
 			<Menubar.Menu>
-				<Menubar.Trigger className="outline-none select-none font-medium leading-none rounded text-violet11 text-[13px] flex items-center justify-between gap-[2px] ">
+				<Menubar.Trigger className="outline-none select-none font-medium leading-none rounded text-[13px] flex items-center justify-between gap-[2px] ">
 					<RadixAvatar.Root className="inline-flex h-[30px] w-[30px] select-none items-center justify-center overflow-hidden rounded-full align-middle cursor-pointer">
 						<RadixAvatar.Image
 							className="h-full w-full rounded-[inherit] object-cover"
@@ -36,7 +36,7 @@ const RadixMenu = () => {
 					>
 						{recruiterMenu.map((menu, index) => (
 							<Link key={index} to={menu.src}>
-								<Menubar.Item className="group text-[13px] leading-none text-violet11 rounded flex items-center h-[25px] px-[10px] relative select-none outline-none data-[state=open]:bg-violet4 data-[state=open]:text-violet11 data-[highlighted]:bg-gradient-to-br data-[highlighted]:from-violet9 data-[highlighted]:to-violet10 data-[highlighted]:text-violet1 data-[highlighted]:data-[state=open]:text-violet1 data-[disabled]:text-mauve8 data-[disabled]:pointer-events-none cursor-pointer">
+								<Menubar.Item className="group text-[13px] leading-none rounded flex items-center h-[25px] px-[10px] relative select-none outline-none data-[state=open]:bg-violet4 data-[state=open]:text-violet11 data-[highlighted]:bg-gradient-to-br data-[highlighted]:from-violet9 data-[highlighted]:to-violet10 data-[highlighted]:text-violet1 data-[highlighted]:data-[state=open]:text-violet1 data-[disabled]:text-mauve8 data-[disabled]:pointer-events-none cursor-pointer">
 									{menu.title}{" "}
 									<div className="ml-auto pl-5 text-mauve9 group-data-[highlighted]:text-white group-data-[disabled]:text-mauve8">
 										{menu.shortHand}
@@ -47,7 +47,7 @@ const RadixMenu = () => {
 						<Menubar.Separator className="h-[1px] bg-gray-200 m-[5px]" />
 						<Menubar.Item
 							onClick={handleLogOut}
-							className="group text-[13px] leading-none text-violet11 rounded flex items-center h-[25px] px-[10px] relative select-none outline-none data-[highlighted]:bg-gradient-to-br data-[highlighted]:from-violet9 data-[highlighted]:to-violet10 data-[highlighted]:text-violet1 data-[disabled]:text-mauve8 data-[disabled]:pointer-events-none cursor-pointer"
+							className="group text-[13px] leading-none rounded flex items-center h-[25px] px-[10px] relative select-none outline-none data-[highlighted]:bg-gradient-to-br data-[highlighted]:from-violet9 data-[highlighted]:to-violet10 data-[highlighted]:text-violet1 data-[disabled]:text-mauve8 data-[disabled]:pointer-events-none cursor-pointer"
 						>
 							Log out{" "}
 							<div className="ml-auto pl-5 text-mauve9 group-data-[highlighted]:text-white group-data-[disabled]:text-mauve8">

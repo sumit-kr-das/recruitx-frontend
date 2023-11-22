@@ -3,6 +3,8 @@ import { INITIAL_JOB_DATA } from "../../@types/recruit/submitJob";
 import useMultistepForm from "../../customHooks/useMultistepForm";
 import BasicInfo from "../../components/recruit/submitJob/BasicInfo";
 import TechnicalInfo from "../../components/recruit/submitJob/TechnicalInfo";
+import TitleBar from "../../components/recruit/titleBar/TitleBar";
+import Container from "../../layout/Container";
 
 const SubmitJob = () => {
 	const [data, setData] = useState(INITIAL_JOB_DATA);
@@ -21,21 +23,22 @@ const SubmitJob = () => {
 	]);
 
 	return (
-		<main className="max-w-screen-xl mx-auto pb-10 flex justify-between">
-			<section className="mt-32 w-full flex gap-10">
+		<Container>
+			<TitleBar title="Post Jobs" path="Employer / Dashboard / Post Jobs" />
+			<section className="w-full flex gap-10">
 				<div className="flex flex-col items-start gap-y-4">
 					<button
 						onClick={() => setCurrentStepIndex(0)}
-						className={` px-4 py-2 rounded-md bg-cyan-200 ${
-							currentStepIndex == 0 && "bg-cyan-400 text-white"
+						className={` px-4 py-2 rounded-md text-white bg-cyan-400 ${
+							currentStepIndex == 0 && "bg-cyan-500"
 						}`}
 					>
 						Basic Information
 					</button>
 					<button
 						onClick={() => setCurrentStepIndex(1)}
-						className={` px-4 py-2 rounded-md bg-cyan-200 ${
-							currentStepIndex == 1 && "bg-cyan-400 text-white"
+						className={` px-4 py-2 rounded-md text-white bg-cyan-400 ${
+							currentStepIndex == 1 && "bg-cyan-500 "
 						}`}
 					>
 						Technical Information
@@ -65,7 +68,7 @@ const SubmitJob = () => {
 					</form>
 				</div>
 			</section>
-		</main>
+		</Container>
 	);
 };
 
