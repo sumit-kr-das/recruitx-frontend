@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useState } from "react";
+import SelectInput, { TSelectOptions } from "./SelectInput";
 
 const options = [
 	{ label: "First", value: 1 },
@@ -9,7 +10,17 @@ const options = [
 ];
 
 const MultiSelectInput = () => {
-	return <div></div>;
+	const [value, setValue] = useState<TSelectOptions[]>([options[0]]);
+	console.log(value);
+	
+	return (
+		<SelectInput
+			multiple
+			options={options}
+			value={value}
+			onChange={(o) => setValue(o)}
+		/>
+	);
 };
 
 export default MultiSelectInput;
