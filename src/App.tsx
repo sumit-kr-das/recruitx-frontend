@@ -13,6 +13,7 @@ import TopHeader from "./components/navigation/TopHeader";
 import Layout from "./layout/Layout";
 import Footer from "./components/footer/Footer";
 import { Toaster } from "react-hot-toast";
+import CompanyRoutes from "./protectedRoutes/CompanyRoutes";
 
 const App = () => {
 	return (
@@ -27,7 +28,14 @@ const App = () => {
 				{/* company */}
 				<Route path="/cRegister" element={<CompanyRegister />} />
 				<Route path="/cLogin" element={<CompanyLogin />} />
-				<Route path="recruit" element={<Layout />}>
+				<Route
+					path="recruit"
+					element={
+						<CompanyRoutes>
+							<Layout />
+						</CompanyRoutes>
+					}
+				>
 					<Route path="/recruit" element={<CompanyHome />} />
 					<Route path="/recruit/submit_jobs" element={<SubmitJobs />} />
 					<Route path="/recruit/my_jobs" element={<MyJobs />} />
