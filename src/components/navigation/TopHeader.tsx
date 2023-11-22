@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import { Link, useLocation } from "react-router-dom";
 import MainLogo from "../../assets/logo.svg";
 import { selectCurrentUser } from "../../features/auth/authSlice";
-import RadixAvatar from "../../themes/RadixAvatar";
+import RadixMenu from "../../themes/RadixMenu";
 
 const TopHeader = () => {
 	const [show, setShow] = useState(true);
@@ -75,7 +75,7 @@ const TopHeader = () => {
 							</div>
 						</>
 					) : (
-						<RadixAvatar />
+						<RadixMenu />
 					)}
 				</div>
 			</nav>
