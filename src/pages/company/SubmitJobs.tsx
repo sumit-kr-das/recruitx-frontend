@@ -10,8 +10,16 @@ import { TINITIAL_JOB_DATA } from "../../@types/recruit/jobPost";
 const SubmitJob = () => {
 	const [data, setData] = useState(INITIAL_JOB_DATA);
 	const updateFields = (fields: Partial<TINITIAL_JOB_DATA>) => {
+		const { title, category, description, tags, ...other } = fields;
 		setData((prev) => {
-			return { ...prev, ...fields };
+			return {
+				...prev,
+				title,
+				category,
+				description,
+				tags,
+				info: { ...other },
+			};
 		});
 	};
 	const {
