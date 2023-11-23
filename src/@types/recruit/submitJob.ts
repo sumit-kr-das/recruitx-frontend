@@ -1,15 +1,15 @@
 type TInfo = {
-	vacancies: number;
+	vacancies: string;
 	jobType: string;
 	workplaceType: string;
 	startDate: string;
 	endDate: string;
 	roles: string;
 	skills: string[];
-	minExprience: number;
-	maxExprience?: number;
-	minSalary?: number;
-	maxSalary?: number;
+	minExprience: string;
+	maxExprience?: string;
+	minSalary?: string;
+	maxSalary?: string;
 	location?: string;
 	maxQualification: string;
 	degree: string;
@@ -31,10 +31,10 @@ const Info:TInfo = {
 	endDate: "",
 	roles: "",
 	skills: [],
-	minExprience: 0,
-	maxExprience: 0,
-	minSalary: 0,
-	maxSalary: 0,
+	minExprience: "",
+	maxExprience: "",
+	minSalary:"",
+	maxSalary: "",
 	location: "",
 	maxQualification: "",
 	degree: "",

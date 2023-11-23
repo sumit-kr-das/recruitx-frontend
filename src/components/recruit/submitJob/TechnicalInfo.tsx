@@ -3,8 +3,44 @@ import { jobTypes } from "../../../constants/jobTypes";
 import { skillData } from "../../../constants/skillData";
 import { workPlaceTypes } from "../../../constants/workplaceTypes";
 import MultiSelectInput from "../../form/multiSelectInput/MultiSelectInput";
+type TUserData = {
+	vacancies: string;
+	jobType: string;
+	workplaceType: string;
+	startDate: string;
+	endDate: string;
+	roles: string;
+	skills: string[];
+	minExprience: string;
+	maxExprience?: string;
+	minSalary?: string;
+	maxSalary?: string;
+	location?: string;
+	maxQualification: string;
+	degree: string;
+};
 
-const TechnicalInfo = () => {
+type TUserFormProps = TUserData & {
+	updateFields: (fields: Partial<TUserData>) => void;
+};
+
+const TechnicalInfo = ({
+	vacancies,
+	jobType,
+	workplaceType,
+	startDate,
+	endDate,
+	roles,
+	skills,
+	minExprience,
+	maxExprience,
+	minSalary,
+	maxSalary,
+	location,
+	maxQualification,
+	degree,
+	updateFields,
+}: TUserFormProps) => {
 	return (
 		<div className="pb-12">
 			<h2 className="text-base font-semibold leading-7 text-gray-900">
@@ -24,8 +60,10 @@ const TechnicalInfo = () => {
 					</label>
 					<div className="mt-2">
 						<select
-							id="country"
-							name="country"
+							value={roles}
+							onChange={(e) => updateFields({ roles: e.target.value })}
+							id="roles"
+							name="roles"
 							autoComplete="country-name"
 							className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6"
 						>
@@ -48,9 +86,11 @@ const TechnicalInfo = () => {
 					</label>
 					<div className="mt-2">
 						<input
+							value={maxExprience}
+							onChange={(e) => updateFields({ maxExprience: e.target.value })}
 							type="text"
-							name="first-name"
-							id="first-name"
+							name="minExprience"
+							id="minExprience"
 							autoComplete="given-name"
 							className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
 						/>
@@ -66,10 +106,12 @@ const TechnicalInfo = () => {
 					</label>
 					<div className="mt-2">
 						<input
+							value={minExprience}
+							onChange={(e) => updateFields({ minExprience: e.target.value })}
 							type="text"
-							name="last-name"
-							id="last-name"
-							autoComplete="family-name"
+							name="minExprience"
+							id="minExprience"
+							autoComplete="minExprience"
 							className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
 						/>
 					</div>
@@ -84,9 +126,11 @@ const TechnicalInfo = () => {
 					</label>
 					<div className="mt-2">
 						<select
-							id="country"
-							name="country"
-							autoComplete="country-name"
+							value={workplaceType}
+							onChange={(e) => updateFields({ workplaceType: e.target.value })}
+							id="workplaceType"
+							name="workplaceType"
+							autoComplete="workplaceType"
 							className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6"
 						>
 							<option>Select workplace type</option>
@@ -108,9 +152,11 @@ const TechnicalInfo = () => {
 					</label>
 					<div className="mt-2">
 						<select
-							id="country"
-							name="country"
-							autoComplete="country-name"
+							value={jobType}
+							onChange={(e) => updateFields({ jobType: e.target.value })}
+							id="jobType"
+							name="jobType"
+							autoComplete="jobType"
 							className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6"
 						>
 							<option>Select job type</option>
@@ -132,10 +178,12 @@ const TechnicalInfo = () => {
 					</label>
 					<div className="mt-2">
 						<input
+							value={location}
+							onChange={(e) => updateFields({ location: e.target.value })}
 							type="text"
-							name="street-address"
-							id="street-address"
-							autoComplete="street-address"
+							name="location"
+							id="location"
+							autoComplete="location"
 							className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
 						/>
 					</div>
@@ -150,10 +198,12 @@ const TechnicalInfo = () => {
 					</label>
 					<div className="mt-2">
 						<input
+							value={vacancies}
+							onChange={(e) => updateFields({ vacancies: e.target.value })}
 							type="text"
-							name="city"
-							id="city"
-							autoComplete="address-level2"
+							name="vacancies"
+							id="vacancies"
+							autoComplete="vacancies"
 							className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
 						/>
 					</div>
@@ -168,10 +218,12 @@ const TechnicalInfo = () => {
 					</label>
 					<div className="mt-2">
 						<input
+							value={minSalary}
+							onChange={(e) => updateFields({ minSalary: e.target.value })}
 							type="text"
-							name="region"
-							id="region"
-							autoComplete="address-level1"
+							name="minSalary"
+							id="minSalary"
+							autoComplete="minSalary"
 							className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
 						/>
 					</div>
@@ -186,10 +238,12 @@ const TechnicalInfo = () => {
 					</label>
 					<div className="mt-2">
 						<input
+							value={maxSalary}
+							onChange={(e) => updateFields({ maxSalary: e.target.value })}
 							type="text"
-							name="postal-code"
-							id="postal-code"
-							autoComplete="postal-code"
+							name="maxSalary"
+							id="maxSalary"
+							autoComplete="maxSalary"
 							className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
 						/>
 					</div>
@@ -204,9 +258,13 @@ const TechnicalInfo = () => {
 					</label>
 					<div className="mt-2">
 						<select
-							id="country"
-							name="country"
-							autoComplete="country-name"
+							value={maxQualification}
+							onChange={(e) =>
+								updateFields({ maxQualification: e.target.value })
+							}
+							id="maxQualification"
+							name="maxQualification"
+							autoComplete="maxQualification"
 							className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6"
 						>
 							<option>Select qualification</option>
@@ -228,10 +286,12 @@ const TechnicalInfo = () => {
 					</label>
 					<div className="mt-2">
 						<input
+							value={degree}
+							onChange={(e) => updateFields({ degree: e.target.value })}
 							type="text"
-							name="postal-code"
-							id="postal-code"
-							autoComplete="postal-code"
+							name="degree"
+							id="degree"
+							autoComplete="degree"
 							placeholder="BE/B.Tech/M.trch/MCA"
 							className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
 						/>
@@ -247,10 +307,12 @@ const TechnicalInfo = () => {
 					</label>
 					<div className="mt-2">
 						<input
+							value={startDate}
+							onChange={(e) => updateFields({ startDate: e.target.value })}
 							type="date"
-							name="postal-code"
-							id="postal-code"
-							autoComplete="postal-code"
+							name="startDate"
+							id="startDate"
+							autoComplete="startDate"
 							className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
 						/>
 					</div>
@@ -265,10 +327,12 @@ const TechnicalInfo = () => {
 					</label>
 					<div className="mt-2">
 						<input
+							value={endDate}
+							onChange={(e) => updateFields({ endDate: e.target.value })}
 							type="date"
-							name="postal-code"
-							id="postal-code"
-							autoComplete="postal-code"
+							name="endDate"
+							id="endDate"
+							autoComplete="endDate"
 							className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
 						/>
 					</div>
