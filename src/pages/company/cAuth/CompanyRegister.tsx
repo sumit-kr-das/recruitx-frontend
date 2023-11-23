@@ -43,7 +43,6 @@ const CompanyRegister = () => {
 		if (!isLastStep) {
 			return next();
 		}
-		console.log(data);
 		try {
 			const userData = await cRegister(data).unwrap();
 			dispatch(setCredentials(userData));

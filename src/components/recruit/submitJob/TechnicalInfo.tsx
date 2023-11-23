@@ -1,8 +1,10 @@
+import { useState } from "react";
 import { jobRoles } from "../../../constants/jobRoles";
 import { jobTypes } from "../../../constants/jobTypes";
 import { skillData } from "../../../constants/skillData";
 import { workPlaceTypes } from "../../../constants/workplaceTypes";
-import MultiSelectInput from "../../form/multiSelectInput/MultiSelectInput";
+import SelectInput from "../../form/multiSelectInput/SelectInput";
+
 type TUserData = {
 	vacancies: string;
 	jobType: string;
@@ -31,7 +33,6 @@ const TechnicalInfo = ({
 	startDate,
 	endDate,
 	roles,
-	skills,
 	minExprience,
 	maxExprience,
 	minSalary,
@@ -41,6 +42,7 @@ const TechnicalInfo = ({
 	degree,
 	updateFields,
 }: TUserFormProps) => {
+	const [value, setValue] = useState([skillData[0]]);
 	return (
 		<div className="pb-12">
 			<h2 className="text-base font-semibold leading-7 text-gray-900">
@@ -346,7 +348,15 @@ const TechnicalInfo = ({
 						Select skills
 					</label>
 					<div className="mt-2 w-full">
-						<MultiSelectInput options={skillData} />
+						<SelectInput
+							multiple
+							options={skillData}
+							value={value}
+							onChange={(o) => {
+								setValue(o);
+								updateFields({ skills: value });
+							}}
+						/>
 					</div>
 				</div>
 			</div>

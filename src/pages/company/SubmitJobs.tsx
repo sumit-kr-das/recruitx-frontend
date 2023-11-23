@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { FormEvent, useState } from "react";
 import { INITIAL_JOB_DATA } from "../../@types/recruit/submitJob";
 import useMultistepForm from "../../customHooks/useMultistepForm";
 import BasicInfo from "../../components/recruit/submitJob/BasicInfo";
@@ -10,9 +10,6 @@ import { TINITIAL_JOB_DATA } from "../../@types/recruit/jobPost";
 const SubmitJob = () => {
 	const [data, setData] = useState(INITIAL_JOB_DATA);
 	const updateFields = (fields: Partial<TINITIAL_JOB_DATA>) => {
-		const { title, category, description, tags, ...other } = fields;
-		console.log({ title: title });
-
 		setData((prev) => {
 			return { ...prev, ...fields };
 		});
@@ -29,9 +26,22 @@ const SubmitJob = () => {
 		<BasicInfo key="basic" {...data} updateFields={updateFields} />,
 		<TechnicalInfo key="technical" {...data} updateFields={updateFields} />,
 	]);
-	const handleSubmit = async (e) => {
+
+	const handleSubmit = async (e: FormEvent) => {
 		e.preventDefault();
-		console.log(data);
+		if (!isLastStep) {
+			return next();
+		}
+		const { title, category, description, tags, ...other } = data;
+		const userData = {
+			title,
+			category,
+			description,
+			tags,
+			info: { ...other },
+		};
+
+		console.log(userData, "data");
 	};
 	return (
 		<Container>
@@ -59,10 +69,9 @@ const SubmitJob = () => {
 					<form onSubmit={handleSubmit}>
 						<div className="space-y-12">{step}</div>
 						<div className="mt-6 flex items-center justify-end gap-x-6">
-							{!isLastStep && (
+							{!isFirstStep && (
 								<button
 									onClick={back}
-									type="submit"
 									className="text-sm font-semibold leading-6 text-gray-900"
 								>
 									Back

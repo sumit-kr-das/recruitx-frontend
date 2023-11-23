@@ -18,7 +18,6 @@ const BasicInfo = ({
 	title,
 	category,
 	description,
-	tags,
 	updateFields,
 }: TUserFormProps) => {
 	const [value, setValue] = useState([tagsData[0]]);
@@ -119,6 +118,7 @@ const BasicInfo = ({
 							value={value}
 							onChange={(o) => {
 								setValue(o);
+								updateFields({ tags: value });
 							}}
 						/>
 					</div>
