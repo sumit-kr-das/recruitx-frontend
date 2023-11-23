@@ -7,7 +7,7 @@ type TRadixScrollProps = TReactNodeProps & {
 
 const RadixScrollArea = ({ children, styles }: TRadixScrollProps) => {
 	return (
-		<ScrollArea.Root className={`rounded overflow-hidden bg-white ${styles}`}>
+		<ScrollArea.Root className={`rounded overflow-hidden ${styles}`}>
 			<ScrollArea.Viewport className="w-full h-full rounded">
 				{children}
 			</ScrollArea.Viewport>

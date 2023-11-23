@@ -4,13 +4,14 @@ import CompanyRoutes from "./protectedRoutes/CompanyRoutes";
 import Layout from "./layout/Layout";
 import {
 	ApplicantsJobs,
-	CompanyHome,
 	CompanyLogin,
 	CompanyRegister,
 	HomePage,
 	MyJobs,
 	SubmitJobs,
 	UserHomePage,
+	ShortlistedCandidates,
+	CompanyDashboard
 } from "./pages";
 
 const App = () => {
@@ -33,10 +34,11 @@ const App = () => {
 						</CompanyRoutes>
 					}
 				>
-					<Route path="/recruit" element={<CompanyHome />} />
+					<Route path="/recruit" element={<CompanyDashboard />} />
 					<Route path="/recruit/submit_jobs" element={<SubmitJobs />} />
 					<Route path="/recruit/my_jobs" element={<MyJobs />} />
 					<Route path="/recruit/applicants_jobs" element={<ApplicantsJobs />} />
+					<Route path="/recruit/shortlisted_candidates" element={<ShortlistedCandidates />} />
 				</Route>
 			</Routes>
 		</BrowserRouter>

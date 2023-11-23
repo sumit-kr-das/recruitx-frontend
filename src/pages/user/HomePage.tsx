@@ -8,9 +8,7 @@ import { useState } from "react";
 
 const HomePage = () => {
 	const { data } = useSearchDataQuery();
-	console.log("====================================");
 	console.log(data);
-	console.log("====================================");
 	const navigate = useNavigate();
 	const [searchParams, setSearchParams] = useState<object | null>();
 

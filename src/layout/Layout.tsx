@@ -11,7 +11,7 @@ const Layout = () => {
 				<RadixScrollArea styles="pt-20 w-[300px] h-screen">
 					<SideBar />
 				</RadixScrollArea>
-				<RadixScrollArea styles="pt-24 w-full h-screen bg-teal-50">
+				<RadixScrollArea styles="pt-24 w-full h-screen bg-green-50">
 					<Outlet />
 				</RadixScrollArea>
 			</div>

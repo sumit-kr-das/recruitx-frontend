@@ -3,12 +3,12 @@ import Container from "../../layout/Container";
 import { CheckCheck, Trash2, RotateCw, ArrowDownToLine } from "lucide-react";
 import DefaultUser from "../../assets/user-default-profile.png";
 
-const ApplicantsJobs = () => {
+const ShortlistedCandidates = () => {
 	return (
 		<Container>
 			<TitleBar
-				title="Manage Applicants"
-				path="Employer / Dashboard / All Applicants"
+				title="Shortlisted Candidates"
+				path="Employer / Dashboard / Shortlisted Candidates"
 			/>
 			<div>
 				<div className="flex justify-between gap-x-5">
@@ -57,9 +57,13 @@ const ApplicantsJobs = () => {
 										</h2>
 									</div>
 									<div className="flex items-center">
-										<p className="mt-2 text-sm text-slate-600">Sr. Web Designer .</p>
+										<p className="mt-2 text-sm text-slate-600">
+											Sr. Web Designer .
+										</p>
 										<p className="mt-2 text-sm text-slate-600">Kalkata .</p>
-										<p className="mt-2 text-sm text-slate-600">Applied: 10 March 2022</p>
+										<p className="mt-2 text-sm text-slate-600">
+											Applied: 10 March 2022
+										</p>
 									</div>
 								</div>
 							</div>
@@ -85,4 +89,4 @@ const ApplicantsJobs = () => {
 	);
 };
 
-export default ApplicantsJobs;
+export default ShortlistedCandidates;
