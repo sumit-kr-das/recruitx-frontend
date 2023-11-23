@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { industryTypes } from "../../../constants/industryTypes";
 import { tagsData } from "../../../constants/tagsData";
 import SelectInput from "../../form/multiSelectInput/SelectInput";
@@ -22,7 +22,6 @@ const BasicInfo = ({
 	updateFields,
 }: TUserFormProps) => {
 	const [value, setValue] = useState([tagsData[0]]);
-
 	return (
 		<div className="pb-12">
 			<h2 className="text-base font-semibold leading-7 text-gray-900">
@@ -119,6 +118,9 @@ const BasicInfo = ({
 							value={value}
 							onChange={(o) => {
 								setValue(o);
+								// console.log(value,"val");
+								// updateFields({tags:value})
+
 							}}
 						/>
 					</div>
