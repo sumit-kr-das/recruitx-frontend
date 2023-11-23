@@ -1,6 +1,8 @@
 import { jobRoles } from "../../../constants/jobRoles";
 import { jobTypes } from "../../../constants/jobTypes";
+import { skillData } from "../../../constants/skillData";
 import { workPlaceTypes } from "../../../constants/workplaceTypes";
+import MultiSelectInput from "../../form/multiSelectInput/MultiSelectInput";
 
 const TechnicalInfo = () => {
 	return (
@@ -190,6 +192,97 @@ const TechnicalInfo = () => {
 							autoComplete="postal-code"
 							className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
 						/>
+					</div>
+				</div>
+
+				<div className="sm:col-span-3">
+					<label
+						htmlFor="country"
+						className="block text-sm font-medium leading-6 text-gray-900"
+					>
+						Highest qualificaion
+					</label>
+					<div className="mt-2">
+						<select
+							id="country"
+							name="country"
+							autoComplete="country-name"
+							className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6"
+						>
+							<option>Select qualification</option>
+							{jobTypes.map((jobType, index) => (
+								<option key={index} value={jobType}>
+									{jobType}
+								</option>
+							))}
+						</select>
+					</div>
+				</div>
+
+				<div className="sm:col-span-3">
+					<label
+						htmlFor="postal-code"
+						className="block text-sm font-medium leading-6 text-gray-900"
+					>
+						Degree title
+					</label>
+					<div className="mt-2">
+						<input
+							type="text"
+							name="postal-code"
+							id="postal-code"
+							autoComplete="postal-code"
+							placeholder="BE/B.Tech/M.trch/MCA"
+							className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+						/>
+					</div>
+				</div>
+
+				<div className="sm:col-span-2">
+					<label
+						htmlFor="postal-code"
+						className="block text-sm font-medium leading-6 text-gray-900"
+					>
+						Start date
+					</label>
+					<div className="mt-2">
+						<input
+							type="date"
+							name="postal-code"
+							id="postal-code"
+							autoComplete="postal-code"
+							className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+						/>
+					</div>
+				</div>
+
+				<div className="sm:col-span-2">
+					<label
+						htmlFor="postal-code"
+						className="block text-sm font-medium leading-6 text-gray-900"
+					>
+						Expiry date
+					</label>
+					<div className="mt-2">
+						<input
+							type="date"
+							name="postal-code"
+							id="postal-code"
+							autoComplete="postal-code"
+							className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+						/>
+					</div>
+				</div>
+
+				<div className="col-span-full">
+					<label
+						htmlFor="country"
+						className="block text-sm font-medium leading-6 text-gray-900"
+					>
+						Select skills
+					</label>
+					<div className="mt-2 w-full">
+						<MultiSelectInput options={skillData} />
 					</div>
 				</div>
 			</div>

@@ -1,8 +1,28 @@
+import { useState } from "react";
 import { industryTypes } from "../../../constants/industryTypes";
 import { tagsData } from "../../../constants/tagsData";
-import MultiSelectInput from "../../form/multiSelectInput/MultiSelectInput";
+import SelectInput from "../../form/multiSelectInput/SelectInput";
 
-const BasicInfo = () => {
+type TUserData = {
+	title: string;
+	category: string;
+	description: string;
+	tags: string[];
+};
+
+type TUserFormProps = TUserData & {
+	updateFields: (fields: Partial<TUserData>) => void;
+};
+
+const BasicInfo = ({
+	title,
+	category,
+	description,
+	tags,
+	updateFields,
+}: TUserFormProps) => {
+	const [value, setValue] = useState([tagsData[0]]);
+
 	return (
 		<div className="pb-12">
 			<h2 className="text-base font-semibold leading-7 text-gray-900">
@@ -23,12 +43,14 @@ const BasicInfo = () => {
 					<div className="mt-2">
 						<div className="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md">
 							<input
+								value={title}
+								onChange={(e) => updateFields({ title: e.target.value })}
 								type="text"
-								name="username"
-								id="username"
-								autoComplete="username"
+								name="title"
+								id="title"
+								autoComplete="title"
 								className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-								placeholder="janesmith"
+								placeholder="Frontend web developer"
 							/>
 						</div>
 					</div>
@@ -43,11 +65,13 @@ const BasicInfo = () => {
 					</label>
 					<div className="mt-2">
 						<textarea
-							id="about"
-							name="about"
+							value={description}
+							onChange={(e) => updateFields({ description: e.target.value })}
+							id="description"
+							name="description"
 							rows={3}
 							className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-							defaultValue={""}
+							placeholder="Enter a breaf description about your job post"
 						/>
 					</div>
 					<p className="mt-3 text-sm leading-6 text-gray-600">
@@ -64,8 +88,10 @@ const BasicInfo = () => {
 					</label>
 					<div className="mt-2">
 						<select
-							id="country"
-							name="country"
+							value={category}
+							onChange={(e) => updateFields({ category: e.target.value })}
+							id="category"
+							name="category"
 							autoComplete="country-name"
 							className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6"
 						>
@@ -79,7 +105,6 @@ const BasicInfo = () => {
 					</div>
 				</div>
 
-				
 				<div className="col-span-full">
 					<label
 						htmlFor="country"
@@ -88,7 +113,14 @@ const BasicInfo = () => {
 						Select tags
 					</label>
 					<div className="mt-2 w-full">
-						<MultiSelectInput options={tagsData}  />
+						<SelectInput
+							multiple
+							options={tagsData}
+							value={value}
+							onChange={(o) => {
+								setValue(o);
+							}}
+						/>
 					</div>
 				</div>
 			</div>

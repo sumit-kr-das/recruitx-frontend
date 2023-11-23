@@ -51,8 +51,8 @@ const CompanyRegister = () => {
 			toast.success("Login successfull");
 			navigate("/recruit/");
 		} catch (err) {
-			console.log("Error on company register", err);
 			toast.error("Enter valid credentials");
+			console.log("Error on company register", err);
 		}
 	};
 	return (

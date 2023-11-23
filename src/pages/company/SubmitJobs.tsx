@@ -5,10 +5,15 @@ import BasicInfo from "../../components/recruit/submitJob/BasicInfo";
 import TechnicalInfo from "../../components/recruit/submitJob/TechnicalInfo";
 import TitleBar from "../../components/recruit/titleBar/TitleBar";
 import Container from "../../layout/Container";
+import { TINITIAL_JOB_DATA } from "../../@types/recruit/jobPost";
 
 const SubmitJob = () => {
 	const [data, setData] = useState(INITIAL_JOB_DATA);
-
+	const updateFields = (fields: Partial<TINITIAL_JOB_DATA>) => {
+		setData((prev) => {
+			return { ...prev, ...fields };
+		});
+	};
 	const {
 		setCurrentStepIndex,
 		currentStepIndex,
@@ -18,10 +23,13 @@ const SubmitJob = () => {
 		back,
 		next,
 	} = useMultistepForm([
-		<BasicInfo key="basic" />,
-		<TechnicalInfo key="technical" />,
+		<BasicInfo key="basic" {...data} updateFields={updateFields} />,
+		<TechnicalInfo key="technical" {...data} updateFields={updateFields} />,
 	]);
-
+	const handleSubmit = async (e: FormEvent) => {
+		e.preventDefault();
+		console.log(data);
+	};
 	return (
 		<Container>
 			<TitleBar title="Post Jobs" path="Employer / Dashboard / Post Jobs" />
@@ -45,7 +53,7 @@ const SubmitJob = () => {
 					</button>
 				</div>
 				<div>
-					<form>
+					<form onSubmit={handleSubmit}>
 						<div className="space-y-12">{step}</div>
 						<div className="mt-6 flex items-center justify-end gap-x-6">
 							{!isLastStep && (
