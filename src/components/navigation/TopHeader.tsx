@@ -1,7 +1,11 @@
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import MainLogo from "../../assets/logo.svg";
+import { selectCurrentUser } from "../../features/auth/authSlice";
+import RadixMenu from "../../themes/RadixMenu";
 
 const TopHeader = () => {
+	const user = useSelector(selectCurrentUser);
 	return (
 		<header className="bg-white shadow-sm fixed w-full z-20">
 			<nav className="max-w-screen-xl mx-auto py-5 flex items-center justify-between">
@@ -36,22 +40,28 @@ const TopHeader = () => {
 						</li>
 					</ul>
 				</div>
-				
+
 				<div className="flex items-center gap-4">
-					<button className="bg-cyan-500 text-white text-sm px-5 py-2 rounded-md hover:bg-cyan-600">
-						Login
-					</button>
-					<button className="bg-orange-500 text-white text-sm px-5 py-2 rounded-md hover:bg-orange-600">
-						Register
-					</button>
-					<div>
-						<Link
-							to="/recruit/login"
-							className="text-sm text-black relative after:absolute after:content-[''] after:h-[1.5px] after:w-0 after:-bottom-[4px] after:left-0 after:right-0  after:bg-black hover:after:w-full"
-						>
-							Employers Login
-						</Link>
-					</div>
+					{!user ? (
+						<>
+							<button className="bg-cyan-500 text-white text-sm px-5 py-2 rounded-md hover:bg-cyan-600">
+								Login
+							</button>
+							<button className="bg-orange-500 text-white text-sm px-5 py-2 rounded-md hover:bg-orange-600">
+								Register
+							</button>
+							<div>
+								<Link
+									to="/cLogin"
+									className="text-sm text-black relative after:absolute after:content-[''] after:h-[1.5px] after:w-0 after:-bottom-[4px] after:left-0 after:right-0  after:bg-black hover:after:w-full"
+								>
+									Employers Login
+								</Link>
+							</div>
+						</>
+					) : (
+						<RadixMenu />
+					)}
 				</div>
 			</nav>
 		</header>

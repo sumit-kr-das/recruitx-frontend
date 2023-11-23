@@ -1,4 +1,13 @@
+// default
 export { default as HomePage } from "./user/HomePage";
 
+// user
 export { default as UserHomePage } from "./mnjuser/UserHomePage";
-export {default as SearchPage} from "./search/SearchPage";
+
+// company
+export { default as CompanyRegister } from "./company/cAuth/CompanyRegister";
+export { default as CompanyLogin } from "./company/cAuth/CompanyLogin";
+export { default as CompanyHome } from "./company/CompanyHome";
+export { default as SubmitJobs } from "./company/SubmitJobs";
+export { default as MyJobs } from "./company/MyJobs";
+export { default as ApplicantsJobs } from "./company/ApplicantsJobs";

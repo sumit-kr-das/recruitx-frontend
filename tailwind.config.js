@@ -1,8 +1,22 @@
+const { blackA, mauve, violet } = require("@radix-ui/colors");
+
 /** @type {import('tailwindcss').Config} */
 export default {
 	content: ["./src/**/*.{js,jsx,ts,tsx}"],
 	theme: {
-		extend: {},
+		extend: {
+			colors: {
+				...blackA,
+				...mauve,
+				...violet,
+				realblue: "#F8F9FA",
+			},
+			backgroundImage: {
+				"gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
+				"gradient-conic":
+					"conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
+			},
+		},
 	},
-	plugins: [],
+	plugins: [require("@tailwindcss/forms")],
 };

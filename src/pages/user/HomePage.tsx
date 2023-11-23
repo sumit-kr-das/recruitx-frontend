@@ -1,9 +1,16 @@
 import ArrowImg from "../../assets/categories/arrow.svg";
+import Footer from "../../components/footer/Footer";
+import TopHeader from "../../components/navigation/TopHeader";
 import catagoriesData from "../../constants/categoriesData";
+import { useSearchDataQuery } from "../../features/user/getSearchData";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 
 const HomePage = () => {
+	const { data } = useSearchDataQuery();
+	console.log("====================================");
+	console.log(data);
+	console.log("====================================");
 	const navigate = useNavigate();
 	const [searchParams, setSearchParams] = useState<object | null>();
 
