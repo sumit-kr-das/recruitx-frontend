@@ -28,6 +28,8 @@ const HomePage = () => {
 
 
 	return (
+		<>
+		<TopHeader/>
 		<div className="max-w-screen-xl mx-auto pb-40">
 			{/* title */}
 			<div className="flex items-center justify-center flex-col pt-40 pb-10">
@@ -85,6 +87,7 @@ const HomePage = () => {
 				))}
 			</div>
 		</div>
+		</>
 	);
 };
 
