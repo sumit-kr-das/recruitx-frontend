@@ -1,25 +1,25 @@
 import React, { useEffect, useRef, useState } from "react";
 import { X, ChevronDown } from "lucide-react";
 
-export type TSelectOptions = {
-	label: string;
-	value: string | number;
-};
+// export type TSelectOptions = {
+// 	label: string;
+// 	value: string | number;
+// };
 
 type TMultipleSelectProps = {
 	multiple: true;
-	value: TSelectOptions[];
-	onChange: (value: TSelectOptions[]) => void;
+	value: string[];
+	onChange: (value: string[]) => void;
 };
 
 type TSingleSelectProps = {
 	multiple?: false;
-	value?: TSelectOptions;
-	onChange: (value: TSelectOptions | undefined) => void;
+	value?: string[];
+	onChange: (value: string | undefined) => void;
 };
 
 type TSelectProps = {
-	options: TSelectOptions[];
+	options: string[];
 } & (TSingleSelectProps | TMultipleSelectProps);
 
 const SelectInput = ({ value, multiple, onChange, options }: TSelectProps) => {
@@ -30,7 +30,7 @@ const SelectInput = ({ value, multiple, onChange, options }: TSelectProps) => {
 	const clearOptions = () => {
 		multiple ? onChange([]) : onChange(undefined);
 	};
-	const selectOption = (option: TSelectOptions) => {
+	const selectOption = (option: string[]) => {
 		if (multiple) {
 			if (value.includes(option)) {
 				onChange(value.filter((o) => o !== option));
@@ -43,7 +43,7 @@ const SelectInput = ({ value, multiple, onChange, options }: TSelectProps) => {
 			}
 		}
 	};
-	const isOptionSelected = (option: TSelectOptions) => {
+	const isOptionSelected = (option: string[]) => {
 		return multiple ? value.includes(option) : option === value;
 	};
 	useEffect(() => {
@@ -98,10 +98,10 @@ const SelectInput = ({ value, multiple, onChange, options }: TSelectProps) => {
 									e.stopPropagation();
 									selectOption(val)
 								}}
-								key={val.value}
+								key={val}
 								className="flex items-center gap-1 border-2 rounded-md px-1"
 							>
-								{val.label}
+								{val}
 								<X
 									// onClick={(e) => {
 									// 	e.stopPropagation();
@@ -111,7 +111,7 @@ const SelectInput = ({ value, multiple, onChange, options }: TSelectProps) => {
 								/>
 							</div>
 					  ))
-					: value?.label}
+					: value}
 			</span>
 
 			<div className="flex items-center gap-1">
@@ -140,13 +140,13 @@ const SelectInput = ({ value, multiple, onChange, options }: TSelectProps) => {
 						}}
 						onMouseEnter={() => setHighlitedIndex(index)}
 						key={index}
-						value={option.value}
+						value={option}
 						className={`
 						${isOptionSelected(option) ? "bg-blue-400 text-white" : ""} 
 						${index === highlitedIndex ? "bg-blue-500 text-white" : ""}
 						px-2.5 py-1.5 hover:bg-blue-500 hover:text-white`}
 					>
-						{option.label}
+						{option}
 					</li>
 				))}
 			</ul>
