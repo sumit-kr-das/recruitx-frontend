@@ -1,7 +1,25 @@
 import ArrowImg from "../../assets/categories/arrow.svg";
 import catagoriesData from "../../constants/categoriesData";
+import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 
 const HomePage = () => {
+	const navigate = useNavigate();
+	const [searchParams, setSearchParams] = useState<object | null>();
+
+	const search = () =>{
+		navigate(`/search?skills=${searchParams?.skill}&exprience=${searchParams?.exprience}&location=${searchParams?.location}`);
+	}
+
+	const handelInfoChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const { name, value } = e.target;
+        setSearchParams({
+            ...searchParams,
+            [name]: value
+        })
+    }
+
+
 	return (
 		<div className="max-w-screen-xl mx-auto pb-40">
 			{/* title */}
@@ -17,21 +35,29 @@ const HomePage = () => {
 							type="text"
 							placeholder="Enter skills / designations / companies"
 							className="bg-transparent border-0 outline-none px-2"
+							name="skill"
+							onChange={handelInfoChange}
 						/>
 						<div>|</div>
 						<input
 							type="text"
 							placeholder="Select experience"
 							className="bg-transparent border-0 outline-none px-2"
+							name="exprience"
+							onChange={handelInfoChange}
+
 						/>
 						<div>|</div>
 						<input
 							type="text"
 							placeholder="Enter location"
 							className="bg-transparent border-0 outline-none px-2"
+							name="location"
+							onChange={handelInfoChange}
+
 						/>
 					</div>
-					<button className="bg-cyan-500 text-white text-sm px-5 py-2 rounded-md hover:bg-cyan-600">
+					<button className="bg-cyan-500 text-white text-sm px-5 py-2 rounded-md hover:bg-cyan-600" onClick={search}>
 						Search
 					</button>
 				</div>
