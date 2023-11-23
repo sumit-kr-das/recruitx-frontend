@@ -1,10 +1,8 @@
 import React, { useState } from "react";
-import SelectInput, { TSelectOptions } from "./SelectInput";
+import SelectInput from "./SelectInput";
 
-const options = ["Frst", "Second", "Third", "Forth"];
-
-const MultiSelectInput = () => {
-	const [value, setValue] = useState([]);
+const MultiSelectInput = ({ options }: { options: string[] }) => {
+	const [value, setValue] = useState([options[0]]);
 	console.log(value);
 
 	return (

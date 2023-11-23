@@ -1,4 +1,5 @@
 import { industryTypes } from "../../../constants/industryTypes";
+import { tagsData } from "../../../constants/tagsData";
 import MultiSelectInput from "../../form/multiSelectInput/MultiSelectInput";
 
 const BasicInfo = () => {
@@ -87,7 +88,7 @@ const BasicInfo = () => {
 						Select tags
 					</label>
 					<div className="mt-2 w-full">
-						<MultiSelectInput />
+						<MultiSelectInput options={tagsData}  />
 					</div>
 				</div>
 			</div>
