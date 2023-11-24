@@ -2,6 +2,8 @@ import { Toaster } from "react-hot-toast";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import CompanyRoutes from "./protectedRoutes/CompanyRoutes";
 import Layout from "./layout/Layout";
+import AuthenticateRoutes from "./protectedRoutes/AuthenticateRoutes";
+import UserRoutes from "./protectedRoutes/UserRoutes";
 import {
 	ApplicantsJobs,
 	CompanyLogin,
@@ -15,8 +17,6 @@ import {
 	Login,
 	Register,
 } from "./pages";
-import AuthenticateRoutes from "./protectedRoutes/AuthenticateRoutes";
-import UserRoutes from "./protectedRoutes/UserRoutes";
 
 const App = () => {
 	return (
