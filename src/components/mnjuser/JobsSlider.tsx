@@ -8,11 +8,58 @@ import LocationSVG from "../../assets/icons/locIcon.svg";
 import JobsSVG from "../../assets/icons/jobs.svg";
 import RightArrowSVG from "../../assets/icons/right-arrow-crsl.svg";
 
-type TSlidesPerView  = {
-	slidesPerView: number
-}
+const jobs = [
+	{
+		title: "Express Developer",
+		company: "Devstack Solutions",
+		location: "Dubai, UAE",
+		star: "4.5",
+		time: "32",
+	},
+	{
+		title: "Android Developer",
+		company: "Amazon",
+		location: "Noida, Uttar Pradesh",
+		star: "4.5",
+		time: "12",
+	},
 
-const JobsSlider = ({slidesPerView}:TSlidesPerView) => {
+	{
+		title: "Web Developer",
+		company: "DesignX Digital",
+		location: "Delhi, Uttar Pradesh",
+		star: "3.5",
+		time: "6",
+	},
+	{
+		title: "AI/ML Engineer",
+		company: "Open AI",
+		location: "America, USA",
+		star: "4.5",
+		time: "8",
+	},
+	{
+		title: "Software Dveloper",
+		company: "Cure.fit",
+		location: "Kalkata, West Bengal",
+		star: "4.5",
+		time: "14",
+	},
+
+	{
+		title: "NodeJS Developer",
+		company: "Flipcart",
+		location: "Noida, Uttar Pradesh",
+		star: "4.5",
+		time: "4",
+	},
+];
+
+type TSlidesPerView = {
+	slidesPerView: number;
+};
+
+const JobsSlider = ({ slidesPerView }: TSlidesPerView) => {
 	const swiperRef = React.useRef<any>(null);
 	return (
 		<div className="relative">
@@ -40,12 +87,12 @@ const JobsSlider = ({slidesPerView}:TSlidesPerView) => {
 					swiperRef.current = swiper;
 				}}
 			>
-				{[...Array(6)].map((_, index) => (
+				{jobs.map((job, index) => (
 					<SwiperSlide key={index} className="mb-6">
 						<div className="bg-white w-72 h-36 py-2 px-4 ml-6  border rounded-lg transition ease-in delay-75 cursor-pointer hover:shadow-lg">
 							<div className="flex justify-between">
 								<div>
-									<h2 className="font-semibold mt-2">Sr. React Js Developer</h2>
+									<h2 className="font-semibold mt-2">{job.title}</h2>
 									<p className="text-xs">Leading IT MNC</p>
 								</div>
 								<p className="text-xs">4d ago</p>
@@ -53,7 +100,7 @@ const JobsSlider = ({slidesPerView}:TSlidesPerView) => {
 							<div className="flex gap-2 my-4">
 								<div className="flex items-center gap-1 bg-slate-200 py-1 px-2 rounded-xl">
 									<img src={StarSVG} width={10} alt="star" />
-									<p className="text-xs font-semibold">3.3</p>
+									<p className="text-xs font-semibold">{job.star}</p>
 								</div>
 								<div className="bg-slate-200 py-1 px-2 rounded-xl">
 									<p className="text-xs font-semibold">Indian MNC</p>
@@ -65,14 +112,12 @@ const JobsSlider = ({slidesPerView}:TSlidesPerView) => {
 							<div className="flex items-center gap-4">
 								<div className="flex gap-1">
 									<img src={JobsSVG} width={10} alt="location" />
-									<p className="truncate overflow-hidden text-xs">
-										0-2 Yrs
-									</p>
+									<p className="truncate overflow-hidden text-xs">0-5 Yrs</p>
 								</div>
 								<div className="flex gap-1">
 									<img src={LocationSVG} width={10} alt="location" />
 									<p className="truncate overflow-hidden text-xs">
-										Noida,Uttar Pradesh
+										{job.location}
 									</p>
 								</div>
 							</div>
