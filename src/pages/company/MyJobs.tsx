@@ -3,7 +3,7 @@ import { useViewJobsQuery } from "../../features/company/viewJobsApiSlice";
 import Container from "../../layout/Container";
 import { Pencil, Trash2 } from "lucide-react";
 
-const convertDate = (srcDate: string) => {
+export const convertDate = (srcDate: string) => {
 	const startDate = new Date(srcDate);
 	const options: Intl.DateTimeFormatOptions = {
 		day: "numeric",

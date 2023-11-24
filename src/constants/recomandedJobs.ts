@@ -1,0 +1,38 @@
+export const recommandJobs = [
+	{
+		role: "Junior Php Developer",
+		company: "Softhought",
+		exp: "0-1",
+		ctc: "1.2-4",
+		type: "Remote",
+		des: "We are looking for a Junior PHP developer specializing in Laravel framework. We need you to code high standard web application, in a timely and efficient way that improves the codebase of our products in meaningful ways.",
+		time: 8,
+	},
+	{
+		role: "Cognizant Hiring Freshers",
+		company: "Cognizant",
+		exp: "0-2",
+		ctc: "3.9",
+		type: "Onsite",
+		des: "Work from wherever you want and whenever you want - we are fully remote,and you can set your own schedule",
+		time: 4,
+	},
+	{
+		role: "SDE - Intern",
+		company: "Wheelseye Technology",
+		exp: "0-5",
+		ctc: "4-9",
+		type: "Remote",
+		des: "I had some coding knowledge when I joined college. Then, I worked on it in my 2nd year, but after two years, I worked a lot on my coding skills. I got many offers and finally decided to join Wheelseye Technology as an intern in my 4th year. ",
+		time: 16,
+	},
+	{
+		role: "UI/UX Designer",
+		company: "Micro SaaS Capital",
+		exp: "0-5",
+		ctc: "4-9",
+		type: "Onsite",
+		des: "Maximum flexibility: Work from wherever you want and whenever you want - we are fully remote,and you can set your own schedule",
+		time: 1,
+	},
+];

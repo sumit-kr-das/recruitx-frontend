@@ -18,6 +18,10 @@ import {
 	Register,
 	CompanyProfile,
 } from "./pages";
+import AuthenticateRoutes from "./protectedRoutes/AuthenticateRoutes";
+import UserRoutes from "./protectedRoutes/UserRoutes";
+import SearchPage from "./pages/search/SearchPage";
+import UserProfilePage from "./pages/mnjuser/UserProfilePage";
 
 const App = () => {
 	return (
@@ -51,6 +55,16 @@ const App = () => {
 						</UserRoutes>
 					}
 				/>
+				<Route
+					path="/userProfile"
+					element={
+						<UserRoutes>
+							<UserProfilePage />
+						</UserRoutes>
+					}
+				/>
+				<Route path="/search" element={<SearchPage />} />
+
 				{/* company */}
 				<Route
 					path="/cRegister"
