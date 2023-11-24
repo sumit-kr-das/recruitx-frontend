@@ -5,9 +5,9 @@ export const companyDashboard = [
 		src: "",
 	},
 	{
-		menu: "User Profile",
+		menu: "Company Profile",
 		icon: "",
-		src: "",
+		src: "/recruit/company_profile",
 	},
 	{
 		menu: "My Jobs",

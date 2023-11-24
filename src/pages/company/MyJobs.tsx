@@ -15,8 +15,6 @@ const convertDate = (srcDate: string) => {
 
 const MyJobs = () => {
 	const { data } = useViewJobsQuery();
-	console.log(data);
-
 	return (
 		<Container>
 			<TitleBar title="Manage jobs" path="Employer / Dashboard / My Jobs" />

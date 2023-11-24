@@ -16,6 +16,7 @@ import {
 	CompanyDashboard,
 	Login,
 	Register,
+	CompanyProfile,
 } from "./pages";
 
 const App = () => {
@@ -76,6 +77,7 @@ const App = () => {
 					}
 				>
 					<Route path="/recruit" element={<CompanyDashboard />} />
+					<Route path="/recruit/company_profile" element={<CompanyProfile />} />
 					<Route path="/recruit/submit_jobs" element={<SubmitJobs />} />
 					<Route path="/recruit/my_jobs" element={<MyJobs />} />
 					<Route path="/recruit/applicants_jobs" element={<ApplicantsJobs />} />
