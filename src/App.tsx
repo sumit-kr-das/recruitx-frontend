@@ -11,8 +11,12 @@ import {
 	SubmitJobs,
 	UserHomePage,
 	ShortlistedCandidates,
-	CompanyDashboard
+	CompanyDashboard,
+	Login,
+	Register,
 } from "./pages";
+import AuthenticateRoutes from "./protectedRoutes/AuthenticateRoutes";
+import UserRoutes from "./protectedRoutes/UserRoutes";
 
 const App = () => {
 	return (
@@ -22,10 +26,47 @@ const App = () => {
 				{/* default */}
 				<Route path="/" element={<HomePage />} />
 				{/* user */}
-				<Route path="/userHome" element={<UserHomePage />} />
+				<Route
+					path="/login"
+					element={
+						<AuthenticateRoutes>
+							<Login />
+						</AuthenticateRoutes>
+					}
+				/>
+				<Route
+					path="/register"
+					element={
+						<AuthenticateRoutes>
+							<Register />
+						</AuthenticateRoutes>
+					}
+				/>
+				<Route
+					path="/userHome"
+					element={
+						<UserRoutes>
+							<UserHomePage />
+						</UserRoutes>
+					}
+				/>
 				{/* company */}
-				<Route path="/cRegister" element={<CompanyRegister />} />
-				<Route path="/cLogin" element={<CompanyLogin />} />
+				<Route
+					path="/cRegister"
+					element={
+						<AuthenticateRoutes>
+							<CompanyRegister />
+						</AuthenticateRoutes>
+					}
+				/>
+				<Route
+					path="/cLogin"
+					element={
+						<AuthenticateRoutes>
+							<CompanyLogin />
+						</AuthenticateRoutes>
+					}
+				/>
 				<Route
 					path="recruit"
 					element={
@@ -38,7 +79,10 @@ const App = () => {
 					<Route path="/recruit/submit_jobs" element={<SubmitJobs />} />
 					<Route path="/recruit/my_jobs" element={<MyJobs />} />
 					<Route path="/recruit/applicants_jobs" element={<ApplicantsJobs />} />
-					<Route path="/recruit/shortlisted_candidates" element={<ShortlistedCandidates />} />
+					<Route
+						path="/recruit/shortlisted_candidates"
+						element={<ShortlistedCandidates />}
+					/>
 				</Route>
 			</Routes>
 		</BrowserRouter>

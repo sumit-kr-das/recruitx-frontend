@@ -2,6 +2,8 @@
 export { default as HomePage } from "./user/HomePage";
 
 // user
+export { default as Login } from "./mnjuser/auth/Login";
+export { default as Register } from "./mnjuser/auth/Register";
 export { default as UserHomePage } from "./mnjuser/UserHomePage";
 
 // company
