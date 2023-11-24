@@ -1,9 +1,7 @@
-import { setCredentials } from "../../../features/auth/authSlice";
-
 import React, { useState } from "react";
+import { setCredentials } from "../../../features/auth/authSlice";
 import { Link, useNavigate } from "react-router-dom";
-
-import toast from "react-hot-toast/headless";
+import {toast} from "react-hot-toast";
 import { useDispatch } from "react-redux";
 import { useUserLoginMutation } from "../../../features/auth/user/userLoginApiSlice";
 
@@ -36,11 +34,11 @@ const Login = () => {
 			const userData = await userLogin(user).unwrap();
 			dispatch(setCredentials(userData));
 			setUser(INITIAL_USER_STATE);
-			toast.success("Login successfull");
 			navigate("/userHome");
+			toast.success("Login successfull");
 		} catch (err) {
-			console.log("Error on company login", err);
 			toast.error("Enter valid credentials");
+			console.log("Error on company login", err);
 		}
 	};
 	return (

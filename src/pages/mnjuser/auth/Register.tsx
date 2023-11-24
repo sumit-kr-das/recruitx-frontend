@@ -1,9 +1,7 @@
 import { setCredentials } from "../../../features/auth/authSlice";
-
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-
-import toast from "react-hot-toast/headless";
+import { toast } from "react-hot-toast";
 import { useDispatch } from "react-redux";
 import { useUserRegisterMutation } from "../../../features/auth/user/userRegisterApiSlice";
 import Container from "../../../layout/Container";
@@ -40,7 +38,7 @@ const Register = () => {
 	const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
 		try {
-            console.log(user);
+			console.log(user);
 			const userData = await userRegister(user).unwrap();
 			dispatch(setCredentials(userData));
 			setUser(INITIAL_USER_STATE);
