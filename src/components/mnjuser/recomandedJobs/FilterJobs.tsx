@@ -1,9 +1,11 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { MdModeEdit } from "react-icons/md";
 import FilterModal from "./FilterModal";
 
-const FilterJobs = () => {
+const FilterJobs = ({ searchFilter, setSearchFilter }) => {
 	const [open, setOpen] = useState<boolean>(false);
+	console.log(searchFilter);
+
 	return (
 		<>
 			<div className="bg-white p-8 border rounded-lg">
@@ -17,13 +19,21 @@ const FilterJobs = () => {
 						<p className="text-sm">Preferred job role</p>
 						<MdModeEdit onClick={() => setOpen(true)} className="text-xl ml-1 text-cyan-500 cursor-pointer" />
 					</div>
-					<div className="flex items-center gap-2 mt-1">
-						<p className="text-sm font-semibold bg-slate-200 py-1 px-2 rounded-xl">
+
+					<div className="flex items-center gap-2 mt-1 flex-wrap">
+						{
+							searchFilter && searchFilter?.role.map((item) => (<>
+								<p className="text-sm font-semibold bg-slate-200 py-1 px-2 rounded-xl">
+									{item}
+								</p>
+							</>))
+						}
+						{/* <p className="text-sm font-semibold bg-slate-200 py-1 px-2 rounded-xl">
 							Software Programmer
 						</p>
 						<p className="text-sm font-semibold bg-slate-200 py-1 px-2 rounded-xl">
 							Developer
-						</p>
+						</p> */}
 					</div>
 				</div>
 				{/* Filter 2 */}
@@ -33,7 +43,16 @@ const FilterJobs = () => {
 						<MdModeEdit onClick={() => setOpen(true)} className="text-xl ml-1 text-cyan-500 cursor-pointer" />
 					</div>
 					<div className="flex items-center gap-2 mt-1">
-						<p className="text-sm font-semibold bg-slate-200 py-1 px-2 rounded-xl">
+						{
+							searchFilter && searchFilter?.location.map((item) => (
+								<>
+									<p className="text-sm font-semibold bg-slate-200 py-1 px-2 rounded-xl">
+										{item}
+									</p>
+								</>
+							))
+						}
+						{/* <p className="text-sm font-semibold bg-slate-200 py-1 px-2 rounded-xl">
 							Noida
 						</p>
 						<p className="text-sm font-semibold bg-slate-200 py-1 px-2 rounded-xl">
@@ -41,7 +60,7 @@ const FilterJobs = () => {
 						</p>
 						<p className="text-sm font-semibold bg-slate-200 py-1 px-2 rounded-xl">
 							West Bengal
-						</p>
+						</p> */}
 					</div>
 				</div>
 				{/* Filter 3 */}
@@ -52,14 +71,14 @@ const FilterJobs = () => {
 					</div>
 					<div className="flex items-center gap-2 mt-1">
 						<p className="text-sm font-semibold bg-slate-200 py-1 px-2 rounded-xl">
-							₹ 4,00,000
+							{searchFilter && searchFilter?.salary}
 						</p>
 					</div>
 				</div>
 			</div>
 			{/* Filter modal */}
 			{
-				open && <FilterModal open={open} setOpen={setOpen} />
+				open && <FilterModal setSearchFilter={setSearchFilter} open={open} setOpen={setOpen} />
 			}
 		</>
 	);

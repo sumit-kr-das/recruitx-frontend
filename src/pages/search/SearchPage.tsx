@@ -10,6 +10,7 @@ const SearchPage = () => {
   const [searchData, { isLoading }] = useSearchDataMutation();
   const [searchParams] = useSearchParams();
   const [jobs, setJobs] = useState([]);
+  const [searchFilter, setSearchFilter] = useState();
   // const queryParams = new URLSearchParams(location.search);
   // const skill = queryParams.get("skill");
   const title = searchParams.get("skills");
@@ -19,10 +20,30 @@ const SearchPage = () => {
 
 
   useEffect(() => {
+    const filters = JSON.parse(localStorage.getItem("filter") || 'null');
+    setSearchFilter(filters);
     const fetchSearchData = async () => {
       try {
         const jobData = await searchData({ title, exprience, location }).unwrap();
-        setJobs(jobData);
+        const filteredJobs = jobData.filter(job => {
+          if (filters !== null) {
+            // Check if the job roles match the filter roles
+            const rolesMatch = filters.role.every(role => job.info.skills.includes(role));
+
+            // Check if the job salary is within the filter salary range
+            const salaryInRange = job.info.minSalary <= filters.salary && job.info.maxSalary >= filters.salary;
+
+            // Check if the job location is in the filter locations
+            const locationMatch = filters.location.includes(job.info.location);
+
+            // Return true if all conditions are met, meaning the job passes the filter
+            return rolesMatch || salaryInRange || locationMatch;
+          }else{
+            return jobData;
+          }
+
+        });
+        setJobs(filteredJobs);
       } catch (err) {
         console.log("Error on company login", err);
       }
@@ -48,11 +69,11 @@ const SearchPage = () => {
           <div className="mt-10 flex justify-between">
             {/* left section */}
             <div className="w-7/12">
-              <Job jobs={jobs}/>
+              <Job jobs={jobs} />
             </div>
             {/* right section */}
             <div className="w-4/12">
-              <FilterJobs />
+              <FilterJobs setSearchFilter={setSearchFilter} searchFilter={searchFilter} />
             </div>
           </div>
         </section>
