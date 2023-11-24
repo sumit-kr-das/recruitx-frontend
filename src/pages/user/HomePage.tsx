@@ -2,29 +2,32 @@ import ArrowImg from "../../assets/categories/arrow.svg";
 import Footer from "../../components/footer/Footer";
 import TopHeader from "../../components/navigation/TopHeader";
 import catagoriesData from "../../constants/categoriesData";
-import { useSearchDataQuery } from "../../features/user/getSearchData";
+// import { useSearchDataQuery } from "../../features/user/getSearchDataApiSlice";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 
 const HomePage = () => {
-	const { data } = useSearchDataQuery();
-	console.log("====================================");
-	console.log(data);
-	console.log("====================================");
+	// const { data } = useSearchDataQuery();
+	// console.log("====================================");
+	// console.log(data);
+	// console.log("====================================");
 	const navigate = useNavigate();
 	const [searchParams, setSearchParams] = useState<object | null>();
+	const [skill, setSkill] = useState("");
+	const [exprience, setExprience] = useState(0);
+	const [location, setLocation] = useState("");
 
 	const search = () =>{
-		navigate(`/search?skills=${searchParams?.skill}&exprience=${searchParams?.exprience}&location=${searchParams?.location}`);
+		navigate(`/search?skills=${skill}&exprience=${exprience}&location=${location}`);
 	}
 
-	const handelInfoChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const { name, value } = e.target;
-        setSearchParams({
-            ...searchParams,
-            [name]: value
-        })
-    }
+	// const handelInfoChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    //     const { name, value } = e.target;
+    //     setSearchParams({
+    //         ...searchParams,
+    //         [name]: value
+    //     })
+    // }
 
 
 	return (
@@ -45,15 +48,15 @@ const HomePage = () => {
 							placeholder="Enter skills / designations / companies"
 							className="bg-transparent border-0 outline-none px-2"
 							name="skill"
-							onChange={handelInfoChange}
+							onChange={(e)=>setSkill(e.target.value)}
 						/>
 						<div>|</div>
 						<input
-							type="text"
+							type="number"
 							placeholder="Select experience"
 							className="bg-transparent border-0 outline-none px-2"
 							name="exprience"
-							onChange={handelInfoChange}
+							onChange={(e)=>setExprience(Number(e.target.value))}
 
 						/>
 						<div>|</div>
@@ -62,7 +65,7 @@ const HomePage = () => {
 							placeholder="Enter location"
 							className="bg-transparent border-0 outline-none px-2"
 							name="location"
-							onChange={handelInfoChange}
+							onChange={(e)=>setLocation(e.target.value)}
 
 						/>
 					</div>

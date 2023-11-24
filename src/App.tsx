@@ -12,6 +12,7 @@ import {
 	SubmitJobs,
 	UserHomePage,
 } from "./pages";
+import SearchPage from "./pages/search/SearchPage";
 
 const App = () => {
 	return (
@@ -22,6 +23,8 @@ const App = () => {
 				<Route path="/" element={<HomePage />} />
 				{/* user */}
 				<Route path="/userHome" element={<UserHomePage />} />
+				<Route path="/search" element={<SearchPage />} />
+
 				{/* company */}
 				<Route path="/cRegister" element={<CompanyRegister />} />
 				<Route path="/cLogin" element={<CompanyLogin />} />

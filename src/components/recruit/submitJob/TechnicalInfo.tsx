@@ -90,8 +90,8 @@ const TechnicalInfo = ({
 					</label>
 					<div className="mt-2">
 						<input
-							value={maxExprience}
-							onChange={(e) => updateFields({ maxExprience: e.target.value })}
+							value={minExprience}
+							onChange={(e) => updateFields({ minExprience: e.target.value })}
 							type="text"
 							name="minExprience"
 							id="minExprience"
@@ -110,8 +110,8 @@ const TechnicalInfo = ({
 					</label>
 					<div className="mt-2">
 						<input
-							value={minExprience}
-							onChange={(e) => updateFields({ minExprience: e.target.value })}
+							value={maxExprience}
+							onChange={(e) => updateFields({ maxExprience: e.target.value })}
 							type="text"
 							name="minExprience"
 							id="minExprience"

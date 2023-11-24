@@ -11,15 +11,10 @@ const SubmitJob = () => {
 	const [data, setData] = useState(INITIAL_JOB_DATA);
 	const updateFields = (fields: Partial<TINITIAL_JOB_DATA>) => {
 		const { title, category, description, tags, ...other } = fields;
+		console.log({ title: title });
+
 		setData((prev) => {
-			return {
-				...prev,
-				title,
-				category,
-				description,
-				tags,
-				info: { ...other },
-			};
+			return { ...prev, ...fields };
 		});
 	};
 	const {
@@ -36,7 +31,13 @@ const SubmitJob = () => {
 	]);
 	const handleSubmit = async (e) => {
 		e.preventDefault();
-		console.log(data);
+		const { title, category, description, tags, ...other } = data;
+		const userData = {
+			title, category, description, tags, info:{...other} 
+		};
+
+		console.log(userData, "data");
+
 	};
 	return (
 		<Container>

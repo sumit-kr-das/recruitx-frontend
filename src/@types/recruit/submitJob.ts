@@ -1,4 +1,8 @@
-type TInfo = {
+type TINITIAL_JOB_DATA = {
+	title: string;
+	category: string;
+	description: string;
+	tags: string[];
 	vacancies: string;
 	jobType: string;
 	workplaceType: string;
@@ -15,16 +19,12 @@ type TInfo = {
 	degree: string;
 };
 
-type TINITIAL_JOB_DATA = {
-    title: string;
-    category: string;
-    description: string;
-    tags: string[];
-	info: TInfo,
-};
-
-const Info:TInfo = {
-	vacancies: 0,
+export const INITIAL_JOB_DATA: TINITIAL_JOB_DATA = {
+	title: "",
+	category: "",
+	description: "",
+	tags: [],
+	vacancies: "",
 	workplaceType: "",
 	jobType: "",
 	startDate: "",
@@ -33,17 +33,9 @@ const Info:TInfo = {
 	skills: [],
 	minExprience: "",
 	maxExprience: "",
-	minSalary:"",
+	minSalary: "",
 	maxSalary: "",
 	location: "",
 	maxQualification: "",
 	degree: "",
-};
-
-export const INITIAL_JOB_DATA: TINITIAL_JOB_DATA = {
-	title: "",
-	category: "",
-	description: "",
-	tags: [],
-	info: Info,
 };
