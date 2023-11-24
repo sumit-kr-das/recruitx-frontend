@@ -1,11 +1,21 @@
 import { useSelector } from "react-redux";
 import { Navigate } from "react-router-dom";
 import { TReactNodeProps } from "../@types/TReactNodeProps";
-import { selectCurrentToken } from "../features/auth/authSlice";
+import {
+	selectCurrentRole,
+	selectCurrentToken,
+} from "../features/auth/authSlice";
 
 const AuthenticateRoutes = ({ children }: TReactNodeProps) => {
 	const isExist = useSelector(selectCurrentToken);
-	return !isExist ? <> {children} </> : <Navigate to="/" />;
+	const role = useSelector(selectCurrentRole);
+	return !isExist ? (
+		<> {children} </>
+	) : role === "user" ? (
+		<Navigate to="/userHome" />
+	) : (
+		<Navigate to="/recruit" />
+	);
 };
 
 export default AuthenticateRoutes;
