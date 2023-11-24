@@ -10,6 +10,7 @@ export default {
 				...mauve,
 				...violet,
 				realblue: "#F8F9FA",
+				yellowprofile:"#fff2e3"
 			},
 			backgroundImage: {
 				"gradient-radial": "radial-gradient(var(--tw-gradient-stops))",

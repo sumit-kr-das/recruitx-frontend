@@ -18,6 +18,7 @@ import {
 import AuthenticateRoutes from "./protectedRoutes/AuthenticateRoutes";
 import UserRoutes from "./protectedRoutes/UserRoutes";
 import SearchPage from "./pages/search/SearchPage";
+import UserProfilePage from "./pages/mnjuser/UserProfilePage";
 
 const App = () => {
 	return (
@@ -48,6 +49,14 @@ const App = () => {
 					element={
 						<UserRoutes>
 							<UserHomePage />
+						</UserRoutes>
+					}
+				/>
+				<Route
+					path="/userProfile"
+					element={
+						<UserRoutes>
+							<UserProfilePage />
 						</UserRoutes>
 					}
 				/>
