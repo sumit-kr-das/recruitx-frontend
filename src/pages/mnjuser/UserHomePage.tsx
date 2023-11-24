@@ -1,11 +1,9 @@
-import React from "react";
-
-import HomeFeed from "../../components/mnjuser/HomeFeed";
-import UserProfile from "../../components/mnjuser/UserProfile";
-import UserNotices from "../../components/mnjuser/UserNotices";
-import Container from "../../layout/Container";
-import TopHeader from "../../components/navigation/TopHeader";
 import Footer from "../../components/footer/Footer";
+import HomeFeed from "../../components/mnjuser/HomeFeed";
+import UserNotices from "../../components/mnjuser/UserNotices";
+import UserProfile from "../../components/mnjuser/UserProfile";
+import TopHeader from "../../components/navigation/TopHeader";
+import Container from "../../layout/Container";
 
 const UserHomePage = () => {
 	return (

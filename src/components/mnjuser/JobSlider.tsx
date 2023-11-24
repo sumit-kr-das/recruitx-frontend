@@ -29,7 +29,7 @@ const JobSlider = () => {
 			</div>
 			<Swiper
 				spaceBetween={5}
-				slidesPerView={2.8}
+				slidesPerView={3.5}
 				onSwiper={(swiper) => {
 					swiperRef.current = swiper;
 				}}

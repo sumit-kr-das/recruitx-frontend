@@ -42,7 +42,7 @@ const JobsSlider = ({slidesPerView}:TSlidesPerView) => {
 			>
 				{[...Array(6)].map((_, index) => (
 					<SwiperSlide key={index} className="mb-6">
-						<div className="bg-white w-96 h-36 py-2 px-4 ml-6  border rounded-lg transition ease-in delay-75 cursor-pointer hover:shadow-lg">
+						<div className="bg-white w-72 h-36 py-2 px-4 ml-6  border rounded-lg transition ease-in delay-75 cursor-pointer hover:shadow-lg">
 							<div className="flex justify-between">
 								<div>
 									<h2 className="font-semibold mt-2">Sr. React Js Developer</h2>

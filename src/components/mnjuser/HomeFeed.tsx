@@ -34,12 +34,12 @@ const HomeFeed = () => {
 			{/* job recomandation section */}
 			<div className="bg-white border rounded-lg mt-4 shadow-md">
 				<div className="flex justify-between p-6">
-					<p className="font-bold">55 Recommended jobs</p>
+					<p className="font-bold">6 Recommended jobs</p>
 					<Link to="/" className="text-blue-600 font-semibold">
 						View all
 					</Link>
 				</div>
-				<div className="w-[600px]">
+				<div className="w-[750px]">
 					<JobSlider />
 				</div>
 			</div>
@@ -62,8 +62,8 @@ const HomeFeed = () => {
 						View all
 					</Link>
 				</div>
-				<div className="w-[600px]">
-					<JobsSlider />
+				<div className="w-[750px]">
+					<JobsSlider slidesPerView={2.5} />
 				</div>
 			</div>
 			{/* top companies section */}
@@ -77,7 +77,7 @@ const HomeFeed = () => {
 						View all
 					</Link>
 				</div>
-				<div className="w-[600px]">
+				<div className="w-[750px]">
 					<CompanySlider />
 				</div>
 			</div>
