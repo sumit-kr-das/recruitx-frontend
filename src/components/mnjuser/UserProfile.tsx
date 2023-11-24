@@ -6,8 +6,12 @@ import HomeSVG from "../../assets/icons/home.svg";
 import BlogSVG from "../../assets/icons/blog.svg";
 import CompanyeSVG from "../../assets/icons/company.svg";
 import JobsSVG from "../../assets/icons/jobs.svg";
+import { useViewUserProfileQuery } from "../../features/user/viewUserProfileApiSlice";
 
 const UserProfile = () => {
+	const { data } = useViewUserProfileQuery();
+	console.log(data);
+
 	return (
 		<div className="p-4 text-center">
 			{/* user profile section */}
@@ -18,10 +22,11 @@ const UserProfile = () => {
 					alt="user_default"
 					className="rounded-full object-cover border"
 				/>
-				<h1 className="font-bold">Sumit Kumar Das</h1>
-				<p className="text-xs font-medium">MERN Full Stack Developer</p>
-				<p className="text-xs font-medium my-1">@ designx.digital</p>
-				<p className="text-xs text-gray-400">Last updated 29d ago</p>
+				<h1 className="font-bold capitalize">{data?.name}</h1>
+				{/* <p className="text-xs font-medium">MERN Full Stack Developer</p> */}
+				{/* <p className="text-xs font-medium my-1">@ designx.digital</p> */}
+				<p className="text-xs font-medium capitalize">{data?.workStatus}</p>
+				<p className="text-xs text-gray-400">Last updated 29m ago</p>
 				<button className="mt-2 bg-cyan-500 text-white text-sm px-5 py-2 rounded-md hover:bg-cyan-600">
 					View profile
 				</button>

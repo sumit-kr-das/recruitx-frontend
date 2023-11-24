@@ -1,11 +1,16 @@
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import MainLogo from "../../assets/logo.svg";
-import { selectCurrentUser } from "../../features/auth/authSlice";
+import {
+	selectCurrentRole,
+	selectCurrentUser,
+} from "../../features/auth/authSlice";
 import RadixMenu from "../../themes/RadixMenu";
+import { recruiterMenu, userMenu } from "../../constants/recruterMenu";
 
 const TopHeader = () => {
 	const user = useSelector(selectCurrentUser);
+	const role = useSelector(selectCurrentRole);
 	return (
 		<header className="bg-white shadow-sm fixed w-full z-20">
 			<nav className="max-w-screen-xl mx-auto py-5 flex items-center justify-between">
@@ -62,8 +67,10 @@ const TopHeader = () => {
 								Employers Login
 							</Link>
 						</>
+					) : role && role === "user" ? (
+						<RadixMenu menu={userMenu} />
 					) : (
-						<RadixMenu />
+						<RadixMenu menu={recruiterMenu} />
 					)}
 				</div>
 			</nav>

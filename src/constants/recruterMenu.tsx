@@ -15,3 +15,16 @@ export const recruiterMenu = [
 		shortHand: "⌘+P",
 	},
 ];
+
+export const userMenu = [
+	{
+		title: "User Dashboard",
+		src: "/userHome",
+		shortHand: "⌘+D",
+	},
+	{
+		title: "View Profile",
+		src: "/userHome",
+		shortHand: "⌘+V",
+	},
+];

@@ -6,6 +6,51 @@ import CompanyLogo from "../../assets/default-company-logo.png";
 import LocationSVG from "../../assets/icons/locIcon.svg";
 import RightArrowSVG from "../../assets/icons/right-arrow-crsl.svg";
 
+const jobs = [
+	{
+		title: "NodeJS Developer",
+		company: "Flipcart",
+		location: "Noida, Uttar Pradesh",
+		star: "4.5",
+		time: "4",
+	},
+	{
+		title: "Web Developer",
+		company: "DesignX Digital",
+		location: "Delhi, Uttar Pradesh",
+		star: "3.5",
+		time: "6",
+	},
+	{
+		title: "AI/ML Engineer",
+		company: "Open AI",
+		location: "America, USA",
+		star: "4.5",
+		time: "8",
+	},
+	{
+		title: "Android Developer",
+		company: "Amazon",
+		location: "Noida, Uttar Pradesh",
+		star: "4.5",
+		time: "12",
+	},
+	{
+		title: "Software Dveloper",
+		company: "Cure.fit",
+		location: "Kalkata, West Bengal",
+		star: "4.5",
+		time: "14",
+	},
+	{
+		title: "Express Developer",
+		company: "Devstack Solutions",
+		location: "Dubai, UAE",
+		star: "4.5",
+		time: "32",
+	},
+];
+
 const JobSlider = () => {
 	const swiperRef = React.useRef<any>(null);
 	return (
@@ -29,12 +74,12 @@ const JobSlider = () => {
 			</div>
 			<Swiper
 				spaceBetween={5}
-				slidesPerView={2.8}
+				slidesPerView={3.5}
 				onSwiper={(swiper) => {
 					swiperRef.current = swiper;
 				}}
 			>
-				{[...Array(6)].map((_, index) => (
+				{jobs.map((job, index) => (
 					<SwiperSlide key={index} className="mb-6">
 						<div className="bg-white w-52 h-36 p-4 ml-6  border rounded-lg transition ease-in delay-75 cursor-pointer hover:shadow-lg">
 							<div className="flex justify-between">
@@ -44,20 +89,20 @@ const JobSlider = () => {
 									alt="company_default"
 									className="border rounded-lg"
 								/>
-								<p className="text-xs">11d ago</p>
+								<p className="text-xs">{job.time}d ago</p>
 							</div>
-							<p className="font-semibold mt-2">Node js Developer</p>
+							<p className="font-semibold mt-2">{job.title}</p>
 							<div className="flex items-center justify-between my-1">
-								<p className="text-xs">FresherMart</p>
+								<p className="text-xs">{job.company}</p>
 								<div className="flex items-center gap-1">
 									<img src={StarSVG} width={10} alt="star" />
-									<p className="text-xs">3.3</p>
+									<p className="text-xs">{job.star}</p>
 								</div>
 							</div>
 							<div className="flex gap-1">
 								<img src={LocationSVG} width={10} alt="location" />
 								<p className="truncate overflow-hidden text-xs">
-									Noida,Uttar Pradesh
+									{job.location}
 								</p>
 							</div>
 						</div>

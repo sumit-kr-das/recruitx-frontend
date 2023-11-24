@@ -1,4 +1,3 @@
-import { recruiterMenu } from "../constants/recruterMenu";
 import * as RadixAvatar from "@radix-ui/react-avatar";
 import * as Menubar from "@radix-ui/react-menubar";
 import { ChevronDown } from "lucide-react";
@@ -6,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { logout, selectCurrentUser } from "../features/auth/authSlice";
 
-const RadixMenu = () => {
+const RadixMenu = ({ menu }) => {
 	const name = useSelector(selectCurrentUser);
 	const dispatch = useDispatch();
 
@@ -34,12 +33,12 @@ const RadixMenu = () => {
 						sideOffset={5}
 						alignOffset={-3}
 					>
-						{recruiterMenu.map((menu, index) => (
-							<Link key={index} to={menu.src}>
+						{menu.map((item, index) => (
+							<Link key={index} to={item.src}>
 								<Menubar.Item className="group text-[13px] leading-none rounded flex items-center h-[25px] px-[10px] relative select-none outline-none data-[state=open]:bg-violet4 data-[state=open]:text-violet11 data-[highlighted]:bg-gradient-to-br data-[highlighted]:from-violet9 data-[highlighted]:to-violet10 data-[highlighted]:text-violet1 data-[highlighted]:data-[state=open]:text-violet1 data-[disabled]:text-mauve8 data-[disabled]:pointer-events-none cursor-pointer">
-									{menu.title}{" "}
+									{item.title}{" "}
 									<div className="ml-auto pl-5 text-mauve9 group-data-[highlighted]:text-white group-data-[disabled]:text-mauve8">
-										{menu.shortHand}
+										{item.shortHand}
 									</div>
 								</Menubar.Item>
 							</Link>
