@@ -1,18 +1,18 @@
-import { useState } from "react";
+import { FormEvent, useState } from "react";
+import toast from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
+import { TINITIAL_JOB_DATA } from "../../@types/recruit/jobPost";
 import { INITIAL_JOB_DATA } from "../../@types/recruit/submitJob";
-import useMultistepForm from "../../customHooks/useMultistepForm";
 import BasicInfo from "../../components/recruit/submitJob/BasicInfo";
 import TechnicalInfo from "../../components/recruit/submitJob/TechnicalInfo";
 import TitleBar from "../../components/recruit/titleBar/TitleBar";
+import useMultistepForm from "../../customHooks/useMultistepForm";
+import { usePostJobMutation } from "../../features/company/postJobApiSlice";
 import Container from "../../layout/Container";
-import { TINITIAL_JOB_DATA } from "../../@types/recruit/jobPost";
 
 const SubmitJob = () => {
 	const [data, setData] = useState(INITIAL_JOB_DATA);
 	const updateFields = (fields: Partial<TINITIAL_JOB_DATA>) => {
-		const { title, category, description, tags, ...other } = fields;
-		console.log({ title: title });
-
 		setData((prev) => {
 			return { ...prev, ...fields };
 		});
@@ -29,15 +29,33 @@ const SubmitJob = () => {
 		<BasicInfo key="basic" {...data} updateFields={updateFields} />,
 		<TechnicalInfo key="technical" {...data} updateFields={updateFields} />,
 	]);
-	const handleSubmit = async (e) => {
+
+	const [postJob, { isLoading }] = usePostJobMutation();
+	const navigate = useNavigate();
+
+	const handleSubmit = async (e: FormEvent) => {
 		e.preventDefault();
+		if (!isLastStep) {
+			return next();
+		}
 		const { title, category, description, tags, ...other } = data;
-		const userData = {
-			title, category, description, tags, info:{...other} 
+		const newJobData = {
+			title,
+			category,
+			description,
+			tags,
+			info: { ...other },
 		};
 
-		console.log(userData, "data");
-
+		try {
+			await postJob(newJobData).unwrap();
+			setData(INITIAL_JOB_DATA);
+			toast.success("Job posted successfully");
+			navigate("/recruit/submit_jobs");
+		} catch (err: any) {
+			toast.error(err.data.message);
+			console.log("Error on company register", err);
+		}
 	};
 	return (
 		<Container>
@@ -65,17 +83,15 @@ const SubmitJob = () => {
 					<form onSubmit={handleSubmit}>
 						<div className="space-y-12">{step}</div>
 						<div className="mt-6 flex items-center justify-end gap-x-6">
-							{!isLastStep && (
+							{!isFirstStep && (
 								<button
 									onClick={back}
-									type="submit"
 									className="text-sm font-semibold leading-6 text-gray-900"
 								>
 									Back
 								</button>
 							)}
 							<button
-								onClick={next}
 								type="submit"
 								className="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
 							>

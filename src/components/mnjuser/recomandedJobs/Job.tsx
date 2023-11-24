@@ -1,15 +1,12 @@
-import LocationSVG from "/assets/icons/locIcon.svg";
-import JobsSVG from "/assets/icons/jobs.svg";
 
 import {
-	MdLocationOn,
-	MdOutlineWork,
-	MdOutlineAttachMoney,
 	MdDescription,
+	MdLocationOn,
+	MdOutlineAttachMoney,
+	MdOutlineWork,
 } from "react-icons/md";
 
-import { recommandJobs } from "../../../constants/recomandedJobs";
-
+import { convertDate } from "../../../pages/company/MyJobs";
 
 
 const Job = ({jobs}) => {
@@ -64,7 +61,8 @@ const Job = ({jobs}) => {
 						</p>
 					</div>
 					<div className="flex items-center gap-1 mt-2">
-						<p className="text-sm">{item.time} Days Ago</p>
+
+						<p className="text-sm">{convertDate(item?.info.startDate)}</p>
 					</div>
 				</div>
 			))}

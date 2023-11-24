@@ -27,7 +27,7 @@ export const companyDashboard = [
 	{
 		menu: "Shortlisted Candidates",
 		icon: "",
-		src: "",
+		src: "/recruit/shortlisted_candidates",
 	},
 	{
 		menu: "Change Password",

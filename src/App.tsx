@@ -4,14 +4,19 @@ import CompanyRoutes from "./protectedRoutes/CompanyRoutes";
 import Layout from "./layout/Layout";
 import {
 	ApplicantsJobs,
-	CompanyHome,
 	CompanyLogin,
 	CompanyRegister,
 	HomePage,
 	MyJobs,
 	SubmitJobs,
 	UserHomePage,
+	ShortlistedCandidates,
+	CompanyDashboard,
+	Login,
+	Register,
 } from "./pages";
+import AuthenticateRoutes from "./protectedRoutes/AuthenticateRoutes";
+import UserRoutes from "./protectedRoutes/UserRoutes";
 import SearchPage from "./pages/search/SearchPage";
 
 const App = () => {
@@ -22,12 +27,49 @@ const App = () => {
 				{/* default */}
 				<Route path="/" element={<HomePage />} />
 				{/* user */}
-				<Route path="/userHome" element={<UserHomePage />} />
+				<Route
+					path="/login"
+					element={
+						<AuthenticateRoutes>
+							<Login />
+						</AuthenticateRoutes>
+					}
+				/>
+				<Route
+					path="/register"
+					element={
+						<AuthenticateRoutes>
+							<Register />
+						</AuthenticateRoutes>
+					}
+				/>
+				<Route
+					path="/userHome"
+					element={
+						<UserRoutes>
+							<UserHomePage />
+						</UserRoutes>
+					}
+				/>
 				<Route path="/search" element={<SearchPage />} />
 
 				{/* company */}
-				<Route path="/cRegister" element={<CompanyRegister />} />
-				<Route path="/cLogin" element={<CompanyLogin />} />
+				<Route
+					path="/cRegister"
+					element={
+						<AuthenticateRoutes>
+							<CompanyRegister />
+						</AuthenticateRoutes>
+					}
+				/>
+				<Route
+					path="/cLogin"
+					element={
+						<AuthenticateRoutes>
+							<CompanyLogin />
+						</AuthenticateRoutes>
+					}
+				/>
 				<Route
 					path="recruit"
 					element={
@@ -36,10 +78,14 @@ const App = () => {
 						</CompanyRoutes>
 					}
 				>
-					<Route path="/recruit" element={<CompanyHome />} />
+					<Route path="/recruit" element={<CompanyDashboard />} />
 					<Route path="/recruit/submit_jobs" element={<SubmitJobs />} />
 					<Route path="/recruit/my_jobs" element={<MyJobs />} />
 					<Route path="/recruit/applicants_jobs" element={<ApplicantsJobs />} />
+					<Route
+						path="/recruit/shortlisted_candidates"
+						element={<ShortlistedCandidates />}
+					/>
 				</Route>
 			</Routes>
 		</BrowserRouter>

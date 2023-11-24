@@ -14,7 +14,7 @@ const isExist = JSON.parse(localStorage.getItem("user") || "{}")
 const initialState: AuthState = {
 	user: isExist ? isExist.user : null,
 	role: isExist ? isExist.role : null,
-	token: isExist ? isExist.token : null,
+	token: isExist ? isExist.access_token : null,
 };
 
 const authSlice = createSlice({
