@@ -1,7 +1,10 @@
 import { MdModeEdit } from "react-icons/md";
 import Certificate from "./Certificate";
+import { useUserCertificationDataQuery } from "../../../features/user/getUserCertificationApiSlice";
 
 const UserCertifications = () => {
+    const {data} = useUserCertificationDataQuery();
+
     return (
         <>
             <section className='bg-white border rounded-md w-full mt-5 h-fit justify-between'>
@@ -14,8 +17,11 @@ const UserCertifications = () => {
                         <p className='text-right p-5'><a href='#'>Add Education</a></p>
                     </div>
                 </div>
-                <Certificate/>
-                <Certificate/>
+                {
+                    data?.map((certificate)=>(<>
+                         <Certificate item={certificate}/>
+                    </>))
+                }
             </section>
         </>
     )

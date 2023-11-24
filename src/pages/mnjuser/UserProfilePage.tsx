@@ -9,6 +9,7 @@ import UserCertifications from '../../components/mnjuser/userprofile/UserCertifi
 import UserProjects from '../../components/mnjuser/userprofile/UserProjects';
 import UserCareerProfile from '../../components/mnjuser/userprofile/UserCareerProfile';
 
+
 const UserProfilePage = () => {
     return (
         <>

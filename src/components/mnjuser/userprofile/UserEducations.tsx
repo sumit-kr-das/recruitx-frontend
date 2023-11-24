@@ -1,7 +1,10 @@
 import { MdModeEdit } from "react-icons/md";
 import Education from "./Education";
+import { useUserEducationDataQuery } from "../../../features/user/getEducationDataApiSlice";
 
 const UserEducations = () => {
+    const { data } = useUserEducationDataQuery();
+
     return (
         <>
             <section className='bg-white border rounded-md w-full mt-5 h-fit justify-between'>
@@ -14,9 +17,12 @@ const UserEducations = () => {
                         <p className='text-right p-5'><a href='#'>Add Education</a></p>
                     </div>
                 </div>
-                <Education />
-                <Education />
-                <Education />
+                {
+                    data?.map((edu) => (<>
+                        <Education edu={edu}/>
+
+                    </>))
+                }
             </section>
         </>
     )

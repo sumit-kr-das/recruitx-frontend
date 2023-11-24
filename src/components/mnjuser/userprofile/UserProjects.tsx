@@ -1,8 +1,10 @@
 import React from 'react'
 import { MdModeEdit } from 'react-icons/md'
 import Project from './Project'
+import { useUserProjectDataQuery } from '../../../features/user/getProjectDataApiSlice'
 
 const UserProjects = () => {
+    const {data} = useUserProjectDataQuery();
     return (
         <>
             <section className='bg-white border rounded-md w-full mt-5 h-fit justify-between'>
@@ -15,9 +17,15 @@ const UserProjects = () => {
                         <p className='text-right p-5'><a href='#'>Add Project</a></p>
                     </div>
                 </div>
-                <Project/>
-                <Project/>
-                <Project/>
+                {
+                    data?.map((item)=>(
+                        <>
+                         <Project item={item}/>
+                        </>
+                    ))
+                }
+                {/* <Project/>
+                <Project/> */}
             </section>
         </>
     )
