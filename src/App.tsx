@@ -18,10 +18,8 @@ import {
 	Register,
 	CompanyProfile,
 } from "./pages";
-import AuthenticateRoutes from "./protectedRoutes/AuthenticateRoutes";
-import UserRoutes from "./protectedRoutes/UserRoutes";
-import SearchPage from "./pages/search/SearchPage";
 import UserProfilePage from "./pages/mnjuser/UserProfilePage";
+import SearchPage from "./pages/search/SearchPage";
 
 const App = () => {
 	return (

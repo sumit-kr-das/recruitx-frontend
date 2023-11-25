@@ -7,7 +7,7 @@ import Container from "../../layout/Container";
 
 const UserHomePage = () => {
 	return (
-		<>
+		<div className="bg-green-50">
 			<TopHeader />
 			<Container className="flex justify-between">
 				<section className="bg-white border rounded-md w-[240px] h-fit mt-24">
@@ -21,7 +21,7 @@ const UserHomePage = () => {
 				</section>
 			</Container>
 			<Footer />
-		</>
+		</div>
 	);
 };
 
