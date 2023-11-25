@@ -21,7 +21,7 @@ interface userInfo{
 export const getSearchData = apiSlice.injectEndpoints({
 	endpoints: (builder) => ({
 		userInfoData: builder.query<userInfo[], void>({
-			query: () => "user/info/view",
+			query: () => "/user/info/view",
 		}),
 	}),
 });

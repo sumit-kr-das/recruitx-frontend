@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import React from "react";
 
 export interface childProp {
 	children: React.ReactNode;
-	classes?: String;
+	classes?: string;
 }
 
 const Modal = ({ children, classes }: childProp) => {

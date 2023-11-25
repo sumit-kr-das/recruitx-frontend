@@ -6,7 +6,7 @@ import HomeSVG from "../../assets/icons/home.svg";
 import BlogSVG from "../../assets/icons/blog.svg";
 import CompanyeSVG from "../../assets/icons/company.svg";
 import JobsSVG from "../../assets/icons/jobs.svg";
-import { useViewUserProfileQuery } from "../../features/user/viewUserProfileApiSlice";
+import { useViewUserProfileQuery } from "../../features/user/userProfile/viewUserProfileApiSlice";
 
 const UserProfile = () => {
 	const { data } = useViewUserProfileQuery();
@@ -27,9 +27,12 @@ const UserProfile = () => {
 				{/* <p className="text-xs font-medium my-1">@ designx.digital</p> */}
 				<p className="text-xs font-medium capitalize">{data?.workStatus}</p>
 				<p className="text-xs text-gray-400">Last updated 29m ago</p>
-				<button className="mt-2 bg-cyan-500 text-white text-sm px-5 py-2 rounded-md hover:bg-cyan-600">
+				<Link
+					to="/userProfile"
+					className="mt-2 bg-cyan-500 text-white text-sm px-5 py-2 rounded-md hover:bg-cyan-600"
+				>
 					View profile
-				</button>
+				</Link>
 			</div>
 			{/* profile performence section */}
 			<div className="bg-slate-100 mt-4 rounded-xl p-2">

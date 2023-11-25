@@ -13,7 +13,7 @@ interface userCertification{
 export const getCertificationData = apiSlice.injectEndpoints({
 	endpoints: (builder) => ({
 		userCertificationData: builder.query<userCertification[], void>({
-			query: () => "user/certificate/view",
+			query: () => "/user/certificate/view",
 		}),
 	}),
 });
