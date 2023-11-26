@@ -4,23 +4,26 @@ import { companyDashboard } from "../constants/companyDashboard";
 import { useViewCompanyQuery } from "../features/company/viewCompanyApiSlice";
 
 const SideBar = () => {
-	const { data } = useViewCompanyQuery();
-	console.log(data);
+	const { data, isSuccess } = useViewCompanyQuery();
 
 	return (
-		<div className="pt-[15px] py-5">
-			<div className="flex items-center justify-center flex-col">
-				<img
-					src={UserDefault}
-					width={120}
-					alt="user_default"
-					className="rounded-full object-cover border mb-2"
-				/>
-				<h1 className="font-bold">{data && data[0]?.name}</h1>
-				<p className="text-xs font-medium">{data && data[0]?.designation}</p>
-				<p className="text-xs font-medium my-1">@ {data && data[0]?.companyName}</p>
-				<p className="text-xs text-gray-400">{data && data[0]?.industry}</p>
-			</div>
+		<div className="pt-[15px] py-">
+			{isSuccess && (
+				<div className="flex items-center justify-center flex-col">
+					<img
+						src={UserDefault}
+						width={120}
+						alt="user_default"
+						className="rounded-full object-cover border mb-2"
+					/>
+					<h1 className="font-bold">{data && data[0]?.name}</h1>
+					<p className="text-xs font-medium">{data && data[0]?.designation}</p>
+					<p className="text-xs font-medium my-1">
+						@ {data && data[0]?.companyName}
+					</p>
+					<p className="text-xs text-gray-400">{data && data[0]?.industry}</p>
+				</div>
+			)}
 			<h3 className="mt-10 mb-4 px-5 font-medium text-bold text-md">
 				Main Navigation
 			</h3>

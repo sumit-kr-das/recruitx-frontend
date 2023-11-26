@@ -3,25 +3,14 @@ import UserDefault from "../../assets/default-company-logo.png";
 import Container from "../../layout/Container";
 import TitleBar from "../../components/recruit/titleBar/TitleBar";
 import { Paperclip } from "lucide-react";
+import CompanyInfo from "../../components/recruit/companyProfile/CompanyInfo";
 
 const CompanyProfile = () => {
 	return (
 		<Container>
 			<TitleBar title="View Profile" path="Employer / Dashboard / My Profile" />
 			{/* user profile details */}
-			<div className="bg-white p-10 rounded-lg flex items-center gap-5">
-				<img
-					src={UserDefault}
-					width={120}
-					alt="user_default"
-					className="rounded-full object-cover border mb-2"
-				/>
-				<div>
-					<h1 className="font-bold text-2xl">Adobe Photoshop</h1>
-					<p className="text-sm font-medium">Software & Application</p>
-					<p className="text-sm font-medium my-1">Canada, USA</p>
-				</div>
-			</div>
+			<CompanyInfo />
 			{/* other details */}
 			<div className="bg-white p-10 rounded-lg mt-5">
 				<div className="px-4 sm:px-0">
