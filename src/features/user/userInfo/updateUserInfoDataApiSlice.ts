@@ -4,7 +4,7 @@ export const updateUserInfoDataApiSlice = apiSlice.injectEndpoints({
 	endpoints: (builder) => ({
 		updateUserInfo: builder.mutation({
 			query: (credentials) => ({
-				url: "/user/edit",
+				url: "/user/info/update",
 				method: "PUT",
 				body: { ...credentials },
 			}),

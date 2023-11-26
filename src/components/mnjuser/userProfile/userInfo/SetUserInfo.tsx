@@ -1,44 +1,36 @@
-import React, { useState } from "react";
-import SelectInput from "../../form/multiSelectInput/SelectInput";
-import { languageData } from "../../../constants/languageData";
-import { qualificationData } from "../../../constants/qualificationData";
-import { tagsData } from "../../../constants/tagsData";
-import { useSetUserMutation } from "../../../features/user/userInfo/setUserInfoDataApiSlice";
-import {toast} from 'react-hot-toast'
+import { toast } from "react-hot-toast";
+import { languageData } from "../../../../constants/languageData";
+import { qualificationData } from "../../../../constants/qualificationData";
+import { useSetUserMutation } from "../../../../features/user/userInfo/setUserInfoDataApiSlice";
+import SelectInput from "../../../form/multiSelectInput/SelectInput";
+import { INITIAL_DATA } from "./OtherInfo";
+import { tagsData } from "../../../../constants/tagsData";
 
-const INITIAL_DATA = {
-	github: "",
-	linkedIn: "",
-	dateOfBirth: "",
-	age: "",
-	address: "",
-	bio: "",
-	objective: "",
-	language: [""],
-	gender: "",
-	skills: [""],
-	maxQualification: "",
-};
-
-const OtherInfo = () => {
-	const [data, setData] = useState(INITIAL_DATA);
-	const [lang, setLang] = useState([languageData[0]]);
-	const [tags, setTags] = useState([tagsData[0]]);
-
+const SetUserInfo = ({
+	userData,
+	setUserData,
+	lang,
+	setLang,
+	tags,
+	setTags,
+}) => {
 	const [setUser] = useSetUserMutation();
 
-	const handleSubmit = async(e) => {
+	const handleSubmit = async (e) => {
 		e.preventDefault();
 		try {
-			await setUser(data).unwrap();
+			await setUser(userData).unwrap();
 			toast.success("Save successfull");
-			
-		} catch (err) {
+		} catch (err: any) {
+			toast.success(err?.data?.msg);
 			console.log("Error on company login", err);
 		}
 	};
+	const handleCancel = () => {
+		setUserData(INITIAL_DATA);
+	};
 	return (
-		<div className="relative bg-white p-5 rounded-lg gap-5 mt-5">
+		<div className="relative bg-white p-5 rounded-lg gap-5 mt-5 shadow-lg">
 			<form onSubmit={handleSubmit}>
 				<div className="pb-12">
 					<h2 className="text-base font-semibold leading-7 text-gray-900">
@@ -59,9 +51,9 @@ const OtherInfo = () => {
 							<div className="mt-2">
 								<div className="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md">
 									<input
-										value={data.objective}
+										value={userData.objective}
 										onChange={(e) =>
-											setData({ ...data, objective: e.target.value })
+											setUserData({ ...userData, objective: e.target.value })
 										}
 										type="text"
 										name="title"
@@ -83,8 +75,10 @@ const OtherInfo = () => {
 							</label>
 							<div className="mt-2">
 								<textarea
-									value={data.bio}
-									onChange={(e) => setData({ ...data, bio: e.target.value })}
+									value={userData.bio}
+									onChange={(e) =>
+										setUserData({ ...userData, bio: e.target.value })
+									}
 									id="description"
 									name="description"
 									rows={3}
@@ -106,9 +100,9 @@ const OtherInfo = () => {
 							</label>
 							<div className="mt-2">
 								<input
-									value={data.address}
+									value={userData.address}
 									onChange={(e) =>
-										setData({ ...data, address: e.target.value })
+										setUserData({ ...userData, address: e.target.value })
 									}
 									type="text"
 									name="location"
@@ -128,8 +122,10 @@ const OtherInfo = () => {
 							</label>
 							<div className="mt-2">
 								<select
-									value={data.gender}
-									onChange={(e) => setData({ ...data, gender: e.target.value })}
+									value={userData.gender}
+									onChange={(e) =>
+										setUserData({ ...userData, gender: e.target.value })
+									}
 									id="category"
 									name="category"
 									autoComplete="country-name"
@@ -157,7 +153,7 @@ const OtherInfo = () => {
 									value={lang}
 									onChange={(o) => {
 										setLang(o);
-										setData({ ...data, language: lang });
+										setUserData({ ...userData, language: lang });
 									}}
 								/>
 							</div>
@@ -172,8 +168,8 @@ const OtherInfo = () => {
 							</label>
 							<div className="mt-2">
 								<input
-									value={data.age}
-									onChange={(e) => setData({ ...data, age: e.target.value })}
+									value={userData.age}
+									onChange={(e) => setUserData({ ...userData, age: e.target.value })}
 									type="text"
 									name="minExprience"
 									id="minExprience"
@@ -192,9 +188,9 @@ const OtherInfo = () => {
 							</label>
 							<div className="mt-2">
 								<input
-									value={data.dateOfBirth}
+									value={userData.dateOfBirth}
 									onChange={(e) =>
-										setData({ ...data, dateOfBirth: e.target.value })
+										setUserData({ ...userData, dateOfBirth: e.target.value })
 									}
 									type="date"
 									name="minExprience"
@@ -214,8 +210,8 @@ const OtherInfo = () => {
 							</label>
 							<div className="mt-2">
 								<input
-									value={data.github}
-									onChange={(e) => setData({ ...data, github: e.target.value })}
+									value={userData.github}
+									onChange={(e) => setUserData({ ...userData, github: e.target.value })}
 									type="text"
 									name="minExprience"
 									id="minExprience"
@@ -234,9 +230,9 @@ const OtherInfo = () => {
 							</label>
 							<div className="mt-2">
 								<input
-									value={data.linkedIn}
+									value={userData.linkedIn}
 									onChange={(e) =>
-										setData({ ...data, linkedIn: e.target.value })
+										setUserData({ ...userData, linkedIn: e.target.value })
 									}
 									type="text"
 									name="minExprience"
@@ -256,9 +252,9 @@ const OtherInfo = () => {
 							</label>
 							<div className="mt-2">
 								<select
-									value={data.maxQualification}
+									value={userData.maxQualification}
 									onChange={(e) =>
-										setData({ ...data, maxQualification: e.target.value })
+										setUserData({ ...userData, maxQualification: e.target.value })
 									}
 									id="category"
 									name="category"
@@ -289,7 +285,7 @@ const OtherInfo = () => {
 									value={tags}
 									onChange={(o) => {
 										setTags(o);
-										setData({ ...data, skills: tags });
+										setUserData({ ...userData, skills: tags });
 									}}
 								/>
 							</div>
@@ -298,6 +294,7 @@ const OtherInfo = () => {
 				</div>
 				<div className="mt-6 flex items-center justify-end gap-x-6">
 					<button
+						onClick={handleCancel}
 						type="button"
 						className="text-sm font-semibold leading-6 text-gray-900"
 					>
@@ -316,4 +313,4 @@ const OtherInfo = () => {
 	);
 };
 
-export default OtherInfo;
+export default SetUserInfo;
