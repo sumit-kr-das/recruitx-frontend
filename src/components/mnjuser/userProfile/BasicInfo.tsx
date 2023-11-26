@@ -20,8 +20,6 @@ const BasicInfo = () => {
 	const { data, isSuccess, isLoading, isError } = useViewUserProfileQuery();
 	const [updateUser] = useUpdateUserMutation();
 
-	console.log(data);
-
 	// set the data into edit modal
 	useEffect(() => {
 		if (isSuccess) {

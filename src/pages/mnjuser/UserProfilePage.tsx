@@ -6,6 +6,7 @@ import { useViewUserProfileQuery } from "../../features/user/userProfile/viewUse
 import { convertDate } from "../company/MyJobs";
 import { Phone, Mail } from "lucide-react";
 import BasicInfo from "../../components/mnjuser/userProfile/BasicInfo";
+import OtherInfo from "../../components/mnjuser/userProfile/OtherInfo";
 
 const UserProfilePage = () => {
 	// const { data, isLoading } = useViewUserProfileQuery();
@@ -17,6 +18,8 @@ const UserProfilePage = () => {
 			<Container className="pt-24 w-full">
 				{/* Basic info */}
 				<BasicInfo />
+				{/* Other info */}
+				<OtherInfo />
 			</Container>
 			<Footer />
 		</div>
