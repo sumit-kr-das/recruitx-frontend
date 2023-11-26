@@ -1,10 +1,6 @@
-import React, { useState } from "react";
-import SelectInput from "../../../form/multiSelectInput/SelectInput";
+import { useState } from "react";
 import { languageData } from "../../../../constants/languageData";
-import { qualificationData } from "../../../../constants/qualificationData";
 import { tagsData } from "../../../../constants/tagsData";
-import { useSetUserMutation } from "../../../../features/user/userInfo/setUserInfoDataApiSlice";
-import { toast } from "react-hot-toast";
 import { useUserInfoDataQuery } from "../../../../features/user/userInfo/getUserInfoDataApiSlice";
 import SetUserInfo from "./SetUserInfo";
 import ViewInfo from "./ViewInfo";
@@ -28,7 +24,7 @@ const OtherInfo = () => {
 	const [lang, setLang] = useState([languageData[0]]);
 	const [tags, setTags] = useState([tagsData[0]]);
 
-	const { data, isSuccess, isLoading, isError } = useUserInfoDataQuery();
+	const { data, isSuccess, isLoading } = useUserInfoDataQuery();
 
 	if (isSuccess) {
 		console.log(data);

@@ -209,7 +209,7 @@ const BasicInfo = () => {
 									type="submit"
 									className="text-white bg-cyan-400 hover:bg-cyan-600 inline-flex h-[35px] items-center justify-center rounded-[4px] px-[15px] font-medium leading-none shadow-[0_2px_10px] focus:shadow-[0_0_0_2px] focus:shadow-black focus:outline-none"
 								>
-									Edit profile
+									Update profile
 								</button>
 							</div>
 						</div>

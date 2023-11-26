@@ -394,7 +394,7 @@ const ViewInfo = ({
 										<SelectInput
 											multiple
 											options={tagsData}
-											value={tags}
+											value={userData.skills}
 											onChange={(o) => {
 												setTags(o);
 												setUserData({ ...userData, skills: tags });
