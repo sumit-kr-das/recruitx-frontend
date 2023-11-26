@@ -1,5 +1,8 @@
+import { toast } from "react-hot-toast";
 import TitleBar from "../../components/recruit/titleBar/TitleBar";
+import { useDeleteJobMutation } from "../../features/company/deleteJobApiSlice";
 import { useViewJobsQuery } from "../../features/company/viewJobsApiSlice";
+import { useGetJobStaticsQuery } from "../../features/statics/getJobStaticsApiSlice";
 import Container from "../../layout/Container";
 import { Pencil, Trash2 } from "lucide-react";
 
@@ -13,17 +16,39 @@ export const convertDate = (srcDate: string) => {
 	return startDate.toLocaleDateString("en-GB", options);
 };
 
+const JobsStat = () => {
+	const { data, isSuccess } = useGetJobStaticsQuery();
+
+	const jobsStat = (
+		<div className="flex items-center gap-x-5">
+			<button>All: {data?.all}</button>
+			<button>Active: {data?.active}</button>
+			<button>Expired: {data?.expired}</button>
+		</div>
+	);
+
+	return isSuccess ? jobsStat : <p>Error in Job</p>;
+};
+
 const MyJobs = () => {
-	const { data } = useViewJobsQuery();
-	return (
+	const { data, isSuccess } = useViewJobsQuery();
+	const [deleteJob] = useDeleteJobMutation();
+
+	const handleDelete = async (id) => {
+		console.log(id);
+		try {
+			await deleteJob(id).unwrap();
+			toast.success("Job deleted successfully");
+		} catch (err: any) {
+			toast.error(err.data.message);
+			console.log("Error on company register", err);
+		}
+	};
+	const myJobs = (
 		<Container>
 			<TitleBar title="Manage jobs" path="Employer / Dashboard / My Jobs" />
-			<div className="">
-				<div className="flex items-center gap-x-5">
-					<button>All: 122</button>
-					<button>Active: 24</button>
-					<button>Expired: 57</button>
-				</div>
+			<div>
+				<JobsStat />
 				<div>
 					{data?.map((job, index) => (
 						<div
@@ -52,10 +77,13 @@ const MyJobs = () => {
 								</p>
 							</div>
 							<div className="flex items-center gap-x-5">
-								<span className="bg-teal-100 px-3 py-2 rounded-lg cursor-pointer">
+								{/* <span className="bg-teal-100 px-3 py-2 rounded-lg cursor-pointer">
 									<Pencil className="w-[20px] text-teal-600" />
-								</span>
-								<span className="bg-red-100 px-3 py-2 rounded-lg cursor-pointer">
+								</span> */}
+								<span
+									onClick={() => handleDelete(job?._id)}
+									className="bg-red-100 px-3 py-2 rounded-lg cursor-pointer"
+								>
 									<Trash2 className="w-[20px] text-red-600" />
 								</span>
 							</div>
@@ -65,6 +93,8 @@ const MyJobs = () => {
 			</div>
 		</Container>
 	);
+
+	return isSuccess ? myJobs : <p>Error in Job</p>;
 };
 
 export default MyJobs;
