@@ -5,6 +5,8 @@ import UserDefault from "../../../assets/default-company-logo.png";
 import { convertDate } from "../../../pages/company/MyJobs";
 import Modal from "../../Modal";
 import { industryTypes } from "../../../constants/industryTypes";
+import { useUpdateCompanyMutation } from "../../../features/company/updateCompanyApiSlice";
+import { toast } from "react-hot-toast";
 
 const INITIAL_DATA = {
 	name: "",
@@ -22,6 +24,7 @@ const CompanyInfo = () => {
 	const [open, setOpen] = useState(false);
 
 	const { data, isLoading, isSuccess } = useViewCompanyQuery();
+	const [updateCompany] = useUpdateCompanyMutation();
 
 	if (isSuccess) {
 		console.log(data[0]);
@@ -43,13 +46,22 @@ const CompanyInfo = () => {
 		}
 	}, [isSuccess, data]);
 
-	const handleUpdate = () => {};
+	const handleUpdate = async(e) => {
+		e.preventDefault();
+		try {
+			await updateCompany(update).unwrap();
+			toast.success("Update successfull");
+			setOpen((prev) => !prev);
+		} catch (err) {
+			console.log("Error on company login", err);
+		}
+	};
 
 	const companyProfile = (
 		<>
 			<div className="relative flex items-center justify-between bg-white p-5 rounded-lg gap-5">
 				<div
-					// onClick={() => setOpen((prev) => !prev)}
+					onClick={() => setOpen((prev) => !prev)}
 					title="edit"
 					className=" absolute top-4 right-4 bg-slate-200 p-4 rounded-full cursor-pointer"
 				>

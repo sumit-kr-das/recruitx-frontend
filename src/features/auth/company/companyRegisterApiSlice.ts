@@ -9,7 +9,7 @@ export const companyRegisterApiSlice = apiSlice.injectEndpoints({
 				body: { ...credentials },
 
 			}),
-			invalidatesTags:['CompanyLogin']
+			invalidatesTags:['CompanyProfile']
 		}),
 	}),
 });

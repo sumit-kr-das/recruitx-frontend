@@ -16,10 +16,10 @@ const RadixMenu = ({ menu }) => {
 		<Menubar.Root className="flex">
 			<Menubar.Menu>
 				<Menubar.Trigger className="outline-none select-none font-medium leading-none rounded text-[13px] flex items-center justify-between gap-[2px] ">
-					<RadixAvatar.Root className="inline-flex h-[30px] w-[30px] select-none items-center justify-center overflow-hidden rounded-full align-middle cursor-pointer">
+					<RadixAvatar.Root className="inline-flex h-[30px] w-[30px] select-none items-center justify-center overflow-hidden rounded-full align-middle cursor-pointer border-2">
 						<RadixAvatar.Image
 							className="h-full w-full rounded-[inherit] object-cover"
-							src="https://images.unsplash.com/photo-1492633423870-43d1cd2775eb?&w=128&h=128&dpr=2&q=80"
+							src="/user_img.png"
 							alt="Colm Tuite"
 						/>
 					</RadixAvatar.Root>
