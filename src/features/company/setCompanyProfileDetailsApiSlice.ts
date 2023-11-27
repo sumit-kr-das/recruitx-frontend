@@ -8,8 +8,10 @@ export const setCompanyProfileDetailsApiSlice = apiSlice.injectEndpoints({
 				method: "POST",
 				body: { ...credentials },
 			}),
+			invalidatesTags: ["CompanyProfileDetails"],
 		}),
 	}),
 });
 
-export const { useSetCompanyProfileMutation } = setCompanyProfileDetailsApiSlice;
+export const { useSetCompanyProfileMutation } =
+	setCompanyProfileDetailsApiSlice;

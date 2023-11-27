@@ -16,30 +16,31 @@ const CompanyProfileDetails = () => {
 	const [userData, setUserData] = useState(INITIAL_DATA);
 	const [cType, setCtype] = useState([companyTagData[0]]);
 	const { data, isSuccess, isLoading } = useViewCompanyProfileQuery();
-	console.log(data);
-	const isAvailable = (
+
+	return isLoading ? (
+		<p>Loading...</p>
+	) : isSuccess ? (
 		<>
-			{!data ? (
-				<SetCompanyProfile
-					userData={userData}
-					setUserData={setUserData}
-					cType={cType}
-					setCtype={setCtype}
-				/>
-			) : (
-				<ViewCompanyProfile
-					data={data}
-					userData={userData}
-					setUserData={setUserData}
-					isSuccess={isSuccess}
-					cType={cType}
-					setCtype={setCtype}
-				/>
-			)}
+			<ViewCompanyProfile
+				data={data}
+				userData={userData}
+				setUserData={setUserData}
+				isSuccess={isSuccess}
+				cType={cType}
+				setCtype={setCtype}
+			/>
+		</>
+	) : (
+		<>
+			<SetCompanyProfile
+				userData={userData}
+				setUserData={setUserData}
+				cType={cType}
+				setCtype={setCtype}
+			/>
+			;
 		</>
 	);
-
-	return isLoading ? <p>Loading...</p> : isSuccess && isAvailable;
 };
 
 export default CompanyProfileDetails;

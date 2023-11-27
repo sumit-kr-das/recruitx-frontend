@@ -15,6 +15,7 @@ import {
 	ShortlistedCandidates,
 	SubmitJobs,
 	UserHomePage,
+	ChangePassword
 } from "./pages";
 import UserProfilePage from "./pages/mnjuser/UserProfilePage";
 import SearchPage from "./pages/search/SearchPage";
@@ -100,6 +101,7 @@ const App = () => {
 						element={<ShortlistedCandidates />}
 					/>
 					<Route path="/recruit/delete_account" element={<DeleteCompany />} />
+					<Route path="/recruit/change_password" element={<ChangePassword />} />
 				</Route>
 			</Routes>
 		</BrowserRouter>

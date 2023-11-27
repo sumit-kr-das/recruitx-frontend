@@ -32,7 +32,7 @@ export const companyDashboard = [
 	{
 		menu: "Change Password",
 		icon: "",
-		src: "",
+		src: "/recruit/change_password",
 	},
 	{
 		menu: "Delete Account",

@@ -1,9 +1,31 @@
 import Container from "../../layout/Container";
-import React from "react";
+import React, { useState } from "react";
 import TitleBar from "../../components/recruit/titleBar/TitleBar";
+import { useDeleteAccountMutation } from "../../features/company/deleteAccountApiSlice";
+import { useDispatch } from "react-redux";
+import { toast } from "react-hot-toast";
+import { logout } from "../../features/auth/authSlice";
+
+const INITIAL_DATA = {
+	password: "",
+};
 
 const DeleteCompany = () => {
-	const handleSubmit = () => {};
+	const [data, setData] = useState(INITIAL_DATA);
+	const [deleteAccount] = useDeleteAccountMutation();
+	const dispatch = useDispatch();
+
+	const handleSubmit = async (e) => {
+		e.preventDefault();
+		try {
+			await deleteAccount(data).unwrap();
+			toast.success("Password update successfull");
+			dispatch(logout());
+		} catch (err) {
+			toast.success(err.data.msg);
+			console.log("Error on company login", err);
+		}
+	};
 	return (
 		<Container>
 			<TitleBar
@@ -21,8 +43,8 @@ const DeleteCompany = () => {
 						</label>
 						<div className="mt-2">
 							<input
-								// value={minExprience}
-								// onChange={(e) => updateFields({ minExprience: e.target.value })}
+								value={data.password}
+								onChange={(e) => setData({ ...data, password: e.target.value })}
 								type="password"
 								name="minExprience"
 								id="minExprience"
