@@ -15,7 +15,8 @@ import {
 	ShortlistedCandidates,
 	SubmitJobs,
 	UserHomePage,
-	ChangePassword
+	ChangePassword,
+	Logout,
 } from "./pages";
 import UserProfilePage from "./pages/mnjuser/UserProfilePage";
 import SearchPage from "./pages/search/SearchPage";
@@ -24,7 +25,6 @@ import CompanyRoutes from "./protectedRoutes/CompanyRoutes";
 import UserRoutes from "./protectedRoutes/UserRoutes";
 
 const App = () => {
-
 	return (
 		<BrowserRouter>
 			<Toaster position="bottom-right" reverseOrder={false} />
@@ -102,6 +102,7 @@ const App = () => {
 					/>
 					<Route path="/recruit/delete_account" element={<DeleteCompany />} />
 					<Route path="/recruit/change_password" element={<ChangePassword />} />
+					<Route path="/recruit/logout" element={<Logout />} />
 				</Route>
 			</Routes>
 		</BrowserRouter>

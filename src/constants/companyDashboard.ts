@@ -42,6 +42,6 @@ export const companyDashboard = [
 	{
 		menu: "Log Out",
 		icon: "",
-		src: "",
+		src: "/recruit/logout",
 	},
 ];

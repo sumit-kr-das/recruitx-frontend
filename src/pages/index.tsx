@@ -17,3 +17,4 @@ export { default as ShortlistedCandidates } from "./company/ShortlistedCandidate
 export { default as CompanyProfile } from "./company/CompanyProfile";
 export { default as DeleteCompany } from "./company/DeleteCompany";
 export { default as ChangePassword } from "./company/ChangePassword";
+export { default as Logout } from "./company/Logout";
