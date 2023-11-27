@@ -31,14 +31,14 @@ const CompanyInfo = () => {
 	useEffect(() => {
 		if (isSuccess) {
 			setUpdate({
-				name: data[0]?.name || "",
-				email: data[0]?.email || "",
-				phone: data[0]?.phone || "",
-				companyName: data[0]?.companyName || "",
-				industry: data[0]?.industry || "",
-				designation: data[0]?.designation || "",
-				pin: data[0]?.pin || "",
-				address: data[0]?.address || "",
+				name: data?.name || "",
+				email: data?.email || "",
+				phone: data?.phone || "",
+				companyName: data?.companyName || "",
+				industry: data?.industry || "",
+				designation: data?.designation || "",
+				pin: data?.pin || "",
+				address: data?.address || "",
 			});
 		}
 	}, [isSuccess, data]);
@@ -71,38 +71,36 @@ const CompanyInfo = () => {
 						<div>
 							<div className="flex items-center gap-2">
 								<h2 className="text-2xl font-bold capitalize">
-									{isSuccess && data[0]?.companyName}
+									{isSuccess && data?.companyName}
 								</h2>
 								<div
 									title={
-										isSuccess && data[0]?.approve ? "Approved" : "Not approved"
+										isSuccess && data?.approve ? "Approved" : "Not approved"
 									}
 									className={`${
-										isSuccess && data[0]?.approve
-											? "bg-green-400"
-											: "bg-red-400"
+										isSuccess && data?.approve ? "bg-green-400" : "bg-red-400"
 									} flex items-center justify-center w-[20px] h-[20px] p-1  text-white rounded-full`}
 								>
 									<CheckCheck />
 								</div>
 							</div>
 							<p className="text-sm text-slate-600 capitalize">
-								{isSuccess && data[0]?.industry} company
+								{isSuccess && data?.industry} company
 							</p>
 							<h3 className="flex items-center text-sm text-slate-600 capitalize">
 								<MapPin className="w-[15px]" />
-								{isSuccess && data[0]?.address} | Pin-
-								{isSuccess && data[0]?.pin}
+								{isSuccess && data?.address} | Pin-
+								{isSuccess && data?.pin}
 							</h3>
 						</div>
 						<div className="flex items-center gap-4">
 							<p className="text-sm">
 								<span className="text-slate-500 ">Profile Created - </span>
-								{isSuccess && data && convertDate(data[0]?.createdAt)}
+								{isSuccess && data && convertDate(data?.createdAt)}
 							</p>
 							<p className="text-sm">
 								<span className="text-slate-500 ">Profile last updated - </span>
-								{isSuccess && data && convertDate(data[0]?.updatedAt)}
+								{isSuccess && data && convertDate(data?.updatedAt)}
 							</p>
 						</div>
 					</div>
@@ -111,14 +109,14 @@ const CompanyInfo = () => {
 							<Phone className="w-[50px] h-[50px] bg-slate-200 p-4 rounded-md" />
 							<div>
 								<h3 className="text-slate-500 text-sm">Call</h3>
-								<p className="text-sm">+91 {isSuccess && data[0]?.phone}</p>
+								<p className="text-sm">+91 {isSuccess && data?.phone}</p>
 							</div>
 						</div>
 						<div className="flex items-center gap-2">
 							<Mail className="w-[50px] h-[50px] bg-slate-200 p-4 rounded-md" />
 							<div>
 								<h3 className="text-slate-500 text-sm">Email</h3>
-								<p className="text-sm">{isSuccess && data[0]?.email}</p>
+								<p className="text-sm">{isSuccess && data?.email}</p>
 							</div>
 						</div>
 					</div>

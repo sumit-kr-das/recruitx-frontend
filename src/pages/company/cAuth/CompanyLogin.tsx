@@ -6,7 +6,7 @@ import { Link, useNavigate } from "react-router-dom";
 import React, { useState } from "react";
 
 import { useDispatch } from "react-redux";
-import toast from "react-hot-toast/headless";
+import {toast} from "react-hot-toast";
 
 type TINITIAL_USER_STATE = {
 	email: string;
@@ -40,8 +40,8 @@ const CompanyLogin = () => {
 			toast.success("Login successfull");
 			navigate("/recruit/");
 		} catch (err) {
-			console.log("Error on company login", err);
 			toast.error("Enter valid credentials");
+			console.log("Error on company login", err);
 		}
 	};
 	return (

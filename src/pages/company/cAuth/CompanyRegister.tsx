@@ -1,5 +1,5 @@
 import { FormEvent, useState } from "react";
-import toast from "react-hot-toast/headless";
+import {toast} from "react-hot-toast";
 import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { TInitialData } from "../../../@types/recruit/companyRegister";

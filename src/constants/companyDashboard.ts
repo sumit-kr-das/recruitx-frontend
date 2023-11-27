@@ -37,7 +37,7 @@ export const companyDashboard = [
 	{
 		menu: "Delete Account",
 		icon: "",
-		src: "",
+		src: "/recruit/delete_account",
 	},
 	{
 		menu: "Log Out",

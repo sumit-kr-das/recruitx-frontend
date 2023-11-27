@@ -5,7 +5,8 @@ import { useViewCompanyQuery } from "../features/company/viewCompanyApiSlice";
 
 const SideBar = () => {
 	const { data, isSuccess } = useViewCompanyQuery();
-
+	console.log(data);
+	
 	return (
 		<div className="pt-[15px] py-">
 			{isSuccess && (
@@ -16,12 +17,12 @@ const SideBar = () => {
 						alt="user_default"
 						className="rounded-full object-cover border mb-2"
 					/>
-					<h1 className="font-bold">{data && data[0]?.name}</h1>
-					<p className="text-xs font-medium">{data && data[0]?.designation}</p>
+					<h1 className="font-bold">{data && data?.name}</h1>
+					<p className="text-xs font-medium">{data && data?.designation}</p>
 					<p className="text-xs font-medium my-1">
-						@ {data && data[0]?.companyName}
+						@ {data && data?.companyName}
 					</p>
-					<p className="text-xs text-gray-400">{data && data[0]?.industry}</p>
+					<p className="text-xs text-gray-400">{data && data?.industry}</p>
 				</div>
 			)}
 			<h3 className="mt-10 mb-4 px-5 font-medium text-bold text-md">

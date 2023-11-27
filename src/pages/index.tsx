@@ -15,3 +15,4 @@ export { default as MyJobs } from "./company/MyJobs";
 export { default as ApplicantsJobs } from "./company/ApplicantsJobs";
 export { default as ShortlistedCandidates } from "./company/ShortlistedCandidates";
 export { default as CompanyProfile } from "./company/CompanyProfile";
+export { default as DeleteCompany } from "./company/DeleteCompany";

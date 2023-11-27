@@ -11,10 +11,16 @@ const isExist = JSON.parse(localStorage.getItem("user") || "{}")
 	? JSON.parse(localStorage.getItem("user") || "{}")
 	: null;
 
+// const initialState: AuthState = {
+// 	user: isExist ? isExist.user : null,
+// 	role: isExist ? isExist.role : null,
+// 	token: isExist ? isExist.access_token : null,
+// };
+
 const initialState: AuthState = {
-	user: isExist ? isExist.user : null,
-	role: isExist ? isExist.role : null,
-	token: isExist ? isExist.access_token : null,
+	user: null,
+	role: null,
+	token: null,
 };
 
 const authSlice = createSlice({
@@ -47,6 +53,8 @@ const authSlice = createSlice({
 			state.user = null;
 			state.role = null;
 			state.token = null;
+
+			console.log("logout", state.token);
 		},
 	},
 });
