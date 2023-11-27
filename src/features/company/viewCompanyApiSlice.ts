@@ -4,6 +4,7 @@ export const viewCompanyApiSlice = apiSlice.injectEndpoints({
 	endpoints: (builder) => ({
 		viewCompany: builder.query({
 			query: () => "/company/view",
+			providesTags:['CompanyLogin']
 		}),
 	}),
 });

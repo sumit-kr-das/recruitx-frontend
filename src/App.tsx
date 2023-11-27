@@ -1,8 +1,5 @@
-import { useEffect } from "react";
 import { Toaster } from "react-hot-toast";
-import { useDispatch, useSelector } from "react-redux";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import { setCredentials } from "./features/auth/authSlice";
 import Layout from "./layout/Layout";
 import {
 	ApplicantsJobs,
@@ -26,14 +23,6 @@ import CompanyRoutes from "./protectedRoutes/CompanyRoutes";
 import UserRoutes from "./protectedRoutes/UserRoutes";
 
 const App = () => {
-	const isExist = JSON.parse(localStorage.getItem("user") || "{}");
-	const dispatch = useDispatch();
-
-	useEffect(() => {
-		if (isExist) {
-			dispatch(setCredentials(isExist));
-		}
-	}, []);
 
 	return (
 		<BrowserRouter>

@@ -7,7 +7,9 @@ export const companyRegisterApiSlice = apiSlice.injectEndpoints({
 				url: "/company/auth/register",
 				method: "POST",
 				body: { ...credentials },
+
 			}),
+			invalidatesTags:['CompanyLogin']
 		}),
 	}),
 });

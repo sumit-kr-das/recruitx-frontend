@@ -11,17 +11,12 @@ const isExist = JSON.parse(localStorage.getItem("user") || "{}")
 	? JSON.parse(localStorage.getItem("user") || "{}")
 	: null;
 
-// const initialState: AuthState = {
-// 	user: isExist ? isExist.user : null,
-// 	role: isExist ? isExist.role : null,
-// 	token: isExist ? isExist.access_token : null,
-// };
-
 const initialState: AuthState = {
-	user: null,
-	role: null,
-	token: null,
+	user: isExist ? isExist.user : null,
+	role: isExist ? isExist.role : null,
+	token: isExist ? isExist.access_token : null,
 };
+
 
 const authSlice = createSlice({
 	name: "auth",
