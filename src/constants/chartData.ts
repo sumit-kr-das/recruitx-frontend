@@ -15,7 +15,7 @@ export const chartData1 = {
 			type: "area",
 		},
 		dataLabels: {
-			enabled: false,
+			enabled: true,
 		},
 		stroke: {
 			curve: "smooth",

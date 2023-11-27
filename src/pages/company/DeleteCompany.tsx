@@ -1,10 +1,10 @@
-import Container from "../../layout/Container";
-import React, { useState } from "react";
-import TitleBar from "../../components/recruit/titleBar/TitleBar";
-import { useDeleteAccountMutation } from "../../features/company/deleteAccountApiSlice";
-import { useDispatch } from "react-redux";
+import { useState } from "react";
 import { toast } from "react-hot-toast";
+import { useDispatch } from "react-redux";
+import TitleBar from "../../components/recruit/titleBar/TitleBar";
 import { logout } from "../../features/auth/authSlice";
+import { useDeleteAccountMutation } from "../../features/company/deleteAccountApiSlice";
+import Container from "../../layout/Container";
 
 const INITIAL_DATA = {
 	password: "",
