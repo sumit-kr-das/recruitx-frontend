@@ -27,22 +27,21 @@ const SearchPage = () => {
   const [data, setData] = useState(INITIAL_SEARCH_DATA);
   const [tags, setTags] = useState([title]);
 
-
-
-  // const queryParams = new URLSearchParams(location.search);
-  // const skill = queryParams.get("skill");
-
   const handelFilterSubmit = (e) => {
     e.preventDefault();
     console.log(data, "searchFilter");
   };
 
   useEffect(() => {
-    // const filters = JSON.parse(localStorage.getItem("filter") || 'null');
-    // setSearchFilter(filters);
     const fetchSearchData = async () => {
       try {
-        const jobData = await searchData({ title, exprience, location }).unwrap();
+        let jobData;
+        if (!title && !location && !exprience) {
+          jobData = await searchData({ title, exprience, location }).unwrap();
+        }else{
+          jobData = await searchData({ title, exprience, location }).unwrap();
+        }
+        // const jobData = await searchData({ title, exprience, location }).unwrap();
         let filteredJobs;
         if (isSuccess) {
           filteredJobs = jobData.filter(job => {
