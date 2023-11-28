@@ -4,7 +4,7 @@ export const viewUserProfileApiSlice = apiSlice.injectEndpoints({
 	endpoints: (builder) => ({
 		viewUserProfile: builder.query({
 			query: () => "/user/view",
-			providesTags: ["UserBasicInfo"],
+			providesTags: ["User"],
 		}),
 	}),
 });

@@ -1,7 +1,7 @@
 import { toast } from "react-hot-toast";
 import { languageData } from "../../../../constants/languageData";
 import { qualificationData } from "../../../../constants/qualificationData";
-import { useSetUserMutation } from "../../../../features/user/userInfo/setUserInfoDataApiSlice";
+import { useSetUserMutation } from "../../../../features/user/post/setUserInfoDataApiSlice";
 import SelectInput from "../../../form/multiSelectInput/SelectInput";
 import { INITIAL_DATA } from "./OtherInfo";
 import { tagsData } from "../../../../constants/tagsData";

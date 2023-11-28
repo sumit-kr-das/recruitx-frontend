@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { languageData } from "../../../../constants/languageData";
 import { tagsData } from "../../../../constants/tagsData";
-import { useUserInfoDataQuery } from "../../../../features/user/userInfo/getUserInfoDataApiSlice";
+import { useUserInfoDataQuery } from "../../../../features/user/get/getUserInfoDataApiSlice";
 import SetUserInfo from "./SetUserInfo";
 import ViewInfo from "./ViewInfo";
 

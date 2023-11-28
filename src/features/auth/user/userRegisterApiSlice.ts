@@ -8,6 +8,7 @@ export const companyLoginApiSlice = apiSlice.injectEndpoints({
 				method: "POST",
 				body: { ...credentials },
 			}),
+			invalidatesTags: ["User", "UserInfo"]
 		}),
 	}),
 });

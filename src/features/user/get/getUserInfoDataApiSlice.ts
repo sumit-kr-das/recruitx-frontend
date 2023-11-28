@@ -22,7 +22,7 @@ export const getUserInfoDataApiSlice = apiSlice.injectEndpoints({
 	endpoints: (builder) => ({
 		userInfoData: builder.query<userInfo[], void>({
 			query: () => "/user/info/view",
-			providesTags: ["UserInfoData"],
+			providesTags: ["UserInfo"],
 		}),
 	}),
 });

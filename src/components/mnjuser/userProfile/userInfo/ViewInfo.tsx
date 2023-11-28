@@ -4,7 +4,7 @@ import { toast } from "react-hot-toast";
 import { languageData } from "../../../../constants/languageData";
 import { qualificationData } from "../../../../constants/qualificationData";
 import { tagsData } from "../../../../constants/tagsData";
-import { useUpdateUserInfoMutation } from "../../../../features/user/userInfo/updateUserInfoDataApiSlice";
+import { useUpdateUserInfoMutation } from "../../../../features/user/put/updateUserInfoDataApiSlice";
 import { convertDate } from "../../../../pages/company/MyJobs";
 import Modal from "../../../Modal";
 import SelectInput from "../../../form/multiSelectInput/SelectInput";

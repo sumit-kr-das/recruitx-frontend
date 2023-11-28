@@ -8,7 +8,7 @@ export const setUserInfoDataApiSlice = apiSlice.injectEndpoints({
 				method: "POST",
 				body: { ...credentials },
 			}),
-			invalidatesTags: ["UserInfoData"],
+			invalidatesTags: ["UserInfo"],
 		}),
 	}),
 });
