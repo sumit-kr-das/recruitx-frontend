@@ -7,41 +7,41 @@ export const companyDashboard = [
 	{
 		menu: "Company Profile",
 		icon: "",
-		src: "/recruit/company_profile",
+		src: "/dashboard/company_profile",
 	},
 	{
 		menu: "My Jobs",
 		icon: "",
-		src: "/recruit/my_jobs",
+		src: "/dashboard/my_jobs",
 	},
 	{
 		menu: "Submit Jobs",
 		icon: "",
-		src: "/recruit/submit_jobs",
+		src: "/dashboard/submit_jobs",
 	},
 	{
 		menu: "Applicants Jobs",
 		icon: "",
-		src: "/recruit/applicants_jobs",
+		src: "/dashboard/applicants_jobs",
 	},
 	{
 		menu: "Shortlisted Candidates",
 		icon: "",
-		src: "/recruit/shortlisted_candidates",
+		src: "/dashboard/shortlisted_candidates",
 	},
 	{
 		menu: "Change Password",
 		icon: "",
-		src: "/recruit/change_password",
+		src: "/dashboard/change_password",
 	},
 	{
 		menu: "Delete Account",
 		icon: "",
-		src: "/recruit/delete_account",
+		src: "/dashboard/delete_account",
 	},
 	{
 		menu: "Log Out",
 		icon: "",
-		src: "/recruit/logout",
+		src: "/dashboard/logout",
 	},
 ];

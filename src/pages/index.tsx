@@ -19,5 +19,10 @@ export { default as DeleteCompany } from "./company/DeleteCompany";
 export { default as ChangePassword } from "./company/ChangePassword";
 export { default as Logout } from "./company/Logout";
 
+// admin
+export { default as AdminDashboard } from "./admin/AdminDashboard";
+export { default as ManageCompanies } from "./admin/ManageCompanies";
+export { default as ManageUsers } from "./admin/ManageUsers";
+
 // error page
 export { default as ErrorPage } from "./error/ErrorPage";

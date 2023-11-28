@@ -18,14 +18,22 @@ import {
   ChangePassword,
   Logout,
   ErrorPage,
+  AdminDashboard,
+  ManageUsers,
+  ManageCompanies,
 } from "./pages";
 import UserProfilePage from "./pages/mnjuser/UserProfilePage";
 import SearchPage from "./pages/search/SearchPage";
 import AuthenticateRoutes from "./protectedRoutes/AuthenticateRoutes";
 import CompanyRoutes from "./protectedRoutes/CompanyRoutes";
 import UserRoutes from "./protectedRoutes/UserRoutes";
+import AuthenticateDashboard from "./protectedRoutes/AuthenticateDashboard";
+import { useSelector } from "react-redux";
+import { selectCurrentRole } from "./features/auth/authSlice";
+import AdminRoutes from "./protectedRoutes/AdminRoutes";
 
 const App = () => {
+  const role = useSelector(selectCurrentRole);
   return (
     <BrowserRouter>
       <Toaster position="bottom-right" reverseOrder={false} />
@@ -67,7 +75,7 @@ const App = () => {
         />
         <Route path="/search" element={<SearchPage />} />
 
-        {/* company */}
+        {/* dashboard */}
         <Route
           path="/cRegister"
           element={
@@ -85,25 +93,98 @@ const App = () => {
           }
         />
         <Route
-          path="recruit"
+          path="dashboard"
           element={
-            <CompanyRoutes>
+            <AuthenticateDashboard>
               <Layout />
-            </CompanyRoutes>
+            </AuthenticateDashboard>
           }
         >
-          <Route path="/recruit" element={<CompanyDashboard />} />
-          <Route path="/recruit/company_profile" element={<CompanyProfile />} />
-          <Route path="/recruit/submit_jobs" element={<SubmitJobs />} />
-          <Route path="/recruit/my_jobs" element={<MyJobs />} />
-          <Route path="/recruit/applicants_jobs" element={<ApplicantsJobs />} />
+          {role === "company" ? (
+            <Route
+              path="/dashboard"
+              element={
+                <CompanyRoutes>
+                  <CompanyDashboard />
+                </CompanyRoutes>
+              }
+            />
+          ) : (
+            <Route
+              path="/dashboard"
+              element={
+                <AdminRoutes>
+                  <AdminDashboard />
+                </AdminRoutes>
+              }
+            />
+          )}
+          {/* company  */}
           <Route
-            path="/recruit/shortlisted_candidates"
-            element={<ShortlistedCandidates />}
+            path="/dashboard/company_profile"
+            element={
+              <CompanyRoutes>
+                <CompanyProfile />
+              </CompanyRoutes>
+            }
           />
-          <Route path="/recruit/delete_account" element={<DeleteCompany />} />
-          <Route path="/recruit/change_password" element={<ChangePassword />} />
-          <Route path="/recruit/logout" element={<Logout />} />
+          <Route
+            path="/dashboard/submit_jobs"
+            element={
+              <CompanyRoutes>
+                <SubmitJobs />
+              </CompanyRoutes>
+            }
+          />
+          <Route
+            path="/dashboard/my_jobs"
+            element={
+              <CompanyRoutes>
+                <MyJobs />
+              </CompanyRoutes>
+            }
+          />
+          <Route
+            path="/dashboard/applicants_jobs"
+            element={
+              <CompanyRoutes>
+                <ApplicantsJobs />
+              </CompanyRoutes>
+            }
+          />
+          <Route
+            path="/dashboard/shortlisted_candidates"
+            element={
+              <CompanyRoutes>
+                <ShortlistedCandidates />
+              </CompanyRoutes>
+            }
+          />
+          {/* admin */}
+          <Route
+            path="/dashboard/admin/manage_user"
+            element={
+              <AdminRoutes>
+                <ManageUsers />
+              </AdminRoutes>
+            }
+          />
+          <Route
+            path="/dashboard/admin/manage_company"
+            element={
+              <AdminRoutes>
+                <ManageCompanies />
+              </AdminRoutes>
+            }
+          />
+
+          {/* company && admin */}
+          <Route path="/dashboard/delete_account" element={<DeleteCompany />} />
+          <Route
+            path="/dashboard/change_password"
+            element={<ChangePassword />}
+          />
+          <Route path="/dashboard/logout" element={<Logout />} />
         </Route>
         <Route path="/*" element={<ErrorPage />} />
       </Routes>

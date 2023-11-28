@@ -22,6 +22,7 @@ export const apiSlice = createApi({
     "CompanyJobs",
     "Company",
     "CompanyProfileDetails",
+    "Admin",
   ],
   endpoints: (builder) => ({}),
 });

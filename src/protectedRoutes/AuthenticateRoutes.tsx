@@ -14,7 +14,7 @@ const AuthenticateRoutes = ({ children }: TReactNodeProps) => {
 	) : role === "user" ? (
 		<Navigate to="/userHome" />
 	) : (
-		<Navigate to="/recruit" />
+		<Navigate to="/dashboard" />
 	);
 };
 
