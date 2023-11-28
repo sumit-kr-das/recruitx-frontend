@@ -1,11 +1,11 @@
-import { setCredentials } from "../../../features/auth/authSlice";
 import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-hot-toast";
 import { useDispatch } from "react-redux";
-import { useUserRegisterMutation } from "../../../features/auth/user/userRegisterApiSlice";
-import Container from "../../../layout/Container";
+import { Link, useNavigate } from "react-router-dom";
 import { TApiError } from "../../../@types/TApiError";
+import { setCredentials } from "../../../features/auth/authSlice";
+import LoginBg from '../../../assets/bg.jpg'
+import { useUserRegisterMutation } from "../../../features/auth/user/userRegisterApiSlice";
 
 type TINITIAL_USER_STATE = {
   name: string;
@@ -47,151 +47,210 @@ const Register = () => {
       navigate("/userHome");
     } catch (err) {
       const apiError = err as TApiError;
-      toast.error(apiError.data.message);
+      toast.error(apiError?.data.message);
     }
   };
   return (
-    <Container>
-      <div className="mt-32 w-full flex justify-between">
-        <div className="flex min-h-full flex-1 flex-col justify-center px-6 pb-12 lg:px-8">
-          <div className="text-center sm:mx-auto sm:w-full sm:max-w-sm">
-            <h1 className="text-2xl font-semibold">
-              Find a job & grow your career
-            </h1>
-            <p className="text-sm text-gray-500">
-              Already Registered{" "}
-              <Link
-                to="/login"
-                className="font-semibold leading-6 text-cyan-500 hover:text-cyan-600"
-              >
-                Login now
-              </Link>
+    <div className="bg-white">
+      <div className="lg:grid lg:min-h-screen lg:grid-cols-12">
+        <section className="relative flex h-32 items-end bg-gray-900 lg:col-span-5 lg:h-full xl:col-span-6">
+          <img
+            alt="Night"
+            src={LoginBg}
+            className="absolute inset-0 h-full w-full object-cover opacity-80"
+          />
+
+          <div className="hidden lg:relative lg:block lg:p-12">
+            <Link className="block text-white" to="/">
+              <span className="sr-only">Home</span>
+              <img src="/vite.svg" alt="vite" />
+            </Link>
+
+            <h2 className="mt-6 text-2xl font-bold text-white sm:text-3xl md:text-4xl">
+              Welcome to RecruitX
+            </h2>
+
+            <p className="mt-4 leading-relaxed text-white/90">
+              RecruitX help you get hired, faster: from preparing your CV,
+              getting recruiter attention, finding the right jobs, and more!
             </p>
           </div>
-          <div className="mt-4 sm:mx-auto sm:w-full sm:max-w-sm">
-            <form className="space-y-6" onSubmit={handleSubmit}>
-              <div>
+        </section>
+
+        <main className="flex items-center justify-center px-8 py-8 sm:px-12 lg:col-span-7 lg:px-16 lg:py-12 xl:col-span-6">
+          <div className="max-w-xl lg:max-w-3xl">
+            <div className="relative -mt-16 block lg:hidden">
+              <Link
+                className="inline-flex h-16 w-16 items-center justify-center rounded-full bg-white text-blue-600 sm:h-20 sm:w-20"
+                to="/"
+              >
+                <span className="sr-only">Home</span>
+                <img src="/vite.svg" alt="vite" />
+              </Link>
+
+              <h1 className="mt-2 text-2xl font-bold text-gray-900 sm:text-3xl md:text-4xl">
+                Welcome to RecruitX
+              </h1>
+
+              <p className="text-sm mt-4 leading-relaxed text-gray-500">
+                RecruitX help you get hired, faster: from preparing your CV,
+                getting recruiter attention, finding the right jobs, and more!
+              </p>
+            </div>
+
+            <form
+              onSubmit={handleSubmit}
+              className="mt-8 grid grid-cols-6 gap-6"
+            >
+              <div className="col-span-6 sm:col-span-3">
                 <label
-                  htmlFor="email"
-                  className="block text-sm font-medium leading-6 text-gray-900"
+                  htmlFor="FirstName"
+                  className="block text-sm font-medium text-gray-700"
                 >
                   Full name
                 </label>
-                <div className="mt-2">
-                  <input
-                    name="name"
-                    value={user.name}
-                    onChange={handleUserValue}
-                    type="text"
-                    required
-                    placeholder="What is your name?"
-                    className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-cyan-600 sm:text-sm sm:leading-6"
-                  />
-                </div>
+
+                <input
+                  required
+                  value={user.name}
+                  onChange={handleUserValue}
+                  type="text"
+                  id="FirstName"
+                  name="name"
+                  className="mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm"
+                />
               </div>
 
-              <div>
+              <div className="col-span-6 sm:col-span-3">
                 <label
-                  htmlFor="email"
-                  className="block text-sm font-medium leading-6 text-gray-900"
+                  htmlFor="LastName"
+                  className="block text-sm font-medium text-gray-700"
                 >
-                  Email address
+                  Phone no
                 </label>
-                <div className="mt-2">
-                  <input
-                    name="email"
-                    value={user.email}
-                    onChange={handleUserValue}
-                    type="email"
-                    required
-                    placeholder="Tell us your email id"
-                    className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-cyan-600 sm:text-sm sm:leading-6"
-                  />
-                </div>
+
+                <input
+                  required
+                  value={user.phoneNo}
+                  onChange={handleUserValue}
+                  type="text"
+                  id="phoneNo"
+                  name="phoneNo"
+                  className="mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm"
+                />
               </div>
 
-              <div>
-                <div className="flex items-center justify-between">
-                  <label
-                    htmlFor="password"
-                    className="block text-sm font-medium leading-6 text-gray-900"
-                  >
-                    Password
-                  </label>
-                </div>
-                <div className="mt-2">
-                  <input
-                    name="password"
-                    value={user.password}
-                    onChange={handleUserValue}
-                    type="password"
-                    required
-                    placeholder="Create a password for your account"
-                    className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-cyan-600 sm:text-sm sm:leading-6"
-                  />
-                </div>
-              </div>
-
-              <div>
+              <div className="col-span-6">
                 <label
-                  htmlFor="email"
-                  className="block text-sm font-medium leading-6 text-gray-900"
+                  htmlFor="Email"
+                  className="block text-sm font-medium text-gray-700"
                 >
-                  Mobile number
+                  Work status
                 </label>
-                <div className="mt-2">
-                  <input
-                    name="phoneNo"
-                    value={user.phoneNo}
-                    onChange={handleUserValue}
-                    type="text"
-                    required
-                    placeholder="Mobile number"
-                    className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-cyan-600 sm:text-sm sm:leading-6"
-                  />
-                </div>
-              </div>
 
-              <div>
-                <div className="flex items-center justify-between">
-                  <label className="block text-sm font-medium leading-6 text-gray-900">
-                    Work status
-                  </label>
-                </div>
-                <div className="mt-2">
-                  <select
-                    name="workStatus"
-                    value={user.workStatus}
-                    onChange={handleUserValue}
-                    className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-cyan-600 sm:text-sm sm:leading-6"
-                  >
-                    <option value="">Select industry type</option>
-                    <option value="experienced">I'm experienced</option>
-                    <option value="fresher">I'm a fresher</option>
-                  </select>
-                </div>
-              </div>
-
-              {isLoading ? (
-                <button
-                  disabled={true}
-                  className="flex w-full justify-center rounded-md bg-cyan-500 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-cyan-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                <select
+                  required
+                  value={user.workStatus}
+                  onChange={handleUserValue}
+                  name="workStatus"
+                  className="mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm"
                 >
-                  Loading...
-                </button>
-              ) : (
+                  <option value="">Select status</option>
+                  <option value="experienced">I'm experienced</option>
+                  <option value="fresher">I'm a fresher</option>
+                </select>
+              </div>
+
+              <div className="col-span-6 sm:col-span-3">
+                <label
+                  htmlFor="Email"
+                  className="block text-sm font-medium text-gray-700"
+                >
+                  Email
+                </label>
+
+                <input
+                  required
+                  value={user.email}
+                  onChange={handleUserValue}
+                  type="email"
+                  id="Email"
+                  name="email"
+                  className="mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm"
+                />
+              </div>
+
+              <div className="col-span-6 sm:col-span-3">
+                <label
+                  htmlFor="Password"
+                  className="block text-sm font-medium text-gray-700"
+                >
+                  Password
+                </label>
+
+                <input
+                  required
+                  value={user.password}
+                  onChange={handleUserValue}
+                  type="password"
+                  id="Password"
+                  name="password"
+                  className="mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm"
+                />
+              </div>
+
+              <div className="col-span-6">
+                <label htmlFor="MarketingAccept" className="flex gap-4">
+                  <input
+                    required
+                    type="checkbox"
+                    id="MarketingAccept"
+                    name="marketing_accept"
+                    className="h-5 w-5 rounded-md border-gray-200 bg-white shadow-sm"
+                  />
+
+                  <span className="text-sm text-gray-700">
+                    I want to receive emails about events, product updates and
+                    company announcements.
+                  </span>
+                </label>
+              </div>
+
+              <div className="col-span-6">
+                <p className="text-sm text-gray-500">
+                  By creating an account, you agree to our
+                  <a href="#" className="text-gray-700 underline">
+                    terms and conditions
+                  </a>
+                  and
+                  <a href="#" className="text-gray-700 underline">
+                    privacy policy
+                  </a>
+                  .
+                </p>
+              </div>
+
+              <div className="col-span-6 sm:flex sm:items-center sm:gap-4">
                 <button
                   type="submit"
-                  className="flex w-full justify-center rounded-md bg-cyan-500 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-cyan-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                  className="inline-block shrink-0 rounded-md border border-blue-600 bg-blue-600 px-12 py-3 text-sm font-medium text-white transition hover:bg-transparent hover:text-blue-600 focus:outline-none focus:ring active:text-blue-500"
                 >
-                  Register now
+                  {isLoading ? "Loading..." : "Register"}
                 </button>
-              )}
+
+                <p className="mt-4 text-sm text-gray-500 sm:mt-0">
+                  Don't have an account?{" "}
+                  <Link to="/login" className="text-gray-700 underline">
+                    Log in
+                  </Link>
+                  .
+                </p>
+              </div>
             </form>
           </div>
-        </div>
+        </main>
       </div>
-    </Container>
+    </div>
   );
 };
 
