@@ -9,6 +9,7 @@ import CompanyDetails from "../../../components/recruit/companyRegister/CompanyD
 import useMultistepForm from "../../../customHooks/useMultistepForm";
 import { setCredentials } from "../../../features/auth/authSlice";
 import { useCRegisterMutation } from "../../../features/auth/company/companyRegisterApiSlice";
+import { TApiError } from "../../../@types/TApiError";
 
 const INITIAL_DATA: TInitialData = {
 	name: "",
@@ -50,8 +51,8 @@ const CompanyRegister = () => {
 			toast.success("Login successfull");
 			navigate("/recruit/");
 		} catch (err) {
-			toast.error("Enter valid credentials");
-			console.log("Error on company register", err);
+			const apiError = err as TApiError;
+			toast.error(apiError.data.message);
 		}
 	};
 	return (

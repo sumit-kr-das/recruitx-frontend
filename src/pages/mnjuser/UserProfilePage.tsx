@@ -1,13 +1,11 @@
 import Footer from "../../components/footer/Footer";
 import BasicInfo from "../../components/mnjuser/userProfile/BasicInfo";
+import UserEducation from "../../components/mnjuser/userProfile/userEducation/UserEducation";
 import OtherInfo from "../../components/mnjuser/userProfile/userInfo/OtherInfo";
 import TopHeader from "../../components/navigation/TopHeader";
 import Container from "../../layout/Container";
 
 const UserProfilePage = () => {
-	// const { data, isLoading } = useViewUserProfileQuery();
-	// console.log(data);
-
 	return (
 		<div className="bg-green-50">
 			<TopHeader />
@@ -16,6 +14,8 @@ const UserProfilePage = () => {
 				<BasicInfo />
 				{/* Other info */}
 				<OtherInfo />
+				{/* Educational details */}
+				<UserEducation />
 			</Container>
 			<Footer />
 		</div>
