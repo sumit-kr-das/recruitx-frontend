@@ -9,8 +9,7 @@ import {
 import { convertDate } from "../../../pages/company/MyJobs";
 
 
-const Job = ({jobs}) => {
-    console.log(jobs);
+const Job = ({ jobs }) => {
 	return (
 		<>
 			{jobs?.map((item, index) => (
@@ -31,7 +30,7 @@ const Job = ({jobs}) => {
 						<div className="flex items-center gap-1">
 							<MdOutlineAttachMoney className="text-slate-400" />
 							<p className="text-sm font-semibold text-slate-400">
-							{item?.info.maxSalary} Lacs PA
+								{item?.info.maxSalary} Lacs PA
 							</p>
 						</div>
 						<p className="mx-2 text-sm font-semibold text-gray-300">&#124;</p>
@@ -43,21 +42,20 @@ const Job = ({jobs}) => {
 					<div className="flex items-center gap-1">
 						<MdDescription className="text-2xl" />
 						<p className="text-sm my-1 truncate">
-						{item.description}
+							{item.description}
 						</p>
 					</div>
 					<div className="flex items-center gap-1">
 						{/* <Image src={StarSVG} width={10} alt="star" /> */}
 						<p className="text-sm text-gray-400">
-                            {
-                                item?.info.skills.map((skill)=>(
-                                    <>
-                                    {skill} &#183;
-                                    </>
-                                ))
-                            }
-							{/* User &#183; Interface &#183; DesigningFront &#183; End &#183;
-							DesignFront &#183; endUX &#183; DesignFrontUXUI */}
+							{
+								item?.info.skills.map((skill, sIndex) => (
+									<span key={sIndex}>
+										{skill} &#183;
+									</span>
+								))
+							}
+
 						</p>
 					</div>
 					<div className="flex items-center gap-1 mt-2">
