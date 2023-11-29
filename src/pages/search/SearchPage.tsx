@@ -1,14 +1,12 @@
 import { useEffect, useState } from "react";
-
-import { useSearchParams } from "react-router-dom"
-import { useSearchDataMutation } from "../../features/user/getSearchDataApiSlice";
+import { useSearchParams } from "react-router-dom";
+import Footer from "../../components/footer/Footer";
+import SelectInput from "../../components/form/multiSelectInput/SelectInput";
 import Job from "../../components/mnjuser/recomandedJobs/Job";
 import TopHeader from "../../components/navigation/TopHeader";
-import Footer from "../../components/footer/Footer";
-import { MdClose } from "react-icons/md";
-import MultiSelectInput from "../../components/form/multiSelectInput/MultiSelectInput";
-import SelectInput from "../../components/form/multiSelectInput/SelectInput";
 import { tagsData } from "../../constants/tagsData";
+import { useSearchDataMutation } from "../../features/user/getSearchDataApiSlice";
+
 const INITIAL_SEARCH_DATA = {
   role: [],
   salary: 0,
@@ -19,7 +17,7 @@ const SearchPage = () => {
   const title = searchParams.get("skills");
   const exprience = Number(searchParams.get("exprience"));
   const location = searchParams.get("location");
-  const [searchData, { isSuccess, isError }] = useSearchDataMutation();
+  const [searchData, { isError }] = useSearchDataMutation();
   const [jobs, setJobs] = useState([]);
 
   const [data, setData] = useState(INITIAL_SEARCH_DATA);
@@ -30,14 +28,12 @@ const SearchPage = () => {
   const handelFilterSubmit = (e) => {
     e.preventDefault();
     setSearchFilter(data);
-    console.log(data, "searchFilter");
   };
 
   useEffect(() => {
     const fetchSearchData = async () => {
       try {
         const jobData = await searchData({ title, exprience, location }).unwrap();
-        // console.log(searchFilter.role.length, "length");
         if (!isError) {
           console.log(jobData);
           console.log(searchFilter.role.length, "length");
@@ -52,21 +48,9 @@ const SearchPage = () => {
           } else {
             setJobs(jobData)
           }
-          // filteredJobs = jobData.filter(job => {
-          //   if (searchFilter.role.length > 0 || searchFilter.salary) {
-          //     console.log("working");
-
-          //     const rolesMatch = searchFilter.role.every(role => job.info.skills.includes(role));
-          //     const salaryInRange = job.info.minSalary <= searchFilter.salary && job.info.maxSalary >= searchFilter.salary;
-          //     return rolesMatch || salaryInRange;
-          //   } else {
-          //     return jobData;
-          //   }
-          // });
         } else {
           console.log("no success");
         }
-        // setJobs(filteredJobs);
       } catch (err) {
         console.log("Error on company login", err);
       }

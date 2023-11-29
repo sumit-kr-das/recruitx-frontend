@@ -1,38 +1,49 @@
+import { Suspense, lazy } from "react";
 import { Toaster } from "react-hot-toast";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
-import UserProfilePage from "./pages/mnjuser/UserProfilePage";
-import { selectCurrentRole } from "./features/auth/authSlice";
-import SearchPage from "./pages/search/SearchPage";
 import { useSelector } from "react-redux";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { selectCurrentRole } from "./features/auth/authSlice";
 import Layout from "./layout/Layout";
+import UserProfilePage from "./pages/mnjuser/UserProfilePage";
+import SearchPage from "./pages/search/SearchPage";
+
+// --------------------------- pages ---------------------------
+const HomePage = lazy(() => import("./pages/user/HomePage"));
+
+const Login = lazy(() => import("./pages/mnjuser/auth/Login"));
+const Register = lazy(() => import("./pages/mnjuser/auth/Register"));
+const UserHomePage = lazy(() => import("./pages/mnjuser/UserHomePage"));
+const JobDetailsPage = lazy(() => import("./pages/user/JobDetailsPage"));
+
+const CompanyDashboard = lazy(() => import("./pages/company/CompanyDashboard"));
+const CompanyRegister = lazy(
+  () => import("./pages/company/cAuth/CompanyRegister")
+);
+const CompanyLogin = lazy(() => import("./pages/company/cAuth/CompanyLogin"));
+const SubmitJobs = lazy(() => import("./pages/company/SubmitJobs"));
+const MyJobs = lazy(() => import("./pages/company/MyJobs"));
+const ApplicantsJobs = lazy(() => import("./pages/company/ApplicantsJobs"));
+const ShortlistedCandidates = lazy(
+  () => import("./pages/company/ShortlistedCandidates")
+);
+const CompanyProfile = lazy(() => import("./pages/company/CompanyProfile"));
+const DeleteCompany = lazy(() => import("./pages/company/DeleteCompany"));
+const ChangePassword = lazy(() => import("./pages/company/ChangePassword"));
+const Logout = lazy(() => import("./pages/company/Logout"));
+
+const AdminDashboard = lazy(() => import("./pages/admin/AdminDashboard"));
+const ManageCompanies = lazy(() => import("./pages/admin/ManageCompanies"));
+const ManageUsers = lazy(() => import("./pages/admin/ManageUsers"));
+
+const ErrorPage = lazy(() => import("./pages/error/ErrorPage"));
+
+// --------------------------- route authenticator ---------------------------
 import {
-  ApplicantsJobs,
-  CompanyDashboard,
-  CompanyLogin,
-  CompanyProfile,
-  CompanyRegister,
-  DeleteCompany,
-  HomePage,
-  Login,
-  MyJobs,
-  Register,
-  ShortlistedCandidates,
-  SubmitJobs,
-  UserHomePage,
-  ChangePassword,
-  Logout,
-  ErrorPage,
-  AdminDashboard,
-  ManageUsers,
-  ManageCompanies,
-  JobDetailsPage
-} from "./pages";
-import {
+  AdminRoute,
+  AuthenticateDashboard,
   AuthenticateRoute,
   CompanyRoute,
   UserRoute,
-  AuthenticateDashboard,
-  AdminRoute,
 } from "./protectedRoutes";
 
 const App = () => {
@@ -42,7 +53,14 @@ const App = () => {
       <Toaster position="bottom-right" reverseOrder={false} />
       <Routes>
         {/* default */}
-        <Route path="/" element={<HomePage />} />
+        <Route
+          path="/"
+          element={
+            <Suspense fallback={"Loading...."}>
+              <HomePage />
+            </Suspense>
+          }
+        />
         {/* user */}
         <Route
           path="/login"
@@ -76,8 +94,22 @@ const App = () => {
             </UserRoute>
           }
         />
-        <Route path="/search" element={<SearchPage />} />
-        <Route path="/jobDetails" element={<JobDetailsPage />} />
+        <Route
+          path="/search"
+          element={
+            <Suspense fallback={"Loading...."}>
+              <SearchPage />
+            </Suspense>
+          }
+        />
+        <Route
+          path="/jobDetails"
+          element={
+            <Suspense fallback={"Loading...."}>
+              <JobDetailsPage />
+            </Suspense>
+          }
+        />
 
         {/* dashboard */}
         <Route

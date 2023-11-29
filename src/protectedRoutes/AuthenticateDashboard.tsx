@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import { useSelector } from "react-redux";
 import { Navigate } from "react-router-dom";
 import { TReactNodeProps } from "../@types/TReactNodeProps";
@@ -12,7 +13,10 @@ const AuthenticateDashboard = ({ children }: TReactNodeProps) => {
 
   return isExist ? (
     role == "admin" || role == "company" ? (
-      <> {children} </>
+      <>
+        {" "}
+        <Suspense fallback={"Loading...."}>{children}</Suspense>
+      </>
     ) : (
       <Navigate to="/" />
     )
