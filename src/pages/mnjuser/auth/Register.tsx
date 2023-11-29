@@ -44,7 +44,7 @@ const Register = () => {
       dispatch(setCredentials(userData));
       setUser(INITIAL_USER_STATE);
       toast.success("Register successfull");
-      navigate("/userHome");
+      navigate("/mnjuser/home");
     } catch (err) {
       const apiError = err as TApiError;
       toast.error(apiError?.data.message);
@@ -240,7 +240,7 @@ const Register = () => {
 
                 <p className="mt-4 text-sm text-gray-500 sm:mt-0">
                   Don't have an account?{" "}
-                  <Link to="/login" className="text-gray-700 underline">
+                  <Link to="/mnjuser/login" className="text-gray-700 underline">
                     Log in
                   </Link>
                   .

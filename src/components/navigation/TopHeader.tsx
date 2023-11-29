@@ -21,7 +21,7 @@ const TopHeader = () => {
           <ul className="flex items-center gap-4">
             <li>
               <Link
-                to="/"
+                to="/mnjuser/jobs"
                 className="text-sm text-black relative after:absolute after:content-[''] after:h-[1.5px] after:w-0 after:-bottom-[4px] after:left-0 after:right-0  after:bg-black hover:after:w-full"
               >
                 Jobs
@@ -29,18 +29,10 @@ const TopHeader = () => {
             </li>
             <li>
               <Link
-                to="/"
+                to="/mnjuser/companies"
                 className="text-sm text-black relative after:absolute after:content-[''] after:h-[1.5px] after:w-0 after:-bottom-[4px] after:left-0 after:right-0  after:bg-black hover:after:w-full"
               >
                 Companies
-              </Link>
-            </li>
-            <li>
-              <Link
-                to="/"
-                className="text-sm text-black relative after:absolute after:content-[''] after:h-[1.5px] after:w-0 after:-bottom-[4px] after:left-0 after:right-0  after:bg-black hover:after:w-full"
-              >
-                Services
               </Link>
             </li>
           </ul>
@@ -49,12 +41,12 @@ const TopHeader = () => {
         <div className="flex items-center gap-4">
           {!user ? (
             <>
-              <Link to="/login">
+              <Link to="/mnjuser/login">
                 <button className="bg-cyan-500 text-white text-sm px-5 py-2 rounded-md hover:bg-cyan-600">
                   Login
                 </button>
               </Link>
-              <Link to="/register">
+              <Link to="/mnjuser/register">
                 <button className="bg-orange-500 text-white text-sm px-5 py-2 rounded-md hover:bg-orange-600">
                   Register
                 </button>

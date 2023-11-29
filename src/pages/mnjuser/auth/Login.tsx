@@ -36,7 +36,7 @@ const Login = () => {
       const userData = await userLogin(user).unwrap();
       dispatch(setCredentials(userData));
       setUser(INITIAL_USER_STATE);
-      navigate("/userHome");
+      navigate("/mnjuser/home");
       toast.success("Login successfull");
     } catch (err) {
       const apiError = err as TApiError;
@@ -174,7 +174,7 @@ const Login = () => {
 
                 <p className="mt-4 text-sm text-gray-500 sm:mt-0">
                   Don't have an account?{" "}
-                  <Link to="/register" className="text-gray-700 underline">
+                  <Link to="/mnjuser/register" className="text-gray-700 underline">
                     Register now
                   </Link>
                   .

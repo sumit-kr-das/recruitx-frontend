@@ -16,7 +16,7 @@ const AuthenticateRoutes = ({ children }: TReactNodeProps) => {
       <Suspense fallback={"Loading...."}>{children}</Suspense>{" "}
     </>
   ) : role === "user" ? (
-    <Navigate to="/userHome" />
+    <Navigate to="/mnjuser/home" />
   ) : (
     <Navigate to="/dashboard" />
   );

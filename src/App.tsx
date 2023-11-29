@@ -63,7 +63,7 @@ const App = () => {
         />
         {/* user */}
         <Route
-          path="/login"
+          path="/mnjuser/login"
           element={
             <AuthenticateRoute>
               <Login />
@@ -71,7 +71,7 @@ const App = () => {
           }
         />
         <Route
-          path="/register"
+          path="/mnjuser/register"
           element={
             <AuthenticateRoute>
               <Register />
@@ -79,7 +79,7 @@ const App = () => {
           }
         />
         <Route
-          path="/userHome"
+          path="/mnjuser/home"
           element={
             <UserRoute>
               <UserHomePage />
@@ -87,7 +87,7 @@ const App = () => {
           }
         />
         <Route
-          path="/userProfile"
+          path="/mnjuser/profile"
           element={
             <UserRoute>
               <UserProfilePage />
@@ -95,7 +95,7 @@ const App = () => {
           }
         />
         <Route
-          path="/search"
+          path="/mnjuser/jobs"
           element={
             <Suspense fallback={"Loading...."}>
               <SearchPage />

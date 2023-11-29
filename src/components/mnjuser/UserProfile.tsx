@@ -1,16 +1,14 @@
-import React from "react";
 import { Link } from "react-router-dom";
-import UserDefault from "../../assets/user-default-profile.png";
-import InfoSVG from "../../assets/icons/info.svg";
-import HomeSVG from "../../assets/icons/home.svg";
 import BlogSVG from "../../assets/icons/blog.svg";
 import CompanyeSVG from "../../assets/icons/company.svg";
+import HomeSVG from "../../assets/icons/home.svg";
+import InfoSVG from "../../assets/icons/info.svg";
 import JobsSVG from "../../assets/icons/jobs.svg";
+import UserDefault from "../../assets/user-default-profile.png";
 import { useViewUserProfileQuery } from "../../features/user/get/viewUserProfileApiSlice";
 
 const UserProfile = () => {
   const { data } = useViewUserProfileQuery();
-  console.log(data);
 
   return (
     <div className="p-4 text-center">
@@ -28,7 +26,7 @@ const UserProfile = () => {
         <p className="text-xs font-medium capitalize">{data?.workStatus}</p>
         <p className="text-xs text-gray-400">Last updated 29m ago</p>
         <Link
-          to="/userProfile"
+          to="/mnjuser/profile"
           className="mt-2 bg-cyan-500 text-white text-sm px-5 py-2 rounded-md hover:bg-cyan-600"
         >
           View profile
@@ -61,7 +59,7 @@ const UserProfile = () => {
         <ul>
           <li>
             <Link
-              to="/home"
+              to="/mnjuser/home"
               className="flex gap-1 py-2 px-4 rounded-lg hover:bg-green-100"
             >
               <img src={HomeSVG} width={20} alt="nav_logo" />
@@ -70,7 +68,7 @@ const UserProfile = () => {
           </li>
           <li>
             <Link
-              to="/home"
+              to="/mnjuser/jobs"
               className="flex gap-1 py-2 px-4 rounded-lg hover:bg-green-100"
             >
               <img src={JobsSVG} width={20} alt="nav_logo" />
@@ -79,7 +77,7 @@ const UserProfile = () => {
           </li>
           <li>
             <Link
-              to="/home"
+              to="/mnjuser/companies"
               className="flex gap-1 py-2 px-4 rounded-lg hover:bg-green-100"
             >
               <img src={CompanyeSVG} width={20} alt="nav_logo" />
@@ -88,7 +86,7 @@ const UserProfile = () => {
           </li>
           <li>
             <Link
-              to="/home"
+              to="/mnjuser/home"
               className="flex gap-1 py-2 px-4 rounded-lg hover:bg-green-100"
             >
               <img src={BlogSVG} width={20} alt="nav_logo" />

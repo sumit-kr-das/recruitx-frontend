@@ -12,7 +12,7 @@ const HomePage = () => {
 
   const search = () => {
     navigate(
-      `/search?skills=${skill}&exprience=${exprience}&location=${location}`
+      `/jobs?skills=${skill}&exprience=${exprience}&location=${location}`
     );
   };
   return (

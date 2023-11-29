@@ -18,13 +18,13 @@ export const recruiterMenu = [
 
 export const userMenu = [
 	{
-		title: "User Dashboard",
-		src: "/userHome",
+		title: "My Dashboard",
+		src: "/mnjuser/home",
 		shortHand: "⌘+D",
 	},
 	{
-		title: "View Profile",
-		src: "/userHome",
+		title: "My Profile",
+		src: "/mnjuser/profile",
 		shortHand: "⌘+V",
 	},
 ];
