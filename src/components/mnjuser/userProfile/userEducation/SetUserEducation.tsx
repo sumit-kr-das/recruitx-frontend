@@ -1,8 +1,23 @@
+import { toast } from "react-hot-toast";
 import { qualificationData } from "../../../../constants/qualificationData";
 import Modal from "../../../Modal";
+import { TApiError } from "../../../../@types/TApiError";
+import { useSetUserEduMutation } from "../../../../features/user/post/setUserEduApiSlice";
+import { useEffect } from "react";
 
-const SetUserEducation = ({ setOpen }) => {
-  const handleSubmit = () => {};
+const SetUserEducation = ({ setOpen, edudata, setEdudata, isSuccess, resData }) => {
+  const [setUserEdu] = useSetUserEduMutation();
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      await setUserEdu(edudata).unwrap();
+      toast.success("Login successfull");
+      setOpen(false);
+    } catch (err) {
+      const apiError = err as TApiError;
+      toast.error(apiError.data.message);
+    }
+  };
   return (
     <Modal classes="w-fit h-fit overflow-auto">
       <form onSubmit={handleSubmit}>
@@ -20,12 +35,12 @@ const SetUserEducation = ({ setOpen }) => {
               </label>
               <div className="mt-2">
                 <select
-                  // value={userData.gender}
-                  // onChange={(e) =>
-                  // 	setUserData({ ...userData, gender: e.target.value })
-                  // }
-                  id="category"
-                  name="category"
+                  value={edudata.degree}
+                  onChange={(e) =>
+                    setEdudata({ ...edudata, degree: e.target.value })
+                  }
+                  id="degree"
+                  name="degree"
                   autoComplete="country-name"
                   className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6"
                 >
@@ -49,17 +64,14 @@ const SetUserEducation = ({ setOpen }) => {
               <div className="mt-2">
                 <div className="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md">
                   <input
-                    // value={userData.objective}
-                    // onChange={(e) =>
-                    // 	setUserData({
-                    // 		...userData,
-                    // 		objective: e.target.value,
-                    // 	})
-                    // }
+                    value={edudata.college}
+                    onChange={(e) =>
+                      setEdudata({ ...edudata, college: e.target.value })
+                    }
                     type="text"
-                    name="title"
-                    id="title"
-                    autoComplete="title"
+                    name="college"
+                    id="college"
+                    autoComplete="college"
                     className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                     placeholder="Institute name"
                   />
@@ -77,17 +89,14 @@ const SetUserEducation = ({ setOpen }) => {
               <div className="mt-2">
                 <div className="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md">
                   <input
-                    // value={userData.objective}
-                    // onChange={(e) =>
-                    // 	setUserData({
-                    // 		...userData,
-                    // 		objective: e.target.value,
-                    // 	})
-                    // }
+                    value={edudata.course}
+                    onChange={(e) =>
+                      setEdudata({ ...edudata, course: e.target.value })
+                    }
                     type="text"
-                    name="title"
-                    id="title"
-                    autoComplete="title"
+                    name="course"
+                    id="course"
+                    autoComplete="course"
                     className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                     placeholder="B.tech"
                   />
@@ -103,13 +112,13 @@ const SetUserEducation = ({ setOpen }) => {
               </label>
               <div className="mt-2">
                 <select
-                  // value={userData.gender}
-                  // onChange={(e) =>
-                  // 	setUserData({ ...userData, gender: e.target.value })
-                  // }
-                  id="category"
-                  name="category"
-                  autoComplete="country-name"
+                  value={edudata.courseType}
+                  onChange={(e) =>
+                    setEdudata({ ...edudata, courseType: e.target.value })
+                  }
+                  id="courseType"
+                  name="courseType"
+                  autoComplete="courseType"
                   className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6"
                 >
                   <option value="">Select course type</option>
@@ -132,34 +141,28 @@ const SetUserEducation = ({ setOpen }) => {
               <div className="mt-2 flex items-center gap-4">
                 <div className="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md">
                   <input
-                    // value={userData.objective}
-                    // onChange={(e) =>
-                    // 	setUserData({
-                    // 		...userData,
-                    // 		objective: e.target.value,
-                    // 	})
-                    // }
+                    value={edudata.admissionYear}
+                    onChange={(e) =>
+                      setEdudata({ ...edudata, admissionYear: e.target.value })
+                    }
                     type="text"
-                    name="title"
-                    id="title"
-                    autoComplete="title"
+                    name="admissionYear"
+                    id="admissionYear"
+                    autoComplete="admissionYear"
                     className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                     placeholder="Starting year"
                   />
                 </div>
                 <div className="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md">
                   <input
-                    // value={userData.objective}
-                    // onChange={(e) =>
-                    // 	setUserData({
-                    // 		...userData,
-                    // 		objective: e.target.value,
-                    // 	})
-                    // }
+                    value={edudata.passYear}
+                    onChange={(e) =>
+                      setEdudata({ ...edudata, passYear: e.target.value })
+                    }
                     type="text"
-                    name="title"
-                    id="title"
-                    autoComplete="title"
+                    name="passYear"
+                    id="passYear"
+                    autoComplete="passYear"
                     className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                     placeholder="Ending year"
                   />
@@ -177,17 +180,14 @@ const SetUserEducation = ({ setOpen }) => {
               <div className="mt-2">
                 <div className="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md">
                   <input
-                    // value={userData.objective}
-                    // onChange={(e) =>
-                    // 	setUserData({
-                    // 		...userData,
-                    // 		objective: e.target.value,
-                    // 	})
-                    // }
-                    type="text"
+                    value={edudata.marks}
+                    onChange={(e) =>
+                      setEdudata({ ...edudata, marks: e.target.value })
+                    }
+                    type="marks"
                     name="title"
-                    id="title"
-                    autoComplete="title"
+                    id="marks"
+                    autoComplete="marks"
                     className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                     placeholder="70"
                   />

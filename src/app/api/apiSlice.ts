@@ -20,6 +20,7 @@ export const apiSlice = createApi({
     "User",
     "UserInfo",
     "CompanyJobs",
+    "UserEdu",
     "Company",
     "CompanyProfileDetails",
     "Admin",

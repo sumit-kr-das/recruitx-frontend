@@ -1,6 +1,38 @@
 import { Pen } from "lucide-react";
+import { useEffect } from "react";
 
-const ViewEducation = ({setOpen}) => {
+const ShowEduData = ({ item, setEdudata, isSuccess, setOpen }) => {
+  console.log("current data",item);
+  useEffect(() => {
+    if (isSuccess) {
+      setEdudata({
+        degree: item?.degree || "",
+        college: item?.college || "",
+        course: item?.course || "",
+        courseType: item?.courseType || "",
+        admissionYear: item?.admissionYear || "",
+        passYear: item?.passYear || "",
+        marks: item?.marks || "",
+      });
+    }
+  }, [isSuccess, item]);
+  return (
+    <div className="mb-4">
+      <div className="flex items-center gap-2">
+        <h2 className="font-bold text-lg"> {item?.course}</h2>
+        <Pen className="w-[12px]" onClick={() => setOpen(true)} />
+      </div>
+      <h3 className="font-semibold">{item?.college}</h3>
+      <h3>
+        {item?.passYear} | {item?.courseType}
+      </h3>
+    </div>
+  );
+};
+
+const ViewEducation = ({ setOpen, resData, setEdudata, isSuccess }) => {
+  console.log("all data",resData);
+  
   return (
     <>
       <div className="mt-4 bg-white p-5 rounded-lg shadow-lg">
@@ -13,31 +45,21 @@ const ViewEducation = ({setOpen}) => {
             Add Education
           </h2>
         </div>
-        {/* <h2>
-        Mention your educational details including your current and previous
-        educational details.
-      </h2> */}
-        <div className="mb-4">
-          <div className="flex items-center gap-2">
-            <h2 className="font-bold text-lg">BCA Computers</h2>
-            <Pen className="w-[12px]" />
-          </div>
-          <h3 className="font-semibold">
-            Burdwan Institute of Management & Computer Science
-          </h3>
-          <h3>2022 | Full Time</h3>
-        </div>
-
-        <div className="mb-4">
-          <div className="flex items-center gap-2">
-            <h2 className="font-bold text-lg">BCA Computers</h2>
-            <Pen className="w-[12px]" />
-          </div>
-          <h3 className="font-semibold">
-            Burdwan Institute of Management & Computer Science
-          </h3>
-          <h3>2022 | Full Time</h3>
-        </div>
+        {resData && resData.length == 0 && (
+          <h2>
+            Mention your educational details including your current and previous
+            educational details.
+          </h2>
+        )}
+        {resData?.map((item, index) => (
+          <ShowEduData
+            key={index}
+            item={item}
+            setEdudata={setEdudata}
+            isSuccess={isSuccess}
+            setOpen={setOpen}
+          />
+        ))}
       </div>
     </>
   );

@@ -1,6 +1,7 @@
-import { useState } from "react";
-import ViewEducation from "./ViewEducation";
+import { useEffect, useState } from "react";
+import { useGetUserEduQuery } from "../../../../features/user/get/getUserEduApiSlice";
 import SetUserEducation from "./SetUserEducation";
+import ViewEducation from "./ViewEducation";
 
 const INITIAL_EDU_DATA = {
   degree: "",
@@ -15,11 +16,26 @@ const INITIAL_EDU_DATA = {
 const UserEducation = () => {
   const [edudata, setEdudata] = useState(INITIAL_EDU_DATA);
   const [open, setOpen] = useState(false);
+  const { data, isSuccess } = useGetUserEduQuery();
+  // console.log(data);
 
   return (
     <div>
-      <ViewEducation setOpen={setOpen} />
-      {open && <SetUserEducation setOpen={setOpen} />}
+      <ViewEducation
+        resData={data}
+        setOpen={setOpen}
+        setEdudata={setEdudata}
+        isSuccess={isSuccess}
+      />
+      {open && (
+        <SetUserEducation
+          setOpen={setOpen}
+          edudata={edudata}
+          setEdudata={setEdudata}
+          isSuccess={isSuccess}
+          resData={data}
+        />
+      )}
     </div>
   );
 };
