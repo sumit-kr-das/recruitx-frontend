@@ -39,7 +39,7 @@ const SearchPage = () => {
         let filteredJobs;
         if (isSuccess) {
           filteredJobs = jobData.filter(job => {
-            if (data) {
+            if (searchFilter) {
               const rolesMatch = searchFilter.role.every(role => job.info.skills.includes(role));
               const salaryInRange = job.info.minSalary <= searchFilter.salary && job.info.maxSalary >= searchFilter.salary;
               return rolesMatch || salaryInRange;
