@@ -10,7 +10,7 @@ import MultiSelectInput from "../../components/form/multiSelectInput/MultiSelect
 import SelectInput from "../../components/form/multiSelectInput/SelectInput";
 import { tagsData } from "../../constants/tagsData";
 const INITIAL_SEARCH_DATA = {
-  role: [""],
+  role: [],
   salary: 0,
 }
 
@@ -19,12 +19,13 @@ const SearchPage = () => {
   const title = searchParams.get("skills");
   const exprience = Number(searchParams.get("exprience"));
   const location = searchParams.get("location");
-  const [searchData, { isSuccess }] = useSearchDataMutation();
+  const [searchData, { isSuccess, isError }] = useSearchDataMutation();
   const [jobs, setJobs] = useState([]);
-  const [searchFilter, setSearchFilter] = useState({});
 
   const [data, setData] = useState(INITIAL_SEARCH_DATA);
-  const [tags, setTags] = useState([title]);
+  const [tags, setTags] = useState([]);
+  const [searchFilter, setSearchFilter] = useState(INITIAL_SEARCH_DATA);
+
 
   const handelFilterSubmit = (e) => {
     e.preventDefault();
@@ -36,25 +37,42 @@ const SearchPage = () => {
     const fetchSearchData = async () => {
       try {
         const jobData = await searchData({ title, exprience, location }).unwrap();
-        let filteredJobs;
-        if (isSuccess) {
-          filteredJobs = jobData.filter(job => {
-            if (searchFilter) {
+        // console.log(searchFilter.role.length, "length");
+        if (!isError) {
+          console.log(jobData);
+          console.log(searchFilter.role.length, "length");
+          if (searchFilter.role.length > 0 || searchFilter.salary > 0) {
+            const filteredJobs = jobData.filter(job => {
+              console.log("working");
               const rolesMatch = searchFilter.role.every(role => job.info.skills.includes(role));
               const salaryInRange = job.info.minSalary <= searchFilter.salary && job.info.maxSalary >= searchFilter.salary;
               return rolesMatch || salaryInRange;
-            } else {
-              return jobData;
-            }
-          });
+            });
+            setJobs(filteredJobs);
+          } else {
+            setJobs(jobData)
+          }
+          // filteredJobs = jobData.filter(job => {
+          //   if (searchFilter.role.length > 0 || searchFilter.salary) {
+          //     console.log("working");
+
+          //     const rolesMatch = searchFilter.role.every(role => job.info.skills.includes(role));
+          //     const salaryInRange = job.info.minSalary <= searchFilter.salary && job.info.maxSalary >= searchFilter.salary;
+          //     return rolesMatch || salaryInRange;
+          //   } else {
+          //     return jobData;
+          //   }
+          // });
+        } else {
+          console.log("no success");
         }
-        setJobs(filteredJobs);
+        // setJobs(filteredJobs);
       } catch (err) {
         console.log("Error on company login", err);
       }
     }
     fetchSearchData();
-  }, [data]);
+  }, [searchFilter]);
 
   return (
     <>
