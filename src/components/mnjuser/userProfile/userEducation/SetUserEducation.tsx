@@ -10,18 +10,18 @@ const SetUserEducation = ({ setOpen, edudata, setEdudata }) => {
   const [updateUserEdu] = useUpdateUserEduMutation();
 
   const isDataPresent = !!edudata?.id;
-  const id = edudata?.id;
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     const {id, ...otherEduData} = edudata
     try {
       if (isDataPresent) {
-        console.log(otherEduData);
+        console.log(otherEduData, id);
         await updateUserEdu({ id, otherEduData }).unwrap();
         toast.success("Education updated");
       } else {
-        console.log(otherEduData);
+        console.log(otherEduData, id);
         await setUserEdu(otherEduData).unwrap();
         toast.success("Education added");
       }
