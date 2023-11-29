@@ -45,18 +45,15 @@ const Job = ({ jobs }) => {
 							{item.description}
 						</p>
 					</div>
-					<div className="flex items-center gap-1">
+					<div className="flex items-center gap-2 flex-wrap my-2">
 						{/* <Image src={StarSVG} width={10} alt="star" /> */}
-						<p className="text-sm text-gray-400">
-							{
-								item?.info.skills.map((skill, sIndex) => (
-									<span key={sIndex}>
-										{skill} &#183;
-									</span>
-								))
-							}
-
-						</p>
+						{
+							item?.info.skills.map((skill, sIndex) => (
+								<p key={sIndex} className="whitespace-nowrap rounded-full bg-purple-100 px-2.5 py-0.5 text-sm text-purple-700 capitalize">
+									{skill}
+								</p>
+							))
+						}
 					</div>
 					<div className="flex items-center gap-1 mt-2">
 

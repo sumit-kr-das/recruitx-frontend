@@ -25,6 +25,7 @@ import {
   AdminDashboard,
   ManageUsers,
   ManageCompanies,
+  JobDetailsPage
 } from "./pages";
 import {
   AuthenticateRoute,
@@ -76,6 +77,7 @@ const App = () => {
           }
         />
         <Route path="/search" element={<SearchPage />} />
+        <Route path="/jobDetails" element={<JobDetailsPage />} />
 
         {/* dashboard */}
         <Route
