@@ -1,12 +1,11 @@
 import { Pen } from "lucide-react";
-import { useEffect } from "react";
 import { INITIAL_EDU_DATA } from "./UserEducation";
 
 const ShowEduData = ({ item, setEdudata, isSuccess, setOpen }) => {
-  console.log("current data", item);
   const openModal = () => {
     if (isSuccess) {
       setEdudata({
+        id: item?._id || "",
         degree: item?.degree || "",
         college: item?.college || "",
         course: item?.course || "",
@@ -17,20 +16,8 @@ const ShowEduData = ({ item, setEdudata, isSuccess, setOpen }) => {
       });
     }
     setOpen(true);
-  }
-  // useEffect(() => {
-  //   if (isSuccess) {
-  //     setEdudata({
-  //       degree: item?.degree || "",
-  //       college: item?.college || "",
-  //       course: item?.course || "",
-  //       courseType: item?.courseType || "",
-  //       admissionYear: item?.admissionYear || "",
-  //       passYear: item?.passYear || "",
-  //       marks: item?.marks || "",
-  //     });
-  //   }
-  // }, [isSuccess, item]);
+  };
+
   return (
     <div className="mb-4">
       <div className="flex items-center gap-2">
@@ -46,8 +33,6 @@ const ShowEduData = ({ item, setEdudata, isSuccess, setOpen }) => {
 };
 
 const ViewEducation = ({ setOpen, resData, setEdudata, isSuccess }) => {
-  console.log("all data", resData);
-
   return (
     <>
       <div className="mt-4 bg-white p-5 rounded-lg shadow-lg">
@@ -55,10 +40,9 @@ const ViewEducation = ({ setOpen, resData, setEdudata, isSuccess }) => {
           <h2 className="font-bold text-lg">Education</h2>
           <h2
             onClick={() => {
-              setEdudata(INITIAL_EDU_DATA)
-              setOpen((prev) => !prev)
-            }
-            }
+              setEdudata(INITIAL_EDU_DATA);
+              setOpen((prev) => !prev);
+            }}
             className="font-bold text-blue-500 cursor-pointer"
           >
             Add Education
