@@ -1,5 +1,9 @@
 import { Toaster } from "react-hot-toast";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
+import UserProfilePage from "./pages/mnjuser/UserProfilePage";
+import { selectCurrentRole } from "./features/auth/authSlice";
+import SearchPage from "./pages/search/SearchPage";
+import { useSelector } from "react-redux";
 import Layout from "./layout/Layout";
 import {
   ApplicantsJobs,
@@ -22,15 +26,13 @@ import {
   ManageUsers,
   ManageCompanies,
 } from "./pages";
-import UserProfilePage from "./pages/mnjuser/UserProfilePage";
-import SearchPage from "./pages/search/SearchPage";
-import AuthenticateRoutes from "./protectedRoutes/AuthenticateRoutes";
-import CompanyRoutes from "./protectedRoutes/CompanyRoutes";
-import UserRoutes from "./protectedRoutes/UserRoutes";
-import AuthenticateDashboard from "./protectedRoutes/AuthenticateDashboard";
-import { useSelector } from "react-redux";
-import { selectCurrentRole } from "./features/auth/authSlice";
-import AdminRoutes from "./protectedRoutes/AdminRoutes";
+import {
+  AuthenticateRoute,
+  CompanyRoute,
+  UserRoute,
+  AuthenticateDashboard,
+  AdminRoute,
+} from "./protectedRoutes";
 
 const App = () => {
   const role = useSelector(selectCurrentRole);
@@ -44,33 +46,33 @@ const App = () => {
         <Route
           path="/login"
           element={
-            <AuthenticateRoutes>
+            <AuthenticateRoute>
               <Login />
-            </AuthenticateRoutes>
+            </AuthenticateRoute>
           }
         />
         <Route
           path="/register"
           element={
-            <AuthenticateRoutes>
+            <AuthenticateRoute>
               <Register />
-            </AuthenticateRoutes>
+            </AuthenticateRoute>
           }
         />
         <Route
           path="/userHome"
           element={
-            <UserRoutes>
+            <UserRoute>
               <UserHomePage />
-            </UserRoutes>
+            </UserRoute>
           }
         />
         <Route
           path="/userProfile"
           element={
-            <UserRoutes>
+            <UserRoute>
               <UserProfilePage />
-            </UserRoutes>
+            </UserRoute>
           }
         />
         <Route path="/search" element={<SearchPage />} />
@@ -79,17 +81,17 @@ const App = () => {
         <Route
           path="/cRegister"
           element={
-            <AuthenticateRoutes>
+            <AuthenticateRoute>
               <CompanyRegister />
-            </AuthenticateRoutes>
+            </AuthenticateRoute>
           }
         />
         <Route
           path="/cLogin"
           element={
-            <AuthenticateRoutes>
+            <AuthenticateRoute>
               <CompanyLogin />
-            </AuthenticateRoutes>
+            </AuthenticateRoute>
           }
         />
         <Route
@@ -104,18 +106,18 @@ const App = () => {
             <Route
               path="/dashboard"
               element={
-                <CompanyRoutes>
+                <CompanyRoute>
                   <CompanyDashboard />
-                </CompanyRoutes>
+                </CompanyRoute>
               }
             />
           ) : (
             <Route
               path="/dashboard"
               element={
-                <AdminRoutes>
+                <AdminRoute>
                   <AdminDashboard />
-                </AdminRoutes>
+                </AdminRoute>
               }
             />
           )}
@@ -123,63 +125,71 @@ const App = () => {
           <Route
             path="/dashboard/company_profile"
             element={
-              <CompanyRoutes>
+              <CompanyRoute>
                 <CompanyProfile />
-              </CompanyRoutes>
+              </CompanyRoute>
             }
           />
           <Route
             path="/dashboard/submit_jobs"
             element={
-              <CompanyRoutes>
+              <CompanyRoute>
                 <SubmitJobs />
-              </CompanyRoutes>
+              </CompanyRoute>
             }
           />
           <Route
             path="/dashboard/my_jobs"
             element={
-              <CompanyRoutes>
+              <CompanyRoute>
                 <MyJobs />
-              </CompanyRoutes>
+              </CompanyRoute>
             }
           />
           <Route
             path="/dashboard/applicants_jobs"
             element={
-              <CompanyRoutes>
+              <CompanyRoute>
                 <ApplicantsJobs />
-              </CompanyRoutes>
+              </CompanyRoute>
             }
           />
           <Route
             path="/dashboard/shortlisted_candidates"
             element={
-              <CompanyRoutes>
+              <CompanyRoute>
                 <ShortlistedCandidates />
-              </CompanyRoutes>
+              </CompanyRoute>
             }
           />
+          <Route
+            path="/dashboard/delete_account"
+            element={
+              <CompanyRoute>
+                <DeleteCompany />
+              </CompanyRoute>
+            }
+          />
+
           {/* admin */}
           <Route
             path="/dashboard/admin/manage_user"
             element={
-              <AdminRoutes>
+              <AdminRoute>
                 <ManageUsers />
-              </AdminRoutes>
+              </AdminRoute>
             }
           />
           <Route
             path="/dashboard/admin/manage_company"
             element={
-              <AdminRoutes>
+              <AdminRoute>
                 <ManageCompanies />
-              </AdminRoutes>
+              </AdminRoute>
             }
           />
 
-          {/* company && admin */}
-          <Route path="/dashboard/delete_account" element={<DeleteCompany />} />
+          {/* company & admin */}
           <Route
             path="/dashboard/change_password"
             element={<ChangePassword />}

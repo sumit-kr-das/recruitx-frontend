@@ -22,7 +22,7 @@ export const adminDashboard = [
   {
     menu: "Delete Account",
     icon: "",
-    src: "/dashboard/delete_account",
+    src: "/dashboard/admin/delete_account",
   },
   {
     menu: "Log Out",
