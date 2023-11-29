@@ -11,7 +11,6 @@ import SelectInput from "../../components/form/multiSelectInput/SelectInput";
 import { tagsData } from "../../constants/tagsData";
 const INITIAL_SEARCH_DATA = {
   role: [""],
-  location: [""],
   salary: 0,
 }
 
@@ -22,40 +21,33 @@ const SearchPage = () => {
   const location = searchParams.get("location");
   const [searchData, { isSuccess }] = useSearchDataMutation();
   const [jobs, setJobs] = useState([]);
-  const [searchFilter, setSearchFilter] = useState();
+  const [searchFilter, setSearchFilter] = useState({});
 
   const [data, setData] = useState(INITIAL_SEARCH_DATA);
   const [tags, setTags] = useState([title]);
 
   const handelFilterSubmit = (e) => {
     e.preventDefault();
+    setSearchFilter(data);
     console.log(data, "searchFilter");
   };
 
   useEffect(() => {
     const fetchSearchData = async () => {
       try {
-        let jobData;
-        if (!title && !location && !exprience) {
-          jobData = await searchData({ title, exprience, location }).unwrap();
-        }else{
-          jobData = await searchData({ title, exprience, location }).unwrap();
-        }
-        // const jobData = await searchData({ title, exprience, location }).unwrap();
+        const jobData = await searchData({ title, exprience, location }).unwrap();
         let filteredJobs;
         if (isSuccess) {
           filteredJobs = jobData.filter(job => {
             if (data) {
-              const rolesMatch = data.role.every(role => job.info.skills.includes(role));
-              const salaryInRange = job.info.minSalary <= data.salary && job.info.maxSalary >= data.salary;
+              const rolesMatch = searchFilter.role.every(role => job.info.skills.includes(role));
+              const salaryInRange = job.info.minSalary <= searchFilter.salary && job.info.maxSalary >= searchFilter.salary;
               return rolesMatch || salaryInRange;
             } else {
               return jobData;
             }
-
           });
         }
-
         setJobs(filteredJobs);
       } catch (err) {
         console.log("Error on company login", err);
