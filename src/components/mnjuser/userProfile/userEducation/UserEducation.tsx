@@ -3,7 +3,7 @@ import { useGetUserEduQuery } from "../../../../features/user/get/getUserEduApiS
 import SetUserEducation from "./SetUserEducation";
 import ViewEducation from "./ViewEducation";
 
-const INITIAL_EDU_DATA = {
+export const INITIAL_EDU_DATA = {
   degree: "",
   college: "",
   course: "",

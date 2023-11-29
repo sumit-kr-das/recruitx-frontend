@@ -1,9 +1,10 @@
 import { Pen } from "lucide-react";
 import { useEffect } from "react";
+import { INITIAL_EDU_DATA } from "./UserEducation";
 
 const ShowEduData = ({ item, setEdudata, isSuccess, setOpen }) => {
-  console.log("current data",item);
-  useEffect(() => {
+  console.log("current data", item);
+  const openModal = () => {
     if (isSuccess) {
       setEdudata({
         degree: item?.degree || "",
@@ -15,12 +16,26 @@ const ShowEduData = ({ item, setEdudata, isSuccess, setOpen }) => {
         marks: item?.marks || "",
       });
     }
-  }, [isSuccess, item]);
+    setOpen(true);
+  }
+  // useEffect(() => {
+  //   if (isSuccess) {
+  //     setEdudata({
+  //       degree: item?.degree || "",
+  //       college: item?.college || "",
+  //       course: item?.course || "",
+  //       courseType: item?.courseType || "",
+  //       admissionYear: item?.admissionYear || "",
+  //       passYear: item?.passYear || "",
+  //       marks: item?.marks || "",
+  //     });
+  //   }
+  // }, [isSuccess, item]);
   return (
     <div className="mb-4">
       <div className="flex items-center gap-2">
         <h2 className="font-bold text-lg"> {item?.course}</h2>
-        <Pen className="w-[12px]" onClick={() => setOpen(true)} />
+        <Pen className="w-[12px]" onClick={openModal} />
       </div>
       <h3 className="font-semibold">{item?.college}</h3>
       <h3>
@@ -31,15 +46,19 @@ const ShowEduData = ({ item, setEdudata, isSuccess, setOpen }) => {
 };
 
 const ViewEducation = ({ setOpen, resData, setEdudata, isSuccess }) => {
-  console.log("all data",resData);
-  
+  console.log("all data", resData);
+
   return (
     <>
       <div className="mt-4 bg-white p-5 rounded-lg shadow-lg">
         <div className="flex items-center justify-between mb-4">
           <h2 className="font-bold text-lg">Education</h2>
           <h2
-            onClick={() => setOpen((prev) => !prev)}
+            onClick={() => {
+              setEdudata(INITIAL_EDU_DATA)
+              setOpen((prev) => !prev)
+            }
+            }
             className="font-bold text-blue-500 cursor-pointer"
           >
             Add Education
