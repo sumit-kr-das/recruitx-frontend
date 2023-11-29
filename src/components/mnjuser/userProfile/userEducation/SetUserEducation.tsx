@@ -1,17 +1,30 @@
 import { toast } from "react-hot-toast";
-import { qualificationData } from "../../../../constants/qualificationData";
-import Modal from "../../../Modal";
 import { TApiError } from "../../../../@types/TApiError";
+import { qualificationData } from "../../../../constants/qualificationData";
 import { useSetUserEduMutation } from "../../../../features/user/post/setUserEduApiSlice";
-import { useEffect } from "react";
+import Modal from "../../../Modal";
+import { useUpdateUserEduMutation } from "../../../../features/user/put/updateUserEduApiSlice";
 
-const SetUserEducation = ({ setOpen, edudata, setEdudata, isSuccess, resData }) => {
+const SetUserEducation = ({ setOpen, edudata, setEdudata }) => {
   const [setUserEdu] = useSetUserEduMutation();
+  const [updateUserEdu] = useUpdateUserEduMutation();
+
+  const isDataPresent = !!edudata?.id;
+  const id = edudata?.id;
+
   const handleSubmit = async (e) => {
     e.preventDefault();
+    const {id, ...otherEduData} = edudata
     try {
-      await setUserEdu(edudata).unwrap();
-      toast.success("Login successfull");
+      if (isDataPresent) {
+        console.log(otherEduData);
+        await updateUserEdu({ id, otherEduData }).unwrap();
+        toast.success("Education updated");
+      } else {
+        console.log(otherEduData);
+        await setUserEdu(otherEduData).unwrap();
+        toast.success("Education added");
+      }
       setOpen(false);
     } catch (err) {
       const apiError = err as TApiError;
@@ -44,7 +57,6 @@ const SetUserEducation = ({ setOpen, edudata, setEdudata, isSuccess, resData }) 
                   autoComplete="country-name"
                   className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6"
                 >
-                  {/* <option value="" >Select education</option> */}
                   {qualificationData.map((item) => (
                     <option key={item} value={item}>
                       {item}

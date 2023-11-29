@@ -1,9 +1,10 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useGetUserEduQuery } from "../../../../features/user/get/getUserEduApiSlice";
 import SetUserEducation from "./SetUserEducation";
 import ViewEducation from "./ViewEducation";
 
 export const INITIAL_EDU_DATA = {
+  id: "",
   degree: "",
   college: "",
   course: "",
@@ -17,7 +18,6 @@ const UserEducation = () => {
   const [edudata, setEdudata] = useState(INITIAL_EDU_DATA);
   const [open, setOpen] = useState(false);
   const { data, isSuccess } = useGetUserEduQuery();
-  // console.log(data);
 
   return (
     <div>
@@ -32,8 +32,6 @@ const UserEducation = () => {
           setOpen={setOpen}
           edudata={edudata}
           setEdudata={setEdudata}
-          isSuccess={isSuccess}
-          resData={data}
         />
       )}
     </div>
