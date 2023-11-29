@@ -5,6 +5,7 @@ export { default as HomePage } from "./user/HomePage";
 export { default as Login } from "./mnjuser/auth/Login";
 export { default as Register } from "./mnjuser/auth/Register";
 export { default as UserHomePage } from "./mnjuser/UserHomePage";
+export { default as JobDetailsPage } from "./user/JobDetailsPage";
 
 // company
 export { default as CompanyDashboard } from "./company/CompanyDashboard";
