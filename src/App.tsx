@@ -33,6 +33,7 @@ const Logout = lazy(() => import("./pages/company/Logout"));
 
 const AdminDashboard = lazy(() => import("./pages/admin/AdminDashboard"));
 const ManageCompanies = lazy(() => import("./pages/admin/ManageCompanies"));
+const ApprovedCompanies  = lazy(() => import("./pages/admin/ApprovdCompanies"));
 const ManageUsers = lazy(() => import("./pages/admin/ManageUsers"));
 
 const ErrorPage = lazy(() => import("./pages/error/ErrorPage"));
@@ -220,6 +221,14 @@ const App = () => {
             element={
               <AdminRoute>
                 <ManageCompanies />
+              </AdminRoute>
+            }
+          />
+          <Route
+            path="/dashboard/admin/approved_companies"
+            element={
+              <AdminRoute>
+                <ApprovedCompanies />
               </AdminRoute>
             }
           />
