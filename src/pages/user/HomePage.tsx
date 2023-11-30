@@ -1,5 +1,7 @@
 import ArrowImg from "../../assets/categories/arrow.svg";
+import Footer from "../../components/footer/Footer";
 import TopHeader from "../../components/navigation/TopHeader";
+import Visitors from "../../components/visitors/Visitors";
 import catagoriesData from "../../constants/categoriesData";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -17,7 +19,10 @@ const HomePage = () => {
   };
   return (
     <div className="bg-green-50">
+      {/* Header */}
       <TopHeader />
+
+      {/* Search */}
       <div className="max-w-screen-xl mx-auto pb-40">
         {/* title */}
         <div className="flex items-center justify-center flex-col pt-40 pb-10">
@@ -78,6 +83,14 @@ const HomePage = () => {
           ))}
         </div>
       </div>
+
+      {/* Jobs */}
+
+      {/* Visitors */}
+      <Visitors />
+
+      {/* Footer */}
+      <Footer />
     </div>
   );
 };
