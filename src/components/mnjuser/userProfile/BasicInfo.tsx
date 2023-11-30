@@ -6,6 +6,8 @@ import Modal from "../../Modal";
 import { useEffect, useState } from "react";
 import { useUpdateUserMutation } from "../../../features/user/put/updateUserProfileApiSlice";
 import { toast } from "react-hot-toast";
+import ChangeProfile from "./ChangeProfile";
+import { TApiError } from "../../../@types/TApiError";
 
 const INITIAL_DATA = {
   name: "",
@@ -14,9 +16,10 @@ const INITIAL_DATA = {
   workStatus: "",
 };
 
-const BasicInfo = () => {
+const BasicInfo = ({profilepic}) => {
   const [update, setUpdate] = useState(INITIAL_DATA);
   const [open, setOpen] = useState<boolean>(false);
+  const [profile, setProfile] = useState<boolean>(false);
   const { data, isSuccess, isLoading, isError } = useViewUserProfileQuery();
   const [updateUser] = useUpdateUserMutation();
 
@@ -39,7 +42,8 @@ const BasicInfo = () => {
       toast.success("Update successfull");
       setOpen((prev) => !prev);
     } catch (err) {
-      console.log("Error on company login", err);
+      const apiError = err as TApiError;
+      toast.error(apiError.data.message);
     }
   };
   const basicInfo = (
@@ -52,18 +56,21 @@ const BasicInfo = () => {
         >
           <Pencil className="w-[15px] h-[15px]" />
         </div>
-        <div className="w-[15%] flex items-center flex-col">
+        <div className="w-[20%] flex items-center flex-col">
           <img
-            src={UserDefault}
+            src={profilepic ? `http://localhost:8000/${profilepic}` : UserDefault}
             // width={180}
             alt="user_default"
-            className="rounded-full object-cover border"
+            className="width-[180px] h-[180px] rounded-full object-cover border"
           />
-          <button className="mt-2 bg-orange-500 text-white text-sm px-5 py-2 rounded-md hover:bg-orange-600">
+          <button
+            onClick={() => setProfile((prev) => !prev)}
+            className="mt-2 bg-orange-500 text-white text-sm px-5 py-2 rounded-md hover:bg-orange-600"
+          >
             Change Profile
           </button>
         </div>
-        <div className="w-[85%]">
+        <div className="w-[80%]">
           <div className="border-b flex items-end justify-between mb-4 pb-4">
             <div>
               <h2 className="text-2xl font-bold capitalize">{data?.name}</h2>
@@ -216,6 +223,10 @@ const BasicInfo = () => {
           </form>
         </Modal>
       )}
+      {/* setProfile */}
+      {
+        profile && <ChangeProfile profile={profile} setProfile ={setProfile } />
+      }
     </>
   );
 

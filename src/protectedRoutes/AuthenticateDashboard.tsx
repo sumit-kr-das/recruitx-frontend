@@ -6,6 +6,7 @@ import {
   selectCurrentRole,
   selectCurrentToken,
 } from "../features/auth/authSlice";
+import Loader from "../components/loader/Loader";
 
 const AuthenticateDashboard = ({ children }: TReactNodeProps) => {
   const isExist = useSelector(selectCurrentToken);
@@ -15,7 +16,7 @@ const AuthenticateDashboard = ({ children }: TReactNodeProps) => {
     role == "admin" || role == "company" ? (
       <>
         {" "}
-        <Suspense fallback={"Loading...."}>{children}</Suspense>
+        <Suspense fallback={<Loader />}>{children}</Suspense>
       </>
     ) : (
       <Navigate to="/" />

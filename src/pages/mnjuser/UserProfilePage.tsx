@@ -1,3 +1,4 @@
+import { useState } from "react";
 import Footer from "../../components/footer/Footer";
 import BasicInfo from "../../components/mnjuser/userProfile/BasicInfo";
 import UserCareer from "../../components/mnjuser/userProfile/userCareer/UserCareer";
@@ -7,14 +8,15 @@ import TopHeader from "../../components/navigation/TopHeader";
 import Container from "../../layout/Container";
 
 const UserProfilePage = () => {
+  const [profilepic, setProfilepic] = useState("")
   return (
     <div className="bg-green-50">
       <TopHeader />
       <Container className="pt-24 w-full">
         {/* Basic info */}
-        <BasicInfo />
+        <BasicInfo profilepic={profilepic} />
         {/* Other info */}
-        <OtherInfo />
+        <OtherInfo setProfilepic={setProfilepic} />
         {/* Educational details */}
         <UserEducation />
         {/* Career details */}

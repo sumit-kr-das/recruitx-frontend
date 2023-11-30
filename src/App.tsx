@@ -45,6 +45,7 @@ import {
   CompanyRoute,
   UserRoute,
 } from "./protectedRoutes";
+import Loader from "./components/loader/Loader";
 
 const App = () => {
   const role = useSelector(selectCurrentRole);
@@ -56,7 +57,7 @@ const App = () => {
         <Route
           path="/"
           element={
-            <Suspense fallback={"Loading...."}>
+            <Suspense fallback={<Loader />}>
               <HomePage />
             </Suspense>
           }
@@ -97,7 +98,7 @@ const App = () => {
         <Route
           path="/mnjuser/jobs"
           element={
-            <Suspense fallback={"Loading...."}>
+            <Suspense fallback={<Loader />}>
               <SearchPage />
             </Suspense>
           }
@@ -105,7 +106,7 @@ const App = () => {
         <Route
           path="/jobDetails"
           element={
-            <Suspense fallback={"Loading...."}>
+            <Suspense fallback={<Loader />}>
               <JobDetailsPage />
             </Suspense>
           }

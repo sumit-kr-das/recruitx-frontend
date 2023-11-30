@@ -6,6 +6,7 @@ import {
   selectCurrentRole,
   selectCurrentToken,
 } from "../features/auth/authSlice";
+import { Loader } from "lucide-react";
 
 const AuthenticateRoutes = ({ children }: TReactNodeProps) => {
   const isExist = useSelector(selectCurrentToken);
@@ -13,7 +14,7 @@ const AuthenticateRoutes = ({ children }: TReactNodeProps) => {
   return !isExist ? (
     <>
       {" "}
-      <Suspense fallback={"Loading...."}>{children}</Suspense>{" "}
+      <Suspense fallback={<Loader />}>{children}</Suspense>{" "}
     </>
   ) : role === "user" ? (
     <Navigate to="/mnjuser/home" />
