@@ -2,21 +2,23 @@ import ArrowImg from "../../assets/categories/arrow.svg";
 import Footer from "../../components/footer/Footer";
 import CompanySlider from "../../components/mnjuser/CompanySlider";
 import JobSlider from "../../components/mnjuser/JobSlider";
+import Search from "../../components/mnjuser/userHome/search/Search";
 import TopHeader from "../../components/navigation/TopHeader";
 import Visitors from "../../components/visitors/Visitors";
 import catagoriesData from "../../constants/categoriesData";
 import { useViewAllCompaniesQuery } from "../../features/company/get/viewAllCompanies";
-import { useGetJobRecomandationQuery } from "../../features/user/get/getJobRecomendationApiSlice";
+import { useGetAllJobsQuery } from "../../features/user/get/getAllJobsApiSlice";
 import Container from "../../layout/Container";
-import Search from "../../components/mnjuser/userHome/search/Search";
 
 const HomePage = () => {
   const { data: companyData } = useViewAllCompaniesQuery();
 
-  const { data: jobData } = useGetJobRecomandationQuery({
-    hasInfo: false,
+  const { data: jobData } = useGetAllJobsQuery({
     limit: 20,
   });
+
+  console.log(",,,,",jobData);
+  
 
   return (
     <>
@@ -39,7 +41,7 @@ const HomePage = () => {
 
         {/* search */}
         <Search />
-        
+
         {/* categories */}
         <div className="mt-10 flex items-center justify-center flex-wrap gap-4">
           {catagoriesData.map((item, index) => (
