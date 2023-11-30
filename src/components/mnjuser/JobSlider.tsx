@@ -1,43 +1,14 @@
 import React from "react";
-import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
-import StarSVG from "../../assets/icons/star.svg";
+import { Swiper, SwiperSlide } from "swiper/react";
 import CompanyLogo from "../../assets/default-company-logo.png";
 import LocationSVG from "../../assets/icons/locIcon.svg";
 import RightArrowSVG from "../../assets/icons/right-arrow-crsl.svg";
-import { useGetJobRecomandationQuery } from "../../features/user/get/getJobRecomendationApiSlice";
+import StarSVG from "../../assets/icons/star.svg";
+import countDays from "../../customFunctions/countDays";
 
-const coundDay = (dateString: string) => {
-  const date = new Date(dateString);
-
-  // Calculate the difference in milliseconds
-  const timeDifference = Date.now() - date.getTime();
-
-  // Calculate the difference in days
-  const daysAgo = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
-
-  // Format the result
-  const formattedDate =
-    daysAgo === 0
-      ? "Today"
-      : daysAgo === 1
-        ? "Yesterday"
-        : `${daysAgo} days ago`;
-
-  return formattedDate;
-  console.log(formattedDate);
-};
-
-const JobSlider = () => {
+const JobSlider = ({ data }) => {
   const swiperRef = React.useRef<any>(null);
-  const { data, isSuccess } = useGetJobRecomandationQuery({
-    hasInfo: "true",
-    limit: "",
-  });
-
-  if (isSuccess) {
-    console.log(data);
-  }
   return (
     <div className="relative">
       <div
@@ -74,13 +45,15 @@ const JobSlider = () => {
                   alt="company_default"
                   className="border rounded-lg"
                 />
-                <p className="text-xs">{coundDay(job?.updatedAt)}</p>
+                <p className="text-xs">{countDays(job?.updatedAt)}</p>
               </div>
               <p className="font-semibold text-sm mt-2 truncate ">
                 {job?.title}
               </p>
               <div className="flex items-center justify-between my-1">
-                <p className="text-xs">Company Name</p>
+                <p className="text-xs truncate">
+                  {job?.companyId?.companyName}
+                </p>
                 <div className="flex items-center gap-1">
                   <img src={StarSVG} width={10} alt="star" />
                   <p className="text-xs">4.2</p>
