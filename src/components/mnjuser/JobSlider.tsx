@@ -21,8 +21,8 @@ const coundDay = (dateString: string) => {
     daysAgo === 0
       ? "Today"
       : daysAgo === 1
-      ? "Yesterday"
-      : `${daysAgo} days ago`;
+        ? "Yesterday"
+        : `${daysAgo} days ago`;
 
   return formattedDate;
   console.log(formattedDate);
@@ -31,7 +31,7 @@ const coundDay = (dateString: string) => {
 const JobSlider = () => {
   const swiperRef = React.useRef<any>(null);
   const { data, isSuccess } = useGetJobRecomandationQuery({
-    hasInfo: "",
+    hasInfo: "true",
     limit: "",
   });
 
