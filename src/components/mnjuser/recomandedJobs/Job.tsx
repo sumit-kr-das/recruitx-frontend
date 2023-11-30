@@ -7,15 +7,21 @@ import {
 } from "react-icons/md";
 
 import { convertDate } from "../../../pages/company/MyJobs";
+import { useNavigate } from "react-router-dom";
 
 
 const Job = ({ jobs }) => {
+	const navigate = useNavigate();
+	const navigateDetailsPage = (id: string) => {
+		navigate(`/jobDetails/${id}`)
+	}
 	return (
 		<>
 			{jobs?.map((item, index) => (
 				<div
 					key={index}
 					className="bg-white p-8 mb-4 border rounded-lg transition ease-in delay-75 cursor-pointer hover:shadow-lg"
+					onClick={() => navigateDetailsPage(item?._id)}
 				>
 					<div>
 						<h2 className="font-semibold text-xl">{item?.title}</h2>

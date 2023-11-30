@@ -14,7 +14,7 @@ const HomePage = () => {
 
   const search = () => {
     navigate(
-      `/jobs?skills=${skill}&exprience=${exprience}&location=${location}`
+      `mnjuser/jobs?skills=${skill}&exprience=${exprience}&location=${location}`
     );
   };
   return (

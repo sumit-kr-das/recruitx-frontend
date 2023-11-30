@@ -20,7 +20,7 @@ const UserProfilePage = () => {
         {/* Educational details */}
         <UserEducation />
         {/* Career details */}
-        <UserCareer />
+        {/* <UserCareer /> */}
       </Container>
       <Footer />
     </div>

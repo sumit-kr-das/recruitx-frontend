@@ -104,7 +104,7 @@ const App = () => {
           }
         />
         <Route
-          path="/jobDetails"
+          path="/jobDetails/:jobId"
           element={
             <Suspense fallback={<Loader />}>
               <JobDetailsPage />
