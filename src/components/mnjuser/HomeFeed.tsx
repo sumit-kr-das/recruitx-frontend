@@ -34,7 +34,7 @@ const HomeFeed = () => {
 			{/* job recomandation section */}
 			<div className="bg-white border rounded-lg mt-4 shadow-md">
 				<div className="flex justify-between p-6">
-					<p className="font-bold">6 Recommended jobs</p>
+					<p className="font-bold">12 Recommended jobs</p>
 					<Link to="/" className="text-blue-600 font-semibold">
 						View all
 					</Link>
