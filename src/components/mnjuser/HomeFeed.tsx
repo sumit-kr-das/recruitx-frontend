@@ -50,7 +50,7 @@ const HomeFeed = () => {
 						<img src={RocketImg} width={40} height={40} alt="rocket_default" />
 						<div>
 							<p className="font-bold">
-								75 Early access roles from top companies
+								45 Early access roles from top companies
 							</p>
 							<p className="text-xs">
 								See what recruiters are searching for, even before they post a

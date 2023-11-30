@@ -7,7 +7,7 @@ import LocationSVG from "../../assets/icons/locIcon.svg";
 import RightArrowSVG from "../../assets/icons/right-arrow-crsl.svg";
 import { useGetJobRecomandationQuery } from "../../features/user/get/getJobRecomendationApiSlice";
 
-const coundDay = (dateString: string) => {
+export const coundDay = (dateString: string) => {
   const date = new Date(dateString);
 
   // Calculate the difference in milliseconds
@@ -30,14 +30,11 @@ const coundDay = (dateString: string) => {
 
 const JobSlider = () => {
   const swiperRef = React.useRef<any>(null);
-  const { data, isSuccess } = useGetJobRecomandationQuery({
-    hasInfo: "",
+  const { data } = useGetJobRecomandationQuery({
+    hasInfo: true,
     limit: "",
   });
 
-  if (isSuccess) {
-    console.log(data);
-  }
   return (
     <div className="relative">
       <div
@@ -80,7 +77,9 @@ const JobSlider = () => {
                 {job?.title}
               </p>
               <div className="flex items-center justify-between my-1">
-                <p className="text-xs">Company Name</p>
+                <p className="text-xs truncate">
+                  {job?.companyId?.companyName}
+                </p>
                 <div className="flex items-center gap-1">
                   <img src={StarSVG} width={10} alt="star" />
                   <p className="text-xs">4.2</p>
