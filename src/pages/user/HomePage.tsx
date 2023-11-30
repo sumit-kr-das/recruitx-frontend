@@ -1,34 +1,25 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import ArrowImg from "../../assets/categories/arrow.svg";
 import Footer from "../../components/footer/Footer";
 import CompanySlider from "../../components/mnjuser/CompanySlider";
 import JobSlider from "../../components/mnjuser/JobSlider";
+import Search from "../../components/mnjuser/userHome/search/Search";
 import TopHeader from "../../components/navigation/TopHeader";
 import Visitors from "../../components/visitors/Visitors";
 import catagoriesData from "../../constants/categoriesData";
 import { useViewAllCompaniesQuery } from "../../features/company/get/viewAllCompanies";
-import { useGetJobRecomandationQuery } from "../../features/user/get/getJobRecomendationApiSlice";
+import { useGetAllJobsQuery } from "../../features/user/get/getAllJobsApiSlice";
 import Container from "../../layout/Container";
 
 const HomePage = () => {
-  const navigate = useNavigate();
-  const [skill, setSkill] = useState("");
-  const [exprience, setExprience] = useState(0);
-  const [location, setLocation] = useState("");
-
   const { data: companyData } = useViewAllCompaniesQuery();
 
-  const { data: jobData } = useGetJobRecomandationQuery({
-    hasInfo: false,
+  const { data: jobData } = useGetAllJobsQuery({
     limit: 20,
   });
 
-  const search = () => {
-    navigate(
-      `mnjuser/jobs?skills=${skill}&exprience=${exprience}&location=${location}`
-    );
-  };
+  console.log(",,,,",jobData);
+  
+
   return (
     <>
       {/* Header */}
@@ -39,51 +30,18 @@ const HomePage = () => {
         {/* title */}
         <div className="mx-auto max-w-3xl text-center mb-10">
           <h1 className="bg-gradient-to-r from-green-300 via-blue-500 to-purple-600 bg-clip-text text-3xl font-extrabold text-transparent sm:text-5xl">
-          Connecting talents to career
+            Connecting talents to career
             <span className="sm:block"> opportunities seamlessly </span>
           </h1>
-
           <p className="mx-auto mt-4 max-w-xl sm:text-xl/relaxed">
             Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nesciunt
             illo tenetur fuga ducimus numquam ea!
           </p>
         </div>
+
         {/* search */}
-        <div className="flex items-center justify-center">
-          <div className="bg-white flex items-center justify-center border-2 rounded-xl shadow-md px-4 py-5">
-            <div className="flex items-center justify-center ">
-              <input
-                type="text"
-                placeholder="Enter skills / designations / companies"
-                className="bg-transparent border-0 outline-none px-2"
-                name="skill"
-                onChange={(e) => setSkill(e.target.value)}
-              />
-              <div>|</div>
-              <input
-                type="number"
-                placeholder="Select experience"
-                className="bg-transparent border-0 outline-none px-2"
-                name="exprience"
-                onChange={(e) => setExprience(Number(e.target.value))}
-              />
-              <div>|</div>
-              <input
-                type="text"
-                placeholder="Enter location"
-                className="bg-transparent border-0 outline-none px-2"
-                name="location"
-                onChange={(e) => setLocation(e.target.value)}
-              />
-            </div>
-            <button
-              className="bg-cyan-500 text-white text-sm px-5 py-2 rounded-md hover:bg-cyan-600"
-              onClick={search}
-            >
-              Search
-            </button>
-          </div>
-        </div>
+        <Search />
+
         {/* categories */}
         <div className="mt-10 flex items-center justify-center flex-wrap gap-4">
           {catagoriesData.map((item, index) => (

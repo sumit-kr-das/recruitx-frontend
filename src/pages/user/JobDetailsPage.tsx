@@ -20,10 +20,8 @@ const JobDetailsPage = () => {
         <section className=" md:py-24 py-16">
           <div className="container mt-10">
             <div className="grid md:grid-cols-12 grid-cols-1 gap-[30px]">
-
               <JobDetailMain job={data} />
               <JobDetailSideBar job={data} />
-
             </div>
           </div>
         </section>

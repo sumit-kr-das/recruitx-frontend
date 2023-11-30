@@ -1,8 +1,7 @@
-import { useRef, useState } from "react";
+import { useRef } from "react";
 import { toast } from "react-hot-toast";
 import { useUpdateUserInfoMutation } from "../../../features/user/put/updateUserInfoDataApiSlice";
 import Modal from "../../Modal";
-import axios from "axios";
 
 const ChangeProfile = ({ profile, setProfile }) => {
   const inputRef = useRef(null);
@@ -13,16 +12,17 @@ const ChangeProfile = ({ profile, setProfile }) => {
     if (!file) {
       return;
     }
-    console.log(file);
-    
+
     const formData = new FormData();
     formData.append("photo", file);
     try {
       await updateUserInfo(formData).unwrap();
       toast.success("Photo uploaded successfully!");
+      setProfile(false);
     } catch (error) {
       console.error(error);
       toast.error("Failed to upload photo");
+      setProfile(false);
     }
   };
 
