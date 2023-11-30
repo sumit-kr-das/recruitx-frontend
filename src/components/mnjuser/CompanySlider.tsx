@@ -2,11 +2,16 @@ import React from "react";
 import { Link } from "react-router-dom";
 import "swiper/css";
 import { Swiper, SwiperSlide } from "swiper/react";
-import DefaultCompanyImg from '../../assets/default-company-logo.png';
+import DefaultCompanyImg from "../../assets/default-company-logo.png";
 import RightArrowSVG from "../../assets/icons/right-arrow-crsl.svg";
 import StarSVG from "../../assets/icons/star.svg";
 
-const CompanySlider = ({ data }) => {
+type props = {
+  slidesPerview?: number;
+  data: {};
+};
+
+const CompanySlider = ({ slidesPerview, data }:props) => {
   const swiperRef = React.useRef<any>(null);
   return (
     <div className="relative">
@@ -29,12 +34,12 @@ const CompanySlider = ({ data }) => {
       </div>
       <Swiper
         spaceBetween={5}
-        slidesPerView={3}
+        slidesPerView={slidesPerview}
         onSwiper={(swiper) => {
           swiperRef.current = swiper;
         }}
       >
-        {data.map((item, index) => (
+        {data?.map((item, index) => (
           <SwiperSlide key={index} className="mb-6">
             <div className="bg-white w-52 h-44 p-4 ml-6 flex items-center flex-col justify-center text-center border rounded-lg transition ease-in delay-75 cursor-pointer hover:shadow-lg">
               <img

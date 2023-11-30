@@ -1,10 +1,15 @@
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import ArrowImg from "../../assets/categories/arrow.svg";
 import Footer from "../../components/footer/Footer";
+import CompanySlider from "../../components/mnjuser/CompanySlider";
+import JobSlider from "../../components/mnjuser/JobSlider";
 import TopHeader from "../../components/navigation/TopHeader";
 import Visitors from "../../components/visitors/Visitors";
 import catagoriesData from "../../constants/categoriesData";
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useViewAllCompaniesQuery } from "../../features/company/get/viewAllCompanies";
+import { useGetJobRecomandationQuery } from "../../features/user/get/getJobRecomendationApiSlice";
+import Container from "../../layout/Container";
 
 const HomePage = () => {
   const navigate = useNavigate();
@@ -12,24 +17,36 @@ const HomePage = () => {
   const [exprience, setExprience] = useState(0);
   const [location, setLocation] = useState("");
 
+  const { data: companyData } = useViewAllCompaniesQuery();
+
+  const { data: jobData } = useGetJobRecomandationQuery({
+    hasInfo: false,
+    limit: 20,
+  });
+
   const search = () => {
     navigate(
       `/jobs?skills=${skill}&exprience=${exprience}&location=${location}`
     );
   };
   return (
-    <div className="bg-green-50">
+    <>
       {/* Header */}
       <TopHeader />
 
       {/* Search */}
-      <div className="max-w-screen-xl mx-auto pb-40">
+      <Container className="pt-40">
         {/* title */}
-        <div className="flex items-center justify-center flex-col pt-40 pb-10">
-          <h1 className="text-5xl font-semibold">
-            Your job search starts here
+        <div className="mx-auto max-w-3xl text-center mb-10">
+          <h1 className="bg-gradient-to-r from-green-300 via-blue-500 to-purple-600 bg-clip-text text-3xl font-extrabold text-transparent sm:text-5xl">
+          Connecting talents to career
+            <span className="sm:block"> opportunities seamlessly </span>
           </h1>
-          <p className="mt-2 text-xl">Find the role that's right for you.</p>
+
+          <p className="mx-auto mt-4 max-w-xl sm:text-xl/relaxed">
+            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nesciunt
+            illo tenetur fuga ducimus numquam ea!
+          </p>
         </div>
         {/* search */}
         <div className="flex items-center justify-center">
@@ -82,16 +99,45 @@ const HomePage = () => {
             </div>
           ))}
         </div>
-      </div>
+      </Container>
 
-      {/* Jobs */}
+      <Container>
+        {/* Jobs */}
+        <div>
+          <div className="mx-auto max-w-xl text-center mb-10">
+            <h1 className="text-2xl font-extrabold">
+              Top companies hiring now
+            </h1>
+
+            <p className="mt-4 sm:text-xl/relaxed">
+              Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nesciunt
+              illo tenetur fuga ducimus numquam ea!
+            </p>
+          </div>
+          <JobSlider slidesPerview={5} data={jobData} />
+        </div>
+        {/* Companies */}
+        <div className="mt-20">
+          <div className="mx-auto max-w-xl text-center mb-10">
+            <h1 className="text-2xl font-extrabold">
+              Featured companies actively hiring
+            </h1>
+
+            <p className="mt-4 sm:text-xl/relaxed">
+              Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nesciunt
+              illo tenetur fuga ducimus numquam ea!
+            </p>
+          </div>
+          <CompanySlider slidesPerview={5} data={companyData} />
+        </div>
+      </Container>
 
       {/* Visitors */}
       <Visitors />
 
       {/* Footer */}
       <Footer />
-    </div>
+    </>
   );
 };
 

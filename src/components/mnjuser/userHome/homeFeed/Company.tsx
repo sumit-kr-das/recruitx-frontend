@@ -5,10 +5,8 @@ import { useViewAllCompaniesQuery } from "../../../../features/company/get/viewA
 
 const Company = () => {
   const { data, isLoading } = useViewAllCompaniesQuery();
-  console.log(data);
-  
 
-  const company =  (
+  const company = (
     <div className="bg-white border rounded-lg mt-4 shadow-md">
       <div className="flex justify-between p-6">
         <div>
@@ -20,7 +18,7 @@ const Company = () => {
         </Link>
       </div>
       <div className="w-[750px]">
-        <CompanySlider data={data} />
+        <CompanySlider slidesPerview={3} data={data} />
       </div>
     </div>
   );

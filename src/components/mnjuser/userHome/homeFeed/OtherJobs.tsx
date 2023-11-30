@@ -5,7 +5,7 @@ import { useGetJobRecomandationQuery } from "../../../../features/user/get/getJo
 import { Loader } from "lucide-react";
 
 const OtherJobs = () => {
-  const { data, isLoading } = useGetJobRecomandationQuery({
+  const { data, isLoading, isSuccess } = useGetJobRecomandationQuery({
     hasInfo: false,
     limit: 20,
   });
@@ -16,7 +16,7 @@ const OtherJobs = () => {
           <img src={RocketImg} width={40} height={40} alt="rocket_default" />
           <div>
             <p className="font-bold">
-              45 Early access roles from top companies
+              {isSuccess && data?.length} Early access roles from top companies
             </p>
             <p className="text-xs">
               See what recruiters are searching for, even before they post a job

@@ -19,7 +19,7 @@ const RecommendedJobs = () => {
         </Link>
       </div>
       <div className="w-[750px]">
-        <JobSlider data={data} />
+        <JobSlider slidesPerview={3.5} data={data} />
       </div>
     </div>
   );

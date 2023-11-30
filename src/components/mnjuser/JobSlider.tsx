@@ -7,8 +7,9 @@ import RightArrowSVG from "../../assets/icons/right-arrow-crsl.svg";
 import StarSVG from "../../assets/icons/star.svg";
 import countDays from "../../customFunctions/countDays";
 
-const JobSlider = ({ data }) => {
+const JobSlider = ({ slidesPerview, data }) => {
   const swiperRef = React.useRef<any>(null);
+  console.log(data);
   return (
     <div className="relative">
       <div
@@ -30,7 +31,7 @@ const JobSlider = ({ data }) => {
       </div>
       <Swiper
         spaceBetween={5}
-        slidesPerView={3.5}
+        slidesPerView={slidesPerview}
         onSwiper={(swiper) => {
           swiperRef.current = swiper;
         }}
