@@ -2,8 +2,16 @@ import TitleBar from "../../components/recruit/titleBar/TitleBar";
 import Container from "../../layout/Container";
 import { CheckCheck, Trash2, RotateCw, ArrowDownToLine } from "lucide-react";
 import DefaultUser from "../../assets/user-default-profile.png";
+import { useState } from "react";
 
 const ApplicantsJobs = () => {
+	const [title, setTitle] = useState();
+
+	const viewApplicants = (e) => {
+		setTitle(e.target.value);
+		console.log(title);
+	}
+
 	return (
 		<Container>
 			<TitleBar
@@ -25,6 +33,7 @@ const ApplicantsJobs = () => {
 								name="country"
 								autoComplete="country-name"
 								className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6"
+								onChange={viewApplicants}
 							>
 								<option>Select role</option>
 								<option>Software Developer (120)</option>

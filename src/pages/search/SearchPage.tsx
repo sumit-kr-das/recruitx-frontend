@@ -65,7 +65,13 @@ const SearchPage = () => {
         <section className="mt-32 w-full">
           <div className="flex items-center flex-col justify-center text-center">
             <h1 className="text-2xl font-bold">
-              {jobs?.length} Jobs based on Your Desired Search
+              {
+                jobs.length > 0 ? (<>
+                  {jobs?.length} Jobs based on Your Desired Search
+                </>) : (<>
+                  No Jobs Found
+                </>)
+              }
             </h1>
             <p className="mt-2">
               Exclusive opportunities based on what recruiters are searching for,
