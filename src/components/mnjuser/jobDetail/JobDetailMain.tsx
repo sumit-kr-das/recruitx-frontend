@@ -1,9 +1,24 @@
 import React from 'react'
 import DefaultJob from "../../../assets/default-company-logo.png"
-
+import { useSetUserApplyMutation } from '../../../features/user/post/setUserApplyAPiSlice'
+import toast from 'react-hot-toast'
+import { useSelector } from 'react-redux'
+import { selectCurrentRole } from '../../../features/auth/authSlice'
+import { Link } from 'react-router-dom'
 const JobDetailMain = ({ job }) => {
+    const [setApply] = useSetUserApplyMutation();
+    const user = useSelector(selectCurrentRole);
+    console.log(user);
 
-    const applyForJob = () => {
+    const applyForJob = async () => {
+        try {
+            const jobId = job?._id;
+            await setApply(jobId).unwrap();
+            toast.success("Your application has been submited");
+        } catch (error) {
+            toast.error(error?.data?.msg);
+            console.log("Error on company login", error);
+        }
         console.log("apply")
     }
 
@@ -40,9 +55,17 @@ const JobDetailMain = ({ job }) => {
             </p>
 
             <div className="mt-5">
-                <button className="bg-cyan-500 text-white text-sm px-5 py-2 rounded-md hover:bg-cyan-600" onClick={applyForJob}>
-                    Apply
-                </button>
+                {
+                    user && user == "user" ? (
+                        <button className="bg-cyan-500 text-white text-sm px-5 py-2 rounded-md hover:bg-cyan-600" onClick={applyForJob}>
+                            Apply
+                        </button>
+                    ) : (
+                        <Link to="/mnjuser/login" className="bg-cyan-500 text-white text-sm px-5 py-2 rounded-md hover:bg-cyan-600">
+                            Login to Apply
+                        </Link>
+                    )
+                }
             </div>
         </div>
     )
