@@ -1,17 +1,17 @@
 export const recruiterMenu = [
 	{
 		title: "Company Dashboard",
-		src: "/recruit",
+		src: "/dashboard",
 		shortHand: "⌘+D",
 	},
 	{
 		title: "View Jobs",
-		src: "/recruit/my_jobs",
+		src: "/dashboard/my_jobs",
 		shortHand: "⌘+V",
 	},
 	{
 		title: "Post Job",
-		src: "/recruit/submit_jobs",
+		src: "/dashboard/submit_jobs",
 		shortHand: "⌘+P",
 	},
 ];

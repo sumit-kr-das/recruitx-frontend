@@ -22,7 +22,7 @@ const CompanyDashboard = () => {
 						<Briefcase className="text-green-500" />
 					</div>
 					<div>
-						<h1 className="text-3xl font-bold text-right">760</h1>
+						<h1 className="text-3xl font-bold text-right">76</h1>
 						<p className="mt-2 text-slate-500">Posted jobs</p>
 					</div>
 				</div>
@@ -31,7 +31,7 @@ const CompanyDashboard = () => {
 						<Bookmark className="text-yellow-500" />
 					</div>
 					<div>
-						<h1 className="text-3xl font-bold text-right">1760</h1>
+						<h1 className="text-3xl font-bold text-right">22</h1>
 						<p className="mt-2 text-slate-500">Saved Candidates</p>
 					</div>
 				</div>
@@ -40,7 +40,7 @@ const CompanyDashboard = () => {
 						<UserCog className="text-red-500" />
 					</div>
 					<div>
-						<h1 className="text-3xl font-bold text-right">652</h1>
+						<h1 className="text-3xl font-bold text-right">42</h1>
 						<p className="mt-2 text-slate-500">Applicants</p>
 					</div>
 				</div>

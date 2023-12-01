@@ -1,36 +1,19 @@
-import TitleBar from "../../components/recruit/titleBar/TitleBar";
-import Container from "../../layout/Container";
-import { CheckCheck, Trash2, RotateCw, ArrowDownToLine } from "lucide-react";
 import DefaultUser from "../../assets/default-company-logo.png";
+import TitleBar from "../../components/recruit/titleBar/TitleBar";
 import { useViewAllCompanyQuery } from "../../features/admin/get/viewAllCompanyApiSlice";
-import { useUpdateCompanyMutation } from "../../features/company/put/updateCompanyApiSlice";
-import { toast } from "react-hot-toast";
-import { TApiError } from "../../@types/TApiError";
-import {  useNavigate } from "react-router-dom";
+import Container from "../../layout/Container";
 
-const ManageCompanies = () => {
-  const navigate = useNavigate();
+const ApprovedCompanies = () => {
   const { data } = useViewAllCompanyQuery({
-    approve: false,
+    approve: true,
   });
 
-  const [updateCompany] = useUpdateCompanyMutation();
-  const handleApprove = async (id) => {
-    try {
-      await updateCompany(id).unwrap();
-      toast.success("Update successfull");
-      navigate("/dashboard/admin/approved_companies");
-    } catch (err) {
-      const apiError = err as TApiError;
-      toast.error(apiError.data.message);
-    }
-  };
 
   return (
     <Container>
       <TitleBar
-        title="All Companies"
-        path="Admin / Dashboard / All Companiess"
+        title="Approved Companies"
+        path="Admin / Dashboard / Approved Companies"
       />
       <div>
         <div className="flex justify-between gap-x-5">
@@ -89,12 +72,9 @@ const ManageCompanies = () => {
                 </div>
               </div>
               <div className="flex items-center gap-x-5">
-                <span
-                  onClick={() => handleApprove(company?._id)}
-                  className="bg-teal-100 px-3 py-2 rounded-lg cursor-pointer"
-                >
+                {/* <span className="bg-teal-100 px-3 py-2 rounded-lg cursor-pointer">
                   <CheckCheck className="w-[20px] text-teal-600" />
-                </span>
+                </span> */}
                 {/* <span className="bg-blue-100 px-3 py-2 rounded-lg cursor-pointer">
                   <RotateCw className="w-[20px] text-blue-600" />
                 </span>
@@ -113,4 +93,4 @@ const ManageCompanies = () => {
   );
 };
 
-export default ManageCompanies;
+export default ApprovedCompanies;
