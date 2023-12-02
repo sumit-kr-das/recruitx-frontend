@@ -17,8 +17,8 @@ const HomePage = () => {
     limit: 20,
   });
 
-  console.log(",,,,",jobData);
-  
+  console.log(",,,,", jobData);
+
 
   return (
     <>
@@ -34,8 +34,7 @@ const HomePage = () => {
             <span className="sm:block"> opportunities seamlessly </span>
           </h1>
           <p className="mx-auto mt-4 max-w-xl sm:text-xl/relaxed">
-            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nesciunt
-            illo tenetur fuga ducimus numquam ea!
+            Recruitx connects skilled candidates with the suitable recruiters from different companies. Explore the jobs for you.
           </p>
         </div>
 
@@ -68,8 +67,7 @@ const HomePage = () => {
             </h1>
 
             <p className="mt-4 sm:text-xl/relaxed">
-              Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nesciunt
-              illo tenetur fuga ducimus numquam ea!
+              Some recent comapnies are finding candidates for their urgent roles here.
             </p>
           </div>
           <JobSlider slidesPerview={5} data={jobData} />
@@ -82,8 +80,7 @@ const HomePage = () => {
             </h1>
 
             <p className="mt-4 sm:text-xl/relaxed">
-              Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nesciunt
-              illo tenetur fuga ducimus numquam ea!
+              Popular companies are hiring actively the skilled and suitable candidates on recruitx.
             </p>
           </div>
           <CompanySlider slidesPerview={5} data={companyData} />

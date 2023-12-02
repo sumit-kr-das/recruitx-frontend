@@ -1,4 +1,7 @@
+import { useGetWebStatsQuery } from "../../features/statics/getWebStatsApiSlice";
+
 const Visitors = () => {
+  const { data } = useGetWebStatsQuery();
   return (
     <section>
       <div className="mx-auto max-w-screen-xl px-4 py-12 sm:px-6 md:py-16 lg:px-8">
@@ -8,9 +11,7 @@ const Visitors = () => {
           </h2>
 
           <p className="mt-4 text-gray-500 sm:text-xl">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Ratione
-            dolores laborum labore provident impedit esse recusandae facere
-            libero harum sequi.
+            Recruitx has a greate achivement of stats and proudly show it how we are chaning the hiring industry.
           </p>
         </div>
 
@@ -18,31 +19,31 @@ const Visitors = () => {
           <dl className="grid grid-cols-1 gap-4 sm:grid-cols-3">
             <div className="flex flex-col rounded-lg bg-blue-100 px-4 py-8 text-center">
               <dt className="order-last text-lg font-medium text-gray-500">
-                Total Visitors
+                Total Companies
               </dt>
 
               <dd className="text-4xl font-extrabold text-blue-600 md:text-5xl">
-                1200
+                {data?.companies}
               </dd>
             </div>
 
             <div className="flex flex-col rounded-lg bg-blue-100 px-4 py-8 text-center">
               <dt className="order-last text-lg font-medium text-gray-500">
-                Weekly Visitors
+                Total Jobs
               </dt>
 
               <dd className="text-4xl font-extrabold text-blue-600 md:text-5xl">
-                24
+                {data?.jobs}
               </dd>
             </div>
 
             <div className="flex flex-col rounded-lg bg-blue-100 px-4 py-8 text-center">
               <dt className="order-last text-lg font-medium text-gray-500">
-                Daily Visitors
+                Total Users
               </dt>
 
               <dd className="text-4xl font-extrabold text-blue-600 md:text-5xl">
-                10
+                {data?.users}
               </dd>
             </div>
           </dl>
