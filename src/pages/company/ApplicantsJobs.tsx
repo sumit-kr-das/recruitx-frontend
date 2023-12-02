@@ -3,22 +3,25 @@ import Container from "../../layout/Container";
 import { CheckCheck, Trash2, RotateCw, ArrowDownToLine } from "lucide-react";
 import DefaultUser from "../../assets/user-default-profile.png";
 import { useState } from "react";
-// import { useApproveApplyMutation } from "../../features/company/put/approveApplyApiSlice";
+import { useApproveApplyMutation } from "../../features/company/put/approveApplyApiSlice";
 
 import { useViewJobsQuery } from "../../features/company/get/viewJobsApiSlice";
 import { useViewApplicantQuery } from "../../features/company/get/viewApplicantApiSlice";
 import toast from "react-hot-toast";
+import { useViewApplicantStatsQuery } from "../../features/company/get/viewApplicantStats";
+
 // import { skipToken } from "@reduxjs/toolkit/query";
 
 const ApplicantsJobs = () => {
 	const [title, setTitle] = useState();
-	const [applicants, setApplicants] = useState();
-	// const [approveApplication] = useApproveApplyMutation();
+	const [approveApplication] = useApproveApplyMutation();
 
 	const { data, isSuccess } = useViewJobsQuery();
 	const [skip, setSkip] = useState(true)
 	// const [myState, setState] = useState(skipToken) // initialize with skipToken to skip at first
 	const { data: result } = useViewApplicantQuery(title, { skip })
+	const { data: stats } = useViewApplicantStatsQuery(title, { skip });
+
 
 
 	// if (title) {
@@ -29,19 +32,18 @@ const ApplicantsJobs = () => {
 
 	const viewApplicants = (e) => {
 		setTitle(e.target.value);
-		console.log(title);
 		setSkip(false);
-		console.log(result, "data");
 	}
 
-	// const approve = async (id) => {
-	// 	try {
-	// 		await approveApplication(id).unwrap;
-	// 		toast.success('Application Shortlisted')
-	// 	} catch (error) {
-	// 		console.log(error);
-	// 	}
-	// }
+	const approve = async (id: string) => {
+		try {
+			console.log(id);
+			await approveApplication(id).unwrap();
+			toast.success('Application Shortlisted')
+		} catch (error) {
+			console.log(error);
+		}
+	}
 
 
 
@@ -81,9 +83,9 @@ const ApplicantsJobs = () => {
 						</div>
 					</div>
 					<div className="flex items-center gap-x-5">
-						<button onClick={viewApplicants}>All: 122</button>
-						<button>Approved: 24</button>
-						<button>Rejected: 57</button>
+						<button>All: {stats?.all}</button>
+						<button>Approved: {stats?.approved}</button>
+						<button>Rejected: {stats?.rejected}</button>
 					</div>
 				</div>
 				<div>
@@ -113,7 +115,7 @@ const ApplicantsJobs = () => {
 							</div>
 							<div className="flex items-center gap-x-5">
 								<span className="bg-teal-100 px-3 py-2 rounded-lg cursor-pointer">
-									<CheckCheck className="w-[20px] text-teal-600" />
+									<CheckCheck className="w-[20px] text-teal-600" onClick={() => approve(item?._id)} />
 								</span>
 								<span className="bg-blue-100 px-3 py-2 rounded-lg cursor-pointer">
 									<RotateCw className="w-[20px] text-blue-600" />
