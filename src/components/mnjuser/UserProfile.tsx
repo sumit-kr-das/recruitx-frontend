@@ -77,6 +77,15 @@ const UserProfile = () => {
           </li>
           <li>
             <Link
+              to="/mnjuser/appliedJobs"
+              className="flex gap-1 py-2 px-4 rounded-lg hover:bg-green-100"
+            >
+              <img src={JobsSVG} width={20} alt="nav_logo" />
+              <p>Applied Jobs</p>
+            </Link>
+          </li>
+          <li>
+            <Link
               to="/mnjuser/companies"
               className="flex gap-1 py-2 px-4 rounded-lg hover:bg-green-100"
             >

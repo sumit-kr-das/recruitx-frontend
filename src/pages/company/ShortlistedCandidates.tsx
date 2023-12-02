@@ -1,9 +1,24 @@
 import TitleBar from "../../components/recruit/titleBar/TitleBar";
 import Container from "../../layout/Container";
-import { CheckCheck, Trash2, RotateCw, ArrowDownToLine } from "lucide-react";
 import DefaultUser from "../../assets/user-default-profile.png";
+import { useViewShortlistedApplicantsQuery } from "../../features/company/get/viewShortlistedApplicant";
+import { useViewJobsQuery } from "../../features/company/get/viewJobsApiSlice";
+import { useViewApplicantStatsQuery } from "../../features/company/get/viewApplicantStats";
+
+import { useState } from "react";
 
 const ShortlistedCandidates = () => {
+	const [title, setTitle] = useState();
+	const [skip, setSkip] = useState(true)
+	const { data } = useViewJobsQuery();
+	const { data: result } = useViewShortlistedApplicantsQuery(title, { skip })
+	const { data: stats } = useViewApplicantStatsQuery(title, { skip });
+
+	const viewApplicants = (e) => {
+		setTitle(e.target.value);
+		setSkip(false);
+	}
+
 	return (
 		<Container>
 			<TitleBar
@@ -25,21 +40,25 @@ const ShortlistedCandidates = () => {
 								name="country"
 								autoComplete="country-name"
 								className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6"
+								onChange={viewApplicants}
 							>
 								<option>Select role</option>
-								<option>Software Developer (120)</option>
-								<option>Software Tester (50)</option>
+								{
+									data?.map((item, index) => (
+										<option value={item?._id} key={index}>{item?.title}</option>
+									))
+								}
 							</select>
 						</div>
 					</div>
 					<div className="flex items-center gap-x-5">
-						<button>All: 122</button>
-						<button>Approved: 24</button>
-						<button>Rejected: 57</button>
+						<button>All: {stats?.all}</button>
+						<button>Approved: {stats?.approved}</button>
+						<button>Rejected: {stats?.rejected}</button>
 					</div>
 				</div>
 				<div>
-					{[...Array(5)].map((_, index) => (
+					{result && result.map((item, index) => (
 						<div
 							key={index}
 							className="flex items-center justify-between p-4 mt-5 rounded-lg border bg-white gap-2"
@@ -53,33 +72,15 @@ const ShortlistedCandidates = () => {
 								<div>
 									<div>
 										<h2 className="font-bold text-slate-600 text-lg">
-											Kr. Dhananjay Preet
+											{item?.userId?.name}
 										</h2>
 									</div>
-									<div className="flex items-center">
-										<p className="mt-2 text-sm text-slate-600">
-											Sr. Web Designer .
-										</p>
-										<p className="mt-2 text-sm text-slate-600">Kalkata .</p>
-										<p className="mt-2 text-sm text-slate-600">
-											Applied: 10 March 2022
-										</p>
+									<div className="flex items-center gap-3">
+										<p className="mt-2 text-sm text-slate-600">{item?.userId?.email}</p>
+										<p className="mt-2 text-sm text-slate-600">{item?.userId?.phoneNo}</p>
+										<p className="mt-2 text-sm text-slate-600">Applied: 10 March 2022</p>
 									</div>
 								</div>
-							</div>
-							<div className="flex items-center gap-x-5">
-								<span className="bg-teal-100 px-3 py-2 rounded-lg cursor-pointer">
-									<CheckCheck className="w-[20px] text-teal-600" />
-								</span>
-								<span className="bg-blue-100 px-3 py-2 rounded-lg cursor-pointer">
-									<RotateCw className="w-[20px] text-blue-600" />
-								</span>
-								<span className="bg-orange-100 px-3 py-2 rounded-lg cursor-pointer">
-									<ArrowDownToLine className="w-[20px] text-orange-600" />
-								</span>
-								<span className="bg-red-100 px-3 py-2 rounded-lg cursor-pointer">
-									<Trash2 className="w-[20px] text-red-600" />
-								</span>
 							</div>
 						</div>
 					))}

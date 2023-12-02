@@ -2,8 +2,51 @@ import TitleBar from "../../components/recruit/titleBar/TitleBar";
 import Container from "../../layout/Container";
 import { CheckCheck, Trash2, RotateCw, ArrowDownToLine } from "lucide-react";
 import DefaultUser from "../../assets/user-default-profile.png";
+import { useState } from "react";
+import { useApproveApplyMutation } from "../../features/company/put/approveApplyApiSlice";
+
+import { useViewJobsQuery } from "../../features/company/get/viewJobsApiSlice";
+import { useViewApplicantQuery } from "../../features/company/get/viewApplicantApiSlice";
+import toast from "react-hot-toast";
+import { useViewApplicantStatsQuery } from "../../features/company/get/viewApplicantStats";
+
+// import { skipToken } from "@reduxjs/toolkit/query";
 
 const ApplicantsJobs = () => {
+	const [title, setTitle] = useState();
+	const [approveApplication] = useApproveApplyMutation();
+
+	const { data, isSuccess } = useViewJobsQuery();
+	const [skip, setSkip] = useState(true)
+	// const [myState, setState] = useState(skipToken) // initialize with skipToken to skip at first
+	const { data: result } = useViewApplicantQuery(title, { skip })
+	const { data: stats } = useViewApplicantStatsQuery(title, { skip });
+
+
+
+	// if (title) {
+	// 	setSkip(false);
+	// 	console.log(result, "data");
+
+	// }
+
+	const viewApplicants = (e) => {
+		setTitle(e.target.value);
+		setSkip(false);
+	}
+
+	const approve = async (id: string) => {
+		try {
+			console.log(id);
+			await approveApplication(id).unwrap();
+			toast.success('Application Shortlisted')
+		} catch (error) {
+			console.log(error);
+		}
+	}
+
+
+
 	return (
 		<Container>
 			<TitleBar
@@ -23,23 +66,30 @@ const ApplicantsJobs = () => {
 							<select
 								id="country"
 								name="country"
+								value={title}
 								autoComplete="country-name"
 								className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6"
+								onChange={viewApplicants}
 							>
 								<option>Select role</option>
-								<option>Software Developer (120)</option>
-								<option>Software Tester (50)</option>
+								{
+									data?.map((item, index) => (
+										<option value={item?._id} key={index}>{item?.title}</option>
+									))
+								}
+								{/* <option>Software Developer (120)</option>
+								<option>Software Tester (50)</option> */}
 							</select>
 						</div>
 					</div>
 					<div className="flex items-center gap-x-5">
-						<button>All: 122</button>
-						<button>Approved: 24</button>
-						<button>Rejected: 57</button>
+						<button>All: {stats?.all}</button>
+						<button>Approved: {stats?.approved}</button>
+						<button>Rejected: {stats?.rejected}</button>
 					</div>
 				</div>
 				<div>
-					{[...Array(5)].map((_, index) => (
+					{result && result.map((item, index) => (
 						<div
 							key={index}
 							className="flex items-center justify-between p-4 mt-5 rounded-lg border bg-white gap-2"
@@ -53,19 +103,19 @@ const ApplicantsJobs = () => {
 								<div>
 									<div>
 										<h2 className="font-bold text-slate-600 text-lg">
-											Kr. Dhananjay Preet
+											{item?.userId?.name}
 										</h2>
 									</div>
-									<div className="flex items-center">
-										<p className="mt-2 text-sm text-slate-600">Sr. Web Designer .</p>
-										<p className="mt-2 text-sm text-slate-600">Kalkata .</p>
+									<div className="flex items-center gap-2">
+										<p className="mt-2 text-sm text-slate-600">{item?.userId?.email}</p>
+										<p className="mt-2 text-sm text-slate-600">{item?.userId?.phoneNo}</p>
 										<p className="mt-2 text-sm text-slate-600">Applied: 10 March 2022</p>
 									</div>
 								</div>
 							</div>
 							<div className="flex items-center gap-x-5">
 								<span className="bg-teal-100 px-3 py-2 rounded-lg cursor-pointer">
-									<CheckCheck className="w-[20px] text-teal-600" />
+									<CheckCheck className="w-[20px] text-teal-600" onClick={() => approve(item?._id)} />
 								</span>
 								<span className="bg-blue-100 px-3 py-2 rounded-lg cursor-pointer">
 									<RotateCw className="w-[20px] text-blue-600" />

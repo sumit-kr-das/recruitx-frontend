@@ -33,10 +33,11 @@ const Logout = lazy(() => import("./pages/company/Logout"));
 
 const AdminDashboard = lazy(() => import("./pages/admin/AdminDashboard"));
 const ManageCompanies = lazy(() => import("./pages/admin/ManageCompanies"));
-const ApprovedCompanies  = lazy(() => import("./pages/admin/ApprovdCompanies"));
+const ApprovedCompanies = lazy(() => import("./pages/admin/ApprovdCompanies"));
 const ManageUsers = lazy(() => import("./pages/admin/ManageUsers"));
 
 const ErrorPage = lazy(() => import("./pages/error/ErrorPage"));
+const ViewAppliedPage = lazy(() => import("./pages/mnjuser/ViewAppliedPage"));
 
 // --------------------------- route authenticator ---------------------------
 import {
@@ -109,6 +110,14 @@ const App = () => {
           element={
             <Suspense fallback={<Loader />}>
               <JobDetailsPage />
+            </Suspense>
+          }
+        />
+        <Route
+          path="/mnjuser/appliedJobs"
+          element={
+            <Suspense fallback={<Loader />}>
+              <ViewAppliedPage />
             </Suspense>
           }
         />
