@@ -45,12 +45,16 @@ const UserProfile = () => {
         </div>
         <div className="flex items-center mt-2">
           <div className="flex-1">
-            <p className="text-xs font-medium">Search appearances</p>
-            <p className="font-bold text-blue-600 mt-1">10</p>
+            <p className="text-xs font-medium">
+              Search <br /> appearances
+            </p>
+            <p className="font-bold text-blue-600 mt-1">0</p>
           </div>
           <div className="flex-1">
-            <p className="text-xs font-medium">Recruiter actions</p>
-            <p className="font-bold text-blue-600 mt-1">14</p>
+            <p className="text-xs font-medium">
+              Recruiter <br /> actions
+            </p>
+            <p className="font-bold text-blue-600 mt-1">0</p>
           </div>
         </div>
       </div>
@@ -80,7 +84,7 @@ const UserProfile = () => {
               to="/mnjuser/appliedJobs"
               className="flex gap-1 py-2 px-4 rounded-lg hover:bg-green-100"
             >
-              <img src={JobsSVG} width={20} alt="nav_logo" />
+              <img src={BlogSVG} width={20} alt="nav_logo" />
               <p>Applied Jobs</p>
             </Link>
           </li>
@@ -93,7 +97,7 @@ const UserProfile = () => {
               <p>Companies</p>
             </Link>
           </li>
-          <li>
+          {/* <li>
             <Link
               to="/mnjuser/home"
               className="flex gap-1 py-2 px-4 rounded-lg hover:bg-green-100"
@@ -101,7 +105,7 @@ const UserProfile = () => {
               <img src={BlogSVG} width={20} alt="nav_logo" />
               <p>Blogs</p>
             </Link>
-          </li>
+          </li> */}
         </ul>
       </div>
     </div>

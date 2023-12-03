@@ -13,7 +13,7 @@ const Company = () => {
           <p className="font-bold">Top companies</p>
           <p className="text-xs">Hiring for Software Development</p>
         </div>
-        <Link to="/" className="text-blue-600 font-semibold">
+        <Link to="/mnjuser/companies" className="text-blue-600 font-semibold">
           View all
         </Link>
       </div>

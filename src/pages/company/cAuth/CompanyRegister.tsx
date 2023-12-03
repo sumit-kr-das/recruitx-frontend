@@ -1,7 +1,8 @@
 import { FormEvent, useState } from "react";
-import {toast} from "react-hot-toast";
+import { toast } from "react-hot-toast";
 import { useDispatch } from "react-redux";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
+import { TApiError } from "../../../@types/TApiError";
 import { TInitialData } from "../../../@types/recruit/companyRegister";
 import RegisterImg from "../../../assets/recruit/registration.png";
 import BasicDetails from "../../../components/recruit/companyRegister/BasicDetails";
@@ -9,7 +10,6 @@ import CompanyDetails from "../../../components/recruit/companyRegister/CompanyD
 import useMultistepForm from "../../../customHooks/useMultistepForm";
 import { setCredentials } from "../../../features/auth/authSlice";
 import { useCRegisterMutation } from "../../../features/auth/company/companyRegisterApiSlice";
-import { TApiError } from "../../../@types/TApiError";
 
 const INITIAL_DATA: TInitialData = {
 	name: "",
@@ -24,7 +24,6 @@ const INITIAL_DATA: TInitialData = {
 };
 
 const CompanyRegister = () => {
-	const navigate = useNavigate();
 	const [data, setData] = useState(INITIAL_DATA);
 	const updateFields = (fields: Partial<TInitialData>) => {
 		setData((prev) => {
@@ -49,7 +48,6 @@ const CompanyRegister = () => {
 			dispatch(setCredentials(userData));
 			setData(INITIAL_DATA);
 			toast.success("Login successfull");
-			navigate("/recruit/");
 		} catch (err) {
 			const apiError = err as TApiError;
 			toast.error(apiError.data.message);
@@ -73,7 +71,7 @@ const CompanyRegister = () => {
 						<p className="text-sm text-gray-500">
 							or already registered?{" "}
 							<Link
-								to="/cLogin"
+								to="/recruit/login"
 								className="font-semibold leading-6 text-cyan-500 hover:text-cyan-600"
 							>
 								Login now

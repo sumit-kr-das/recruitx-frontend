@@ -2,11 +2,11 @@ import LoginBg from "../../../assets/bg.jpg";
 import { setCredentials } from "../../../features/auth/authSlice";
 import { useCLoginMutation } from "../../../features/auth/company/companyLoginApiSlice";
 
-import { Link, useNavigate } from "react-router-dom";
 import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 
-import { useDispatch } from "react-redux";
 import { toast } from "react-hot-toast";
+import { useDispatch } from "react-redux";
 import { useALoginMutation } from "../../../features/auth/admin/companyLoginApiSlice";
 
 type TINITIAL_USER_STATE = {
@@ -41,14 +41,12 @@ const CompanyLogin = () => {
         const userData = await aLogin(user).unwrap();
         dispatch(setCredentials(userData));
         setUser(INITIAL_USER_STATE);
-        toast.success("Admin login successfull");
-        navigate("/recruit/");
+        toast.success("Login successfull");
       } else {
         const userData = await cLogin(user).unwrap();
         dispatch(setCredentials(userData));
         setUser(INITIAL_USER_STATE);
-        toast.success("Company login successfull");
-        navigate("/recruit/");
+        toast.success("Login successfull");
       }
     } catch (err) {
       toast.error("Enter valid credentials");
@@ -215,7 +213,10 @@ const CompanyLogin = () => {
 
                 <p className="mt-4 text-sm text-gray-500 sm:mt-0">
                   Don't have an account?{" "}
-                  <Link to="/register" className="text-gray-700 underline">
+                  <Link
+                    to="/recruit/register"
+                    className="text-gray-700 underline"
+                  >
                     Register now
                   </Link>
                   .

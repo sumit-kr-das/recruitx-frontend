@@ -1,20 +1,22 @@
-import React from "react";
-import DefaultJob from "../../../assets/default-company-logo.png";
-import { useSetUserApplyMutation } from "../../../features/user/post/setUserApplyAPiSlice";
 import toast from "react-hot-toast";
 import { useSelector } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
+import DefaultJob from "../../../assets/default-company-logo.png";
 import { selectCurrentRole } from "../../../features/auth/authSlice";
-import { Link } from "react-router-dom";
+import { useSetUserApplyMutation } from "../../../features/user/post/setUserApplyAPiSlice";
+
+
 const JobDetailMain = ({ job }) => {
+  const navigate = useNavigate()
   const [setApply] = useSetUserApplyMutation();
   const user = useSelector(selectCurrentRole);
-  console.log(user);
 
   const applyForJob = async () => {
     try {
       const jobId = job?._id;
       await setApply(jobId).unwrap();
       toast.success("Your application has been submited");
+      navigate("/mnjuser/appliedJobs")
     } catch (error) {
       toast.error(error?.data?.msg);
       console.log("Error on company login", error);

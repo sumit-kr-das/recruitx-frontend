@@ -9,6 +9,8 @@ import SearchPage from "./pages/search/SearchPage";
 
 // --------------------------- pages ---------------------------
 const HomePage = lazy(() => import("./pages/user/HomePage"));
+const AllCompanies = lazy(() => import("./pages/user/AllCompanies"));
+const CompanyDetails = lazy(() => import("./pages/user/CompanyDetails"));
 
 const Login = lazy(() => import("./pages/mnjuser/auth/Login"));
 const Register = lazy(() => import("./pages/mnjuser/auth/Register"));
@@ -121,10 +123,25 @@ const App = () => {
             </Suspense>
           }
         />
-
+        <Route
+          path="/mnjuser/companies"
+          element={
+            <Suspense fallback={<Loader />}>
+              <AllCompanies />
+            </Suspense>
+          }
+        />
+        <Route
+          path="/mnjuser/company/:cimpanyId"
+          element={
+            <Suspense fallback={<Loader />}>
+              <CompanyDetails />
+            </Suspense>
+          }
+        />
         {/* dashboard */}
         <Route
-          path="/cRegister"
+          path="/recruit/register"
           element={
             <AuthenticateRoute>
               <CompanyRegister />
@@ -132,7 +149,7 @@ const App = () => {
           }
         />
         <Route
-          path="/cLogin"
+          path="/recruit/login"
           element={
             <AuthenticateRoute>
               <CompanyLogin />
@@ -249,7 +266,14 @@ const App = () => {
           />
           <Route path="/dashboard/logout" element={<Logout />} />
         </Route>
-        <Route path="/*" element={<ErrorPage />} />
+        <Route
+          path="/*"
+          element={
+            <Suspense fallback={<Loader />}>
+              <ErrorPage />
+            </Suspense>
+          }
+        />
       </Routes>
     </BrowserRouter>
   );
