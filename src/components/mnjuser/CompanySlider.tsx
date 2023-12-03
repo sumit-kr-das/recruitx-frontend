@@ -11,7 +11,7 @@ type props = {
   data: {};
 };
 
-const CompanySlider = ({ slidesPerview, data }:props) => {
+const CompanySlider = ({ slidesPerview, data }: props) => {
   const swiperRef = React.useRef<any>(null);
   return (
     <div className="relative">
@@ -41,30 +41,32 @@ const CompanySlider = ({ slidesPerview, data }:props) => {
       >
         {data?.map((item, index) => (
           <SwiperSlide key={index} className="mb-6">
-            <div className="bg-white w-52 h-44 p-4 ml-6 flex items-center flex-col justify-center text-center border rounded-lg transition ease-in delay-75 cursor-pointer hover:shadow-lg">
-              <img
-                src={DefaultCompanyImg}
-                width={40}
-                alt="company_default"
-                className="border rounded-lg"
-              />
-              <p className="font-semibold mt-2 truncate w-[80%]">
-                {item.companyName}
-              </p>
-              <div className="flex items-center justify-between my-1">
-                <div className="flex items-center gap-1">
-                  <img src={StarSVG} width={10} alt="star" />
-                  <p className="text-xs">4.5</p>
-                </div>
-                <p className="mx-1 text-xs font-semibold text-gray-300">
-                  &#124;
+            <Link to={`/mnjuser/company/${item?._id}`}>
+              <div className="bg-white w-52 h-44 p-4 ml-6 flex items-center flex-col justify-center text-center border rounded-lg transition ease-in delay-75 cursor-pointer hover:shadow-lg">
+                <img
+                  src={DefaultCompanyImg}
+                  width={40}
+                  alt="company_default"
+                  className="border rounded-lg"
+                />
+                <p className="font-semibold mt-2 truncate w-[80%]">
+                  {item.companyName}
                 </p>
-                <p className="text-xs">120 reviews</p>
+                <div className="flex items-center justify-between my-1">
+                  <div className="flex items-center gap-1">
+                    <img src={StarSVG} width={10} alt="star" />
+                    <p className="text-xs">4.5</p>
+                  </div>
+                  <p className="mx-1 text-xs font-semibold text-gray-300">
+                    &#124;
+                  </p>
+                  <p className="text-xs">120 reviews</p>
+                </div>
+                <Link to="/" className="text-blue-600 text-xs font-semibold">
+                  View all
+                </Link>
               </div>
-              <Link to="/" className="text-blue-600 text-xs font-semibold">
-                View all
-              </Link>
-            </div>
+            </Link>
           </SwiperSlide>
         ))}
       </Swiper>

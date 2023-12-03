@@ -23,6 +23,14 @@ const TopHeader = () => {
             <img className="w-32" src={MainLogo} alt="main logo" />
           </Link>
           <ul className="flex items-center gap-4">
+          <li>
+              <Link
+                to="/"
+                className="text-sm text-black relative after:absolute after:content-[''] after:h-[1.5px] after:w-0 after:-bottom-[4px] after:left-0 after:right-0  after:bg-black hover:after:w-full"
+              >
+                Home
+              </Link>
+            </li>
             <li>
               <Link
                 to="/mnjuser/jobs"
@@ -49,7 +57,7 @@ const TopHeader = () => {
               onClick={() => setSearch((prev) => !prev)}
               className="text-gray-400 flex items-center border-2 border-gray-300 bg-white h-10 px-5 pr-16 rounded-full text-sm focus:outline-none"
             >
-              Search
+              Search jobs
             </div>
             <button type="button" className="absolute right-0 top-0 mt-2 mr-4">
               <Search className="w-[15px]" />
@@ -87,7 +95,7 @@ const TopHeader = () => {
               </Link>
 
               <Link
-                to="/cLogin"
+                to="/recruit/login"
                 className="text-sm text-black relative after:absolute after:content-[''] after:h-[1.5px] after:w-0 after:-bottom-[4px] after:left-0 after:right-0  after:bg-black hover:after:w-full"
               >
                 Employers/Admin Login

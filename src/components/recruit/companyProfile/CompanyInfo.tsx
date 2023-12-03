@@ -1,12 +1,12 @@
-import React, { useEffect, useState } from "react";
-import { useViewCompanyQuery } from "../../../features/company/get/viewCompanyApiSlice";
-import { Mail, Pencil, Phone, MapPin, CheckCheck } from "lucide-react";
+import { CheckCheck, Mail, MapPin, Pencil, Phone } from "lucide-react";
+import { useEffect, useState } from "react";
+import { toast } from "react-hot-toast";
 import UserDefault from "../../../assets/default-company-logo.png";
+import { industryTypes } from "../../../constants/industryTypes";
+import { useViewCompanyQuery } from "../../../features/company/get/viewCompanyApiSlice";
+import { useUpdateCompanyMutation } from "../../../features/company/put/updateCompanyApiSlice";
 import { convertDate } from "../../../pages/company/MyJobs";
 import Modal from "../../Modal";
-import { industryTypes } from "../../../constants/industryTypes";
-import { useUpdateCompanyMutation } from "../../../features/company/put/updateCompanyApiSlice";
-import { toast } from "react-hot-toast";
 
 const INITIAL_DATA = {
   name: "",
@@ -25,10 +25,6 @@ const CompanyInfo = () => {
 
   const { data, isLoading, isSuccess } = useViewCompanyQuery();
   const [updateCompany] = useUpdateCompanyMutation();
-
-  if (isSuccess) {
-    console.log(data[0]);
-  }
 
   // set the data into edit modal
   useEffect(() => {

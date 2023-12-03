@@ -10,7 +10,7 @@ import { useSearchDataMutation } from "../../features/user/getSearchDataApiSlice
 const INITIAL_SEARCH_DATA = {
   role: [],
   salary: 0,
-}
+};
 
 const SearchPage = () => {
   const [searchParams] = useSearchParams();
@@ -24,7 +24,6 @@ const SearchPage = () => {
   const [tags, setTags] = useState([]);
   const [searchFilter, setSearchFilter] = useState(INITIAL_SEARCH_DATA);
 
-
   const handelFilterSubmit = (e) => {
     e.preventDefault();
     setSearchFilter(data);
@@ -33,20 +32,28 @@ const SearchPage = () => {
   useEffect(() => {
     const fetchSearchData = async () => {
       try {
-        const jobData = await searchData({ title, exprience, location }).unwrap();
+        const jobData = await searchData({
+          title,
+          exprience,
+          location,
+        }).unwrap();
         if (!isError) {
           console.log(jobData);
           console.log(searchFilter.role.length, "length");
           if (searchFilter.role.length > 0 || searchFilter.salary > 0) {
-            const filteredJobs = jobData.filter(job => {
+            const filteredJobs = jobData.filter((job) => {
               console.log("working");
-              const rolesMatch = searchFilter.role.every(role => job.info.skills.includes(role));
-              const salaryInRange = job.info.minSalary <= searchFilter.salary && job.info.maxSalary >= searchFilter.salary;
+              const rolesMatch = searchFilter.role.every((role) =>
+                job.info.skills.includes(role)
+              );
+              const salaryInRange =
+                job.info.minSalary <= searchFilter.salary &&
+                job.info.maxSalary >= searchFilter.salary;
               return rolesMatch || salaryInRange;
             });
             setJobs(filteredJobs);
           } else {
-            setJobs(jobData)
+            setJobs(jobData);
           }
         } else {
           console.log("no success");
@@ -54,7 +61,7 @@ const SearchPage = () => {
       } catch (err) {
         console.log("Error on company login", err);
       }
-    }
+    };
     fetchSearchData();
   }, [searchFilter]);
 
@@ -65,20 +72,22 @@ const SearchPage = () => {
         <section className="mt-32 w-full">
           <div className="flex items-center flex-col justify-center text-center">
             <h1 className="text-2xl font-bold">
-              {
-                jobs.length > 0 ? (<>
-                  {jobs?.length} Jobs based on Your Desired Search
-                </>) : (<>
-                  No Jobs Found
-                </>)
-              }
+              {jobs.length > 0 ? (
+                <>{jobs?.length} Jobs based on Your Desired Search</>
+              ) : (
+                <>No Jobs Found</>
+              )}
             </h1>
             <p className="mt-2">
-              Exclusive opportunities based on what recruiters are searching for,
+              Exclusive opportunities based on what recruiters are searching
+              for,
               <br /> even before they post a job on RecruitX
             </p>
           </div>
-          <form className="mt-10 flex justify-between" onSubmit={handelFilterSubmit}>
+          <form
+            className="mt-10 flex justify-between"
+            onSubmit={handelFilterSubmit}
+          >
             {/* left section */}
             <div className="w-7/12">
               <Job jobs={jobs} />
@@ -86,7 +95,9 @@ const SearchPage = () => {
             {/* right section */}
             <div className="w-4/12">
               <div className="bg-white p-8 border rounded-lg">
-                <h1 className="text-xl font-bold">Manage your job preferences</h1>
+                <h1 className="text-xl font-bold">
+                  Manage your job preferences
+                </h1>
                 <div className="mt-4">
                   <div className="sm:col-span-3">
                     <label
@@ -107,7 +118,6 @@ const SearchPage = () => {
                       />
                     </div>
                   </div>
-
                 </div>
                 <div className="mt-4">
                   <div className="sm:col-span-4">
@@ -147,10 +157,10 @@ const SearchPage = () => {
             </div>
           </form>
         </section>
-      </main >
+      </main>
       <Footer />
     </>
-  )
-}
+  );
+};
 
-export default SearchPage
+export default SearchPage;

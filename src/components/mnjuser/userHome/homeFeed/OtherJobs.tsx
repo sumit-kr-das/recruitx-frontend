@@ -23,7 +23,7 @@ const OtherJobs = () => {
             </p>
           </div>
         </div>
-        <Link to="/" className="text-blue-600 font-semibold">
+        <Link to="/mnjuser/jobs" className="text-blue-600 font-semibold">
           View all
         </Link>
       </div>

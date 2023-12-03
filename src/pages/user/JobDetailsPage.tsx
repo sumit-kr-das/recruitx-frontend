@@ -1,15 +1,13 @@
-// import DefaultJob from "../../assets/default-company-logo.png";
-import Footer from "../../components/footer/Footer";
-import TopHeader from "../../components/navigation/TopHeader";
-import Container from "../../layout/Container";
-import JobDetailSideBar from "../../components/mnjuser/jobDetail/JobDetailSideBar";
-import JobDetailMain from "../../components/mnjuser/jobDetail/JobDetailMain";
-import { useGetJobDetailQuery } from "../../features/user/get/getJobDetailApiSlice";
 import { useParams } from "react-router-dom";
+import Footer from "../../components/footer/Footer";
+import JobDetailMain from "../../components/mnjuser/jobDetail/JobDetailMain";
+import JobDetailSideBar from "../../components/mnjuser/jobDetail/JobDetailSideBar";
+import TopHeader from "../../components/navigation/TopHeader";
+import { useGetJobDetailQuery } from "../../features/user/get/getJobDetailApiSlice";
+import Container from "../../layout/Container";
 
 const JobDetailsPage = () => {
   const { jobId } = useParams();
-  console.log(jobId);
   const { data } = useGetJobDetailQuery({ id: jobId });
 
   return (
