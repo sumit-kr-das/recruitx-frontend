@@ -9,6 +9,7 @@ import { useViewJobsQuery } from "../../features/company/get/viewJobsApiSlice";
 import { useViewApplicantQuery } from "../../features/company/get/viewApplicantApiSlice";
 import toast from "react-hot-toast";
 import { useViewApplicantStatsQuery } from "../../features/company/get/viewApplicantStats";
+import { Link } from "react-router-dom";
 
 // import { skipToken } from "@reduxjs/toolkit/query";
 
@@ -85,7 +86,7 @@ const ApplicantsJobs = () => {
 					<div className="flex items-center gap-x-5">
 						<button>All: {stats?.all}</button>
 						<button>Approved: {stats?.approved}</button>
-						<button>Rejected: {stats?.rejected}</button>
+						<button>Pending: {stats?.rejected}</button>
 					</div>
 				</div>
 				<div>
@@ -121,7 +122,7 @@ const ApplicantsJobs = () => {
 									<RotateCw className="w-[20px] text-blue-600" />
 								</span>
 								<span className="bg-orange-100 px-3 py-2 rounded-lg cursor-pointer">
-									<ArrowDownToLine className="w-[20px] text-orange-600" />
+									<Link to={`/dashboard/cv?userId=${item?.userId?._id}`}><ArrowDownToLine className="w-[20px] text-orange-600" /></Link>
 								</span>
 								<span className="bg-red-100 px-3 py-2 rounded-lg cursor-pointer">
 									<Trash2 className="w-[20px] text-red-600" />

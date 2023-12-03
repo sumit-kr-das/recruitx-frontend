@@ -29,6 +29,7 @@ const ShortlistedCandidates = lazy(
 const CompanyProfile = lazy(() => import("./pages/company/CompanyProfile"));
 const DeleteCompany = lazy(() => import("./pages/company/DeleteCompany"));
 const ChangePassword = lazy(() => import("./pages/company/ChangePassword"));
+const ViewCvPage = lazy(() => import("./pages/company/ViewCvPage"));
 const Logout = lazy(() => import("./pages/company/Logout"));
 
 const AdminDashboard = lazy(() => import("./pages/admin/AdminDashboard"));
@@ -204,6 +205,14 @@ const App = () => {
             element={
               <CompanyRoute>
                 <ShortlistedCandidates />
+              </CompanyRoute>
+            }
+          />
+          <Route
+            path="/dashboard/cv"
+            element={
+              <CompanyRoute>
+                <ViewCvPage />
               </CompanyRoute>
             }
           />
