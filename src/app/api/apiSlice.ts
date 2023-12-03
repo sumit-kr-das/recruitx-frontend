@@ -25,6 +25,7 @@ export const apiSlice = createApi({
     "CompanyProfileDetails",
     "Admin",
     "ApproveCompany",
+    "ApproveCandidate"
   ],
   endpoints: (builder) => ({}),
 });

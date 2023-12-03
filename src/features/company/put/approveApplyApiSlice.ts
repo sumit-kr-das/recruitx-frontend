@@ -8,6 +8,7 @@ export const approveApplyApiSlice = apiSlice.injectEndpoints({
                 method: "PUT",
                 body: {},
             }),
+            invalidatesTags: ["ApproveCandidate"],
         }),
     }),
 });

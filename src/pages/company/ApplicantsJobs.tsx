@@ -1,6 +1,6 @@
 import TitleBar from "../../components/recruit/titleBar/TitleBar";
 import Container from "../../layout/Container";
-import { CheckCheck, Trash2, RotateCw, ArrowDownToLine } from "lucide-react";
+import { CheckCheck, Trash2, RotateCw, ArrowDownToLine, Eye } from "lucide-react";
 import DefaultUser from "../../assets/user-default-profile.png";
 import { useState } from "react";
 import { useApproveApplyMutation } from "../../features/company/put/approveApplyApiSlice";
@@ -10,6 +10,7 @@ import { useViewApplicantQuery } from "../../features/company/get/viewApplicantA
 import toast from "react-hot-toast";
 import { useViewApplicantStatsQuery } from "../../features/company/get/viewApplicantStats";
 import { Link } from "react-router-dom";
+import { useDeleteApplicantMutation } from "../../features/company/delete/deleteApplicantApiSlice";
 
 // import { skipToken } from "@reduxjs/toolkit/query";
 
@@ -22,6 +23,7 @@ const ApplicantsJobs = () => {
 	// const [myState, setState] = useState(skipToken) // initialize with skipToken to skip at first
 	const { data: result } = useViewApplicantQuery(title, { skip })
 	const { data: stats } = useViewApplicantStatsQuery(title, { skip });
+	const [deleteApplicant] = useDeleteApplicantMutation();
 
 
 
@@ -30,6 +32,15 @@ const ApplicantsJobs = () => {
 	// 	console.log(result, "data");
 
 	// }
+
+	const deleteApplicants = async (id, userId) => {
+		try {
+			await deleteApplicant({ id, userId }).unwrap();
+			toast.success("Applicant removed");
+		} catch (error) {
+			console.log(error);
+		}
+	}
 
 	const viewApplicants = (e) => {
 		setTitle(e.target.value);
@@ -118,14 +129,11 @@ const ApplicantsJobs = () => {
 								<span className="bg-teal-100 px-3 py-2 rounded-lg cursor-pointer">
 									<CheckCheck className="w-[20px] text-teal-600" onClick={() => approve(item?._id)} />
 								</span>
-								<span className="bg-blue-100 px-3 py-2 rounded-lg cursor-pointer">
-									<RotateCw className="w-[20px] text-blue-600" />
-								</span>
 								<span className="bg-orange-100 px-3 py-2 rounded-lg cursor-pointer">
-									<Link to={`/dashboard/cv?userId=${item?.userId?._id}`}><ArrowDownToLine className="w-[20px] text-orange-600" /></Link>
+									<Link to={`/dashboard/cv?userId=${item?.userId?._id}`}><Eye className="w-[20px] text-orange-600" /></Link>
 								</span>
 								<span className="bg-red-100 px-3 py-2 rounded-lg cursor-pointer">
-									<Trash2 className="w-[20px] text-red-600" />
+									<Trash2 className="w-[20px] text-red-600" onClick={() => deleteApplicants(item?.jobId, item?.userId?._id)} />
 								</span>
 							</div>
 						</div>
