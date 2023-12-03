@@ -51,7 +51,7 @@ const SubmitJob = () => {
       await postJob(newJobData).unwrap();
       setData(INITIAL_JOB_DATA);
       toast.success("Job posted successfully");
-      navigate("/recruit/my_jobs");
+      navigate("/dashboard/my_jobs");
     } catch (err: any) {
       toast.error(err.data.message);
       console.log("Error on company register", err);
