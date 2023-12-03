@@ -4,9 +4,10 @@ import { toast } from "react-hot-toast";
 import UserDefault from "../../../assets/default-company-logo.png";
 import { industryTypes } from "../../../constants/industryTypes";
 import { useViewCompanyQuery } from "../../../features/company/get/viewCompanyApiSlice";
-import { useUpdateCompanyMutation } from "../../../features/company/put/updateCompanyApiSlice";
+// import { useUpdateCompanyMutation } from "../../../features/company/put/updateCompanyApiSlice";
 import { convertDate } from "../../../pages/company/MyJobs";
 import Modal from "../../Modal";
+import { useApproveCompanyMutation } from "../../../features/admin/post/updateApproveCompanyApiSlice";
 
 const INITIAL_DATA = {
   name: "",
@@ -24,7 +25,7 @@ const CompanyInfo = () => {
   const [open, setOpen] = useState(false);
 
   const { data, isLoading, isSuccess } = useViewCompanyQuery();
-  const [updateCompany] = useUpdateCompanyMutation();
+  const [updateCompany] = useApproveCompanyMutation();
 
   // set the data into edit modal
   useEffect(() => {
@@ -85,9 +86,8 @@ const CompanyInfo = () => {
                   title={
                     isSuccess && data?.approve ? "Approved" : "Not approved"
                   }
-                  className={`${
-                    isSuccess && data?.approve ? "bg-green-400" : "bg-red-400"
-                  } flex items-center justify-center w-[20px] h-[20px] p-1  text-white rounded-full`}
+                  className={`${isSuccess && data?.approve ? "bg-green-400" : "bg-red-400"
+                    } flex items-center justify-center w-[20px] h-[20px] p-1  text-white rounded-full`}
                 >
                   <CheckCheck />
                 </div>
