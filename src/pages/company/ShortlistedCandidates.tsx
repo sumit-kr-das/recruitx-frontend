@@ -54,7 +54,7 @@ const ShortlistedCandidates = () => {
 					<div className="flex items-center gap-x-5">
 						<button>All: {stats?.all}</button>
 						<button>Approved: {stats?.approved}</button>
-						<button>Rejected: {stats?.rejected}</button>
+						<button>Pending: {stats?.rejected}</button>
 					</div>
 				</div>
 				<div>
