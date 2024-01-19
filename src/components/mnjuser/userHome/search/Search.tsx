@@ -18,24 +18,24 @@ const Search = () => {
         <div className="flex items-center justify-center ">
           <input
             type="text"
-            placeholder="Enter skills / designations / companies"
-            className="block w-full rounded-md border-0 py-1.5 text-gray-900 focus:ring-transparent"
+            placeholder="Enter skills/designations/companies"
+            className="block w-full rounded-md border-0 py-1.5 focus:outline-none focus:ring-transparent"
             name="skill"
             onChange={(e) => setSkill(e.target.value)}
           />
-          <div className="text-gray-400">|</div>
+          <div className="text-gray-400 mx-2">|</div>
           <input
             type="text"
-            placeholder="Select experience"
-            className="block w-full rounded-md border-0 py-1.5 text-gray-900 focus:ring-transparent"
+            placeholder="Enter experience"
+            className="block w-[70%] rounded-md border-0 py-1.5 focus:outline-none focus:ring-transparent"
             name="exprience"
             onChange={(e) => setExprience(Number(e.target.value))}
           />
-          <div className="text-gray-400">|</div>
+          <div className="text-gray-400 mx-2">|</div>
           <input
             type="text"
             placeholder="Enter location"
-            className="block w-full rounded-md border-0 py-1.5 text-gray-900 focus:ring-transparent"
+            className="block w-[50%] rounded-md border-0 py-1.5 focus:outline-none focus:ring-transparent"
             name="location"
             onChange={(e) => setLocation(e.target.value)}
           />

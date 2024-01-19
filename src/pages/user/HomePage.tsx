@@ -23,7 +23,7 @@ const HomePage = () => {
       <TopHeader />
 
       {/* Search */}
-      <Container className="pt-40">
+      <Container className="pt-32 h-screen flex flex-col items-center justify-center">
         {/* title */}
         <div className="mx-auto max-w-3xl text-center mb-10">
           <h1 className="bg-gradient-to-r from-green-300 via-blue-500 to-purple-600 bg-clip-text text-3xl font-extrabold text-transparent sm:text-5xl">
@@ -40,7 +40,7 @@ const HomePage = () => {
         <Search />
 
         {/* categories */}
-        <div className="mt-10 flex items-center justify-center flex-wrap gap-4">
+        <div className="mt-20 flex items-center justify-center flex-wrap gap-4">
           {catagoriesData.map((item, index) => (
             <div
               key={index}
@@ -48,7 +48,7 @@ const HomePage = () => {
             >
               <img src={item.logo} alt={item.title} />
               <div className="flex items-center gap-1">
-                <p className="font-semibold">{item.title}</p>
+                <h3 className="ont-medium">{item.title}</h3>
                 <img src={ArrowImg} alt="arrowimg" />
               </div>
             </div>
@@ -71,6 +71,7 @@ const HomePage = () => {
           </div>
           <JobSlider slidesPerview={5} data={jobData} />
         </div>
+        
         {/* Companies */}
         <div className="mt-20">
           <div className="mx-auto max-w-xl text-center mb-10">
