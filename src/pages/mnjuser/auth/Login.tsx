@@ -4,8 +4,10 @@ import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { TApiError } from "../../../@types/TApiError";
 import { setCredentials } from "../../../features/auth/authSlice";
-import LoginBg from '../../../assets/bg.jpg'
+import LoginBg from "../../../assets/bg.jpg";
 import { useUserLoginMutation } from "../../../features/auth/user/userLoginApiSlice";
+import TopHeader from "../../../components/navigation/TopHeader";
+import { Button } from "../../../ui/button";
 
 type TINITIAL_USER_STATE = {
   email: string;
@@ -43,146 +45,51 @@ const Login = () => {
       toast.error(apiError?.data.message);
     }
   };
+
+  const [type, setType] = useState(0);
+
   return (
-    <section className="bg-white">
-      <div className="lg:grid lg:min-h-screen lg:grid-cols-12">
-        <section className="relative flex h-32 items-end bg-gray-900 lg:col-span-5 lg:h-full xl:col-span-6">
-          <img
-            alt="Night"
-            src={LoginBg}
-            className="absolute inset-0 h-full w-full object-cover opacity-80"
-          />
-
-          <div className="hidden lg:relative lg:block lg:p-12">
-            <Link className="block text-white" to="/">
-              <span className="sr-only">Home</span>
-              <img src="/vite.svg" alt="vite" />
-            </Link>
-
-            <h2 className="mt-6 text-2xl font-bold text-white sm:text-3xl md:text-4xl">
-              Welcome to RecruitX
-            </h2>
-
-            <p className="mt-4 leading-relaxed text-white/90">
-              RecruitX help you get hired, faster: from preparing your CV,
-              getting recruiter attention, finding the right jobs, and more!
-            </p>
-          </div>
-        </section>
-
-        <main className="flex items-center justify-center px-8 py-8 sm:px-12 lg:col-span-7 lg:px-16 lg:py-12 xl:col-span-6">
-          <div className="max-w-xl lg:max-w-3xl">
-            <div className="relative -mt-16 block lg:hidden">
-              <Link
-                className="inline-flex h-16 w-16 items-center justify-center rounded-full bg-white text-blue-600 sm:h-20 sm:w-20"
-                to="/"
-              >
-                <span className="sr-only">Home</span>
-                <img src="/vite.svg" alt="vite" />
-              </Link>
-
-              <h1 className="mt-2 text-2xl font-bold text-gray-900 sm:text-3xl md:text-4xl">
-                Welcome to RecruitX
-              </h1>
-
-              <p className="text-sm mt-4 leading-relaxed text-gray-500">
-                RecruitX help you get hired, faster: from preparing your CV,
-                getting recruiter attention, finding the right jobs, and more!
-              </p>
-            </div>
-
-            <form
-              onSubmit={handleSubmit}
-              className="mt-8 grid grid-cols-6 gap-6"
+    <section>
+      {/* navigation */}
+      <TopHeader />
+      <div className="pt-40 w-full h-screen flex justify-center">
+        {/* select options */}
+        <section>
+          <h1 className="text-4xl font-extrabold text-center">
+            Login Your <br /> RecruitX Account
+          </h1>
+          <p className="text-xs mt-6">Login Type</p>
+          <div className="mt-2 w-96">
+            <div
+              onClick={() => setType(1)}
+              className={`border border-gray-200 p-2 rounded-md cursor-pointer ${
+                type === 1 && "bg-slate-200"
+              }  `}
             >
-              <div className="col-span-6 sm:col-span-3">
-                <label
-                  htmlFor="Email"
-                  className="block text-sm font-medium text-gray-700"
-                >
-                  Email
-                </label>
-
-                <input
-                  required
-                  value={user.email}
-                  onChange={handleUserValue}
-                  type="email"
-                  id="Email"
-                  name="email"
-                  className="mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm"
-                />
-              </div>
-
-              <div className="col-span-6 sm:col-span-3">
-                <label
-                  htmlFor="Password"
-                  className="block text-sm font-medium text-gray-700"
-                >
-                  Password
-                </label>
-
-                <input
-                  required
-                  value={user.password}
-                  onChange={handleUserValue}
-                  type="password"
-                  id="Password"
-                  name="password"
-                  className="mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm"
-                />
-              </div>
-
-              <div className="col-span-6">
-                <label htmlFor="MarketingAccept" className="flex gap-4">
-                  <input
-                    required
-                    type="checkbox"
-                    id="MarketingAccept"
-                    name="marketing_accept"
-                    className="h-5 w-5 rounded-md border-gray-200 bg-white shadow-sm"
-                  />
-
-                  <span className="text-sm text-gray-700">
-                    I want to receive emails about events, product updates and
-                    company announcements.
-                  </span>
-                </label>
-              </div>
-
-              <div className="col-span-6">
-                <p className="text-sm text-gray-500">
-                  By creating an account, you agree to our
-                  <a href="#" className="text-gray-700 underline">
-                    terms and conditions
-                  </a>
-                  and
-                  <a href="#" className="text-gray-700 underline">
-                    privacy policy
-                  </a>
-                  .
-                </p>
-              </div>
-
-              <div className="col-span-6 sm:flex sm:items-center sm:gap-4">
-                <button
-                  type="submit"
-                  className="inline-block shrink-0 rounded-md border border-blue-600 bg-blue-600 px-12 py-3 text-sm font-medium text-white transition hover:bg-transparent hover:text-blue-600 focus:outline-none focus:ring active:text-blue-500"
-                >
-                  {isLoading ? "Loading..." : "Log in"}
-                </button>
-
-                <p className="mt-4 text-sm text-gray-500 sm:mt-0">
-                  Don't have an account?{" "}
-                  <Link to="/mnjuser/register" className="text-gray-700 underline">
-                    Register now
-                  </Link>
-                  .
-                </p>
-              </div>
-            </form>
+              <h3 className="font-medium">User Login</h3>
+              <p className="text-xs">I'm looking for job</p>
+            </div>
+            <div
+              onClick={() => setType(2)}
+              className={`border border-gray-200 p-2 rounded-md cursor-pointer my-2 ${
+                type === 2 && "bg-slate-200"
+              }  `}
+            >
+              <h3 className="font-medium">Recruiter Login</h3>
+              <p className="text-xs">I'm looking for candidates</p>
+            </div>
+            <div
+              onClick={() => setType(3)}
+              className={`border border-gray-200 p-2 rounded-md cursor-pointer ${
+                type === 3 && "bg-slate-200"
+              }  `}
+            >
+              <h3 className="font-medium">Admin Login</h3>
+              <p className="text-xs">I'm authorized admin</p>
+            </div>
           </div>
-        </main>
+          <Button className="w-full mt-4">Continue</Button>
+        </section>
       </div>
     </section>
   );

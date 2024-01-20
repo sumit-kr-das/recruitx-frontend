@@ -67,7 +67,7 @@ const NavigationMenus=() =>{
                 Are you looking for candidates? Join RecruitX and recruit.
               </ListItem>
               <ListItem href="/docs/primitives/typography" title="Admin Login">
-                Only for authorized user.
+              Are you a authorized admin ?
               </ListItem>
             </ul>
           </NavigationMenuContent>
