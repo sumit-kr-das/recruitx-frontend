@@ -1,5 +1,5 @@
 import { Suspense, lazy } from "react";
-import { Toaster } from "react-hot-toast";
+import { Toaster } from "./ui/toaster"
 import { useSelector } from "react-redux";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { selectCurrentRole } from "./features/auth/authSlice";
@@ -56,7 +56,7 @@ const App = () => {
   const role = useSelector(selectCurrentRole);
   return (
     <BrowserRouter>
-      <Toaster position="bottom-right" reverseOrder={false} />
+      <Toaster />
       <Routes>
         {/* default */}
         <Route
