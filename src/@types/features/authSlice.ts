@@ -1,5 +1,8 @@
 export interface AuthState {
-	user: string | null;
-	role: string | null;
-	token: string | null;
+  status: string | null;
+  data: {
+    user: string | null;
+    role: string | null;
+    access_token: string | null;
+  };
 }
