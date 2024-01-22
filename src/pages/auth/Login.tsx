@@ -3,15 +3,15 @@ import { useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-import { TApiError } from "../../../@types/TApiError";
-import TopHeader from "../../../components/navigation/TopHeader";
-import { setCredentials } from "../../../features/auth/authSlice";
-import { useUserLoginMutation } from "../../../features/auth/user/userLoginApiSlice";
-import { Button } from "../../../ui/button";
-import { Input } from "../../../ui/input";
-import { useToast } from "../../../ui/use-toast";
-import { useCLoginMutation } from "../../../features/auth/company/companyLoginApiSlice";
-import { useALoginMutation } from "../../../features/auth/admin/companyLoginApiSlice";
+import { TApiError } from "../../@types/TApiError";
+import TopHeader from "../../components/navigation/TopHeader";
+import { setCredentials } from "../../features/auth/authSlice";
+import { useUserLoginMutation } from "../../features/auth/user/userLoginApiSlice";
+import { Button } from "../../ui/button";
+import { Input } from "../../ui/input";
+import { useToast } from "../../ui/use-toast";
+import { useCLoginMutation } from "../../features/auth/company/companyLoginApiSlice";
+import { useALoginMutation } from "../../features/auth/admin/companyLoginApiSlice";
 
 const userRoles = [
   {

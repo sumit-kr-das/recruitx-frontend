@@ -1,5 +1,5 @@
 import { Suspense, lazy } from "react";
-import { Toaster } from "./ui/toaster"
+import { Toaster } from "./ui/toaster";
 import { useSelector } from "react-redux";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { selectCurrentRole } from "./features/auth/authSlice";
@@ -12,7 +12,7 @@ const HomePage = lazy(() => import("./pages/user/HomePage"));
 const AllCompanies = lazy(() => import("./pages/user/AllCompanies"));
 const CompanyDetails = lazy(() => import("./pages/user/CompanyDetails"));
 
-const Login = lazy(() => import("./pages/mnjuser/auth/Login"));
+const Login = lazy(() => import("./pages/auth/Login"));
 const Register = lazy(() => import("./pages/mnjuser/auth/Register"));
 const UserHomePage = lazy(() => import("./pages/mnjuser/UserHomePage"));
 const JobDetailsPage = lazy(() => import("./pages/user/JobDetailsPage"));
