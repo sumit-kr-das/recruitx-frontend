@@ -2,7 +2,7 @@ import { AlertTriangle } from "lucide-react";
 import { useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { TApiError } from "../../../@types/TApiError";
 import TopHeader from "../../../components/navigation/TopHeader";
 import { setCredentials } from "../../../features/auth/authSlice";
@@ -117,57 +117,64 @@ const Login = () => {
 
             {/* form */}
             {formStep === 1 && (
-              <section>
-                <Input
-                  type="email"
-                  placeholder="Email"
-                  className="mt-6"
-                  {...register("email", {
-                    required: "Email address is required",
-                    pattern: {
-                      value: /\S+@\S+\.\S+/,
-                      message: "Entered value does not match email format",
-                    },
-                  })}
-                />
-                {errors.email && (
-                  <div className="mt-2 flex items-center gap-2 text-red-600">
-                    <AlertTriangle className="h-4 w-4" />
-                    {typeof errors.email.message === "string" && (
-                      <p>{errors.email.message}</p>
-                    )}
-                  </div>
-                )}
-                <Input
-                  type="password"
-                  placeholder="Password"
-                  className="mt-4"
-                  {...register("password", {
-                    required: "Password is required",
-                    minLength: {
-                      value: 5,
-                      message: "Password should be min 5 character log",
-                    },
-                  })}
-                />
-                {errors.password && (
-                  <div className="mt-2 flex items-center gap-2 text-red-600">
-                    <AlertTriangle className="h-4 w-4" />
-                    {typeof errors.password.message === "string" && (
-                      <p>{errors.password.message}</p>
-                    )}
-                  </div>
-                )}
-                <Button
-                  type="submit"
-                  disabled={
-                    !isValid || userLoading || companyLoading || adminLoading
-                  }
-                  className="w-full mt-4"
-                >
-                  Log In
-                </Button>
-              </section>
+              <>
+                <section>
+                  <Input
+                    type="email"
+                    placeholder="Email"
+                    className="mt-6"
+                    {...register("email", {
+                      required: "Email address is required",
+                      pattern: {
+                        value: /\S+@\S+\.\S+/,
+                        message: "Entered value does not match email format",
+                      },
+                    })}
+                  />
+                  {errors.email && (
+                    <div className="mt-2 flex items-center gap-2 text-red-600">
+                      <AlertTriangle className="h-4 w-4" />
+                      {typeof errors.email.message === "string" && (
+                        <p>{errors.email.message}</p>
+                      )}
+                    </div>
+                  )}
+                  <Input
+                    type="password"
+                    placeholder="Password"
+                    className="mt-4"
+                    {...register("password", {
+                      required: "Password is required",
+                      minLength: {
+                        value: 5,
+                        message: "Password should be min 5 character log",
+                      },
+                    })}
+                  />
+                  {errors.password && (
+                    <div className="mt-2 flex items-center gap-2 text-red-600">
+                      <AlertTriangle className="h-4 w-4" />
+                      {typeof errors.password.message === "string" && (
+                        <p>{errors.password.message}</p>
+                      )}
+                    </div>
+                  )}
+                  <Button
+                    type="submit"
+                    disabled={
+                      !isValid || userLoading || companyLoading || adminLoading
+                    }
+                    className="w-full mt-4"
+                  >
+                    Log In
+                  </Button>
+                </section>
+                <div className="mt-2 float-right font-medium text-blue-600">
+                  <Link to={`/reset-password/${type}`}>
+                    <p>Forgot password? Click here</p>
+                  </Link>
+                </div>
+              </>
             )}
           </form>
         </div>
