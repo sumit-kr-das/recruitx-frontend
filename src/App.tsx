@@ -13,6 +13,8 @@ const AllCompanies = lazy(() => import("./pages/user/AllCompanies"));
 const CompanyDetails = lazy(() => import("./pages/user/CompanyDetails"));
 
 const Login = lazy(() => import("./pages/auth/Login"));
+const VerifyUser = lazy(() => import("./pages/auth/VerifyUser"));
+
 const Register = lazy(() => import("./pages/mnjuser/auth/Register"));
 const UserHomePage = lazy(() => import("./pages/mnjuser/UserHomePage"));
 const JobDetailsPage = lazy(() => import("./pages/user/JobDetailsPage"));
@@ -67,15 +69,16 @@ const App = () => {
             </Suspense>
           }
         />
-        {/* user */}
         <Route
-          path="/mnjuser/login"
+          path="/login"
           element={
             <AuthenticateRoute>
               <Login />
             </AuthenticateRoute>
           }
         />
+        <Route path="/verify-user" element={<VerifyUser />} />
+        {/* user */}
         <Route
           path="/mnjuser/register"
           element={
