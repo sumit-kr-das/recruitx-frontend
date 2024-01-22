@@ -10,6 +10,8 @@ import { useUserLoginMutation } from "../../../features/auth/user/userLoginApiSl
 import { Button } from "../../../ui/button";
 import { Input } from "../../../ui/input";
 import { useToast } from "../../../ui/use-toast";
+import { useCLoginMutation } from "../../../features/auth/company/companyLoginApiSlice";
+import { useALoginMutation } from "../../../features/auth/admin/companyLoginApiSlice";
 
 const userRoles = [
   {
@@ -37,13 +39,14 @@ type FormValues = {
 const Login = () => {
   const [formStep, setFormStep] = useState(0);
   const [type, setType] = useState(0);
-  const [userLogin, { isLoading }] = useUserLoginMutation();
+  const [userLogin, { isLoading: userLoading }] = useUserLoginMutation();
+  const [cLogin, { isLoading: companyLoading }] = useCLoginMutation();
+  const [aLogin, { isLoading: adminLoading }] = useALoginMutation();
   const { toast } = useToast();
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const {
-    watch,
     register,
     handleSubmit,
     formState: { errors, isValid },
@@ -52,13 +55,20 @@ const Login = () => {
   const completeFormStep = () => {
     setFormStep((prev) => prev + 1);
   };
+
   const submitForm: SubmitHandler<FormValues> = async (values) => {
     try {
-      const userData = await userLogin(values).unwrap();
-      console.log(values, userData);
+      let userData;
+      if (type === 1) {
+        userData = await userLogin(values).unwrap();
+      } else if (type === 2) {
+        userData = await cLogin(values).unwrap();
+      } else if (type === 3) {
+        userData = await aLogin(values).unwrap();
+      }
       dispatch(setCredentials(userData));
       toast({
-        description: "Log In success",
+        description: "User login successfully",
       });
       navigate("/mnjuser/home");
     } catch (err) {
@@ -150,7 +160,9 @@ const Login = () => {
                 )}
                 <Button
                   type="submit"
-                  disabled={!isValid || isLoading}
+                  disabled={
+                    !isValid || userLoading || companyLoading || adminLoading
+                  }
                   className="w-full mt-4"
                 >
                   Log In
