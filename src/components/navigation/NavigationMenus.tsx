@@ -32,7 +32,7 @@ const NavigationMenus=() =>{
           </Link>
         </NavigationMenuItem>
         <NavigationMenuItem>
-          <Link to="Companies">
+          <Link to="/Companies">
             <NavigationMenuLink className={navigationMenuTriggerStyle()}>
               Companies
             </NavigationMenuLink>

@@ -62,10 +62,10 @@ const TopHeader = () => {
         <div className="flex items-center gap-4 ">
           {!user ? (
             <>
-              <Link to="/mnjuser/login">
+              <Link to="/login">
                 <Button variant="outline">Login</Button>
               </Link>
-              <Link to="/mnjuser/login">
+              <Link to="/mnjuser/register">
                 <Button>Sign Up</Button>
               </Link>
             </>
