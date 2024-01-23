@@ -7,11 +7,14 @@ import { useResendOtpMutation } from "../../features/auth/user/resendOtpApiSlice
 import { Button } from "../../ui/button";
 import { Input } from "../../ui/input";
 import { toast } from "../../ui/use-toast";
+import { useDispatch } from "react-redux";
+import { setCredentials, updateStatus } from "../../features/auth/authSlice";
 
 const VerifyUser = () => {
   const [verifyUser] = useVerifyUserMutation();
   const [resendOtp] = useResendOtpMutation();
   const navigate = useNavigate();
+  const dispatch = useDispatch()
   const {
     register,
     handleSubmit,
@@ -21,7 +24,7 @@ const VerifyUser = () => {
   const submitForm: SubmitHandler<{ otp: string }> = async (values) => {
     try {
       await verifyUser(values).unwrap();
-      //   dispatch(setCredentials(userData));
+        dispatch(updateStatus({status: "verified"}));
       toast({
         description: "OTP verifed successfully",
       });

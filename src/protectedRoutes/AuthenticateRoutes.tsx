@@ -17,7 +17,7 @@ const AuthenticateRoutes = ({ children }: TReactNodeProps) => {
     <>
       <Suspense fallback={<Loader />}>{children}</Suspense>
     </>
-  ) : role === "user" && isVarified === "verified" ? (
+  ) : role === "user" ? ( isVarified === "verified" ? <Navigate to="/verify-user" /> :
     <Navigate to="/mnjuser/home" />
   ) : (
     <Navigate to="/dashboard" />
