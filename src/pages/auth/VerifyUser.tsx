@@ -1,14 +1,14 @@
 import { AlertTriangle, RefreshCcw } from "lucide-react";
 import { SubmitHandler, useForm } from "react-hook-form";
+import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { TApiError } from "../../@types/TApiError";
-import { useVerifyUserMutation } from "../../features/auth/user/verifyUserApiSlice";
+import { updateStatus } from "../../features/auth/authSlice";
 import { useResendOtpMutation } from "../../features/auth/user/resendOtpApiSlice";
+import { useVerifyUserMutation } from "../../features/auth/user/verifyUserApiSlice";
 import { Button } from "../../ui/button";
 import { Input } from "../../ui/input";
 import { toast } from "../../ui/use-toast";
-import { useDispatch } from "react-redux";
-import { setCredentials, updateStatus } from "../../features/auth/authSlice";
 
 const VerifyUser = () => {
   const [verifyUser] = useVerifyUserMutation();

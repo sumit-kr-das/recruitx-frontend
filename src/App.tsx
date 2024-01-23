@@ -64,9 +64,9 @@ const App = () => {
         <Route
           path="/"
           element={
-            <Suspense fallback={<Loader />}>
+            <AuthenticateRoute>
               <HomePage />
-            </Suspense>
+            </AuthenticateRoute>
           }
         />
         <Route

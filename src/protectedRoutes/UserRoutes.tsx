@@ -15,12 +15,15 @@ const UserRoutes = ({ children }: TReactNodeProps) => {
 
 
 
-  return role === "user" && isVarified === "verified" ? (
+  return role === "user" ? (
+    isVarified === "verified" ? 
     <>
       <Suspense fallback={<Loader />}>{children}</Suspense>
-    </>
-  ) : (
+    </> : 
     <Navigate to="/verify-user" />
+
+  ) : (
+    <Navigate to="/" />
   );
 };
 
