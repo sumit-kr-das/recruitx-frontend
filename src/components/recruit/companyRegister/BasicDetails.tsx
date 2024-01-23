@@ -1,4 +1,6 @@
 import FormWrapper from "./FormWrapper";
+import { Input } from "../../../ui/input";
+import { Button } from "../../../ui/button";
 
 type TUserData = {
 	name: string;
@@ -28,13 +30,13 @@ const BasicDetails = ({
 					Your name
 				</label>
 				<div className="mt-2">
-					<input
+					<Input
 						value={name}
 						onChange={(e) => updateFields({ name: e.target.value })}
 						type="text"
 						required
 						placeholder="Enter your original name"
-						className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-cyan-600 sm:text-sm sm:leading-6"
+						className=""
 					/>
 				</div>
 			</div>
@@ -47,13 +49,13 @@ const BasicDetails = ({
 					Email address
 				</label>
 				<div className="mt-2">
-					<input
+					<Input
 						value={email}
 						onChange={(e) => updateFields({ email: e.target.value })}
 						type="email"
 						required
 						placeholder="Enter your email address"
-						className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-cyan-600 sm:text-sm sm:leading-6"
+						className=""
 					/>
 				</div>
 			</div>
@@ -66,13 +68,12 @@ const BasicDetails = ({
 					Phone no
 				</label>
 				<div className="mt-2">
-					<input
+					<Input
 						value={phone}
 						onChange={(e) => updateFields({ phone: e.target.value })}
 						type="text"
 						required
-						placeholder="Enter your phone no"
-						className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-cyan-600 sm:text-sm sm:leading-6"
+						placeholder="Enter phone no"
 					/>
 				</div>
 			</div>
@@ -87,13 +88,13 @@ const BasicDetails = ({
 					</label>
 				</div>
 				<div className="mt-2">
-					<input
+					<Input
 						value={password}
 						onChange={(e) => updateFields({ password: e.target.value })}
 						type="password"
 						required
 						placeholder="Enter your password"
-						className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-cyan-600 sm:text-sm sm:leading-6"
+						className=""
 					/>
 				</div>
 			</div>

@@ -10,6 +10,9 @@ import CompanyDetails from "../../../components/recruit/companyRegister/CompanyD
 import useMultistepForm from "../../../customHooks/useMultistepForm";
 import { setCredentials } from "../../../features/auth/authSlice";
 import { useCRegisterMutation } from "../../../features/auth/company/companyRegisterApiSlice";
+import { Button } from "../../../ui/button";
+import { Input } from "../../../ui/input";
+import { useToast } from "../../../ui/use-toast";
 
 const INITIAL_DATA: TInitialData = {
 	name: "",
@@ -56,7 +59,7 @@ const CompanyRegister = () => {
 	return (
 		<main className="max-w-screen-xl mx-auto pb-10 flex justify-between">
 			<section className="mt-32 w-full flex justify-between">
-				<div>
+				<div className="hidden md:block">
 					<p className="text-center text-sm font-semibold text-cyan-500">
 						WELCOME
 					</p>
@@ -83,27 +86,27 @@ const CompanyRegister = () => {
 							{step}
 							<div className="flex items-center gap-2">
 								{!isFirstStep && (
-									<button
+									<Button
 										onClick={back}
-										className="flex w-full justify-center rounded-md bg-cyan-500 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-cyan-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+										className="w-full mt-4"
 									>
 										Prev
-									</button>
+									</Button>
 								)}
 								{isLoading ? (
-									<button
+									<Button
 										disabled={true}
-										className="flex w-full justify-center rounded-md bg-cyan-500 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-cyan-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+										className="w-full mt-4"
 									>
 										Saving...
-									</button>
+									</Button>
 								) : (
-									<button
+									<Button
 										type="submit"
-										className="flex w-full justify-center rounded-md bg-cyan-500 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-cyan-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+										className="w-full mt-4"
 									>
 										{isLastStep ? "Finish" : "Next"}
-									</button>
+									</Button>
 								)}
 							</div>
 						</form>

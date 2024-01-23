@@ -1,5 +1,8 @@
 import { industryTypes } from "../../../constants/industryTypes";
 import FormWrapper from "./FormWrapper";
+import { Input } from "../../../ui/input";
+import { Button } from "../../../ui/button";
+import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue } from "../../../ui/select";
 
 type TUserData = {
 	companyName: string;
@@ -31,13 +34,13 @@ const CompanyDetails = ({
 					Company name (as per KYC documents)
 				</label>
 				<div className="mt-2">
-					<input
+					<Input
 						value={companyName}
 						onChange={(e) => updateFields({ companyName: e.target.value })}
 						type="text"
 						required
 						placeholder="Enter your company name"
-						className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-cyan-600 sm:text-sm sm:leading-6"
+						className=""
 					/>
 				</div>
 			</div>
@@ -50,13 +53,13 @@ const CompanyDetails = ({
 					Your designation
 				</label>
 				<div className="mt-2">
-					<input
+					<Input
 						value={designation}
 						onChange={(e) => updateFields({ designation: e.target.value })}
 						type="text"
 						required
 						placeholder="Enter your designation"
-						className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-cyan-600 sm:text-sm sm:leading-6"
+						className=""
 					/>
 				</div>
 			</div>
@@ -69,13 +72,13 @@ const CompanyDetails = ({
 					Pin code
 				</label>
 				<div className="mt-2">
-					<input
+					<Input
 						value={pin}
 						onChange={(e) => updateFields({ pin: e.target.value })}
 						type="text"
 						required
 						placeholder="Enter your pin no"
-						className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-cyan-600 sm:text-sm sm:leading-6"
+						className=""
 					/>
 				</div>
 			</div>
@@ -90,13 +93,13 @@ const CompanyDetails = ({
 					</label>
 				</div>
 				<div className="mt-2">
-					<input
+					<Input
 						value={address}
 						onChange={(e) => updateFields({ address: e.target.value })}
 						type="text"
 						required
 						placeholder="Enter your street address"
-						className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-cyan-600 sm:text-sm sm:leading-6"
+						className=""
 					/>
 				</div>
 			</div>
@@ -108,7 +111,19 @@ const CompanyDetails = ({
 					</label>
 				</div>
 				<div className="mt-2">
-					<select
+					<Select>
+						<SelectTrigger className="w-full">
+							<SelectValue placeholder="Select Industry Type" />
+						</SelectTrigger>
+						<SelectContent>
+							<SelectGroup>
+								{industryTypes.map((item, index) => (
+									<SelectItem value={item} key={index}>{item}</SelectItem>
+								))}
+							</SelectGroup>
+						</SelectContent>
+					</Select>
+					{/* <select
 						value={industry}
 						onChange={(e) => updateFields({ industry: e.target.value })}
 						className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-cyan-600 sm:text-sm sm:leading-6"
@@ -119,12 +134,12 @@ const CompanyDetails = ({
 								{item}
 							</option>
 						))}
-					</select>
+					</select> */}
 				</div>
 			</div>
 
 			<div className="mt-4 flex items-center gap-2">
-				<input
+				<Input
 					id="comments"
 					name="comments"
 					type="checkbox"
