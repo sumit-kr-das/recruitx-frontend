@@ -19,6 +19,7 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "
 import CompanyRegisterSchema from "../../../@types/zod/CompanyRegisterSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
+import TopHeader from "../../../components/navigation/TopHeader";
 
 type FormValues = {
 	name: string,
@@ -74,20 +75,14 @@ const CompanyRegister = () => {
 	}
 
 	return (
-		<main className="max-w-screen-xl mx-auto pb-10 flex justify-between">
-			<section className="mt-32 w-full flex justify-between">
-				<div className="hidden md:block">
-					<p className="text-center text-sm font-semibold text-cyan-500">
-						WELCOME
-					</p>
-					<h2 className="text-center text-2xl font-semibold mb-8 mt-2">
-						Get started with Naukri <br /> Recruitment Solutions
-					</h2>
-					<img src={RegisterImg} width={400} height={400} alt="register img" />
-				</div>
-				<div className="flex min-h-full flex-1 flex-col justify-center px-6 pb-12 lg:px-8">
-					<div className="text-center sm:mx-auto sm:w-full sm:max-w-sm">
-						<h1 className="text-2xl font-semibold">Create Account</h1>
+		<>
+			<div className="bg-cyan-50">
+				<TopHeader />
+				<div className="pt-40 w-full h-auto flex justify-center">
+					<div className="h-fit rounded-xl bg-white p-10 mb-10 shadow md:w-[800px]">
+						<h1 className="text-2xl mb-10 font-extrabold text-center">
+							Get started with Naukri <br /> Recruitment Solutions
+						</h1>
 						<p className="text-sm text-gray-500">
 							or already registered?{" "}
 							<Link
@@ -97,66 +92,69 @@ const CompanyRegister = () => {
 								Login now
 							</Link>
 						</p>
-					</div>
-					<div className="mt-4 sm:mx-auto sm:w-full sm:max-w-sm">
 						<Form {...form}>
 
-							<form className="space-y-6" onSubmit={form.handleSubmit(registerCompany)}>
+							<form className="space-y-8" onSubmit={form.handleSubmit(registerCompany)} >
 								{
 									step === 0 && (
 										<>
-											<FormField
-												control={form.control}
-												name="name"
-												render={({ field }) => (
-													<FormItem>
-														<FormLabel>Your Name</FormLabel>
-														<FormControl>
-															<Input placeholder="Enter Name" {...field} />
-														</FormControl>
-														<FormMessage />
-													</FormItem>
-												)}
-											/>
-											<FormField
-												control={form.control}
-												name="email"
-												render={({ field }) => (
-													<FormItem>
-														<FormLabel>Email</FormLabel>
-														<FormControl>
-															<Input placeholder="Enter Your Email" {...field} />
-														</FormControl>
-														<FormMessage />
-													</FormItem>
-												)}
-											/>
-											<FormField
-												control={form.control}
-												name="phone"
-												render={({ field }) => (
-													<FormItem>
-														<FormLabel>Phone No</FormLabel>
-														<FormControl>
-															<Input placeholder="Enter phone no" {...field} />
-														</FormControl>
-														<FormMessage />
-													</FormItem>
-												)}
-											/>
-											<FormField
-												control={form.control}
-												name="password"
-												render={({ field }) => (
-													<FormItem>
-														<FormLabel>Password</FormLabel>
-														<FormControl>
-															<Input type="password" placeholder="Enter Password" {...field} />
-														</FormControl>
-														<FormMessage />
-													</FormItem>
-												)}
-											/>
+											<div className="flex gap-4">
+												<FormField
+													control={form.control}
+													name="name"
+													render={({ field }) => (
+														<FormItem className="flex-1">
+															<FormLabel>Your Name</FormLabel>
+															<FormControl>
+																<Input placeholder="Enter Name" {...field} />
+															</FormControl>
+															<FormMessage />
+														</FormItem>
+													)}
+												/>
+												<FormField
+													control={form.control}
+													name="email"
+													render={({ field }) => (
+														<FormItem className="flex-1">
+															<FormLabel>Email</FormLabel>
+															<FormControl>
+																<Input placeholder="Enter Your Email" {...field} />
+															</FormControl>
+															<FormMessage />
+														</FormItem>
+													)}
+												/>
+											</div>
+											<div className="flex gap-4">
+												<FormField
+													control={form.control}
+													name="phone"
+													render={({ field }) => (
+														<FormItem className="flex-1">
+															<FormLabel>Phone No</FormLabel>
+															<FormControl>
+																<Input placeholder="Enter phone no" {...field} />
+															</FormControl>
+															<FormMessage />
+														</FormItem>
+													)}
+												/>
+												<FormField
+													control={form.control}
+													name="password"
+													render={({ field }) => (
+														<FormItem className="flex-1">
+															<FormLabel>Password</FormLabel>
+															<FormControl>
+																<Input type="password" placeholder="Enter Password" {...field} />
+															</FormControl>
+															<FormMessage />
+														</FormItem>
+													)}
+												/>
+											</div>
+
 										</>
 									)
 								}
@@ -164,63 +162,67 @@ const CompanyRegister = () => {
 								{
 									step === 1 && (
 										<>
-											<FormField
-												control={form.control}
-												name="companyName"
-												render={({ field }) => (
-													<FormItem>
-														<FormLabel>Company Name</FormLabel>
-														<FormControl>
-															<Input placeholder="Your Company Name" {...field} />
-														</FormControl>
-														<FormMessage />
-													</FormItem>
-												)}
-											/>
-											<FormField
-												control={form.control}
-												name="designation"
-												render={({ field }) => (
-													<FormItem>
-														<FormLabel>Designation</FormLabel>
-														<FormControl>
-															<Input placeholder="Your Designation" {...field} />
-														</FormControl>
-														<FormMessage />
-													</FormItem>
-												)}
-											/>
-											<FormField
-												control={form.control}
-												name="pin"
-												render={({ field }) => (
-													<FormItem>
-														<FormLabel>Pin Code</FormLabel>
-														<FormControl>
-															<Input placeholder="Your Pin" {...field} />
-														</FormControl>
-														<FormMessage />
-													</FormItem>
-												)}
-											/>
-											<FormField
-												control={form.control}
-												name="address"
-												render={({ field }) => (
-													<FormItem>
-														<FormLabel>Street address</FormLabel>
-														<FormControl>
-															<Input placeholder="Your Address" {...field} />
-														</FormControl>
-														<FormMessage />
-													</FormItem>
-												)}
-											/>
+											<div className="flex gap-4">
+												<FormField
+													control={form.control}
+													name="companyName"
+													render={({ field }) => (
+														<FormItem className="flex-1">
+															<FormLabel>Company Name</FormLabel>
+															<FormControl>
+																<Input placeholder="Your Company Name" {...field} />
+															</FormControl>
+															<FormMessage />
+														</FormItem>
+													)}
+												/>
+												<FormField
+													control={form.control}
+													name="designation"
+													render={({ field }) => (
+														<FormItem className="flex-1">
+															<FormLabel>Designation</FormLabel>
+															<FormControl>
+																<Input placeholder="Your Designation" {...field} />
+															</FormControl>
+															<FormMessage />
+														</FormItem>
+													)}
+												/>
+											</div>
+											<div className="flex gap-4">
+												<FormField
+													control={form.control}
+													name="pin"
+													render={({ field }) => (
+														<FormItem className="flex-1">
+															<FormLabel>Pin Code</FormLabel>
+															<FormControl>
+																<Input placeholder="Your Pin" {...field} />
+															</FormControl>
+															<FormMessage />
+														</FormItem>
+													)}
+												/>
+												<FormField
+													control={form.control}
+													name="address"
+													render={({ field }) => (
+														<FormItem className="flex-1">
+															<FormLabel>Street address</FormLabel>
+															<FormControl>
+																<Input placeholder="Your Address" {...field} />
+															</FormControl>
+															<FormMessage />
+														</FormItem>
+													)}
+												/>
+											</div>
 											<FormField
 												control={form.control}
 												name="industry"
 												render={({ field }) => (
-													<Select onValueChange={field.onChange} defaultValue={field.value}>
+													<Select onValueChange={field.onChange} defaultValue={field.value} >
 														<SelectTrigger className="w-full">
 															<SelectValue placeholder="Select Industry Type"
 															/>
@@ -237,18 +239,6 @@ const CompanyRegister = () => {
 													</Select>
 												)}
 											/>
-											<div className="mt-4 flex items-center gap-2">
-												{/* <Input
-													id="comments"
-													name="comments"
-													type="checkbox"
-													required
-													className="h-4 w-4 rounded border-gray-300 text-cyan-600 focus:ring-cyan-600"
-												/> */}
-												{/* <p className=" text-sm text-gray-500">
-													I agree to Terms & conditions and Privacy policy
-												</p> */}
-											</div>
 										</>
 									)
 								}
@@ -291,8 +281,8 @@ const CompanyRegister = () => {
 						</Form>
 					</div>
 				</div>
-			</section>
-		</main>
+			</div>
+		</>
 	);
 };
 
