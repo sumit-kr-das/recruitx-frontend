@@ -5,7 +5,7 @@ import SelectInput from "../../components/form/multiSelectInput/SelectInput";
 import Job from "../../components/mnjuser/recomandedJobs/Job";
 import TopHeader from "../../components/navigation/TopHeader";
 import { tagsData } from "../../constants/tagsData";
-import { useSearchDataMutation } from "../../features/user/getSearchDataApiSlice";
+import { useSearchDataMutation } from "../../features/user/get/getSearchDataApiSlice";
 
 const INITIAL_SEARCH_DATA = {
   role: [],
