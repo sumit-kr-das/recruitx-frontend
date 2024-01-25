@@ -17,9 +17,10 @@ const VerifyUser = () => {
   const [resendOtp] = useResendOtpMutation();
   const navigate = useNavigate();
   const dispatch = useDispatch()
+  const [seconds, setSeconds] = useState(60);
+
 
   const role = useSelector(selectCurrentRole);
-  const [isButtonDisabled, setIsButtonDisabled] = useState(false);
   const {
     register,
     handleSubmit,
@@ -28,6 +29,7 @@ const VerifyUser = () => {
 
   const submitForm: SubmitHandler<{ otp: string }> = async (values) => {
     try {
+
       await verifyUser({ ...values, userType: role }).unwrap();
       dispatch(updateStatus({ status: "verified" }));
       toast({
@@ -45,8 +47,7 @@ const VerifyUser = () => {
 
   const resendEmail = async () => {
     try {
-      setIsButtonDisabled(true);
-
+      setSeconds(60);
       await resendOtp({
         userType: role,
       }).unwrap();
@@ -61,6 +62,23 @@ const VerifyUser = () => {
       });
     }
   };
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      if (seconds > 0) {
+        setSeconds(seconds - 1);
+      }
+
+      if (seconds === 0) {
+        clearInterval(interval);
+      }
+    }, 1000);
+
+    return () => {
+      clearInterval(interval);
+    };
+  }, [seconds]);
+
 
   return (
     <div className="pt-40 w-full h-screen flex justify-center">
@@ -94,11 +112,11 @@ const VerifyUser = () => {
           </Button>
         </form>
         {
-          isButtonDisabled ? (<>
+          seconds > 0 ? (<>
             <div
               className="mt-2 float-right flex items-center gap-2 font-medium text-blue-600 cursor-pointer"
             >
-              Resend after 1min
+              Resend after {seconds}s
             </div>
           </>) : (<>
             <div
