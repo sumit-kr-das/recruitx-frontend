@@ -1,26 +1,47 @@
 import * as z from "zod";
 
-const UserRegisterSchema = z.object({
-  name: z.string().min(4, {
-    message: "Name must be at least 4 characters.",
-  }),
-  email: z.string().min(4, {
-    message: "Name must be at least 4 characters.",
-  }),
-  phoneNo: z
-    .string()
-    .min(10, {
-      message: "Phone must be  10 digit.",
-    })
-    .max(10, {
-      message: "Phone must be 10 digit.",
+const UserRegisterSchema = z
+  .object({
+    name: z
+      .string()
+      .min(4, {
+        message: "Name must be at least 4 characters",
+      })
+      .max(30, {
+        message: "Name must be at max 30 characters",
+      }),
+    email: z.string().email(),
+    phoneNo: z
+      .string()
+      .min(10, {
+        message: "Phone must be 10 digit",
+      })
+      .max(10, {
+        message: "Phone must be 10 digit",
+      }),
+    workStatus: z.string({
+      required_error: "Select your status",
     }),
-  workStatus: z.string({
-    required_error: "Please select status",
-  }),
-  password: z.string({
-    required_error: "Please the password",
-  }),
-});
+    password: z
+      .string()
+      .min(5, {
+        message: "Password must be at list 5 characters",
+      })
+      .max(20, {
+        message: "Password must be at max 20 characters",
+      }),
+    confirmPassword: z
+      .string()
+      .min(5, {
+        message: "Password must be at list 5 characters",
+      })
+      .max(20, {
+        message: "Password must be at max 20 characters",
+      }),
+  })
+  .refine((data) => data.password === data.confirmPassword, {
+    message: "Password no not match",
+    path: ["confirmPassword"],
+  });
 
-export default UserRegisterSchema
+export default UserRegisterSchema;
