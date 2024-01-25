@@ -1,6 +1,6 @@
 import { AlertTriangle, RefreshCcw } from "lucide-react";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { TApiError } from "../../@types/TApiError";
 import { updateStatus } from "../../features/auth/authSlice";
@@ -9,12 +9,17 @@ import { useVerifyUserMutation } from "../../features/auth/user/verifyUserApiSli
 import { Button } from "../../ui/button";
 import { Input } from "../../ui/input";
 import { toast } from "../../ui/use-toast";
+import { selectCurrentRole } from "../../features/auth/authSlice";
+import { useState, useEffect } from "react";
 
 const VerifyUser = () => {
   const [verifyUser] = useVerifyUserMutation();
   const [resendOtp] = useResendOtpMutation();
   const navigate = useNavigate();
   const dispatch = useDispatch()
+
+  const role = useSelector(selectCurrentRole);
+  const [isButtonDisabled, setIsButtonDisabled] = useState(false);
   const {
     register,
     handleSubmit,
@@ -23,8 +28,8 @@ const VerifyUser = () => {
 
   const submitForm: SubmitHandler<{ otp: string }> = async (values) => {
     try {
-      await verifyUser(values).unwrap();
-        dispatch(updateStatus({status: "verified"}));
+      await verifyUser({ ...values, userType: role }).unwrap();
+      dispatch(updateStatus({ status: "verified" }));
       toast({
         description: "OTP verifed successfully",
       });
@@ -40,11 +45,14 @@ const VerifyUser = () => {
 
   const resendEmail = async () => {
     try {
-      await resendOtp({}).unwrap();
+      setIsButtonDisabled(true);
+
+      await resendOtp({
+        userType: role,
+      }).unwrap();
       toast({
         description: "Check your registered email",
       });
-      navigate("/mnjuser/home");
     } catch (err) {
       const apiError = err as TApiError;
       toast({
@@ -85,12 +93,28 @@ const VerifyUser = () => {
             Verify Email
           </Button>
         </form>
-        <div
+        {
+          isButtonDisabled ? (<>
+            <div
+              className="mt-2 float-right flex items-center gap-2 font-medium text-blue-600 cursor-pointer"
+            >
+              Resend after 1min
+            </div>
+          </>) : (<>
+            <div
+              onClick={resendEmail}
+              className="mt-2 float-right flex items-center gap-2 font-medium text-blue-600 cursor-pointer"
+            >
+              Resend email <RefreshCcw className="w-4 h-4" />
+            </div>
+          </>)
+        }
+        {/* <div
           onClick={resendEmail}
           className="mt-2 float-right flex items-center gap-2 font-medium text-blue-600 cursor-pointer"
         >
           Resend email <RefreshCcw className="w-4 h-4" />
-        </div>
+        </div> */}
       </div>
     </div>
   );
