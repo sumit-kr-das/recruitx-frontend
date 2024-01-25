@@ -1,6 +1,7 @@
 /* Images */
 import RocketIMG from "../../../../assets/icons/leftImg.png";
 import QRCode from "../../../../assets/qrcode.png";
+import NewSlider from "../../NewSlider";
 import Company from "./Company";
 import OtherJobs from "./OtherJobs";
 import RecommendedJobs from "./RecommendedJobs";
@@ -34,6 +35,8 @@ const HomeFeed = () => {
       <OtherJobs />
       {/* companies section */}
       <Company />
+
+      <NewSlider />
     </div>
   );
 };

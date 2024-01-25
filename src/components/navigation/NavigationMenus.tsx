@@ -1,6 +1,4 @@
 import * as React from "react";
-import { Link } from "react-router-dom";
-
 import { UserCheck } from "lucide-react";
 import { cn } from "../../lib/utils.ts";
 import {
@@ -13,30 +11,30 @@ import {
   navigationMenuTriggerStyle,
 } from "../../ui/navigation-menu";
 
-const NavigationMenus=() =>{
+const NavigationMenus = () => {
   return (
     <NavigationMenu>
       <NavigationMenuList>
         <NavigationMenuItem>
-          <Link to="/">
-            <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-              Home
-            </NavigationMenuLink>
-          </Link>
+          <NavigationMenuLink href="/" className={navigationMenuTriggerStyle()}>
+            Home
+          </NavigationMenuLink>
         </NavigationMenuItem>
         <NavigationMenuItem>
-          <Link to="/mnjuser/jobs">
-            <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-              Jobs
-            </NavigationMenuLink>
-          </Link>
+          <NavigationMenuLink
+            href="/mnjuser/jobs"
+            className={navigationMenuTriggerStyle()}
+          >
+            Jobs
+          </NavigationMenuLink>
         </NavigationMenuItem>
         <NavigationMenuItem>
-          <Link to="/Companies">
-            <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-              Companies
-            </NavigationMenuLink>
-          </Link>
+          <NavigationMenuLink
+            href="/Companies"
+            className={navigationMenuTriggerStyle()}
+          >
+            Companies
+          </NavigationMenuLink>
         </NavigationMenuItem>
 
         <NavigationMenuItem>
@@ -67,7 +65,7 @@ const NavigationMenus=() =>{
                 Are you looking for candidates? Join RecruitX and recruit.
               </ListItem>
               <ListItem href="/docs/primitives/typography" title="Admin Login">
-              Are you a authorized admin ?
+                Are you a authorized admin ?
               </ListItem>
             </ul>
           </NavigationMenuContent>
@@ -75,9 +73,9 @@ const NavigationMenus=() =>{
       </NavigationMenuList>
     </NavigationMenu>
   );
-}
+};
 
-export default NavigationMenus
+export default NavigationMenus;
 
 const ListItem = React.forwardRef<
   React.ElementRef<"a">,
