@@ -1,12 +1,7 @@
-import { FormEvent, useState } from "react";
+import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { TApiError } from "../../../@types/TApiError";
-import { TInitialData } from "../../../@types/recruit/companyRegister";
-import RegisterImg from "../../../assets/recruit/registration.png";
-import BasicDetails from "../../../components/recruit/companyRegister/BasicDetails";
-import CompanyDetails from "../../../components/recruit/companyRegister/CompanyDetails";
-import useMultistepForm from "../../../customHooks/useMultistepForm";
 import { setCredentials } from "../../../features/auth/authSlice";
 import { useCRegisterMutation } from "../../../features/auth/company/companyRegisterApiSlice";
 import { Button } from "../../../ui/button";
@@ -14,7 +9,7 @@ import { Input } from "../../../ui/input";
 import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from "../../../ui/select";
 import { useToast } from "../../../ui/use-toast";
 import { industryTypes } from "../../../constants/industryTypes";
-import { SubmitErrorHandler, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "../../../ui/form";
 import CompanyRegisterSchema from "../../../@types/zod/CompanyRegisterSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -66,7 +61,6 @@ const CompanyRegister = () => {
 
 		} catch (err) {
 			const apiError = err as TApiError;
-			console.log(apiError);
 			toast({
 				variant: "destructive",
 				description: apiError?.data.message,
@@ -80,10 +74,10 @@ const CompanyRegister = () => {
 				<TopHeader />
 				<div className="pt-40 w-full h-auto flex justify-center">
 					<div className="h-fit rounded-xl bg-white p-10 mb-10 shadow md:w-[800px]">
-						<h1 className="text-2xl mb-10 font-extrabold text-center">
+						<h1 className="text-2xl mb-5 font-extrabold text-center">
 							Get started with Naukri <br /> Recruitment Solutions
 						</h1>
-						<p className="text-sm text-gray-500">
+						<p className="text-sm text-gray-500 text-center mb-5">
 							or already registered?{" "}
 							<Link
 								to="/recruit/login"
