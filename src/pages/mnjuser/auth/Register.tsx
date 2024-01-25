@@ -1,256 +1,171 @@
-import React, { useState } from "react";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { SubmitHandler, useForm } from "react-hook-form";
 import { toast } from "react-hot-toast";
 import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
+import * as z from "zod";
 import { TApiError } from "../../../@types/TApiError";
 import { setCredentials } from "../../../features/auth/authSlice";
-import LoginBg from '../../../assets/bg.jpg'
 import { useUserRegisterMutation } from "../../../features/auth/user/userRegisterApiSlice";
-
-type TINITIAL_USER_STATE = {
-  name: string;
-  email: string;
-  phoneNo: string;
-  workStatus: string;
-  password: string;
-};
-
-const INITIAL_USER_STATE: TINITIAL_USER_STATE = {
-  name: "",
-  email: "",
-  phoneNo: "",
-  workStatus: "",
-  password: "",
-};
+import {
+  Form,
+  FormControl,
+  FormDescription,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "../../../ui/form";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "../../../ui/select";
+import { Button } from "../../../ui/button";
+import { Input } from "../../../ui/input";
+import TopHeader from "../../../components/navigation/TopHeader";
+import UserRegisterSchema from "../../../@types/zod/UserRegisterSchema";
 
 const Register = () => {
-  const [user, setUser] = useState(INITIAL_USER_STATE);
   const [userRegister, { isLoading }] = useUserRegisterMutation();
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const handleUserValue = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setUser({
-      ...user,
-      [e.target.name]: e.target.value,
-    });
-  };
+  const form = useForm<z.infer<typeof UserRegisterSchema>>({
+    resolver: zodResolver(UserRegisterSchema),
+    defaultValues: {
+      name: "",
+      email: "",
+      phoneNo: "",
+      password: "",
+    },
+  });
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    try {
-      console.log(user);
-      const userData = await userRegister(user).unwrap();
-      dispatch(setCredentials(userData));
-      setUser(INITIAL_USER_STATE);
-      toast.success("Register successfull");
-      navigate("/mnjuser/home");
-    } catch (err) {
-      const apiError = err as TApiError;
-      toast.error(apiError?.data.message);
-    }
-  };
+  // const submitForm: SubmitHandler<FormValues> = async (value) => {
+  //   try {
+  //     console.log(value);
+  //     const userData = await userRegister(value).unwrap();
+  //     dispatch(setCredentials(userData));
+  //     toast.success("Register successfull");
+  //     navigate("/mnjuser/home");
+  //   } catch (err) {
+  //     const apiError = err as TApiError;
+  //     toast.error(apiError?.data.message);
+  //   }
+  // };
+
+  function onSubmit() {}
   return (
-    <div className="bg-white">
-      <div className="lg:grid lg:min-h-screen lg:grid-cols-12">
-        <section className="relative flex h-32 items-end bg-gray-900 lg:col-span-5 lg:h-full xl:col-span-6">
-          <img
-            alt="Night"
-            src={LoginBg}
-            className="absolute inset-0 h-full w-full object-cover opacity-80"
-          />
+    <>
+      <TopHeader />
+      <div className="pt-40 w-full h-screen flex justify-center">
+        <div className="w-[800px]">
+          <h1 className="text-4xl mb-10 font-extrabold text-center">
+            Login Your <br /> RecruitX Account
+          </h1>
+          <Form {...form}>
+            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+              <FormField
+                control={form.control}
+                name="name"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Full name</FormLabel>
+                    <FormControl>
+                      <Input placeholder="Your full name" {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
 
-          <div className="hidden lg:relative lg:block lg:p-12">
-            <Link className="block text-white" to="/">
-              <span className="sr-only">Home</span>
-              <img src="/vite.svg" alt="vite" />
-            </Link>
+              <FormField
+                control={form.control}
+                name="phoneNo"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Phone no</FormLabel>
+                    <FormControl>
+                      <Input placeholder="Your phone no" {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="email"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Your email</FormLabel>
+                    <FormControl>
+                      <Input placeholder="Your email" {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
 
-            <h2 className="mt-6 text-2xl font-bold text-white sm:text-3xl md:text-4xl">
-              Welcome to RecruitX
-            </h2>
+              <FormField
+                control={form.control}
+                name="workStatus"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Select your status</FormLabel>
+                    <Select
+                      onValueChange={field.onChange}
+                      defaultValue={field.value}
+                    >
+                      <FormControl>
+                        <SelectTrigger>
+                          <SelectValue placeholder="Select ststus" />
+                        </SelectTrigger>
+                      </FormControl>
+                      <SelectContent>
+                        <SelectItem value="student">I am a student</SelectItem>
+                        <SelectItem value="employee">
+                          I am an employee
+                        </SelectItem>
+                        <SelectItem value="other">Other</SelectItem>
+                      </SelectContent>
+                    </Select>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
 
-            <p className="mt-4 leading-relaxed text-white/90">
-              RecruitX help you get hired, faster: from preparing your CV,
-              getting recruiter attention, finding the right jobs, and more!
-            </p>
-          </div>
-        </section>
+              <FormField
+                control={form.control}
+                name="password"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Password</FormLabel>
+                    <FormControl>
+                      <Input
+                        placeholder="Your password"
+                        type="password"
+                        {...field}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
 
-        <main className="flex items-center justify-center px-8 py-8 sm:px-12 lg:col-span-7 lg:px-16 lg:py-12 xl:col-span-6">
-          <div className="max-w-xl lg:max-w-3xl">
-            <div className="relative -mt-16 block lg:hidden">
-              <Link
-                className="inline-flex h-16 w-16 items-center justify-center rounded-full bg-white text-blue-600 sm:h-20 sm:w-20"
-                to="/"
-              >
-                <span className="sr-only">Home</span>
-                <img src="/vite.svg" alt="vite" />
-              </Link>
+              <Button className="w-full" type="submit">
+                Login Now
+              </Button>
 
-              <h1 className="mt-2 text-2xl font-bold text-gray-900 sm:text-3xl md:text-4xl">
-                Welcome to RecruitX
-              </h1>
-
-              <p className="text-sm mt-4 leading-relaxed text-gray-500">
-                RecruitX help you get hired, faster: from preparing your CV,
-                getting recruiter attention, finding the right jobs, and more!
-              </p>
-            </div>
-
-            <form
-              onSubmit={handleSubmit}
-              className="mt-8 grid grid-cols-6 gap-6"
-            >
-              <div className="col-span-6 sm:col-span-3">
-                <label
-                  htmlFor="FirstName"
-                  className="block text-sm font-medium text-gray-700"
-                >
-                  Full name
-                </label>
-
-                <input
-                  required
-                  value={user.name}
-                  onChange={handleUserValue}
-                  type="text"
-                  id="FirstName"
-                  name="name"
-                  className="mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm"
-                />
-              </div>
-
-              <div className="col-span-6 sm:col-span-3">
-                <label
-                  htmlFor="LastName"
-                  className="block text-sm font-medium text-gray-700"
-                >
-                  Phone no
-                </label>
-
-                <input
-                  required
-                  value={user.phoneNo}
-                  onChange={handleUserValue}
-                  type="text"
-                  id="phoneNo"
-                  name="phoneNo"
-                  className="mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm"
-                />
-              </div>
-
-              <div className="col-span-6">
-                <label
-                  htmlFor="Email"
-                  className="block text-sm font-medium text-gray-700"
-                >
-                  Work status
-                </label>
-
-                <select
-                  required
-                  value={user.workStatus}
-                  onChange={handleUserValue}
-                  name="workStatus"
-                  className="mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm"
-                >
-                  <option value="">Select status</option>
-                  <option value="experienced">I'm experienced</option>
-                  <option value="fresher">I'm a fresher</option>
-                </select>
-              </div>
-
-              <div className="col-span-6 sm:col-span-3">
-                <label
-                  htmlFor="Email"
-                  className="block text-sm font-medium text-gray-700"
-                >
-                  Email
-                </label>
-
-                <input
-                  required
-                  value={user.email}
-                  onChange={handleUserValue}
-                  type="email"
-                  id="Email"
-                  name="email"
-                  className="mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm"
-                />
-              </div>
-
-              <div className="col-span-6 sm:col-span-3">
-                <label
-                  htmlFor="Password"
-                  className="block text-sm font-medium text-gray-700"
-                >
-                  Password
-                </label>
-
-                <input
-                  required
-                  value={user.password}
-                  onChange={handleUserValue}
-                  type="password"
-                  id="Password"
-                  name="password"
-                  className="mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm"
-                />
-              </div>
-
-              <div className="col-span-6">
-                <label htmlFor="MarketingAccept" className="flex gap-4">
-                  <input
-                    required
-                    type="checkbox"
-                    id="MarketingAccept"
-                    name="marketing_accept"
-                    className="h-5 w-5 rounded-md border-gray-200 bg-white shadow-sm"
-                  />
-
-                  <span className="text-sm text-gray-700">
-                    I want to receive emails about events, product updates and
-                    company announcements.
-                  </span>
-                </label>
-              </div>
-
-              <div className="col-span-6">
-                <p className="text-sm text-gray-500">
-                  By creating an account, you agree to our
-                  <a href="#" className="text-gray-700 underline">
-                    terms and conditions
-                  </a>
-                  and
-                  <a href="#" className="text-gray-700 underline">
-                    privacy policy
-                  </a>
-                  .
-                </p>
-              </div>
-
-              <div className="col-span-6 sm:flex sm:items-center sm:gap-4">
-                <button
-                  type="submit"
-                  className="inline-block shrink-0 rounded-md border border-blue-600 bg-blue-600 px-12 py-3 text-sm font-medium text-white transition hover:bg-transparent hover:text-blue-600 focus:outline-none focus:ring active:text-blue-500"
-                >
-                  {isLoading ? "Loading..." : "Register"}
-                </button>
-
-                <p className="mt-4 text-sm text-gray-500 sm:mt-0">
-                  Don't have an account?{" "}
-                  <Link to="/mnjuser/login" className="text-gray-700 underline">
-                    Log in
-                  </Link>
-                  .
-                </p>
-              </div>
+              <FormDescription>
+                Already have an account ?<Link to="/login"> Login now</Link>.
+              </FormDescription>
             </form>
-          </div>
-        </main>
+          </Form>
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 
