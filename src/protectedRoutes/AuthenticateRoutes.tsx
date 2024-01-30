@@ -13,6 +13,7 @@ const AuthenticateRoutes = ({ children }: TReactNodeProps) => {
   const isExist = useSelector(selectCurrentToken);
   const isVarified = useSelector(selectCurrentStatus);
   const role = useSelector(selectCurrentRole);
+  
   return !isExist ? (
     <>
       <Suspense fallback={<Loader />}>{children}</Suspense>

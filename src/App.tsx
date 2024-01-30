@@ -54,19 +54,21 @@ import {
   AuthenticateRoute,
   CompanyRoute,
   UserRoute,
+  VerifyUserRoutes,
 } from "./protectedRoutes";
 
 const App = () => {
   const role = useSelector(selectCurrentRole);
-  const { data, isLoading } = useGetUserGlobalQuery();
-  const dispatch  = useDispatch()
-  
-  useEffect(() => {
-    if (role === "user" && !isLoading) {
-      console.log("data", data);
-      dispatch(setUserData(data));
-    }
-  }, [role, isLoading, data, dispatch]);
+  // const { data, isLoading } = useGetUserGlobalQuery();
+  // const dispatch  = useDispatch()
+  if (!role) console.log("role", role);
+
+  // useEffect(() => {
+  //   if (role && role === "user" && !isLoading) {
+  //     console.log("user global data",data);
+  //     dispatch(setUserData(data));
+  //   }
+  // }, [role, isLoading, data, dispatch]);
 
   return (
     <BrowserRouter>
@@ -89,7 +91,14 @@ const App = () => {
             </AuthenticateRoute>
           }
         />
-        <Route path="/verify-user" element={<VerifyUser />} />
+        <Route
+          path="/verify-user"
+          element={
+            <VerifyUserRoutes>
+              <VerifyUser />
+            </VerifyUserRoutes>
+          }
+        />
         {/* user */}
         <Route
           path="/mnjuser/register"
