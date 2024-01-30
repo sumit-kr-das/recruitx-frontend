@@ -10,7 +10,6 @@ import { Link } from "react-router-dom";
 
 const JobSlider = ({ slidesPerview, data }) => {
   const swiperRef = React.useRef<any>(null);
-  console.log(data);
   return (
     <div className="relative">
       <div

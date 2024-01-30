@@ -61,7 +61,6 @@ const Slider = ({ data }: SliderProps) => {
 
 const NewSlider = () => {
   const { data, isLoading } = useViewAllCompaniesQuery();
-  console.log(data);
 
   const CompanyCarousel = (
     <div className="w-full bg-white py-4 px-8 rounded-lg my-10">

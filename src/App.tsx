@@ -1,11 +1,11 @@
-import { Suspense, lazy } from "react";
-import { Toaster } from "./ui/toaster";
-import { useSelector } from "react-redux";
+import { Suspense, lazy, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { selectCurrentRole } from "./features/auth/authSlice";
 import Layout from "./layout/Layout";
 import UserProfilePage from "./pages/mnjuser/UserProfilePage";
 import SearchPage from "./pages/search/SearchPage";
+import { Toaster } from "./ui/toaster";
 
 // --------------------------- pages ---------------------------
 const HomePage = lazy(() => import("./pages/user/HomePage"));
@@ -45,6 +45,9 @@ const ErrorPage = lazy(() => import("./pages/error/ErrorPage"));
 const ViewAppliedPage = lazy(() => import("./pages/mnjuser/ViewAppliedPage"));
 
 // --------------------------- route authenticator ---------------------------
+import Loader from "./components/loader/Loader";
+import { useGetUserGlobalQuery } from "./features/user/get/getUserGlobalApiSlice";
+import { setUserData } from "./features/user/userSlice";
 import {
   AdminRoute,
   AuthenticateDashboard,
@@ -52,10 +55,19 @@ import {
   CompanyRoute,
   UserRoute,
 } from "./protectedRoutes";
-import Loader from "./components/loader/Loader";
 
 const App = () => {
   const role = useSelector(selectCurrentRole);
+  const { data, isLoading } = useGetUserGlobalQuery();
+  const dispatch  = useDispatch()
+  
+  useEffect(() => {
+    if (role === "user" && !isLoading) {
+      console.log("data", data);
+      dispatch(setUserData(data));
+    }
+  }, [role, isLoading, data, dispatch]);
+
   return (
     <BrowserRouter>
       <Toaster />
