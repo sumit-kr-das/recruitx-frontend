@@ -8,6 +8,10 @@ import { useUpdateUserMutation } from "../../../features/user/put/updateUserProf
 import { toast } from "react-hot-toast";
 import ChangeProfile from "./ChangeProfile";
 import { TApiError } from "../../../@types/TApiError";
+import { Button } from "../../../ui/button";
+import { useSelector } from "react-redux";
+import { selectCurrentUserData } from "../../../features/user/userSlice";
+import Loader from "../../loader/Loader";
 
 const INITIAL_DATA = {
   name: "",
@@ -16,24 +20,28 @@ const INITIAL_DATA = {
   workStatus: "",
 };
 
-const BasicInfo = ({profilepic}) => {
+const BasicInfo = () => {
   const [update, setUpdate] = useState(INITIAL_DATA);
   const [open, setOpen] = useState<boolean>(false);
   const [profile, setProfile] = useState<boolean>(false);
-  const { data, isSuccess, isLoading, isError } = useViewUserProfileQuery();
+  // const { data:user, isSuccess, isLoading, isError } = useViewUserProfileQuery();
   const [updateUser] = useUpdateUserMutation();
 
-  // set the data into edit modal
-  useEffect(() => {
-    if (isSuccess) {
-      setUpdate({
-        name: data?.name || "",
-        email: data?.email || "",
-        phoneNo: data?.phoneNo || "",
-        workStatus: data?.workStatus || "",
-      });
-    }
-  }, [isSuccess, data]);
+  const { user } = useSelector(selectCurrentUserData);
+  console.log("====================================");
+  console.log(user);
+  console.log("====================================");
+
+  // useEffect(() => {
+  //   if (isSuccess) {
+  //     setUpdate({
+  //       name: user?.name || "",
+  //       email: user?.email || "",
+  //       phoneNo: user?.phoneNo || "",
+  //       workStatus: user?.workStatus || "",
+  //     });
+  //   }
+  // }, [isSuccess, data]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -46,7 +54,8 @@ const BasicInfo = ({profilepic}) => {
       toast.error(apiError.data.message);
     }
   };
-  const basicInfo = (
+
+  const basicInfo =  (
     <>
       <div className="relative flex items-center justify-between bg-white p-5 rounded-lg gap-5">
         <div
@@ -56,36 +65,37 @@ const BasicInfo = ({profilepic}) => {
         >
           <Pencil className="w-[15px] h-[15px]" />
         </div>
-        <div className="w-[20%] flex items-center flex-col">
+        <div className="w-[20%] flex items-center justify-center flex-col">
           <img
-            src={profilepic ? `http://localhost:8000/${profilepic}` : UserDefault}
+            src={UserDefault}
             // width={180}
             alt="user_default"
-            className="width-[180px] h-[180px] rounded-full object-cover border"
+            className="w-[120px] h-[120px] rounded-full border"
           />
-          <button
+          <Button
             onClick={() => setProfile((prev) => !prev)}
-            className="mt-2 bg-orange-500 text-white text-sm px-5 py-2 rounded-md hover:bg-orange-600"
+            variant="outline"
+            className="mt-2"
           >
             Change Profile
-          </button>
+          </Button>
         </div>
         <div className="w-[80%]">
           <div className="border-b flex items-end justify-between mb-4 pb-4">
             <div>
-              <h2 className="text-2xl font-bold capitalize">{data?.name}</h2>
+              <h2 className="text-2xl font-bold capitalize">{user?.name}</h2>
               <p className="text-lg text-slate-600 capitalize">
-                {data?.workStatus}
+                {user?.workStatus}
               </p>
             </div>
             <div className="flex items-center gap-4">
               <p className="text-sm">
                 <span className="text-slate-500 ">Profile Created - </span>
-                {data && convertDate(data?.createdAt)}
+                {user && convertDate(user?.createdAt)}
               </p>
               <p className="text-sm">
                 <span className="text-slate-500 ">Profile last updated - </span>
-                {data && convertDate(data?.updatedAt)}
+                {user && convertDate(user?.updatedAt)}
               </p>
             </div>
           </div>
@@ -94,14 +104,14 @@ const BasicInfo = ({profilepic}) => {
               <Phone className="w-[50px] h-[50px] bg-slate-200 p-4 rounded-md" />
               <div>
                 <h3 className="text-slate-500 text-sm">Call</h3>
-                <p className="text-sm">{data?.phoneNo}</p>
+                <p className="text-sm">{user?.phoneNo}</p>
               </div>
             </div>
             <div className="flex items-center gap-2">
               <Mail className="w-[50px] h-[50px] bg-slate-200 p-4 rounded-md" />
               <div>
                 <h3 className="text-slate-500 text-sm">Email</h3>
-                <p className="text-sm">{data?.email}</p>
+                <p className="text-sm">{user?.email}</p>
               </div>
             </div>
           </div>
@@ -224,19 +234,11 @@ const BasicInfo = ({profilepic}) => {
         </Modal>
       )}
       {/* setProfile */}
-      {
-        profile && <ChangeProfile profile={profile} setProfile ={setProfile } />
-      }
+      {profile && <ChangeProfile profile={profile} setProfile={setProfile} />}
     </>
   );
 
-  return isLoading ? (
-    <>
-      <p>Loading...</p>
-    </>
-  ) : (
-    isSuccess && basicInfo
-  );
+  return user ? basicInfo : <Loader />
 };
 
 export default BasicInfo;

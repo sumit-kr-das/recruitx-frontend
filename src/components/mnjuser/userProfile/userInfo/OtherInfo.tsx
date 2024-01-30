@@ -19,18 +19,14 @@ export const INITIAL_DATA = {
   maxQualification: "",
 };
 
-const OtherInfo = ({ setProfilepic }) => {
+const OtherInfo = () => {
   const [userData, setUserData] = useState(INITIAL_DATA);
   const [lang, setLang] = useState([languageData[0]]);
   const [tags, setTags] = useState([tagsData[0]]);
 
   const { data, isSuccess, isLoading } = useUserInfoDataQuery();
 
-  useEffect(() => {
-    if (isSuccess) {
-      setProfilepic(data[0]?.photo);
-    }
-  }, [data]);
+
 
   if (isSuccess) {
     console.log(data);
