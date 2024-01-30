@@ -5,7 +5,7 @@ const baseQuery = fetchBaseQuery({
   baseUrl: "http://localhost:8000/api",
   credentials: "include",
   prepareHeaders: (headers, { getState }) => {
-    const token = (getState() as RootState).auth.token;
+    const token = (getState() as RootState).auth.data.access_token;
     if (token) {
       headers.set("authorization", `Bearer ${token}`);
     }

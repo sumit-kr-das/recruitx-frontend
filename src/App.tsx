@@ -1,18 +1,20 @@
-import { Suspense, lazy } from "react";
-import { Toaster } from "react-hot-toast";
-import { useSelector } from "react-redux";
+import { Suspense, lazy, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { selectCurrentRole } from "./features/auth/authSlice";
 import Layout from "./layout/Layout";
 import UserProfilePage from "./pages/mnjuser/UserProfilePage";
 import SearchPage from "./pages/search/SearchPage";
+import { Toaster } from "./ui/toaster";
 
 // --------------------------- pages ---------------------------
 const HomePage = lazy(() => import("./pages/user/HomePage"));
 const AllCompanies = lazy(() => import("./pages/user/AllCompanies"));
 const CompanyDetails = lazy(() => import("./pages/user/CompanyDetails"));
 
-const Login = lazy(() => import("./pages/mnjuser/auth/Login"));
+const Login = lazy(() => import("./pages/auth/Login"));
+const VerifyUser = lazy(() => import("./pages/auth/VerifyUser"));
+
 const Register = lazy(() => import("./pages/mnjuser/auth/Register"));
 const UserHomePage = lazy(() => import("./pages/mnjuser/UserHomePage"));
 const JobDetailsPage = lazy(() => import("./pages/user/JobDetailsPage"));
@@ -43,39 +45,61 @@ const ErrorPage = lazy(() => import("./pages/error/ErrorPage"));
 const ViewAppliedPage = lazy(() => import("./pages/mnjuser/ViewAppliedPage"));
 
 // --------------------------- route authenticator ---------------------------
+import Loader from "./components/loader/Loader";
+import { useGetUserGlobalQuery } from "./features/user/get/getUserGlobalApiSlice";
+import { setUserData } from "./features/user/userSlice";
 import {
   AdminRoute,
   AuthenticateDashboard,
   AuthenticateRoute,
   CompanyRoute,
   UserRoute,
+  VerifyUserRoutes,
 } from "./protectedRoutes";
-import Loader from "./components/loader/Loader";
 
 const App = () => {
   const role = useSelector(selectCurrentRole);
+  // const { data, isLoading } = useGetUserGlobalQuery();
+  // const dispatch  = useDispatch()
+  if (!role) console.log("role", role);
+
+  // useEffect(() => {
+  //   if (role && role === "user" && !isLoading) {
+  //     console.log("user global data",data);
+  //     dispatch(setUserData(data));
+  //   }
+  // }, [role, isLoading, data, dispatch]);
+
   return (
     <BrowserRouter>
-      <Toaster position="bottom-right" reverseOrder={false} />
+      <Toaster />
       <Routes>
         {/* default */}
         <Route
           path="/"
           element={
-            <Suspense fallback={<Loader />}>
+            <AuthenticateRoute>
               <HomePage />
-            </Suspense>
+            </AuthenticateRoute>
           }
         />
-        {/* user */}
         <Route
-          path="/mnjuser/login"
+          path="/login"
           element={
             <AuthenticateRoute>
               <Login />
             </AuthenticateRoute>
           }
         />
+        <Route
+          path="/verify-user"
+          element={
+            <VerifyUserRoutes>
+              <VerifyUser />
+            </VerifyUserRoutes>
+          }
+        />
+        {/* user */}
         <Route
           path="/mnjuser/register"
           element={

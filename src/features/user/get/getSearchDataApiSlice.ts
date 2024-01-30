@@ -1,23 +1,18 @@
-
-import { apiSlice } from "../../app/api/apiSlice";
+import { apiSlice } from "../../../app/api/apiSlice";
 
 export const getSearchDataApiSlice = apiSlice.injectEndpoints({
-	endpoints: (builder) => ({
-		searchData: builder.mutation({
-			query: (credentials) => ({
-				url: "/job/search",
-				method: "POST",
-				body: { ...credentials },
-			}),
-		}),
-	}),
+  endpoints: (builder) => ({
+    searchData: builder.mutation({
+      query: (credentials) => ({
+        url: "/job/search",
+        method: "POST",
+        body: { ...credentials },
+      }),
+    }),
+  }),
 });
 
 export const { useSearchDataMutation } = getSearchDataApiSlice;
-
-
-
-
 
 // import { apiSlice } from "../../app/api/apiSlice";
 
@@ -37,4 +32,3 @@ export const { useSearchDataMutation } = getSearchDataApiSlice;
 // });
 
 // export const { useSearchDataQuery } = getSearchData;
-

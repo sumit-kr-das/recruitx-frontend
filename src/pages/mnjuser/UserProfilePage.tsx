@@ -8,15 +8,15 @@ import TopHeader from "../../components/navigation/TopHeader";
 import Container from "../../layout/Container";
 
 const UserProfilePage = () => {
-  const [profilepic, setProfilepic] = useState("")
+  
   return (
     <div className="bg-green-50">
       <TopHeader />
       <Container className="pt-24 w-full">
         {/* Basic info */}
-        <BasicInfo profilepic={profilepic} />
+        <BasicInfo />
         {/* Other info */}
-        <OtherInfo setProfilepic={setProfilepic} />
+        <OtherInfo  />
         {/* Educational details */}
         <UserEducation />
         {/* Career details */}

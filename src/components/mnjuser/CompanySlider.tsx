@@ -62,9 +62,6 @@ const CompanySlider = ({ slidesPerview, data }: props) => {
                   </p>
                   <p className="text-xs">120 reviews</p>
                 </div>
-                <Link to="/" className="text-blue-600 text-xs font-semibold">
-                  View all
-                </Link>
               </div>
             </Link>
           </SwiperSlide>

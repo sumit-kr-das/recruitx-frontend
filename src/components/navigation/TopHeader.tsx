@@ -1,15 +1,17 @@
+import { Search, X } from "lucide-react";
 import { useState } from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import MainLogo from "../../assets/logo.svg";
+import { recruiterMenu, userMenu } from "../../constants/recruterMenu";
 import {
   selectCurrentRole,
   selectCurrentUser,
 } from "../../features/auth/authSlice";
 import RadixMenu from "../../themes/RadixMenu";
-import { recruiterMenu, userMenu } from "../../constants/recruterMenu";
-import { Search, X } from "lucide-react";
+import { Button } from "../../ui/button";
 import SearchComponent from "../mnjuser/userHome/search/Search";
+import NavigationMenus from "./NavigationMenus";
 
 const TopHeader = () => {
   const [search, setSearch] = useState<boolean>(false);
@@ -17,42 +19,19 @@ const TopHeader = () => {
   const role = useSelector(selectCurrentRole);
   return (
     <header className=" bg-white shadow-sm fixed w-full z-20">
-      <nav className="max-w-screen-xl mx-auto py-5 flex items-center justify-between">
+      <nav className="max-w-screen-xl mx-auto px-4 py-5 flex items-center justify-between">
         <div className="flex items-center gap-12">
           <Link to="/">
             <img className="w-32" src={MainLogo} alt="main logo" />
           </Link>
-          <ul className="flex items-center gap-4">
-          <li>
-              <Link
-                to="/"
-                className="text-sm text-black relative after:absolute after:content-[''] after:h-[1.5px] after:w-0 after:-bottom-[4px] after:left-0 after:right-0  after:bg-black hover:after:w-full"
-              >
-                Home
-              </Link>
-            </li>
-            <li>
-              <Link
-                to="/mnjuser/jobs"
-                className="text-sm text-black relative after:absolute after:content-[''] after:h-[1.5px] after:w-0 after:-bottom-[4px] after:left-0 after:right-0  after:bg-black hover:after:w-full"
-              >
-                Jobs
-              </Link>
-            </li>
-            <li>
-              <Link
-                to="/mnjuser/companies"
-                className="text-sm text-black relative after:absolute after:content-[''] after:h-[1.5px] after:w-0 after:-bottom-[4px] after:left-0 after:right-0  after:bg-black hover:after:w-full"
-              >
-                Companies
-              </Link>
-            </li>
-          </ul>
+          <div className="hidden md:block">
+            <NavigationMenus />
+          </div>
         </div>
 
         {/* search */}
         {role && role === "user" && (
-          <div className="relative mx-auto  cursor-pointer">
+          <div className="relative mx-auto cursor-pointer">
             <div
               onClick={() => setSearch((prev) => !prev)}
               className="text-gray-400 flex items-center border-2 border-gray-300 bg-white h-10 px-5 pr-16 rounded-full text-sm focus:outline-none"
@@ -80,25 +59,14 @@ const TopHeader = () => {
           </div>
         )}
 
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-4 ">
           {!user ? (
             <>
-              <Link to="/mnjuser/login">
-                <button className="bg-cyan-500 text-white text-sm px-5 py-2 rounded-md hover:bg-cyan-600">
-                  Login
-                </button>
+              <Link to="/login">
+                <Button variant="outline">Login</Button>
               </Link>
               <Link to="/mnjuser/register">
-                <button className="bg-orange-500 text-white text-sm px-5 py-2 rounded-md hover:bg-orange-600">
-                  Register
-                </button>
-              </Link>
-
-              <Link
-                to="/recruit/login"
-                className="text-sm text-black relative after:absolute after:content-[''] after:h-[1.5px] after:w-0 after:-bottom-[4px] after:left-0 after:right-0  after:bg-black hover:after:w-full"
-              >
-                Employers/Admin Login
+                <Button>Sign Up</Button>
               </Link>
             </>
           ) : role && role === "user" ? (

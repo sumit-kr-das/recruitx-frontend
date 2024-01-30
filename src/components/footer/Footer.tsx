@@ -5,12 +5,15 @@ import MainLogo from "../../assets/logo.svg";
 
 const Footer = () => {
   return (
-    <footer className="bg-white">
+    <footer className="bg-white mt-5">
       <div className="max-w-screen-xl mx-auto py-10 flex justify-between">
         <div>
           <Link to="/">
             <img src={MainLogo} width={120} alt="main logo" />
           </Link>
+          <p className="mt-4">
+            All rights reserved ©2024 <b> RecruitX</b>
+          </p>
         </div>
         <div>
           <ul>
@@ -132,9 +135,6 @@ const Footer = () => {
             </Link>
           </div>
         </div>
-      </div>
-      <div className="max-w-screen-xl mx-auto mb-5 border-t">
-        <p className="pt-5">All rights reserved © 2023 RecruitX</p>
       </div>
     </footer>
   );
