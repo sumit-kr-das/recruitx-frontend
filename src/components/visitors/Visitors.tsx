@@ -6,11 +6,11 @@ const Visitors = () => {
     <section>
       <div className="mx-auto max-w-screen-xl px-4 py-12 sm:px-6 md:py-16 lg:px-8">
         <div className="mx-auto max-w-3xl text-center">
-          <h2 className="text-2xl font-extrabold">
-            Trusted by Jobseekers & Companies
+          <h2 className="text-4xl font-extrabold">
+            Trusted by  <span className="text-cyan-500"> Jobseekers & Companies</span>
           </h2>
 
-          <p className="mt-4 text-gray-500 sm:text-xl">
+          <p className="mt-4 sm:text-xl">
             Recruitx has a greate achivement of stats and proudly show it how we are chaning the hiring industry.
           </p>
         </div>
