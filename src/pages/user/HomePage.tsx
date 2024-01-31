@@ -106,7 +106,7 @@ const HomePage = () => {
     setloadJobs((prev) => prev + 3);
   };
 
-  console.log(companyData);
+  console.log(jobData);
 
   return (
     <>
