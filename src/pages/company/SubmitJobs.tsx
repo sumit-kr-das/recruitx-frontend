@@ -1,43 +1,90 @@
 import { FormEvent, useState } from "react";
-import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
-import { TINITIAL_JOB_DATA } from "../../@types/recruit/jobPost";
 import { INITIAL_JOB_DATA } from "../../@types/recruit/submitJob";
-import BasicInfo from "../../components/recruit/submitJob/BasicInfo";
-import TechnicalInfo from "../../components/recruit/submitJob/TechnicalInfo";
 import TitleBar from "../../components/recruit/titleBar/TitleBar";
-import useMultistepForm from "../../customHooks/useMultistepForm";
-import { usePostJobMutation } from "../../features/company/post/setJobApiSlice";
 import Container from "../../layout/Container";
-
+import JobPostSchema from "../../@types/zod/JobPostSchema";
+import { Controller, useForm } from "react-hook-form";
+import * as z from 'zod';
+import { zodResolver } from "@hookform/resolvers/zod";
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "../../ui/form";
+import { Input } from "../../ui/input";
+import { Textarea } from "../../ui/textarea";
+import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from "../../ui/select";
+import { industryTypes } from "../../constants/industryTypes";
+import SelectInput from "../../components/form/multiSelectInput/SelectInput";
+import { tagsData } from "../../constants/tagsData";
+import { jobRoles } from "../../constants/jobRoles";
+import { workPlaceTypes } from "../../constants/workplaceTypes";
+import { jobTypes } from "../../constants/jobTypes";
+import { qualificationData } from "../../constants/qualificationData";
+import { skillData } from "../../constants/skillData";
+import { Button } from "../../ui/button";
+import { usePostJobMutation } from "../../features/company/post/setJobApiSlice";
+import { useToast } from "../../ui/use-toast";
 const SubmitJob = () => {
-  const [data, setData] = useState(INITIAL_JOB_DATA);
-  const updateFields = (fields: Partial<TINITIAL_JOB_DATA>) => {
-    setData((prev) => {
-      return { ...prev, ...fields };
-    });
-  };
-  const {
-    setCurrentStepIndex,
-    currentStepIndex,
-    step,
-    isFirstStep,
-    isLastStep,
-    back,
-    next,
-  } = useMultistepForm([
-    <BasicInfo key="basic" {...data} updateFields={updateFields} />,
-    <TechnicalInfo key="technical" {...data} updateFields={updateFields} />,
-  ]);
-
-  const [postJob, { isLoading }] = usePostJobMutation();
+  // const [data, setData] = useState(INITIAL_JOB_DATA);
+  // const updateFields = (fields: Partial<TINITIAL_JOB_DATA>) => {
+  //   setData((prev) => {
+  //     return { ...prev, ...fields };
+  //   });
+  // };
+  const [submitJob, { isLoading }] = usePostJobMutation();
   const navigate = useNavigate();
+  const [step, setStep] = useState(0);
+  const [value, setValue] = useState([tagsData[0]]);
+  const [skills, setSkills] = useState([skillData[0]])
+  const { toast } = useToast();
 
-  const handleSubmit = async (e: FormEvent) => {
-    e.preventDefault();
-    if (!isLastStep) {
-      return next();
-    }
+  type FormValues = {
+    title: string,
+    category: string,
+    description: string,
+    tags: [string],
+    vacancies: number,
+    jobType: string
+    workplaceType: string,
+    startDate: Date,
+    endDate: Date,
+    roles: string,
+    skills: [string],
+    minExprience: number,
+    maxExprience: number,
+    minSalary: number,
+    maxSalary: number,
+    location: string,
+    maxQualification: string,
+    degree: string
+
+  }
+  const form = useForm<z.infer<typeof JobPostSchema>>({
+    resolver: zodResolver(JobPostSchema),
+    defaultValues: {
+      title: "",
+      category: "",
+      description: "",
+      tags: [],
+      vacancies: 0,
+      jobType: "",
+      workplaceType: "",
+      startDate: null,
+      endDate: null,
+      roles: "",
+      skills: [],
+      minExprience: "",
+      maxExprience: "",
+      minSalary: "",
+      maxSalary: "",
+      location: "",
+      maxQualification: "",
+      degree: ""
+    },
+  });
+
+
+  const postJob = async (data: FormValues) => {
+    console.log(data);
+
     const { title, category, description, tags, ...other } = data;
     const newJobData = {
       title,
@@ -48,57 +95,433 @@ const SubmitJob = () => {
     };
 
     try {
-      await postJob(newJobData).unwrap();
-      setData(INITIAL_JOB_DATA);
-      toast.success("Job posted successfully");
+      console.log(newJobData);
+      await submitJob(newJobData).unwrap();
+      toast({
+        description: "Job Submitted Successfully",
+      });
       navigate("/dashboard/my_jobs");
     } catch (err: any) {
-      toast.error(err.data.message);
+      toast({
+        variant: "destructive",
+        description: err?.data.message,
+      });
       console.log("Error on company register", err);
     }
   };
   return (
     <Container>
       <TitleBar title="Post Jobs" path="Employer / Dashboard / Post Jobs" />
-      <section className="w-full flex gap-10">
+      <section className="w-full flex gap-5">
         <div className="flex flex-col items-start gap-y-4">
-          <button
-            onClick={() => setCurrentStepIndex(0)}
-            className={` px-4 py-2 rounded-md text-white bg-cyan-400 ${
-              currentStepIndex == 0 && "bg-cyan-500"
-            }`}
+          <Button
+            onClick={() => setStep(0)}
+            className={` px-4 py-2 rounded-md text-white bg-cyan-400 ${step === 0 && "bg-cyan-500"
+              }`}
           >
             Basic Information
-          </button>
-          <button
-            onClick={() => setCurrentStepIndex(1)}
-            className={` px-4 py-2 rounded-md text-white bg-cyan-400 ${
-              currentStepIndex == 1 && "bg-cyan-500 "
-            }`}
+          </Button>
+          <Button
+            onClick={() => setStep(1)}
+            className={` px-4 py-2 rounded-md text-white bg-cyan-400 ${step === 1 && "bg-cyan-500 "
+              }`}
           >
             Technical Information
-          </button>
+          </Button>
         </div>
-        <div>
-          <form onSubmit={handleSubmit}>
-            <div className="space-y-12">{step}</div>
-            <div className="mt-6 flex items-center justify-end gap-x-6">
-              {!isFirstStep && (
-                <button
-                  onClick={back}
-                  className="text-sm font-semibold leading-6 text-gray-900"
-                >
-                  Back
-                </button>
-              )}
-              <button
-                type="submit"
-                className="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-              >
-                {isLastStep ? "Finish" : "Next"}
-              </button>
-            </div>
-          </form>
+
+
+        <div className="w-full h-auto flex justify-center">
+          <div className="h-fit rounded-xl bg-white p-10 mb-10 shadow md:w-[800px]">
+            <h2 className="text-base font-semibold leading-7 text-gray-900">
+              Basic information
+            </h2>
+            <p className="mt-1 text-sm leading-6 text-gray-600">
+              Increase the quality of your hire
+            </p>
+            <Form {...form}>
+              <form className="" onSubmit={form.handleSubmit(postJob)} >
+                {
+                  step === 0 && (<>
+                    <div className="flex flex-col">
+                      <FormField
+                        control={form.control}
+                        name="title"
+                        render={({ field }) => (
+                          <FormItem className="flex-1">
+                            <FormLabel>Job Title</FormLabel>
+                            <FormControl>
+                              <Input placeholder="Enter Title" {...field} />
+                            </FormControl>
+                            <FormMessage />
+                          </FormItem>
+                        )}
+                      />
+                      <FormField
+                        control={form.control}
+                        name="description"
+                        render={({ field }) => (
+                          <FormItem className="flex-1 mt-3">
+                            <FormLabel>Job Description</FormLabel>
+                            <FormControl>
+                              <Textarea rows={8} placeholder="Enter Description" {...field} />
+                            </FormControl>
+                            <FormMessage />
+                          </FormItem>
+                        )}
+                      />
+                      <FormField
+                        control={form.control}
+                        name="category"
+                        render={({ field }) => (
+                          <FormItem className="mt-3">
+                            <FormLabel>Job Category</FormLabel>
+                            <FormControl>
+                              <Select onValueChange={field.onChange} defaultValue={field.value}>
+                                <SelectTrigger className="w-full">
+                                  <SelectValue placeholder="Select Industry Type"
+                                  />
+                                </SelectTrigger>
+                                <SelectContent>
+                                  <SelectGroup>
+                                    {industryTypes.map((item, index) => (
+                                      <SelectItem value={item} key={index}>{item}</SelectItem>
+                                    ))}
+                                  </SelectGroup>
+                                </SelectContent>
+                                <FormMessage />
+
+                              </Select>
+                            </FormControl>
+
+                          </FormItem>
+                        )}
+                      />
+                      <FormField
+                        control={form.control}
+                        name="category"
+                        render={({ field }) => (
+                          <FormItem className="mt-3">
+                            <FormLabel>Select Tags</FormLabel>
+                            <FormControl>
+                              <Controller
+                                name="tags"
+                                control={form.control}
+                                defaultValue={[]}
+                                render={({ field }) => (
+                                  <SelectInput
+                                    multiple
+                                    options={tagsData}
+                                    value={value}
+                                    onChange={(selectedOptions) => {
+                                      setValue(selectedOptions);
+                                      // Update the RHF form value and trigger validation
+                                      field.onChange(selectedOptions);
+                                    }}
+                                  />
+                                )}
+                              />
+                            </FormControl>
+
+                          </FormItem>
+                        )}
+                      />
+                    </div>
+                  </>)
+                }
+                {
+                  step === 1 && (<>
+                    <div className="flex flex-col">
+                      <FormField
+                        control={form.control}
+                        name="roles"
+                        render={({ field }) => (
+                          <FormItem className="mt-3">
+                            <FormLabel>Select Role</FormLabel>
+                            <FormControl>
+                              <Select onValueChange={field.onChange} defaultValue={field.value}>
+                                <SelectTrigger className="w-full">
+                                  <SelectValue placeholder="Select Industry Type"
+                                  />
+                                </SelectTrigger>
+                                <SelectContent>
+                                  <SelectGroup>
+                                    {jobRoles.map((item, index) => (
+                                      <SelectItem value={item} key={index}>{item}</SelectItem>
+                                    ))}
+                                  </SelectGroup>
+                                </SelectContent>
+                                <FormMessage />
+                              </Select>
+                            </FormControl>
+                          </FormItem>
+                        )}
+                      />
+
+                      <FormField
+                        control={form.control}
+                        name="minExprience"
+                        render={({ field }) => (
+                          <FormItem className="flex-1">
+                            <FormLabel>Job Title</FormLabel>
+                            <FormControl>
+                              <Input placeholder="Enter miminum exprience" {...field} />
+                            </FormControl>
+                            <FormMessage />
+                          </FormItem>
+                        )}
+                      />
+                      <FormField
+                        control={form.control}
+                        name="maxExprience"
+                        render={({ field }) => (
+                          <FormItem className="flex-1">
+                            <FormLabel>Maximum Exprience</FormLabel>
+                            <FormControl>
+                              <Input placeholder="Enter maximum exprience" {...field} />
+                            </FormControl>
+                            <FormMessage />
+                          </FormItem>
+                        )}
+                      />
+
+                      <FormField
+                        control={form.control}
+                        name="workplaceType"
+                        render={({ field }) => (
+                          <FormItem className="mt-3">
+                            <FormLabel>Select Role</FormLabel>
+                            <FormControl>
+                              <Select onValueChange={field.onChange} defaultValue={field.value}>
+                                <SelectTrigger className="w-full">
+                                  <SelectValue placeholder="Select workspace type"
+                                  />
+                                </SelectTrigger>
+                                <SelectContent>
+                                  <SelectGroup>
+                                    {workPlaceTypes.map((item, index) => (
+                                      <SelectItem value={item} key={index}>{item}</SelectItem>
+                                    ))}
+                                  </SelectGroup>
+                                </SelectContent>
+                                <FormMessage />
+                              </Select>
+                            </FormControl>
+                          </FormItem>
+                        )}
+                      />
+
+                      <FormField
+                        control={form.control}
+                        name="jobType"
+                        render={({ field }) => (
+                          <FormItem className="mt-3">
+                            <FormLabel>Select Role</FormLabel>
+                            <FormControl>
+                              <Select onValueChange={field.onChange} defaultValue={field.value}>
+                                <SelectTrigger className="w-full">
+                                  <SelectValue placeholder="Select job type"
+                                  />
+                                </SelectTrigger>
+                                <SelectContent>
+                                  <SelectGroup>
+                                    {jobTypes.map((item, index) => (
+                                      <SelectItem value={item} key={index}>{item}</SelectItem>
+                                    ))}
+                                  </SelectGroup>
+                                </SelectContent>
+                                <FormMessage />
+                              </Select>
+                            </FormControl>
+                          </FormItem>
+                        )}
+                      />
+
+                      <FormField
+                        control={form.control}
+                        name="location"
+                        render={({ field }) => (
+                          <FormItem className="flex-1 mt-3">
+                            <FormLabel>Enter location</FormLabel>
+                            <FormControl>
+                              <Input placeholder="Enter maximum exprience" {...field} />
+                            </FormControl>
+                            <FormMessage />
+                          </FormItem>
+                        )}
+                      />
+
+                      <FormField
+                        control={form.control}
+                        name="vacancies"
+                        render={({ field }) => (
+                          <FormItem className="flex-1 mt-3">
+                            <FormLabel>Enter No of Vacancies</FormLabel>
+                            <FormControl>
+                              <Input placeholder="Enter No of Vacancies" {...field} />
+                            </FormControl>
+                            <FormMessage />
+                          </FormItem>
+                        )}
+                      />
+
+                      <FormField
+                        control={form.control}
+                        name="minSalary"
+                        render={({ field }) => (
+                          <FormItem className="flex-1 mt-3">
+                            <FormLabel>Minimum Salary</FormLabel>
+                            <FormControl>
+                              <Input placeholder="Enter Minimum Salary" {...field} />
+                            </FormControl>
+                            <FormMessage />
+                          </FormItem>
+                        )}
+                      />
+
+                      <FormField
+                        control={form.control}
+                        name="maxSalary"
+                        render={({ field }) => (
+                          <FormItem className="flex-1 mt-3">
+                            <FormLabel>Maximum Salary</FormLabel>
+                            <FormControl>
+                              <Input placeholder="Enter Maximum Salary" {...field} />
+                            </FormControl>
+                            <FormMessage />
+                          </FormItem>
+                        )}
+                      />
+
+                      <FormField
+                        control={form.control}
+                        name="maxQualification"
+                        render={({ field }) => (
+                          <FormItem className="mt-3">
+                            <FormLabel>Select max qualification</FormLabel>
+                            <FormControl>
+                              <Select onValueChange={field.onChange} defaultValue={field.value}>
+                                <SelectTrigger className="w-full">
+                                  <SelectValue placeholder="Select max qualification"
+                                  />
+                                </SelectTrigger>
+                                <SelectContent>
+                                  <SelectGroup>
+                                    {qualificationData.map((item, index) => (
+                                      <SelectItem value={item} key={index}>{item}</SelectItem>
+                                    ))}
+                                  </SelectGroup>
+                                </SelectContent>
+                                <FormMessage />
+                              </Select>
+                            </FormControl>
+                          </FormItem>
+                        )}
+                      />
+
+                      <FormField
+                        control={form.control}
+                        name="degree"
+                        render={({ field }) => (
+                          <FormItem className="flex-1 mt-3">
+                            <FormLabel>Enter Degree Title</FormLabel>
+                            <FormControl>
+                              <Input placeholder="Enter Degree" {...field} />
+                            </FormControl>
+                            <FormMessage />
+                          </FormItem>
+                        )}
+                      />
+
+                      <FormField
+                        control={form.control}
+                        name="startDate"
+                        render={({ field }) => (
+                          <FormItem className="flex-1 mt-3">
+                            <FormLabel>Start Date</FormLabel>
+                            <FormControl>
+                              <Input type="date"  {...field} />
+                            </FormControl>
+                            <FormMessage />
+                          </FormItem>
+                        )}
+                      />
+
+                      <FormField
+                        control={form.control}
+                        name="endDate"
+                        render={({ field }) => (
+                          <FormItem className="flex-1 mt-3">
+                            <FormLabel>End Date</FormLabel>
+                            <FormControl>
+                              <Input type="date"  {...field} />
+                            </FormControl>
+                            <FormMessage />
+                          </FormItem>
+                        )}
+                      />
+
+                      <FormField
+                        control={form.control}
+                        name="category"
+                        render={({ field }) => (
+                          <FormItem className="mt-3">
+                            <FormLabel>Select Tags</FormLabel>
+                            <FormControl>
+                              <Controller
+                                name="skills"
+                                control={form.control}
+                                defaultValue={[]}
+                                render={({ field }) => (
+                                  <SelectInput
+                                    multiple
+                                    options={skillData}
+                                    value={skills}
+                                    onChange={(selectedOptions) => {
+                                      setSkills(selectedOptions);
+                                      // Update the RHF form value and trigger validation
+                                      field.onChange(selectedOptions);
+                                    }}
+                                  />
+                                )}
+                              />
+                            </FormControl>
+
+                          </FormItem>
+                        )}
+                      />
+
+                    </div>
+                  </>)
+                }
+
+                <div className="mt-6 flex items-center justify-end gap-x-6">
+                  {step === 1 && (
+                    <Button
+                      onClick={() => setStep(0)}
+                    >
+                      Back
+                    </Button>
+                  )}
+                  {
+                    step === 1 ? (
+                      <Button
+                        type="submit"
+                      >
+                        Finish
+                      </Button>
+                    ) : (
+                      <Button
+                        onClick={() => setStep(1)}
+                      >
+                        Next
+                      </Button>
+                    )
+                  }
+                </div>
+              </form>
+            </Form>
+          </div>
         </div>
       </section>
     </Container>

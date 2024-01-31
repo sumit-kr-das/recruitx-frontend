@@ -216,7 +216,7 @@ const CompanyRegister = () => {
 												control={form.control}
 												name="industry"
 												render={({ field }) => (
-													<Select onValueChange={field.onChange} defaultValue={field.value} >
+													<Select onValueChange={field.onChange} defaultValue={field.value}>
 														<SelectTrigger className="w-full">
 															<SelectValue placeholder="Select Industry Type"
 															/>
