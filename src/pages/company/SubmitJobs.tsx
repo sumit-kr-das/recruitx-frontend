@@ -40,14 +40,14 @@ const SubmitJob = () => {
     title: string,
     category: string,
     description: string,
-    tags: [string],
+    tags: string[],
     vacancies: number,
     jobType: string
     workplaceType: string,
-    startDate: Date,
-    endDate: Date,
+    startDate: string,
+    endDate: string,
     roles: string,
-    skills: [string],
+    skills: string[],
     minExprience: number,
     maxExprience: number,
     minSalary: number,
@@ -67,14 +67,14 @@ const SubmitJob = () => {
       vacancies: 0,
       jobType: "",
       workplaceType: "",
-      startDate: null,
-      endDate: null,
+      startDate: "",
+      endDate: "",
       roles: "",
       skills: [],
-      minExprience: "",
-      maxExprience: "",
-      minSalary: "",
-      maxSalary: "",
+      minExprience: 0,
+      maxExprience: 0,
+      minSalary: 0,
+      maxSalary: 0,
       location: "",
       maxQualification: "",
       degree: ""
@@ -199,7 +199,7 @@ const SubmitJob = () => {
                       />
                       <FormField
                         control={form.control}
-                        name="category"
+                        name="tags"
                         render={({ field }) => (
                           <FormItem className="mt-3">
                             <FormLabel>Select Tags</FormLabel>
@@ -263,7 +263,7 @@ const SubmitJob = () => {
                         name="minExprience"
                         render={({ field }) => (
                           <FormItem className="flex-1">
-                            <FormLabel>Job Title</FormLabel>
+                            <FormLabel>Minimum Exprience</FormLabel>
                             <FormControl>
                               <Input placeholder="Enter miminum exprience" {...field} />
                             </FormControl>
@@ -463,7 +463,7 @@ const SubmitJob = () => {
 
                       <FormField
                         control={form.control}
-                        name="category"
+                        name="skills"
                         render={({ field }) => (
                           <FormItem className="mt-3">
                             <FormLabel>Select Tags</FormLabel>
