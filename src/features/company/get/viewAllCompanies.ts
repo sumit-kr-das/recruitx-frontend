@@ -3,8 +3,8 @@ import { apiSlice } from "../../../app/api/apiSlice";
 
 export const viewAllCompaniesApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
-    viewAllCompanies: builder.query<TCompany[], void>({
-      query: () => "/company/views",
+    viewAllCompanies: builder.query<TCompany[], { limit: number }>({
+      query: ({ limit }) => `/company/views?limit=${limit}`,
       providesTags: ["Company"],
     }),
   }),

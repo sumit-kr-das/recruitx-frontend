@@ -107,3 +107,33 @@ input {
     @apply bg-background text-foreground;
   }
 }
+
+/* utility classes */
+
+@keyframes scrollX {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-100%);
+  }
+}
+
+.marquee {
+  animation: scrollX 30s linear infinite;
+}
+
+.marquee-reverse {
+  animation-direction: reverse;
+  animation-delay: -3s;
+}
+
+.mask-gradient {
+  mask-image: linear-gradient(
+    to right,
+    hsl(0 0% 0% / 0),
+    hsl(0 0% 0% / 1) 10%,
+    hsl(0 0% 0% / 1) 90%,
+    hsl(0 0% 0% / 0)
+  );
+}
