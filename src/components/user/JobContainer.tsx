@@ -3,7 +3,7 @@ import DefaultCompany from "../../assets/default-company-logo.png";
 
 const JobContainer = ({ data }) => {
   return (
-    <div className="w-[350px] h-[350px] p-6 shadow border rounded-xl">
+    <div className="bg-white w-[350px] h-[350px] p-6 shadow border rounded-xl">
       <div className="flex items-center gap-2">
         <img
           className="w-[60px] h-[60px] rounded-full object-cover"

@@ -1,35 +1,20 @@
-import { useGetWebStatsQuery } from "../../features/statics/getWebStatsApiSlice";
-
-const Visitors = () => {
-  const { data } = useGetWebStatsQuery();
+const Visitors = ({ data }) => {
   return (
-    <div className="max-w-screen-xl">
-    <div className="">
-      <div className="flex flex-col rounded-lg bg-white border shadow px-4 py-8 text-center">
-        <dt className="order-last text-lg font-medium text-gray-500">
-          Total Companies
-        </dt>
-        <dd className="text-4xl font-extrabold text-blue-600 md:text-5xl">
-          {data?.companies}
-        </dd>
+    <div className="w-full">
+      <div className="flex items-center justify-center gap-8">
+        <div className="flex items-center flex-col">
+          <h2 className="font-semibold">Total Users</h2>
+          <h1 className="text-9xl font-bold">{data?.users}</h1>
+        </div>
+        <div className="flex items-center flex-col">
+          <h2 className="font-semibold">Total Companies</h2>
+          <h1 className="text-9xl font-bold">{data?.companies}</h1>
+        </div>
+        <div className="flex items-center flex-col">
+          <h2 className="font-semibold">Total Jobs</h2>
+          <h1 className="text-9xl font-bold">{data?.jobs}</h1>
+        </div>
       </div>
-      <div className="flex flex-col rounded-lg bg-white border shadow px-4 py-8 text-center">
-        <dt className="order-last text-lg font-medium text-gray-500">
-          Total Jobs
-        </dt>
-        <dd className="text-4xl font-extrabold text-blue-600 md:text-5xl">
-          {data?.jobs}
-        </dd>
-      </div>
-      <div className="flex flex-col rounded-lg bg-white border shadow px-4 py-8 text-center">
-        <dt className="order-last text-lg font-medium text-gray-500">
-          Total Users
-        </dt>
-        <dd className="text-4xl font-extrabold text-blue-600 md:text-5xl">
-          {data?.users}
-        </dd>
-      </div>
-    </div>
     </div>
   );
 };

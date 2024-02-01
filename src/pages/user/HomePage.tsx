@@ -12,6 +12,7 @@ import { useViewAllCompaniesQuery } from "../../features/company/get/viewAllComp
 import { useGetAllJobsQuery } from "../../features/user/get/getAllJobsApiSlice";
 import Container from "../../layout/Container";
 import Steps from "../../components/user/Steps";
+import { useGetWebStatsQuery } from "../../features/statics/getWebStatsApiSlice";
 
 const HomePage = () => {
   const [loadjobs, setloadJobs] = useState(6);
@@ -23,6 +24,7 @@ const HomePage = () => {
   const { data: companyData } = useViewAllCompaniesQuery({
     limit: loadcompanies,
   });
+  const { data: stats } = useGetWebStatsQuery();
 
   const handleLoadJobs = () => {
     setloadJobs((prev) => prev + 3);
@@ -30,11 +32,8 @@ const HomePage = () => {
   const handleLoadCompanyes = () => {
     setLoadCompanies((prev) => prev + 3);
   };
-
-  console.log(companyData);
-
   return (
-    <>
+    <div className="bg-[#FAFAFA]">
       <TopHeader />
       <Container className="pt-32">
         <UserHero />
@@ -48,39 +47,45 @@ const HomePage = () => {
           <Steps />
         </UserTitleWrapper>
         {/* Jobs */}
-        <UserTitleWrapper
-          title="Top companies"
-          titleVariant="hiring no"
-          des="Some recent comapnies are finding candidates for their urgent
+        {jobData && (
+          <UserTitleWrapper
+            title="Top companies"
+            titleVariant="hiring no"
+            des="Some recent comapnies are finding candidates for their urgent
               roles here."
-          handleLoadJobs={handleLoadJobs}
-        >
-          {jobData?.map((item, index) => (
-            <JobContainer key={index} data={item} />
-          ))}
-        </UserTitleWrapper>
+            handleLoadJobs={handleLoadJobs}
+          >
+            {jobData?.map((item, index) => (
+              <JobContainer key={index} data={item} />
+            ))}
+          </UserTitleWrapper>
+        )}
         {/* Companies */}
-        <UserTitleWrapper
-          title="Featured companies"
-          titleVariant="actively hiring"
-          des="Popular companies are hiring actively the skilled and suitable
+        {companyData && (
+          <UserTitleWrapper
+            title="Featured companies"
+            titleVariant="actively hiring"
+            des="Popular companies are hiring actively the skilled and suitable
           candidates on recruitx."
-          handleLoadJobs={handleLoadCompanyes}
-        >
-          {[...Array(8)]?.map((item, index) => (
-            <CompanyContainer key={index} data={item} />
-          ))}
-        </UserTitleWrapper>
-        <UserTitleWrapper
-          title="Trusted by"
-          titleVariant="Jobseekers & Companies"
-          des="Recruitx has a greate achivement of stats and proudly show it how we are chaning the hiring industry."
-        >
-          <Visitors />
-        </UserTitleWrapper>
+            handleLoadJobs={handleLoadCompanyes}
+          >
+            {[...Array(8)]?.map((item, index) => (
+              <CompanyContainer key={index} data={item} />
+            ))}
+          </UserTitleWrapper>
+        )}
+        {stats && (
+          <UserTitleWrapper
+            title="Trusted by"
+            titleVariant="Jobseekers & Companies"
+            des="Recruitx has a greate achivement of stats and proudly show it how we are chaning the hiring industry."
+          >
+            <Visitors data={stats} />
+          </UserTitleWrapper>
+        )}
       </Container>
       <Footer />
-    </>
+    </div>
   );
 };
 

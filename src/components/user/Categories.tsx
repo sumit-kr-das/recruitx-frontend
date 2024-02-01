@@ -3,14 +3,14 @@ import { skillData } from "../../constants/skillData";
 
 const Categories = () => {
   return (
-    <div className="w-full relative mt-10">
+    <div className="w-full relative mt-20">
       {/* marquee */}
       <div className="flex w-full select-none overflow-hidden mask-gradient">
         {/* marqueeGroup */}
         <div className="w-full flex items-center gap-4 shrink-0 whitespace-nowrap marquee">
           {skillData.map((item, index) => (
             <div
-              className="grid place-items-center border border-gray-600 px-4 py-1 rounded-full"
+              className="bg-white grid place-items-center border px-4 py-1 rounded-full"
               key={index}
             >
               <p className="text-sm font-semibold capitalize">{item}</p>
@@ -24,7 +24,7 @@ const Categories = () => {
         <div className="w-full flex items-center gap-4 shrink-0 whitespace-nowrap marquee marquee-reverse">
           {jobRoles.map((item, index) => (
             <div
-              className="grid place-items-center border border-black px-4 py-1 rounded-full"
+              className="bg-white grid place-items-center border px-4 py-1 rounded-full"
               key={index}
             >
               <p className="text-sm font-semibold capitalize">{item}</p>

@@ -2,7 +2,7 @@ import DefaultCompany from "../../assets/default-company-logo.png";
 
 const CompanyContainer = () => {
   return (
-    <div className="w-[300px] h-[300px] flex items-center flex-col justify-center text-center p-6 shadow border rounded-xl">
+    <div className="bg-white w-[300px] h-[300px] flex items-center flex-col justify-center text-center p-6 shadow border rounded-xl mt-8">
       <img
         className="relative -top-[30px] w-[140px] h-[140px] rounded-full object-cover"
         src={DefaultCompany}

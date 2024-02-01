@@ -24,12 +24,12 @@ const UserTitleWrapper = ({
         </h1>
         <p className="mt-4 sm:text-xl/relaxed">{des}</p>
       </div>
-      <div className="flex items-center justify-between flex-wrap gap-y-8">
+      <div className="flex items-center justify-between flex-wrap gap-y-10">
         {children}
       </div>
       {handleLoadJobs && (
         <div className="mt-8 flex items-center justify-center">
-          <Button onClick={handleLoadJobs}>Load more ...</Button>
+          <Button onClick={handleLoadJobs}>Load more</Button>
         </div>
       )}
     </div>

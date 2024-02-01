@@ -19,7 +19,7 @@ const Search = () => {
 
   return (
     <div className="w-full flex items-center justify-center">
-      <div className="w-8/12 flex items-center justify-center gap-4 border-2 rounded-lg shadow px-3 py-2">
+      <div className="bg-white w-8/12 flex items-center justify-center gap-4 border-2 rounded-lg shadow px-3 py-2">
         <div className="flex items-center justify-center gap-1 flex-1">
           <SearchIcn className="w-4  h-4 text-gray-400" />
           <input
