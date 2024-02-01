@@ -47,8 +47,24 @@ const CompanyRegister = () => {
 		},
 	});
 
+	const steps = [
+		{
+			fields: ['name', 'email', 'phone', 'password']
+		}
+	]
+
 	const [cRegister, { isLoading }] = useCRegisterMutation();
 	const dispatch = useDispatch();
+	type FieldName = keyof z.infer<typeof CompanyRegisterSchema>
+
+	const next = async () => {
+		const fields = steps[0].fields
+
+		const output = await form.trigger(fields as FieldName[], { shouldFocus: true })
+
+		if (!output) return
+		setStep(1);
+	}
 
 	const registerCompany = async (data: FormValues) => {
 		try {
@@ -243,7 +259,7 @@ const CompanyRegister = () => {
 											<>
 												<Button
 													className="w-full mt-4"
-													onClick={() => setStep(1)}
+													onClick={next}
 												>
 													Next
 												</Button>

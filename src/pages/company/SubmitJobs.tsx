@@ -58,9 +58,13 @@ const SubmitJob = () => {
   const steps = [
     {
       id: 'Step 1',
-      name: 'Personal Information',
+      name: 'Basic Information',
       fields: ['title', 'category', 'description', 'tags']
     },
+    {
+      id: 'Step 2',
+      name: 'Technical Infomation'
+    }
   ]
 
   const form = useForm<z.infer<typeof JobPostSchema>>({
@@ -158,7 +162,8 @@ const SubmitJob = () => {
         <div className="w-full h-auto flex justify-center">
           <div className="h-fit rounded-xl bg-white p-10 mb-10 shadow md:w-[800px]">
             <h2 className="text-base font-semibold leading-7 text-gray-900">
-              Basic information
+              {steps[step]?.name}
+
             </h2>
             <p className="mt-1 text-sm leading-6 text-gray-600">
               Increase the quality of your hire
