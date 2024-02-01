@@ -24,7 +24,7 @@ const UserTitleWrapper = ({
         </h1>
         <p className="mt-4 sm:text-xl/relaxed">{des}</p>
       </div>
-      <div className="flex items-center justify-between flex-wrap gap-y-10">
+      <div className="flex items-center justify-center md:justify-between flex-wrap gap-y-10">
         {children}
       </div>
       {handleLoadJobs && (

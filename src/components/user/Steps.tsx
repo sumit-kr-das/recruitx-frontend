@@ -29,7 +29,7 @@ const stepsData = [
 
 const Steps = () => {
   return (
-    <div className="flex items-center justify-between gap-4">
+    <div className="flex items-center justify-between flex-col md:flex-row gap-4">
       {stepsData.map((item, index) => (
         <div
           key={index}
