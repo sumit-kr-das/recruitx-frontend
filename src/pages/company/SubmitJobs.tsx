@@ -55,7 +55,13 @@ const SubmitJob = () => {
   const [skills, setSkills] = useState([skillData[0]])
   const { toast } = useToast();
 
-
+  const steps = [
+    {
+      id: 'Step 1',
+      name: 'Personal Information',
+      fields: ['title', 'category', 'description', 'tags']
+    },
+  ]
 
   const form = useForm<z.infer<typeof JobPostSchema>>({
     resolver: zodResolver(JobPostSchema),
@@ -81,6 +87,16 @@ const SubmitJob = () => {
     },
     mode: "onSubmit"
   });
+  type FieldName = keyof z.infer<typeof JobPostSchema>
+
+  const next = async () => {
+    const fields = steps[0].fields
+
+    const output = await form.trigger(fields as FieldName[], { shouldFocus: true })
+
+    if (!output) return
+    setStep(1);
+  }
 
   // const { errors } = formState;
   const postJob = async (data: FormValues) => {
@@ -504,7 +520,32 @@ const SubmitJob = () => {
                 }
 
                 <div className="mt-6 flex items-center justify-end gap-x-6">
-                  {step === 1 && (
+                  {
+                    step === 0 && (<>
+                      <Button
+                        onClick={next}
+                        type="button"
+                      >
+                        Next
+                      </Button>
+                    </>)
+                  }
+                  {
+                    step === 1 && (<>
+                      <Button
+                        onClick={() => setStep(0)}
+                      >
+                        Back
+                      </Button>
+                      <Button
+                        type="submit"
+                      >
+                        Finish
+                      </Button>
+
+                    </>)
+                  }
+                  {/* {step === 1 && (
                     <Button
                       onClick={() => setStep(0)}
                     >
@@ -520,12 +561,13 @@ const SubmitJob = () => {
                       </Button>
                     ) : (
                       <Button
-                        onClick={() => setStep(1)}
+                        onClick={next}
+                        type="button"
                       >
                         Next
                       </Button>
                     )
-                  }
+                  } */}
                 </div>
               </form>
             </Form>
