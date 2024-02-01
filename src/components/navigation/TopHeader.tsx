@@ -12,6 +12,7 @@ import RadixMenu from "../../themes/RadixMenu";
 import { Button } from "../../ui/button";
 import SearchComponent from "../mnjuser/userHome/search/Search";
 import NavigationMenus from "./NavigationMenus";
+import Sidebar from "./Sidebar";
 
 const TopHeader = () => {
   const [search, setSearch] = useState<boolean>(false);
@@ -59,7 +60,7 @@ const TopHeader = () => {
           </div>
         )}
 
-        <div className="flex items-center gap-4 ">
+        <div className="hidden md:flex items-center gap-4">
           {!user ? (
             <>
               <Link to="/login">
@@ -74,6 +75,9 @@ const TopHeader = () => {
           ) : (
             <RadixMenu menu={recruiterMenu} />
           )}
+        </div>
+        <div className="md:hidden">
+          <Sidebar />
         </div>
       </nav>
     </header>
