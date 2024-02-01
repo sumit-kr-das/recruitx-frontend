@@ -1,6 +1,5 @@
-import { FormEvent, useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { INITIAL_JOB_DATA } from "../../@types/recruit/submitJob";
 import TitleBar from "../../components/recruit/titleBar/TitleBar";
 import Container from "../../layout/Container";
 import JobPostSchema from "../../@types/zod/JobPostSchema";
@@ -22,6 +21,26 @@ import { skillData } from "../../constants/skillData";
 import { Button } from "../../ui/button";
 import { usePostJobMutation } from "../../features/company/post/setJobApiSlice";
 import { useToast } from "../../ui/use-toast";
+type FormValues = {
+  title: string,
+  category: string,
+  description: string,
+  tags: string[],
+  vacancies: string,
+  jobType: string
+  workplaceType: string,
+  startDate: string,
+  endDate: string,
+  roles: string,
+  skills: string[],
+  minExprience: string,
+  maxExprience: string,
+  minSalary: string,
+  maxSalary: string,
+  location: string,
+  maxQualification: string,
+  degree: string
+}
 const SubmitJob = () => {
   // const [data, setData] = useState(INITIAL_JOB_DATA);
   // const updateFields = (fields: Partial<TINITIAL_JOB_DATA>) => {
@@ -36,27 +55,8 @@ const SubmitJob = () => {
   const [skills, setSkills] = useState([skillData[0]])
   const { toast } = useToast();
 
-  type FormValues = {
-    title: string,
-    category: string,
-    description: string,
-    tags: string[],
-    vacancies: number,
-    jobType: string
-    workplaceType: string,
-    startDate: string,
-    endDate: string,
-    roles: string,
-    skills: string[],
-    minExprience: number,
-    maxExprience: number,
-    minSalary: number,
-    maxSalary: number,
-    location: string,
-    maxQualification: string,
-    degree: string
 
-  }
+
   const form = useForm<z.infer<typeof JobPostSchema>>({
     resolver: zodResolver(JobPostSchema),
     defaultValues: {
@@ -64,28 +64,36 @@ const SubmitJob = () => {
       category: "",
       description: "",
       tags: [],
-      vacancies: 0,
+      vacancies: '',
       jobType: "",
       workplaceType: "",
       startDate: "",
       endDate: "",
       roles: "",
       skills: [],
-      minExprience: 0,
-      maxExprience: 0,
-      minSalary: 0,
-      maxSalary: 0,
+      minExprience: '',
+      maxExprience: '',
+      minSalary: '0',
+      maxSalary: '',
       location: "",
       maxQualification: "",
       degree: ""
     },
+    mode: "onSubmit"
   });
 
-
+  // const { errors } = formState;
   const postJob = async (data: FormValues) => {
     console.log(data);
-
-    const { title, category, description, tags, ...other } = data;
+    const convertedData = {
+      ...data,
+      vacancies: parseInt(data.vacancies.toString(), 10),
+      minExprience: parseInt(data.minExprience.toString(), 10),
+      maxExprience: parseInt(data.maxExprience.toString(), 10),
+      minSalary: parseInt(data.minSalary.toString(), 10),
+      maxSalary: parseInt(data.maxSalary.toString(), 10),
+    };
+    const { title, category, description, tags, ...other } = convertedData;
     const newJobData = {
       title,
       category,
@@ -166,7 +174,7 @@ const SubmitJob = () => {
                             <FormControl>
                               <Textarea rows={8} placeholder="Enter Description" {...field} />
                             </FormControl>
-                            <FormMessage />
+                            {/* <FormMessage>{errors.description?.message}</FormMessage> */}
                           </FormItem>
                         )}
                       />
