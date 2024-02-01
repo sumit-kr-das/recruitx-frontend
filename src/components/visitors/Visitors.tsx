@@ -1,4 +1,10 @@
-const Visitors = ({ data }) => {
+import { TWebStats } from "../../@types/publicTypes/TWebStats";
+
+type TStatProp = {
+  data: TWebStats;
+};
+
+const Visitors = ({ data }: TStatProp) => {
   return (
     <div className="w-full">
       <div className="flex items-center justify-center gap-8">
