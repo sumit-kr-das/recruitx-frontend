@@ -1,55 +1,21 @@
-import { useGetWebStatsQuery } from "../../features/statics/getWebStatsApiSlice";
-
-const Visitors = () => {
-  const { data } = useGetWebStatsQuery();
+const Visitors = ({ data }) => {
   return (
-    <section>
-      <div className="mx-auto max-w-screen-xl px-4 py-12 sm:px-6 md:py-16 lg:px-8">
-        <div className="mx-auto max-w-3xl text-center">
-          <h2 className="text-4xl font-extrabold">
-            Trusted by  <span className="text-cyan-500"> Jobseekers & Companies</span>
-          </h2>
-
-          <p className="mt-4 sm:text-xl">
-            Recruitx has a greate achivement of stats and proudly show it how we are chaning the hiring industry.
-          </p>
+    <div className="w-full">
+      <div className="flex items-center justify-center gap-8">
+        <div className="flex items-center flex-col">
+          <h2 className="font-semibold">Total Users</h2>
+          <h1 className="text-9xl font-bold">{data?.users}</h1>
         </div>
-
-        <div className="mt-8 sm:mt-12">
-          <dl className="grid grid-cols-1 gap-4 sm:grid-cols-3">
-            <div className="flex flex-col rounded-lg bg-blue-100 px-4 py-8 text-center">
-              <dt className="order-last text-lg font-medium text-gray-500">
-                Total Companies
-              </dt>
-
-              <dd className="text-4xl font-extrabold text-blue-600 md:text-5xl">
-                {data?.companies}
-              </dd>
-            </div>
-
-            <div className="flex flex-col rounded-lg bg-blue-100 px-4 py-8 text-center">
-              <dt className="order-last text-lg font-medium text-gray-500">
-                Total Jobs
-              </dt>
-
-              <dd className="text-4xl font-extrabold text-blue-600 md:text-5xl">
-                {data?.jobs}
-              </dd>
-            </div>
-
-            <div className="flex flex-col rounded-lg bg-blue-100 px-4 py-8 text-center">
-              <dt className="order-last text-lg font-medium text-gray-500">
-                Total Users
-              </dt>
-
-              <dd className="text-4xl font-extrabold text-blue-600 md:text-5xl">
-                {data?.users}
-              </dd>
-            </div>
-          </dl>
+        <div className="flex items-center flex-col">
+          <h2 className="font-semibold">Total Companies</h2>
+          <h1 className="text-9xl font-bold">{data?.companies}</h1>
+        </div>
+        <div className="flex items-center flex-col">
+          <h2 className="font-semibold">Total Jobs</h2>
+          <h1 className="text-9xl font-bold">{data?.jobs}</h1>
         </div>
       </div>
-    </section>
+    </div>
   );
 };
 
