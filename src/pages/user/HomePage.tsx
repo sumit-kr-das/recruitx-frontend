@@ -29,9 +29,11 @@ const HomePage = () => {
   const handleLoadJobs = () => {
     setloadJobs((prev) => prev + 3);
   };
+
   const handleLoadCompanyes = () => {
     setLoadCompanies((prev) => prev + 3);
   };
+
   return (
     <div className="bg-[#FAFAFA]">
       <TopHeader />
