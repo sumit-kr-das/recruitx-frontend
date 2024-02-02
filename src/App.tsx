@@ -59,16 +59,16 @@ import {
 
 const App = () => {
   const role = useSelector(selectCurrentRole);
-  // const { data, isLoading } = useGetUserGlobalQuery();
-  // const dispatch  = useDispatch()
+  const { data } = useGetUserGlobalQuery();
+  const dispatch  = useDispatch()
   if (!role) console.log("role", role);
 
-  // useEffect(() => {
-  //   if (role && role === "user" && !isLoading) {
-  //     console.log("user global data",data);
-  //     dispatch(setUserData(data));
-  //   }
-  // }, [role, isLoading, data, dispatch]);
+  useEffect(() => {
+    if (role && role === "user" && data) {
+      console.log("user global data",data);
+      dispatch(setUserData(data));
+    }
+  }, [role, data, dispatch]);
 
   return (
     <BrowserRouter>

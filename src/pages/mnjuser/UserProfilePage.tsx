@@ -10,7 +10,7 @@ import Container from "../../layout/Container";
 const UserProfilePage = () => {
   
   return (
-    <div className="bg-green-50">
+    <div className="bg-[#FAFAFA]">
       <TopHeader />
       <Container className="pt-24 w-full">
         {/* Basic info */}

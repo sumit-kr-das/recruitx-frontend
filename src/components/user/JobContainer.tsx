@@ -1,13 +1,18 @@
 import { Button } from "../../ui/button";
 import DefaultCompany from "../../assets/default-company-logo.png";
+import { TJobs } from "../../@types/publicTypes/TJobs";
 
-const JobContainer = ({ data }) => {
+type TJobProps = {
+  data: TJobs;
+};
+
+const JobContainer = ({ data }: TJobProps) => {
   return (
     <div className="bg-white w-[350px] h-[350px] p-6 shadow border rounded-xl">
       <div className="flex items-center gap-2">
         <img
           className="w-[60px] h-[60px] rounded-full object-cover"
-          src={DefaultCompany}
+          src={data?.companyId?.companyProfileId.logo || DefaultCompany}
           alt="company icon"
         />
         <div>

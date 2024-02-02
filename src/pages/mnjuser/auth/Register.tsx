@@ -71,7 +71,7 @@ const Register = () => {
   };
 
   return (
-    <div className="bg-cyan-50">
+    <div className="bg-[#FAFAFA]">
       <TopHeader />
       <div className="pt-40 w-full h-screen flex justify-center">
         <div className="w-[800px] h-fit rounded-xl bg-white p-10 shadow">
