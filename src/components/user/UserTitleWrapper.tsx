@@ -19,7 +19,7 @@ const UserTitleWrapper = ({
   return (
     <div>
       <div className="mx-auto max-w-xl text-center mt-20 mb-10">
-        <h1 className="text-4xl font-extrabold">
+        <h1 className="text-2xl md:text-4xl font-extrabold">
           {title} <span className="text-cyan-500">{titleVariant}</span>
         </h1>
         <p className="mt-4 sm:text-xl/relaxed">{des}</p>
