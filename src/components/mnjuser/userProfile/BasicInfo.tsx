@@ -55,7 +55,7 @@ const BasicInfo = () => {
     }
   };
 
-  const basicInfo =  (
+  const basicInfo = (
     <>
       <div className="relative flex items-center justify-between bg-white p-5 rounded-lg gap-5">
         <div
@@ -234,7 +234,7 @@ const BasicInfo = () => {
         </Modal>
       )}
       {/* setProfile */}
-      {profile && <ChangeProfile profile={profile} setProfile={setProfile} />}
+      {profile && <ChangeProfile profile={profile} setProfile={setProfile} type="user" />}
     </>
   );
 

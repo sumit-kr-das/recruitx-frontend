@@ -62,7 +62,6 @@ const App = () => {
   // const { data, isLoading } = useGetUserGlobalQuery();
   // const dispatch  = useDispatch()
   if (!role) console.log("role", role);
-
   // useEffect(() => {
   //   if (role && role === "user" && !isLoading) {
   //     console.log("user global data",data);

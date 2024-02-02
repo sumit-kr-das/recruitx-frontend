@@ -6,7 +6,7 @@ export const updateCompanyProfileDetailsApiSlice = apiSlice.injectEndpoints({
       query: (credentials) => ({
         url: "/company/profile/edit",
         method: "PUT",
-        body: { ...credentials },
+        body: credentials
       }),
       invalidatesTags: ["CompanyProfileDetails"],
     }),

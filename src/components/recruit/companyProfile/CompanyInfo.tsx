@@ -8,7 +8,8 @@ import { useViewCompanyQuery } from "../../../features/company/get/viewCompanyAp
 import { convertDate } from "../../../pages/company/MyJobs";
 import Modal from "../../Modal";
 import { useApproveCompanyMutation } from "../../../features/admin/post/updateApproveCompanyApiSlice";
-
+import ChangeProfile from "../../mnjuser/userProfile/ChangeProfile";
+import { BASE_URL } from "../../../config/config";
 const INITIAL_DATA = {
   name: "",
   email: "",
@@ -18,15 +19,17 @@ const INITIAL_DATA = {
   designation: "",
   pin: "",
   address: "",
+  logo: ""
 };
 
 const CompanyInfo = () => {
   const [update, setUpdate] = useState(INITIAL_DATA);
   const [open, setOpen] = useState(false);
+  const [profile, setProfile] = useState<boolean>(false);
 
   const { data, isLoading, isSuccess } = useViewCompanyQuery();
   const [updateCompany] = useApproveCompanyMutation();
-
+  console.log(data?.companyProfileId.logo);
   // set the data into edit modal
   useEffect(() => {
     if (isSuccess) {
@@ -39,6 +42,7 @@ const CompanyInfo = () => {
         designation: data?.designation || "",
         pin: data?.pin || "",
         address: data?.address || "",
+        logo: data?.companyProfileId.logo || UserDefault
       });
     }
   }, [isSuccess, data]);
@@ -66,12 +70,12 @@ const CompanyInfo = () => {
         </div>
         <div className="w-[15%] flex items-center flex-col">
           <img
-            src={UserDefault}
+            src={isSuccess && data.companyProfileId.logo}
             width={180}
             alt="user_default"
             className="rounded-full object-cover border"
           />
-          <button className="mt-2 bg-orange-500 text-white text-sm px-5 py-2 rounded-md hover:bg-orange-600">
+          <button className="mt-2 bg-orange-500 text-white text-sm px-5 py-2 rounded-md hover:bg-orange-600" onClick={() => setProfile(true)}>
             Change Profile
           </button>
         </div>
@@ -347,6 +351,8 @@ const CompanyInfo = () => {
           </form>
         </Modal>
       )}
+      {profile && <ChangeProfile profile={profile} setProfile={setProfile} type="company" />}
+
     </>
   );
 
