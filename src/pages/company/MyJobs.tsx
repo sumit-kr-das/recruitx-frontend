@@ -40,7 +40,7 @@ const MyJobs = () => {
   const [open, setOpen] = useState(false);
   const [deleteJob] = useDeleteJobMutation();
 
-  const handleDelete = async (id) => {
+  const handleDelete = async (id: string) => {
     try {
       await deleteJob(id).unwrap();
       toast.success("Job deleted successfully");
