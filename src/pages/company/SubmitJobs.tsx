@@ -97,7 +97,6 @@ const SubmitJob = () => {
   }
 
   const postJob = async (data: FormValues) => {
-    console.log(data);
     const convertedData = {
       ...data,
       vacancies: parseInt(data.vacancies.toString(), 10),
@@ -116,7 +115,6 @@ const SubmitJob = () => {
     };
 
     try {
-      console.log(newJobData);
       await submitJob(newJobData).unwrap();
       toast({
         description: "Job Submitted Successfully",
@@ -127,7 +125,6 @@ const SubmitJob = () => {
         variant: "destructive",
         description: err?.data.message,
       });
-      console.log("Error on company register", err);
     }
   };
   return (

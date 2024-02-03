@@ -135,7 +135,6 @@ const EditJobForm = ({ job, setOpen }: { job: job, setOpen: Function }) => {
             info: { ...other },
         };
         try {
-            console.log(job?._id);
             await updateJob({ id: job?._id, credentials }).unwrap();
             toast({
                 description: "Job updated",
