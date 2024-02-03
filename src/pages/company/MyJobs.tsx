@@ -1,4 +1,4 @@
-import { Trash2 } from "lucide-react";
+import { Pencil, Trash2 } from "lucide-react";
 import { toast } from "react-hot-toast";
 import TitleBar from "../../components/recruit/titleBar/TitleBar";
 import { useDeleteJobMutation } from "../../features/company/delete/deleteJobApiSlice";
@@ -6,6 +6,19 @@ import { useViewJobsQuery } from "../../features/company/get/viewJobsApiSlice";
 import { useGetJobStaticsQuery } from "../../features/statics/getJobStaticsApiSlice";
 import Container from "../../layout/Container";
 import NotFound from "../../components/notFound/NotFound";
+import Modal from "../../components/Modal";
+import { useState } from "react";
+import { Button } from "../../ui/button";
+import {
+  Dialog, DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "../../ui/dialog";
+import EditJobForm from "../../components/recruit/companyProfile/EditJobForm";
+import BaseDialog from "../../components/BaseDialog";
 
 export const convertDate = (srcDate: string) => {
   const startDate = new Date(srcDate);
@@ -33,6 +46,7 @@ const JobsStat = () => {
 
 const MyJobs = () => {
   const { data, isSuccess } = useViewJobsQuery();
+  const [open, setOpen] = useState(false);
   const [deleteJob] = useDeleteJobMutation();
 
   const handleDelete = async (id) => {
@@ -45,57 +59,107 @@ const MyJobs = () => {
     }
   };
   const myJobs = (
-    <Container>
-      <TitleBar title="Manage jobs" path="Employer / Dashboard / My Jobs" />
-      {data?.length === 0 ? (
-        <NotFound />
-      ) : (
-        <div>
-          <JobsStat />
+    <>
+      <Container>
+        <TitleBar title="Manage jobs" path="Employer / Dashboard / My Jobs" />
+        {data?.length === 0 ? (
+          <NotFound />
+        ) : (
           <div>
-            {data?.map((job, index) => (
-              <div
-                key={index}
-                className="flex items-center justify-between p-4 mt-5 rounded-lg border bg-white gap-2"
-              >
-                <div>
-                  <h2 className="font-bold text-slate-600 text-lg">
-                    {job?.title}
-                  </h2>
-                  <p className="mt-2 text-sm">{job?.info.roles}</p>
-                </div>
-                <div>
-                  <p className="text-white text-sm bg-blue-600 px-2 py-1 rounded-md">
-                    {index} Applicants
-                  </p>
-                </div>
-                <div>
-                  <p className="text-sm text-teal-600">
-                    <span className="text-slate-500">Posted: </span>
-                    {convertDate(job?.info.startDate)}
-                  </p>
-                  <p className="text-sm mt-2 text-red-600">
-                    <span className="text-slate-500">Expired: </span>
-                    {convertDate(job?.info.endDate)}
-                  </p>
-                </div>
-                <div className="flex items-center gap-x-5">
-                  {/* <span className="bg-teal-100 px-3 py-2 rounded-lg cursor-pointer">
+            <JobsStat />
+            <div>
+              {data?.map((job, index) => (
+                <div
+                  key={index}
+                  className="flex flex-col md:flex-row items-center md:justify-between p-4 mt-5 rounded-lg border bg-white gap-2"
+                >
+                  <div>
+                    <h2 className="font-bold text-slate-600 text-lg">
+                      {job?.title}
+                    </h2>
+                    <p className="mt-2 text-sm text-center md:text-left">{job?.info.roles}</p>
+                  </div>
+                  <div>
+                    <p className="text-white text-sm bg-blue-600 px-2 py-1 rounded-md">
+                      {index} Applicants
+                    </p>
+                  </div>
+                  <div>
+                    <p className="text-sm text-teal-600">
+                      <span className="text-slate-500">Posted: </span>
+                      {convertDate(job?.info.startDate)}
+                    </p>
+                    <p className="text-sm mt-2 text-red-600">
+                      <span className="text-slate-500">Expired: </span>
+                      {convertDate(job?.info.endDate)}
+                    </p>
+                  </div>
+                  <div className="flex items-center gap-x-5">
+                    {/* <span className="bg-teal-100 px-3 py-2 rounded-lg cursor-pointer">
                 <Pencil className="w-[20px] text-teal-600" />
               </span> */}
-                  <span
-                    onClick={() => handleDelete(job?._id)}
-                    className="bg-red-100 px-3 py-2 rounded-lg cursor-pointer"
-                  >
-                    <Trash2 className="w-[20px] text-red-600" />
-                  </span>
+                    {/* <span
+                      onClick={() => setOpen(!open)}
+                      className="bg-green-100 px-3 py-2 rounded-lg cursor-pointer"
+                    >
+                      <Pencil className="w-[20px] text-white-600" />
+                    </span> */}
+                    {/* <Dialog>
+                      <DialogTrigger>
+                        <Pencil className="w-[20px] text-white-600" />
+                      </DialogTrigger>
+                      <DialogContent className="sm:max-w-[800px] overflow-y-scroll max-h-[530px] rounded">
+                        <DialogHeader>
+                          <DialogTitle>Edit Job</DialogTitle>
+                        </DialogHeader>
+                        <div className="grid gap-4 py-4">
+                          <EditJobForm />
+                        </div>
+
+                      </DialogContent>
+                    </Dialog> */}
+                    <BaseDialog title="Edit Job" trigger={<Pencil className="w-[20px] text-white-600" />} content={<EditJobForm />} contentClassName="overflow-y-scroll max-h-[530px]" />
+
+                    <span
+                      onClick={() => handleDelete(job?._id)}
+                      className="bg-red-100 px-3 py-2 rounded-lg cursor-pointer"
+                    >
+                      <Trash2 className="w-[20px] text-red-600" />
+                    </span>
+                  </div>
                 </div>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
-        </div>
-      )}
-    </Container>
+        )}
+      </Container>
+      {/* {
+        open && (
+          <>
+            <Modal classes="w-[50%] h-[90%] overflow-auto">
+              <h1>Hello</h1>
+              <div className="mt-6 flex items-center justify-end gap-x-6">
+                <button
+                  onClick={() => setOpen((prev) => !prev)}
+                  type="button"
+                  className="text-sm font-semibold leading-6 text-gray-900"
+                >
+                  Cancel
+                </button>
+
+                <button
+                  type="submit"
+                  className="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                >
+                  Save
+                </button>
+              </div>
+            </Modal>
+          </>
+        )
+      } */}
+    </>
+
   );
 
   return isSuccess ? myJobs : <p>Error in Job</p>;

@@ -9,4 +9,4 @@ export const getUserGlobalApiSlice = apiSlice.injectEndpoints({
   }),
 });
 
-export const { useGetUserGlobalQuery } = getUserGlobalApiSlice;
+export const { useLazyGetUserGlobalQuery } = getUserGlobalApiSlice;
