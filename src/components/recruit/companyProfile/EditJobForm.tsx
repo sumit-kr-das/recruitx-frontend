@@ -250,12 +250,12 @@ const EditJobForm = ({ job, setOpen }: { job: job, setOpen: Function }) => {
                     <TabsContent value="password">
                         <Form {...form}>
                             <form className="" onSubmit={form.handleSubmit(updateJob)} >
-                                <div className='flex gap-4'>
+                                <div className='sm:flex sm:gap-4'>
                                     <FormField
                                         control={form.control}
                                         name="roles"
                                         render={({ field }) => (
-                                            <FormItem className="mt-3 flex-1">
+                                            <FormItem className="mt-3 sm:flex-1">
                                                 <FormLabel>Select Role</FormLabel>
                                                 <FormControl>
                                                     <Select onValueChange={field.onChange} defaultValue={field.value}>
@@ -281,7 +281,7 @@ const EditJobForm = ({ job, setOpen }: { job: job, setOpen: Function }) => {
                                         control={form.control}
                                         name="minExprience"
                                         render={({ field }) => (
-                                            <FormItem className="mt-3 flex-1">
+                                            <FormItem className="mt-3 sm:flex-1">
                                                 <FormLabel>Minimum Exprience</FormLabel>
                                                 <FormControl>
                                                     <Input placeholder="Enter miminum exprience" {...field} />
@@ -291,12 +291,12 @@ const EditJobForm = ({ job, setOpen }: { job: job, setOpen: Function }) => {
                                         )}
                                     />
                                 </div>
-                                <div className='flex gap-4'>
+                                <div className='sm:flex sm:gap-4'>
                                     <FormField
                                         control={form.control}
                                         name="maxExprience"
                                         render={({ field }) => (
-                                            <FormItem className="flex-1 mt-3">
+                                            <FormItem className="sm:flex-1 mt-3">
                                                 <FormLabel>Maximum Exprience</FormLabel>
                                                 <FormControl>
                                                     <Input placeholder="Enter maximum exprience" {...field} />
@@ -310,7 +310,7 @@ const EditJobForm = ({ job, setOpen }: { job: job, setOpen: Function }) => {
                                         control={form.control}
                                         name="workplaceType"
                                         render={({ field }) => (
-                                            <FormItem className="mt-3 flex-1">
+                                            <FormItem className="mt-3 sm:flex-1">
                                                 <FormLabel>Select Role</FormLabel>
                                                 <FormControl>
                                                     <Select onValueChange={field.onChange} defaultValue={field.value}>
@@ -332,12 +332,12 @@ const EditJobForm = ({ job, setOpen }: { job: job, setOpen: Function }) => {
                                         )}
                                     />
                                 </div>
-                                <div className='flex gap-4'>
+                                <div className='sm:flex sm:gap-4'>
                                     <FormField
                                         control={form.control}
                                         name="jobType"
                                         render={({ field }) => (
-                                            <FormItem className="mt-3 flex-1">
+                                            <FormItem className="mt-3 sm:flex-1">
                                                 <FormLabel>Select Role</FormLabel>
                                                 <FormControl>
                                                     <Select onValueChange={field.onChange} defaultValue={field.value}>
@@ -363,7 +363,7 @@ const EditJobForm = ({ job, setOpen }: { job: job, setOpen: Function }) => {
                                         control={form.control}
                                         name="location"
                                         render={({ field }) => (
-                                            <FormItem className="flex-1 mt-3">
+                                            <FormItem className="sm:flex-1 mt-3">
                                                 <FormLabel>Enter location</FormLabel>
                                                 <FormControl>
                                                     <Input placeholder="Enter maximum exprience" {...field} />
@@ -373,12 +373,12 @@ const EditJobForm = ({ job, setOpen }: { job: job, setOpen: Function }) => {
                                         )}
                                     />
                                 </div>
-                                <div className='flex gap-4'>
+                                <div className='sm:flex sm:gap-4'>
                                     <FormField
                                         control={form.control}
                                         name="vacancies"
                                         render={({ field }) => (
-                                            <FormItem className="flex-1 mt-3">
+                                            <FormItem className="sm:flex-1 mt-3">
                                                 <FormLabel>Enter No of Vacancies</FormLabel>
                                                 <FormControl>
                                                     <Input placeholder="Enter No of Vacancies" {...field} />
@@ -392,7 +392,7 @@ const EditJobForm = ({ job, setOpen }: { job: job, setOpen: Function }) => {
                                         control={form.control}
                                         name="minSalary"
                                         render={({ field }) => (
-                                            <FormItem className="flex-1 mt-3">
+                                            <FormItem className="sm:flex-1 mt-3">
                                                 <FormLabel>Minimum Salary</FormLabel>
                                                 <FormControl>
                                                     <Input placeholder="Enter Minimum Salary" {...field} />
@@ -402,12 +402,12 @@ const EditJobForm = ({ job, setOpen }: { job: job, setOpen: Function }) => {
                                         )}
                                     />
                                 </div>
-                                <div className='flex gap-4'>
+                                <div className='sm:flex sm:gap-4'>
                                     <FormField
                                         control={form.control}
                                         name="maxSalary"
                                         render={({ field }) => (
-                                            <FormItem className="flex-1 mt-3">
+                                            <FormItem className="sm:flex-1 mt-3">
                                                 <FormLabel>Maximum Salary</FormLabel>
                                                 <FormControl>
                                                     <Input placeholder="Enter Maximum Salary" {...field} />
@@ -421,7 +421,7 @@ const EditJobForm = ({ job, setOpen }: { job: job, setOpen: Function }) => {
                                         control={form.control}
                                         name="maxQualification"
                                         render={({ field }) => (
-                                            <FormItem className="mt-3 flex-1">
+                                            <FormItem className="sm:mt-3 flex-1">
                                                 <FormLabel>Select max qualification</FormLabel>
                                                 <FormControl>
                                                     <Select onValueChange={field.onChange} defaultValue={field.value}>
@@ -443,12 +443,12 @@ const EditJobForm = ({ job, setOpen }: { job: job, setOpen: Function }) => {
                                         )}
                                     />
                                 </div>
-                                <div className='flex gap-4'>
+                                <div className='sm:flex sm:gap-4'>
                                     <FormField
                                         control={form.control}
                                         name="degree"
                                         render={({ field }) => (
-                                            <FormItem className="flex-1 mt-3">
+                                            <FormItem className="sm:flex-1 mt-3">
                                                 <FormLabel>Enter Degree Title</FormLabel>
                                                 <FormControl>
                                                     <Input placeholder="Enter Degree" {...field} />
@@ -462,7 +462,7 @@ const EditJobForm = ({ job, setOpen }: { job: job, setOpen: Function }) => {
                                         control={form.control}
                                         name="startDate"
                                         render={({ field }) => (
-                                            <FormItem className="flex-1 mt-3">
+                                            <FormItem className="sm:flex-1 mt-3">
                                                 <FormLabel>Start Date</FormLabel>
                                                 <FormControl>
                                                     <Input type="date"   {...field} />
@@ -472,12 +472,12 @@ const EditJobForm = ({ job, setOpen }: { job: job, setOpen: Function }) => {
                                         )}
                                     />
                                 </div>
-                                <div className='flex gap-4'>
+                                <div className='sm:flex sm:gap-4'>
                                     <FormField
                                         control={form.control}
                                         name="endDate"
                                         render={({ field }) => (
-                                            <FormItem className="flex-1 mt-3">
+                                            <FormItem className="sm:flex-1 mt-3">
                                                 <FormLabel>End Date</FormLabel>
                                                 <FormControl>
                                                     <Input type="date"  {...field} />
@@ -491,7 +491,7 @@ const EditJobForm = ({ job, setOpen }: { job: job, setOpen: Function }) => {
                                         control={form.control}
                                         name="skills"
                                         render={() => (
-                                            <FormItem className="mt-3 flex-1">
+                                            <FormItem className="mt-3 sm:flex-1">
                                                 <FormLabel>Select Tags</FormLabel>
                                                 <FormControl>
                                                     <Controller
