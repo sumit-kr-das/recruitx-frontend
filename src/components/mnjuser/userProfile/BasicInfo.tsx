@@ -40,7 +40,7 @@ const BasicInfo = () => {
     }
   }, [user]);
 
-  const handleSubmit = async (e:React.SyntheticEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.SyntheticEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
       await updateUser(update).unwrap();
@@ -54,7 +54,7 @@ const BasicInfo = () => {
 
   const basicInfo = (
     <>
-      <div className="relative flex items-center justify-between bg-white p-5 rounded-lg gap-5 border shadow">
+      <div className="relative flex items-center justify-between bg-white p-10 rounded-lg gap-10 border shadow">
         <div
           onClick={() => setOpen((prev) => !prev)}
           title="edit"
@@ -62,7 +62,7 @@ const BasicInfo = () => {
         >
           <Pencil className="w-[15px] h-[15px]" />
         </div>
-        <div className="w-[20%] flex items-center justify-center flex-col">
+        <div className="flex items-start justify-start flex-col">
           <img
             src={UserDefault}
             // width={180}
@@ -77,7 +77,7 @@ const BasicInfo = () => {
             Change Profile
           </Button>
         </div>
-        <div className="w-[80%]">
+        <div className="w-full">
           <div className="border-b flex items-end justify-between mb-4 pb-4">
             <div>
               <h2 className="text-2xl font-bold capitalize">{user?.name}</h2>

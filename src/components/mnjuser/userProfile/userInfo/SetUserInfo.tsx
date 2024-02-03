@@ -27,21 +27,7 @@ import {
 import { Textarea } from "../../../../ui/textarea";
 import { useToast } from "../../../../ui/use-toast";
 import SelectInput from "../../../form/multiSelectInput/SelectInput";
-import { INITIAL_DATA } from "./OtherInfo";
-
-type FormValue = {
-  github: string;
-  linkedIn: string;
-  dateOfBirth: string;
-  age: string;
-  address: string;
-  bio: string;
-  objective: string;
-  language: string[];
-  gender: string;
-  skills: string[];
-  maxQualification: string;
-};
+import { FormValue, INITIAL_DATA } from "./OtherInfo";
 
 type TSetUserInfoProps = {
   setUserData: (value: FormValue) => void;

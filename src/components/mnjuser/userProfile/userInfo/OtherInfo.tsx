@@ -5,6 +5,20 @@ import { useUserInfoDataQuery } from "../../../../features/user/get/getUserInfoD
 import SetUserInfo from "./SetUserInfo";
 import ViewInfo from "./ViewInfo";
 
+export type FormValue = {
+  github: string;
+  linkedIn: string;
+  dateOfBirth: string;
+  age: string;
+  address: string;
+  bio: string;
+  objective: string;
+  language: string[];
+  gender: string;
+  skills: string[];
+  maxQualification: string;
+};
+
 export const INITIAL_DATA = {
   github: "",
   linkedIn: "",
@@ -41,7 +55,6 @@ const OtherInfo = () => {
         />
       ) : (
         <SetUserInfo
-          userData={userData}
           setUserData={setUserData}
           lang={lang}
           setLang={setLang}
