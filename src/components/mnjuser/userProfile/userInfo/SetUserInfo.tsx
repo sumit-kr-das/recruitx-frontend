@@ -1,10 +1,12 @@
-import { toast } from "react-hot-toast";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { Controller, SubmitHandler, useForm } from "react-hook-form";
+import * as z from "zod";
+import OtherInfoSchema from "../../../../@types/zod/OtherInfoSchema";
 import { languageData } from "../../../../constants/languageData";
 import { qualificationData } from "../../../../constants/qualificationData";
-import { useSetUserMutation } from "../../../../features/user/post/setUserInfoDataApiSlice";
-import SelectInput from "../../../form/multiSelectInput/SelectInput";
-import { INITIAL_DATA } from "./OtherInfo";
 import { tagsData } from "../../../../constants/tagsData";
+import { useSetUserMutation } from "../../../../features/user/post/setUserInfoDataApiSlice";
+import { Button } from "../../../../ui/button";
 import {
   Form,
   FormControl,
@@ -15,12 +17,6 @@ import {
   FormMessage,
 } from "../../../../ui/form";
 import { Input } from "../../../../ui/input";
-import { SubmitHandler, useForm } from "react-hook-form";
-import OtherInfoSchema from "../../../../@types/zod/OtherInfoSchema";
-import { zodResolver } from "@hookform/resolvers/zod";
-import * as z from "zod";
-import { Button } from "../../../../ui/button";
-import { Link } from "react-router-dom";
 import {
   Select,
   SelectContent,
@@ -29,30 +25,41 @@ import {
   SelectValue,
 } from "../../../../ui/select";
 import { Textarea } from "../../../../ui/textarea";
+import { useToast } from "../../../../ui/use-toast";
+import SelectInput from "../../../form/multiSelectInput/SelectInput";
+import { INITIAL_DATA } from "./OtherInfo";
 
- type FormValue = {
-  github: string,
-  linkedIn: string,
-  dateOfBirth: string,
-  age: string,
-  address: string,
-  bio: string,
-  objective: string,
-  language: string[],
-  gender: string,
-  skills: string[],
-  maxQualification: string,
+type FormValue = {
+  github: string;
+  linkedIn: string;
+  dateOfBirth: string;
+  age: string;
+  address: string;
+  bio: string;
+  objective: string;
+  language: string[];
+  gender: string;
+  skills: string[];
+  maxQualification: string;
+};
+
+type TSetUserInfoProps = {
+  setUserData: (value: FormValue) => void;
+  lang: string[];
+  setLang: (value: string[]) => void;
+  tags: string[];
+  setTags: (value: string[]) => void;
 };
 
 const SetUserInfo = ({
-  userData,
   setUserData,
   lang,
   setLang,
   tags,
   setTags,
-}) => {
+}: TSetUserInfoProps) => {
   const [setUser] = useSetUserMutation();
+  const { toast } = useToast();
 
   const form = useForm<z.infer<typeof OtherInfoSchema>>({
     resolver: zodResolver(OtherInfoSchema),
@@ -71,15 +78,17 @@ const SetUserInfo = ({
     },
   });
 
-  const submitForm:SubmitHandler<FormValue> = async (value) => {
-    console.log("submitted")
-    toast.success("Entered");
-    // e.preventDefault();
+  const submitForm: SubmitHandler<FormValue> = async (value) => {
     try {
       await setUser(value).unwrap();
+      toast({
+        description: "User information update success",
+      });
     } catch (err) {
-      toast.success(err?.data?.msg);
-      console.log("Error on company login", err);
+      toast({
+        variant: "destructive",
+        description: "Something went wrong",
+      });
     }
   };
 
@@ -124,7 +133,9 @@ const SetUserInfo = ({
                 <FormControl>
                   <Textarea placeholder="About yourself" {...field} />
                 </FormControl>
-                <FormDescription>Brief description about yourself</FormDescription>
+                <FormDescription>
+                  Brief description about yourself
+                </FormDescription>
                 <FormMessage />
               </FormItem>
             )}
@@ -169,24 +180,33 @@ const SetUserInfo = ({
               )}
             />
             <div className="w-1/2">
-              <label
-                htmlFor="country"
-                className="block text-sm font-medium leading-6 text-gray-900"
-              >
-                Select language
-              </label>
-              <div className="mt-2 w-full">
-                <SelectInput
-                  multiple
-                  options={languageData}
-                  value={lang}
-                  onChange={(o) => {
-                    setLang(o);
-                    setUserData({ ...userData, language: lang });
-                  }}
-                />
-              </div>
-              <FormDescription>Select atlist 2 language</FormDescription>
+              <FormField
+                control={form.control}
+                name="language"
+                render={() => (
+                  <FormItem className="mt-3">
+                    <FormLabel>Select language</FormLabel>
+                    <FormControl>
+                      <Controller
+                        name="language"
+                        control={form.control}
+                        defaultValue={[]}
+                        render={({ field }) => (
+                          <SelectInput
+                            multiple
+                            options={languageData}
+                            value={lang}
+                            onChange={(selectedOptions) => {
+                              setLang(selectedOptions);
+                              field.onChange(selectedOptions);
+                            }}
+                          />
+                        )}
+                      />
+                    </FormControl>
+                  </FormItem>
+                )}
+              />
             </div>
           </div>
           <div className="flex gap-4">
@@ -241,7 +261,9 @@ const SetUserInfo = ({
                   <FormControl>
                     <Input placeholder="sumit-kumar-das-01" {...field} />
                   </FormControl>
-                  <FormDescription>www.linkedin.com/in/sumit-kumar-das-01/</FormDescription>
+                  <FormDescription>
+                    www.linkedin.com/in/sumit-kumar-das-01/
+                  </FormDescription>
                   <FormMessage />
                 </FormItem>
               )}
@@ -276,24 +298,33 @@ const SetUserInfo = ({
               )}
             />
             <div className="w-1/2">
-              <label
-                htmlFor="country"
-                className="block text-sm font-medium leading-6 text-gray-900"
-              >
-                Select your skills
-              </label>
-              <div className="mt-2 w-full">
-                <SelectInput
-                  multiple
-                  options={tagsData}
-                  value={tags}
-                  onChange={(o) => {
-                    setTags(o);
-                    setUserData({ ...userData, skills: tags });
-                  }}
-                />
-              </div>
-              <FormDescription>Select atlist 5 skills</FormDescription>
+              <FormField
+                control={form.control}
+                name="skills"
+                render={() => (
+                  <FormItem className="mt-3">
+                    <FormLabel>Select Tags</FormLabel>
+                    <FormControl>
+                      <Controller
+                        name="skills"
+                        control={form.control}
+                        defaultValue={[]}
+                        render={({ field }) => (
+                          <SelectInput
+                            multiple
+                            options={tagsData}
+                            value={tags}
+                            onChange={(selectedOptions) => {
+                              setTags(selectedOptions);
+                              field.onChange(selectedOptions);
+                            }}
+                          />
+                        )}
+                      />
+                    </FormControl>
+                  </FormItem>
+                )}
+              />
             </div>
           </div>
           <div className="flex gap-5">

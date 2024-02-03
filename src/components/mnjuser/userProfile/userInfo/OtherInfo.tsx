@@ -25,10 +25,6 @@ const OtherInfo = () => {
   const [tags, setTags] = useState([tagsData[0]]);
 
   const { data, isSuccess, isLoading } = useUserInfoDataQuery();
-
-  if (isSuccess) {
-    console.log(data);
-  }
   
   const otherInfo = (
     <>

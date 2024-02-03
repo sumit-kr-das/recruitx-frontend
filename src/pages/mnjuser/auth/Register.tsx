@@ -26,7 +26,8 @@ import { Button } from "../../../ui/button";
 import { Input } from "../../../ui/input";
 import TopHeader from "../../../components/navigation/TopHeader";
 import UserRegisterSchema from "../../../@types/zod/UserRegisterSchema";
-import { toast } from "../../../ui/use-toast";
+import { useToast } from "../../../ui/use-toast";
+
 
 type FormValues = {
   name: string;
@@ -40,6 +41,7 @@ const Register = () => {
   const [userRegister, { isLoading }] = useUserRegisterMutation();
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const { toast } = useToast()
 
   const form = useForm<z.infer<typeof UserRegisterSchema>>({
     resolver: zodResolver(UserRegisterSchema),
@@ -54,7 +56,6 @@ const Register = () => {
 
   const submitForm: SubmitHandler<FormValues> = async (value) => {
     try {
-      console.log(value);
       const userData = await userRegister(value).unwrap();
       dispatch(setCredentials(userData));
       toast({
