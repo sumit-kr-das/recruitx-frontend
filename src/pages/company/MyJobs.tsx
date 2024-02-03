@@ -6,17 +6,8 @@ import { useViewJobsQuery } from "../../features/company/get/viewJobsApiSlice";
 import { useGetJobStaticsQuery } from "../../features/statics/getJobStaticsApiSlice";
 import Container from "../../layout/Container";
 import NotFound from "../../components/notFound/NotFound";
-import Modal from "../../components/Modal";
 import { useState } from "react";
-import { Button } from "../../ui/button";
-import {
-  Dialog, DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "../../ui/dialog";
+
 import EditJobForm from "../../components/recruit/companyProfile/EditJobForm";
 import BaseDialog from "../../components/BaseDialog";
 
@@ -95,30 +86,8 @@ const MyJobs = () => {
                     </p>
                   </div>
                   <div className="flex items-center gap-x-5">
-                    {/* <span className="bg-teal-100 px-3 py-2 rounded-lg cursor-pointer">
-                <Pencil className="w-[20px] text-teal-600" />
-              </span> */}
-                    {/* <span
-                      onClick={() => setOpen(!open)}
-                      className="bg-green-100 px-3 py-2 rounded-lg cursor-pointer"
-                    >
-                      <Pencil className="w-[20px] text-white-600" />
-                    </span> */}
-                    {/* <Dialog>
-                      <DialogTrigger>
-                        <Pencil className="w-[20px] text-white-600" />
-                      </DialogTrigger>
-                      <DialogContent className="sm:max-w-[800px] overflow-y-scroll max-h-[530px] rounded">
-                        <DialogHeader>
-                          <DialogTitle>Edit Job</DialogTitle>
-                        </DialogHeader>
-                        <div className="grid gap-4 py-4">
-                          <EditJobForm />
-                        </div>
 
-                      </DialogContent>
-                    </Dialog> */}
-                    <BaseDialog title="Edit Job" trigger={<Pencil className="w-[20px] text-white-600" />} content={<EditJobForm />} contentClassName="overflow-y-scroll max-h-[530px]" />
+                    <BaseDialog setOpen={setOpen} open={open} title="Edit Job" trigger={<Pencil className="w-[20px] text-white-600" onClick={() => setOpen(true)} />} content={<EditJobForm job={job} setOpen={setOpen} />} contentClassName="overflow-y-scroll max-h-[530px]" />
 
                     <span
                       onClick={() => handleDelete(job?._id)}

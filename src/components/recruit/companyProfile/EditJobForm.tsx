@@ -1,15 +1,6 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { Input } from '../../../ui/input'
 import { Button } from '../../../ui/button'
-import { Label } from '../../../ui/label'
-import {
-    Card,
-    CardContent,
-    CardDescription,
-    CardFooter,
-    CardHeader,
-    CardTitle,
-} from '../../../ui/card'
 import {
     Tabs,
     TabsContent,
@@ -32,6 +23,8 @@ import { qualificationData } from '../../../constants/qualificationData'
 import { jobTypes } from '../../../constants/jobTypes'
 import { workPlaceTypes } from '../../../constants/workplaceTypes'
 import { jobRoles } from '../../../constants/jobRoles'
+import { useUpdateJobMutation } from '../../../features/company/put/updateJobApiSlice';
+import { DialogClose } from '../../../ui/dialog';
 type FormValues = {
     title: string,
     category: string,
@@ -53,38 +46,76 @@ type FormValues = {
     degree: string
 }
 
-const EditJobForm = () => {
+const EditJobForm = ({ job, setOpen }: { job: any, setOpen: Function }) => {
 
-    const [value, setValue] = useState([tagsData[0]]);
-    const [skills, setSkills] = useState([skillData[0]])
+    const [value, setValue] = useState([...job?.tags || tagsData[0]]);
+    const [skills, setSkills] = useState([...job?.info?.skills || skillData[0]])
     const { toast } = useToast();
+    const [updateJob] = useUpdateJobMutation();
+
+    const getDate = (srcDate: string) => {
+        const originalDate = new Date(srcDate);
+        const day = originalDate.getDate().toString().padStart(2, '0');
+        const month = (originalDate.getMonth() + 1).toString().padStart(2, '0');
+        const year = originalDate.getFullYear();
+        return `${year}-${month}-${day}`
+    };
+
     const form = useForm<z.infer<typeof JobPostSchema>>({
         resolver: zodResolver(JobPostSchema),
         defaultValues: {
-            title: "",
-            category: "",
-            description: "",
-            tags: [],
-            vacancies: '',
-            jobType: "",
-            workplaceType: "",
-            startDate: "",
-            endDate: "",
-            roles: "",
-            skills: [],
-            minExprience: '',
-            maxExprience: '',
-            minSalary: '0',
-            maxSalary: '',
-            location: "",
-            maxQualification: "",
-            degree: ""
+            title: job?.title || "",
+            category: job?.category || "",
+            description: job?.description || "",
+            tags: job?.tags || [],
+            vacancies: job?.info?.vacancies.toString() || '',
+            jobType: job?.info?.jobType || "",
+            workplaceType: job?.info?.workplaceType || "",
+            startDate: getDate(job?.info?.startDate) || "",
+            endDate: getDate(job?.info?.endDate) || "",
+            roles: job?.info?.roles || "",
+            skills: job?.info?.skills || [],
+            minExprience: job?.info?.minExprience.toString() || '',
+            maxExprience: job?.info?.maxExprience.toString() || '',
+            minSalary: job?.info?.minSalary.toString() || '0',
+            maxSalary: job?.info?.maxSalary.toString() || '',
+            location: job?.info?.location || "",
+            maxQualification: job?.info?.maxQualification || "",
+            degree: job?.info?.degree || ""
         },
         mode: "onSubmit"
     });
 
-    const updateJob = async (data: FormValues) => {
-        console.log(data);
+    const updateJobData = async (data: FormValues) => {
+        const convertedData = {
+            ...data,
+            vacancies: parseInt(data.vacancies.toString(), 10),
+            minExprience: parseInt(data.minExprience.toString(), 10),
+            maxExprience: parseInt(data.maxExprience.toString(), 10),
+            minSalary: parseInt(data.minSalary.toString(), 10),
+            maxSalary: parseInt(data.maxSalary.toString(), 10),
+        };
+        const { title, category, description, tags, ...other } = convertedData;
+        const credentials = {
+            title,
+            category,
+            description,
+            tags,
+            info: { ...other },
+        };
+        try {
+            console.log(job?._id);
+            await updateJob({ id: job?._id, credentials }).unwrap();
+            toast({
+                description: "Job updated",
+            });
+            setOpen(false);
+        } catch (error: any) {
+            toast({
+                variant: "destructive",
+                description: error?.data.message,
+            });
+        }
     };
 
 
@@ -97,26 +128,8 @@ const EditJobForm = () => {
                         <TabsTrigger value="password">Technical Information</TabsTrigger>
                     </TabsList>
                     <TabsContent value="account" className='h-auto'>
-                        {/* <Card>
-                            <CardHeader>
-                                <CardTitle>Account</CardTitle>
-                                <CardDescription>
-                                    Make changes to your account here. Click save when you're done.
-                                </CardDescription>
-                            </CardHeader>
-                            <CardContent className="space-y-2">
-                                <div className="space-y-1">
-                                    <Label htmlFor="name">Name</Label>
-                                    <Input id="name" defaultValue="Pedro Duarte" />
-                                </div>
-                                <div className="space-y-1">
-                                    <Label htmlFor="username">Username</Label>
-                                    <Input id="username" defaultValue="@peduarte" />
-                                </div>
-                            </CardContent>
-                        </Card> */}
                         <Form {...form}>
-                            <form className="" onSubmit={form.handleSubmit(updateJob)} >
+                            <form className="" onSubmit={form.handleSubmit(updateJobData)} >
                                 <FormField
                                     control={form.control}
                                     name="title"
@@ -139,7 +152,7 @@ const EditJobForm = () => {
                                             <FormControl>
                                                 <Textarea rows={8} placeholder="Enter Description" {...field} />
                                             </FormControl>
-                                            {/* <FormMessage>{errors.description?.message}</FormMessage> */}
+                                            <FormMessage />
                                         </FormItem>
                                     )}
                                 />
@@ -163,10 +176,8 @@ const EditJobForm = () => {
                                                         </SelectGroup>
                                                     </SelectContent>
                                                     <FormMessage />
-
                                                 </Select>
                                             </FormControl>
-
                                         </FormItem>
                                     )}
                                 />
@@ -188,7 +199,6 @@ const EditJobForm = () => {
                                                             value={value}
                                                             onChange={(selectedOptions) => {
                                                                 setValue(selectedOptions);
-                                                                // Update the RHF form value and trigger validation
                                                                 field.onChange(selectedOptions);
                                                             }}
                                                         />
@@ -199,7 +209,10 @@ const EditJobForm = () => {
                                         </FormItem>
                                     )}
                                 />
-                                <Button className='float-right mt-5'>Update</Button>
+                                <DialogClose asChild>
+                                    <Button className='float-right mt-5' type='submit'>Update</Button>
+                                </DialogClose>
+
                             </form>
                         </Form>
                     </TabsContent>
@@ -288,192 +301,195 @@ const EditJobForm = () => {
                                         )}
                                     />
                                 </div>
-                                <div className='flex flex-1'>
+                                <div className='flex gap-4'>
+                                    <FormField
+                                        control={form.control}
+                                        name="jobType"
+                                        render={({ field }) => (
+                                            <FormItem className="mt-3 flex-1">
+                                                <FormLabel>Select Role</FormLabel>
+                                                <FormControl>
+                                                    <Select onValueChange={field.onChange} defaultValue={field.value}>
+                                                        <SelectTrigger className="w-full">
+                                                            <SelectValue placeholder="Select job type"
+                                                            />
+                                                        </SelectTrigger>
+                                                        <SelectContent>
+                                                            <SelectGroup>
+                                                                {jobTypes.map((item, index) => (
+                                                                    <SelectItem value={item} key={index}>{item}</SelectItem>
+                                                                ))}
+                                                            </SelectGroup>
+                                                        </SelectContent>
+                                                        <FormMessage />
+                                                    </Select>
+                                                </FormControl>
+                                            </FormItem>
+                                        )}
+                                    />
 
+                                    <FormField
+                                        control={form.control}
+                                        name="location"
+                                        render={({ field }) => (
+                                            <FormItem className="flex-1 mt-3">
+                                                <FormLabel>Enter location</FormLabel>
+                                                <FormControl>
+                                                    <Input placeholder="Enter maximum exprience" {...field} />
+                                                </FormControl>
+                                                <FormMessage />
+                                            </FormItem>
+                                        )}
+                                    />
                                 </div>
-                                <FormField
-                                    control={form.control}
-                                    name="jobType"
-                                    render={({ field }) => (
-                                        <FormItem className="mt-3">
-                                            <FormLabel>Select Role</FormLabel>
-                                            <FormControl>
-                                                <Select onValueChange={field.onChange} defaultValue={field.value}>
-                                                    <SelectTrigger className="w-full">
-                                                        <SelectValue placeholder="Select job type"
-                                                        />
-                                                    </SelectTrigger>
-                                                    <SelectContent>
-                                                        <SelectGroup>
-                                                            {jobTypes.map((item, index) => (
-                                                                <SelectItem value={item} key={index}>{item}</SelectItem>
-                                                            ))}
-                                                        </SelectGroup>
-                                                    </SelectContent>
-                                                    <FormMessage />
-                                                </Select>
-                                            </FormControl>
-                                        </FormItem>
-                                    )}
-                                />
+                                <div className='flex gap-4'>
+                                    <FormField
+                                        control={form.control}
+                                        name="vacancies"
+                                        render={({ field }) => (
+                                            <FormItem className="flex-1 mt-3">
+                                                <FormLabel>Enter No of Vacancies</FormLabel>
+                                                <FormControl>
+                                                    <Input placeholder="Enter No of Vacancies" {...field} />
+                                                </FormControl>
+                                                <FormMessage />
+                                            </FormItem>
+                                        )}
+                                    />
 
-                                <FormField
-                                    control={form.control}
-                                    name="location"
-                                    render={({ field }) => (
-                                        <FormItem className="flex-1 mt-3">
-                                            <FormLabel>Enter location</FormLabel>
-                                            <FormControl>
-                                                <Input placeholder="Enter maximum exprience" {...field} />
-                                            </FormControl>
-                                            <FormMessage />
-                                        </FormItem>
-                                    )}
-                                />
+                                    <FormField
+                                        control={form.control}
+                                        name="minSalary"
+                                        render={({ field }) => (
+                                            <FormItem className="flex-1 mt-3">
+                                                <FormLabel>Minimum Salary</FormLabel>
+                                                <FormControl>
+                                                    <Input placeholder="Enter Minimum Salary" {...field} />
+                                                </FormControl>
+                                                <FormMessage />
+                                            </FormItem>
+                                        )}
+                                    />
+                                </div>
+                                <div className='flex gap-4'>
+                                    <FormField
+                                        control={form.control}
+                                        name="maxSalary"
+                                        render={({ field }) => (
+                                            <FormItem className="flex-1 mt-3">
+                                                <FormLabel>Maximum Salary</FormLabel>
+                                                <FormControl>
+                                                    <Input placeholder="Enter Maximum Salary" {...field} />
+                                                </FormControl>
+                                                <FormMessage />
+                                            </FormItem>
+                                        )}
+                                    />
 
-                                <FormField
-                                    control={form.control}
-                                    name="vacancies"
-                                    render={({ field }) => (
-                                        <FormItem className="flex-1 mt-3">
-                                            <FormLabel>Enter No of Vacancies</FormLabel>
-                                            <FormControl>
-                                                <Input placeholder="Enter No of Vacancies" {...field} />
-                                            </FormControl>
-                                            <FormMessage />
-                                        </FormItem>
-                                    )}
-                                />
+                                    <FormField
+                                        control={form.control}
+                                        name="maxQualification"
+                                        render={({ field }) => (
+                                            <FormItem className="mt-3 flex-1">
+                                                <FormLabel>Select max qualification</FormLabel>
+                                                <FormControl>
+                                                    <Select onValueChange={field.onChange} defaultValue={field.value}>
+                                                        <SelectTrigger className="w-full">
+                                                            <SelectValue placeholder="Select max qualification"
+                                                            />
+                                                        </SelectTrigger>
+                                                        <SelectContent>
+                                                            <SelectGroup>
+                                                                {qualificationData.map((item, index) => (
+                                                                    <SelectItem value={item} key={index}>{item}</SelectItem>
+                                                                ))}
+                                                            </SelectGroup>
+                                                        </SelectContent>
+                                                        <FormMessage />
+                                                    </Select>
+                                                </FormControl>
+                                            </FormItem>
+                                        )}
+                                    />
+                                </div>
+                                <div className='flex gap-4'>
+                                    <FormField
+                                        control={form.control}
+                                        name="degree"
+                                        render={({ field }) => (
+                                            <FormItem className="flex-1 mt-3">
+                                                <FormLabel>Enter Degree Title</FormLabel>
+                                                <FormControl>
+                                                    <Input placeholder="Enter Degree" {...field} />
+                                                </FormControl>
+                                                <FormMessage />
+                                            </FormItem>
+                                        )}
+                                    />
 
-                                <FormField
-                                    control={form.control}
-                                    name="minSalary"
-                                    render={({ field }) => (
-                                        <FormItem className="flex-1 mt-3">
-                                            <FormLabel>Minimum Salary</FormLabel>
-                                            <FormControl>
-                                                <Input placeholder="Enter Minimum Salary" {...field} />
-                                            </FormControl>
-                                            <FormMessage />
-                                        </FormItem>
-                                    )}
-                                />
+                                    <FormField
+                                        control={form.control}
+                                        name="startDate"
+                                        render={({ field }) => (
+                                            <FormItem className="flex-1 mt-3">
+                                                <FormLabel>Start Date</FormLabel>
+                                                <FormControl>
+                                                    <Input type="date"   {...field} />
+                                                </FormControl>
+                                                <FormMessage />
+                                            </FormItem>
+                                        )}
+                                    />
+                                </div>
+                                <div className='flex gap-4'>
+                                    <FormField
+                                        control={form.control}
+                                        name="endDate"
+                                        render={({ field }) => (
+                                            <FormItem className="flex-1 mt-3">
+                                                <FormLabel>End Date</FormLabel>
+                                                <FormControl>
+                                                    <Input type="date"  {...field} />
+                                                </FormControl>
+                                                <FormMessage />
+                                            </FormItem>
+                                        )}
+                                    />
 
-                                <FormField
-                                    control={form.control}
-                                    name="maxSalary"
-                                    render={({ field }) => (
-                                        <FormItem className="flex-1 mt-3">
-                                            <FormLabel>Maximum Salary</FormLabel>
-                                            <FormControl>
-                                                <Input placeholder="Enter Maximum Salary" {...field} />
-                                            </FormControl>
-                                            <FormMessage />
-                                        </FormItem>
-                                    )}
-                                />
+                                    <FormField
+                                        control={form.control}
+                                        name="skills"
+                                        render={({ field }) => (
+                                            <FormItem className="mt-3 flex-1">
+                                                <FormLabel>Select Tags</FormLabel>
+                                                <FormControl>
+                                                    <Controller
+                                                        name="skills"
+                                                        control={form.control}
+                                                        defaultValue={[]}
+                                                        render={({ field }) => (
+                                                            <SelectInput
+                                                                multiple
+                                                                options={skillData}
+                                                                value={skills}
+                                                                onChange={(selectedOptions) => {
+                                                                    setSkills(selectedOptions);
+                                                                    // Update the RHF form value and trigger validation
+                                                                    field.onChange(selectedOptions);
+                                                                }}
+                                                            />
+                                                        )}
+                                                    />
+                                                </FormControl>
 
-                                <FormField
-                                    control={form.control}
-                                    name="maxQualification"
-                                    render={({ field }) => (
-                                        <FormItem className="mt-3">
-                                            <FormLabel>Select max qualification</FormLabel>
-                                            <FormControl>
-                                                <Select onValueChange={field.onChange} defaultValue={field.value}>
-                                                    <SelectTrigger className="w-full">
-                                                        <SelectValue placeholder="Select max qualification"
-                                                        />
-                                                    </SelectTrigger>
-                                                    <SelectContent>
-                                                        <SelectGroup>
-                                                            {qualificationData.map((item, index) => (
-                                                                <SelectItem value={item} key={index}>{item}</SelectItem>
-                                                            ))}
-                                                        </SelectGroup>
-                                                    </SelectContent>
-                                                    <FormMessage />
-                                                </Select>
-                                            </FormControl>
-                                        </FormItem>
-                                    )}
-                                />
-
-                                <FormField
-                                    control={form.control}
-                                    name="degree"
-                                    render={({ field }) => (
-                                        <FormItem className="flex-1 mt-3">
-                                            <FormLabel>Enter Degree Title</FormLabel>
-                                            <FormControl>
-                                                <Input placeholder="Enter Degree" {...field} />
-                                            </FormControl>
-                                            <FormMessage />
-                                        </FormItem>
-                                    )}
-                                />
-
-                                <FormField
-                                    control={form.control}
-                                    name="startDate"
-                                    render={({ field }) => (
-                                        <FormItem className="flex-1 mt-3">
-                                            <FormLabel>Start Date</FormLabel>
-                                            <FormControl>
-                                                <Input type="date"  {...field} />
-                                            </FormControl>
-                                            <FormMessage />
-                                        </FormItem>
-                                    )}
-                                />
-
-                                <FormField
-                                    control={form.control}
-                                    name="endDate"
-                                    render={({ field }) => (
-                                        <FormItem className="flex-1 mt-3">
-                                            <FormLabel>End Date</FormLabel>
-                                            <FormControl>
-                                                <Input type="date"  {...field} />
-                                            </FormControl>
-                                            <FormMessage />
-                                        </FormItem>
-                                    )}
-                                />
-
-                                <FormField
-                                    control={form.control}
-                                    name="skills"
-                                    render={({ field }) => (
-                                        <FormItem className="mt-3">
-                                            <FormLabel>Select Tags</FormLabel>
-                                            <FormControl>
-                                                <Controller
-                                                    name="skills"
-                                                    control={form.control}
-                                                    defaultValue={[]}
-                                                    render={({ field }) => (
-                                                        <SelectInput
-                                                            multiple
-                                                            options={skillData}
-                                                            value={skills}
-                                                            onChange={(selectedOptions) => {
-                                                                setSkills(selectedOptions);
-                                                                // Update the RHF form value and trigger validation
-                                                                field.onChange(selectedOptions);
-                                                            }}
-                                                        />
-                                                    )}
-                                                />
-                                            </FormControl>
-
-                                        </FormItem>
-                                    )}
-                                />
+                                            </FormItem>
+                                        )}
+                                    />
+                                </div>
+                                <Button type='submit' className='float-right mt-5'>Update</Button>
                             </form>
                         </Form>
                     </TabsContent>
-                    {/* <Button className='float-right mt-5'>Update</Button> */}
 
                 </Tabs>
             </div>
