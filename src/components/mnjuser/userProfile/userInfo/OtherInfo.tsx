@@ -26,11 +26,10 @@ const OtherInfo = () => {
 
   const { data, isSuccess, isLoading } = useUserInfoDataQuery();
 
-
-
   if (isSuccess) {
     console.log(data);
   }
+  
   const otherInfo = (
     <>
       {data?.length !== 0 ? (

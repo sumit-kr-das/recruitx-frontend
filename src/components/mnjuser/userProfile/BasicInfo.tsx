@@ -28,22 +28,19 @@ const BasicInfo = () => {
   const [updateUser] = useUpdateUserMutation();
 
   const { user } = useSelector(selectCurrentUserData);
-  console.log("====================================");
-  console.log(user);
-  console.log("====================================");
 
-  // useEffect(() => {
-  //   if (isSuccess) {
-  //     setUpdate({
-  //       name: user?.name || "",
-  //       email: user?.email || "",
-  //       phoneNo: user?.phoneNo || "",
-  //       workStatus: user?.workStatus || "",
-  //     });
-  //   }
-  // }, [isSuccess, data]);
+  useEffect(() => {
+    if (user) {
+      setUpdate({
+        name: user?.name || "",
+        email: user?.email || "",
+        phoneNo: user?.phoneNo || "",
+        workStatus: user?.workStatus || "",
+      });
+    }
+  }, [user]);
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e:React.SyntheticEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
       await updateUser(update).unwrap();
@@ -55,9 +52,9 @@ const BasicInfo = () => {
     }
   };
 
-  const basicInfo =  (
+  const basicInfo = (
     <>
-      <div className="relative flex items-center justify-between bg-white p-5 rounded-lg gap-5">
+      <div className="relative flex items-center justify-between bg-white p-5 rounded-lg gap-5 border shadow">
         <div
           onClick={() => setOpen((prev) => !prev)}
           title="edit"
@@ -91,11 +88,11 @@ const BasicInfo = () => {
             <div className="flex items-center gap-4">
               <p className="text-sm">
                 <span className="text-slate-500 ">Profile Created - </span>
-                {user && convertDate(user?.createdAt)}
+                {user?.createdAt && convertDate(user?.createdAt)}
               </p>
               <p className="text-sm">
                 <span className="text-slate-500 ">Profile last updated - </span>
-                {user && convertDate(user?.updatedAt)}
+                {user?.updatedAt && convertDate(user?.updatedAt)}
               </p>
             </div>
           </div>
@@ -104,7 +101,7 @@ const BasicInfo = () => {
               <Phone className="w-[50px] h-[50px] bg-slate-200 p-4 rounded-md" />
               <div>
                 <h3 className="text-slate-500 text-sm">Call</h3>
-                <p className="text-sm">{user?.phoneNo}</p>
+                <p className="text-sm">+91 {user?.phoneNo}</p>
               </div>
             </div>
             <div className="flex items-center gap-2">
@@ -238,7 +235,7 @@ const BasicInfo = () => {
     </>
   );
 
-  return user ? basicInfo : <Loader />
+  return user ? basicInfo : <Loader />;
 };
 
 export default BasicInfo;

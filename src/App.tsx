@@ -46,7 +46,7 @@ const ViewAppliedPage = lazy(() => import("./pages/mnjuser/ViewAppliedPage"));
 
 // --------------------------- route authenticator ---------------------------
 import Loader from "./components/loader/Loader";
-import { useGetUserGlobalQuery } from "./features/user/get/getUserGlobalApiSlice";
+import { useLazyGetUserGlobalQuery } from "./features/user/get/getUserGlobalApiSlice";
 import { setUserData } from "./features/user/userSlice";
 import {
   AdminRoute,
@@ -59,16 +59,22 @@ import {
 
 const App = () => {
   const role = useSelector(selectCurrentRole);
-  const { data } = useGetUserGlobalQuery();
-  const dispatch  = useDispatch()
-  if (!role) console.log("role", role);
+  const [trigger, user] = useLazyGetUserGlobalQuery();
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    if (role && role === "user" && data) {
-      console.log("user global data",data);
-      dispatch(setUserData(data));
+    console.log("Data triggered", user.data);
+    if (role && role === "user") {
+      trigger();
     }
-  }, [role, data, dispatch]);
+  }, [role]);
+
+  useEffect(() => {
+    console.log("user global data", user.data);
+    if (user.data) {
+      dispatch(setUserData(user.data));
+    }
+  }, [user]);
 
   return (
     <BrowserRouter>

@@ -8,7 +8,6 @@ import TopHeader from "../../components/navigation/TopHeader";
 import Container from "../../layout/Container";
 
 const UserProfilePage = () => {
-  
   return (
     <div className="bg-[#FAFAFA]">
       <TopHeader />
