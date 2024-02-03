@@ -42,13 +42,7 @@ type FormValues = {
   degree: string
 }
 const SubmitJob = () => {
-  // const [data, setData] = useState(INITIAL_JOB_DATA);
-  // const updateFields = (fields: Partial<TINITIAL_JOB_DATA>) => {
-  //   setData((prev) => {
-  //     return { ...prev, ...fields };
-  //   });
-  // };
-  const [submitJob, { isLoading }] = usePostJobMutation();
+  const [submitJob] = usePostJobMutation();
   const navigate = useNavigate();
   const [step, setStep] = useState(0);
   const [value, setValue] = useState([tagsData[0]]);
@@ -102,7 +96,6 @@ const SubmitJob = () => {
     setStep(1);
   }
 
-  // const { errors } = formState;
   const postJob = async (data: FormValues) => {
     console.log(data);
     const convertedData = {
@@ -229,7 +222,7 @@ const SubmitJob = () => {
                       <FormField
                         control={form.control}
                         name="tags"
-                        render={({ field }) => (
+                        render={() => (
                           <FormItem className="mt-3">
                             <FormLabel>Select Tags</FormLabel>
                             <FormControl>
@@ -493,7 +486,7 @@ const SubmitJob = () => {
                       <FormField
                         control={form.control}
                         name="skills"
-                        render={({ field }) => (
+                        render={() => (
                           <FormItem className="mt-3">
                             <FormLabel>Select Tags</FormLabel>
                             <FormControl>
@@ -508,7 +501,6 @@ const SubmitJob = () => {
                                     value={skills}
                                     onChange={(selectedOptions) => {
                                       setSkills(selectedOptions);
-                                      // Update the RHF form value and trigger validation
                                       field.onChange(selectedOptions);
                                     }}
                                   />
@@ -550,29 +542,6 @@ const SubmitJob = () => {
 
                     </>)
                   }
-                  {/* {step === 1 && (
-                    <Button
-                      onClick={() => setStep(0)}
-                    >
-                      Back
-                    </Button>
-                  )}
-                  {
-                    step === 1 ? (
-                      <Button
-                        type="submit"
-                      >
-                        Finish
-                      </Button>
-                    ) : (
-                      <Button
-                        onClick={next}
-                        type="button"
-                      >
-                        Next
-                      </Button>
-                    )
-                  } */}
                 </div>
               </form>
             </Form>

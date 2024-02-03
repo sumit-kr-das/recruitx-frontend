@@ -45,8 +45,39 @@ type FormValues = {
     maxQualification: string,
     degree: string
 }
-
-const EditJobForm = ({ job, setOpen }: { job: any, setOpen: Function }) => {
+interface job {
+    _id: string,
+    title: string,
+    category: string,
+    description: string,
+    tags: [string],
+    active: boolean,
+    comapanyId: {
+        _id: string,
+        companyName: string,
+        companyProfileId: {
+            _id: string,
+            logo: string
+        }
+    },
+    info: {
+        vacancies: number,
+        jobType: string,
+        workplaceType: string,
+        startDate: string,
+        endDate: string,
+        roles: string,
+        skills: [string],
+        minExprience: number,
+        maxExprience: number,
+        minSalary: number,
+        maxSalary: number,
+        location: string,
+        maxQualification: string,
+        degree: string
+    },
+}
+const EditJobForm = ({ job, setOpen }: { job: job, setOpen: Function }) => {
 
     const [value, setValue] = useState([...job?.tags || tagsData[0]]);
     const [skills, setSkills] = useState([...job?.info?.skills || skillData[0]])
@@ -184,7 +215,7 @@ const EditJobForm = ({ job, setOpen }: { job: any, setOpen: Function }) => {
                                 <FormField
                                     control={form.control}
                                     name="tags"
-                                    render={({ field }) => (
+                                    render={() => (
                                         <FormItem className="mt-3">
                                             <FormLabel>Select Tags</FormLabel>
                                             <FormControl>
@@ -459,7 +490,7 @@ const EditJobForm = ({ job, setOpen }: { job: any, setOpen: Function }) => {
                                     <FormField
                                         control={form.control}
                                         name="skills"
-                                        render={({ field }) => (
+                                        render={() => (
                                             <FormItem className="mt-3 flex-1">
                                                 <FormLabel>Select Tags</FormLabel>
                                                 <FormControl>
@@ -474,7 +505,6 @@ const EditJobForm = ({ job, setOpen }: { job: any, setOpen: Function }) => {
                                                                 value={skills}
                                                                 onChange={(selectedOptions) => {
                                                                     setSkills(selectedOptions);
-                                                                    // Update the RHF form value and trigger validation
                                                                     field.onChange(selectedOptions);
                                                                 }}
                                                             />
