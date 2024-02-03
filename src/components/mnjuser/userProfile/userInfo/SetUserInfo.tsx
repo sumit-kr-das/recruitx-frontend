@@ -64,14 +64,15 @@ const SetUserInfo = ({
       address: "",
       bio: "",
       objective: "",
-      language: [""],
+      language: [],
       gender: "",
-      skills: [""],
+      skills: [],
       maxQualification: "",
     },
   });
 
   const submitForm:SubmitHandler<FormValue> = async (value) => {
+    console.log("submitted")
     toast.success("Entered");
     // e.preventDefault();
     try {
@@ -211,6 +212,36 @@ const SetUserInfo = ({
                   <FormControl>
                     <Input type="date" {...field} />
                   </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+          </div>
+          <div className="flex gap-4">
+            <FormField
+              control={form.control}
+              name="linkedIn"
+              render={({ field }) => (
+                <FormItem className="flex-1">
+                  <FormLabel>Linkedin username</FormLabel>
+                  <FormControl>
+                    <Input placeholder="sumit-kr-das" {...field} />
+                  </FormControl>
+                  <FormDescription>github.com/sumit-kr-das</FormDescription>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="github"
+              render={({ field }) => (
+                <FormItem className="flex-1">
+                  <FormLabel>Date of birth</FormLabel>
+                  <FormControl>
+                    <Input placeholder="sumit-kumar-das-01" {...field} />
+                  </FormControl>
+                  <FormDescription>www.linkedin.com/in/sumit-kumar-das-01/</FormDescription>
                   <FormMessage />
                 </FormItem>
               )}
