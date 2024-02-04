@@ -1,17 +1,17 @@
-import { Github, Linkedin, Pencil, Twitter } from "lucide-react";
+import { Github, Linkedin, Pencil } from "lucide-react";
 import { useEffect, useState } from "react";
-import { toast } from "react-hot-toast";
 import { languageData } from "../../../../constants/languageData";
 import { qualificationData } from "../../../../constants/qualificationData";
 import { tagsData } from "../../../../constants/tagsData";
 import { useUpdateUserInfoMutation } from "../../../../features/user/put/updateUserInfoDataApiSlice";
 import { convertDate } from "../../../../pages/company/MyJobs";
+import { useToast } from "../../../../ui/use-toast";
 import Modal from "../../../Modal";
 import SelectInput from "../../../form/multiSelectInput/SelectInput";
 import { FormValue } from "./OtherInfo";
 
 type TSetUserInfoProps = {
-  data: FormValue;
+  data: FormValue[];
   userData: FormValue;
   isSuccess: boolean;
   setUserData: (value: FormValue) => void;
@@ -33,8 +33,7 @@ const ViewInfo = ({
 }: TSetUserInfoProps) => {
   const [open, setOpen] = useState(false);
   const [updateUserInfo] = useUpdateUserInfoMutation();
-  console.log(data[0]);
-  console.log(isSuccess);
+  const { toast } = useToast();
 
   useEffect(() => {
     if (isSuccess) {
@@ -58,10 +57,15 @@ const ViewInfo = ({
     e.preventDefault();
     try {
       await updateUserInfo(userData).unwrap();
-      toast.success("Update successfull");
+      toast({
+        description: "User information update success",
+      });
       setOpen((prev) => !prev);
     } catch (err) {
-      console.log("Error on company login", err);
+      toast({
+        variant: "destructive",
+        description: "Something went wrong",
+      });
     }
   };
   return (
@@ -130,9 +134,7 @@ const ViewInfo = ({
                   </p>
                 </div>
                 <div>
-                  <h2 className="text-sm font-semibold mb-2">
-                    Personal details
-                  </h2>
+                  <h2 className="text-sm font-semibold mb-1">Sex</h2>
                   <p className="text-gray-700 text-sm capitalize">
                     {data[0]?.gender}
                   </p>
@@ -140,13 +142,13 @@ const ViewInfo = ({
               </div>
               <div>
                 <div className="mb-4">
-                  <h2 className="text-sm font-semibold mb-2">Age</h2>
+                  <h2 className="text-sm font-semibold mb-1">Age</h2>
                   <p className="text-gray-700 text-sm capitalize">
                     {data[0]?.age} years
                   </p>
                 </div>
                 <div>
-                  <h2 className="text-sm font-semibold mb-2">Date of birth</h2>
+                  <h2 className="text-sm font-semibold mb-1">Date of birth</h2>
                   <p className="text-gray-700 text-sm capitalize">
                     {convertDate(data[0]?.dateOfBirth)}
                   </p>

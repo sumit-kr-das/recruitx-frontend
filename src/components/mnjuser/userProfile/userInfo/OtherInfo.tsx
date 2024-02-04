@@ -39,7 +39,7 @@ const OtherInfo = () => {
   const [tags, setTags] = useState([tagsData[0]]);
 
   const { data, isSuccess, isLoading } = useUserInfoDataQuery();
-  
+
   const otherInfo = (
     <>
       {data?.length !== 0 ? (
