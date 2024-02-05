@@ -1,9 +1,9 @@
 import { useState } from "react";
 import Footer from "../../components/footer/Footer";
-import BasicInfo from "../../components/mnjuser/userProfile/basicInfo/BasicInfo";
+import BasicInfo from "./_components/BasicInfo";
 import UserCareer from "../../components/mnjuser/userProfile/userCareer/UserCareer";
-import UserEducation from "../../components/mnjuser/userProfile/userEducation/UserEducation";
-import OtherInfo from "../../components/mnjuser/userProfile/userInfo/OtherInfo";
+import UserEducation from "./_components/UserEducation";
+import OtherInfo from "./_components/OtherInfo";
 import TopHeader from "../../components/navigation/TopHeader";
 import Container from "../../layout/Container";
 

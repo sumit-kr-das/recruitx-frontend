@@ -27,7 +27,10 @@ import {
 import { Textarea } from "../../../../ui/textarea";
 import { useToast } from "../../../../ui/use-toast";
 import SelectInput from "../../../form/multiSelectInput/SelectInput";
-import { FormValue, INITIAL_DATA } from "./OtherInfo";
+import {
+  FormValue,
+  INITIAL_DATA,
+} from "../../../../pages/mnjuser/_components/OtherInfo";
 
 type TSetUserInfoProps = {
   setUserData: (value: FormValue) => void;

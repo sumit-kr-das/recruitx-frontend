@@ -8,7 +8,7 @@ import { convertDate } from "../../../../pages/company/MyJobs";
 import { useToast } from "../../../../ui/use-toast";
 import Modal from "../../../Modal";
 import SelectInput from "../../../form/multiSelectInput/SelectInput";
-import { FormValue } from "./OtherInfo";
+import { FormValue } from "../../../../pages/mnjuser/_components/OtherInfo";
 import Loader from "../../../loader/Loader";
 
 type TSetUserInfoProps = {

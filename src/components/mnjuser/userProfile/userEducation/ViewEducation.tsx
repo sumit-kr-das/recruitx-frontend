@@ -1,5 +1,5 @@
 import { Pen, Trash2 } from "lucide-react";
-import { INITIAL_EDU_DATA } from "./UserEducation";
+import { INITIAL_EDU_DATA } from "../../../../pages/mnjuser/_components/UserEducation";
 import { useDeleteUserEduMutation } from "../../../../features/user/delete/deleteUserEduApiSlice";
 import { toast } from "react-hot-toast";
 import { TApiError } from "../../../../@types/TApiError";

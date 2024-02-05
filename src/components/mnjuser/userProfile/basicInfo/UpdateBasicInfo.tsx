@@ -29,17 +29,20 @@ import {
   SelectTrigger,
   SelectValue,
 } from "../../../../ui/select";
-import { BasicInfoFormData } from "./BasicInfo";
+import { BasicInfoFormData } from "../../../../pages/mnjuser/_components/BasicInfo";
 import { useEffect, useState } from "react";
+import { TApiError } from "../../../../@types/TApiError";
+import { useToast } from "../../../../ui/use-toast";
 
 type UserBasicInfoProps = {
   user: BasicInfoFormData;
 };
 
 const UpdateBasicInfo = ({ user }: UserBasicInfoProps) => {
-  const [isOpen, setIsOpen] = useState(false); 
-  const [isFormDirty, setIsFormDirty] = useState(false); 
+  const [isOpen, setIsOpen] = useState(false);
+  const [isFormDirty, setIsFormDirty] = useState(false);
   const [updateUser] = useUpdateUserMutation();
+  const { toast } = useToast();
 
   const form = useForm<z.infer<typeof BasicInfoSchema>>({
     resolver: zodResolver(BasicInfoSchema),
@@ -59,18 +62,20 @@ const UpdateBasicInfo = ({ user }: UserBasicInfoProps) => {
 
   const submitForm: SubmitHandler<BasicInfoFormData> = async (value) => {
     try {
-        await updateUser(value).unwrap();
-        setIsOpen(false)
-        setIsFormDirty(false);
-      //   toast.success("Update successfull");
+      await updateUser(value).unwrap();
+      setIsOpen(false);
+      setIsFormDirty(false);
+      toast({
+        description: "User information update successfull",
+      });
     } catch (err) {
-      // const apiError = err as TApiError;
-      // toast.error(apiError.data.message);
+      const apiError = err as TApiError;
+      toast({
+        variant: "destructive",
+        description: apiError.data.message,
+      });
     }
   };
-
-  console.log(form.formState.isDirty);
-  
 
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
@@ -155,7 +160,11 @@ const UpdateBasicInfo = ({ user }: UserBasicInfoProps) => {
                 </FormItem>
               )}
             />
-            <Button disabled={!isFormDirty} className="float-right" type="submit">
+            <Button
+              disabled={!isFormDirty}
+              className="float-right"
+              type="submit"
+            >
               Update info
             </Button>
           </form>

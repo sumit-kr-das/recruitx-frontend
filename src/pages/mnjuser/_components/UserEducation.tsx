@@ -1,7 +1,7 @@
 import { useState } from "react";
-import { useGetUserEduQuery } from "../../../../features/user/get/getUserEduApiSlice";
-import SetUserEducation from "./SetUserEducation";
-import ViewEducation from "./ViewEducation";
+import { useGetUserEduQuery } from "../../../features/user/get/getUserEduApiSlice";
+import SetUserEducation from "../../../components/mnjuser/userProfile/userEducation/SetUserEducation";
+import ViewEducation from "../../../components/mnjuser/userProfile/userEducation/ViewEducation";
 
 export const INITIAL_EDU_DATA = {
   id: "",

@@ -1,9 +1,9 @@
-import { useState, useEffect } from "react";
-import { languageData } from "../../../../constants/languageData";
-import { tagsData } from "../../../../constants/tagsData";
-import { useUserInfoDataQuery } from "../../../../features/user/get/getUserInfoDataApiSlice";
-import SetUserInfo from "./SetUserInfo";
-import ViewInfo from "./ViewInfo";
+import { useState } from "react";
+import SetUserInfo from "../../../components/mnjuser/userProfile/userInfo/SetUserInfo";
+import ViewInfo from "../../../components/mnjuser/userProfile/userInfo/ViewInfo";
+import { languageData } from "../../../constants/languageData";
+import { tagsData } from "../../../constants/tagsData";
+import { useUserInfoDataQuery } from "../../../features/user/get/getUserInfoDataApiSlice";
 
 export type FormValue = {
   github: string;
@@ -18,9 +18,9 @@ export type FormValue = {
   skills: string[];
   maxQualification: string;
   photo?: string;
-  userID?:string;
-  _id?:string;
-  __v?:string;
+  userID?: string;
+  _id?: string;
+  __v?: string;
 };
 
 export const INITIAL_DATA = {
