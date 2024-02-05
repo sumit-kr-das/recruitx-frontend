@@ -4,17 +4,17 @@ import { useViewCompanyProfileQuery } from "../../../../features/company/get/vie
 import SetCompanyProfile from "./SetCompanyProfile";
 import ViewCompanyProfile from "./ViewCompanyProfile";
 
-export const INITIAL_DATA = {
-  description: "",
-  teamSize: "",
-  founded: "",
-  type: "",
-  tags: "",
-};
+// export const INITIAL_DATA = {
+//   description: "",
+//   teamSize: "",
+//   founded: "",
+//   type: "",
+//   tags: "",
+// };
 
 const CompanyProfileDetails = () => {
-  const [userData, setUserData] = useState(INITIAL_DATA);
-  const [cType, setCtype] = useState([companyTagData[0]]);
+  // const [userData, setUserData] = useState(INITIAL_DATA);
+  // const [cType, setCtype] = useState([companyTagData[0]]);
   const { data, isSuccess, isLoading } = useViewCompanyProfileQuery();
 
   return isLoading ? (
@@ -23,20 +23,12 @@ const CompanyProfileDetails = () => {
     <>
       <ViewCompanyProfile
         data={data}
-        userData={userData}
-        setUserData={setUserData}
-        isSuccess={isSuccess}
-        cType={cType}
-        setCtype={setCtype}
       />
     </>
   ) : (
     <>
       <SetCompanyProfile
-        userData={userData}
-        setUserData={setUserData}
-        cType={cType}
-        setCtype={setCtype}
+
       />
       ;
     </>

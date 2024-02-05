@@ -26,7 +26,6 @@ const EditCompanyProfile = ({ company, setOpen }: { company: any, setOpen: Funct
     const { toast } = useToast();
     const [updateCompany] = useApproveCompanyMutation();
 
-    console.log(company);
     const form = useForm<z.infer<typeof CompanyUpdateSchema>>({
         resolver: zodResolver(CompanyUpdateSchema),
         defaultValues: {

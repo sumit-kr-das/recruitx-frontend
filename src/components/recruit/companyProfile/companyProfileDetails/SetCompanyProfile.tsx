@@ -5,25 +5,25 @@ import SelectInput from "../../../form/multiSelectInput/SelectInput";
 import { companyTagData } from "../../../../constants/companyTagsData";
 import { useSetCompanyProfileMutation } from "../../../../features/company/post/setCompanyProfileDetailsApiSlice";
 
-const SetCompanyProfile = ({ userData, setUserData, cType, setCtype }) => {
+const SetCompanyProfile = () => {
   const [setCompanyProfile] = useSetCompanyProfileMutation();
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    try {
-      await setCompanyProfile(userData).unwrap();
-      toast.success("Save successfull");
-    } catch (err: any) {
-      toast.success(err?.data?.msg);
-      console.log("Error on company login", err);
-    }
-  };
-  const handleCancel = () => {
-    setUserData(INITIAL_DATA);
-  };
+  // const handleSubmit = async (e) => {
+  //   e.preventDefault();
+  //   try {
+  //     await setCompanyProfile(userData).unwrap();
+  //     toast.success("Save successfull");
+  //   } catch (err: any) {
+  //     toast.success(err?.data?.msg);
+  //     console.log("Error on company login", err);
+  //   }
+  // };
+  // const handleCancel = () => {
+  //   setUserData(INITIAL_DATA);
+  // };
   return (
     <div className="relative bg-white p-5 rounded-lg gap-5 mt-5 shadow-lg">
-      <form onSubmit={handleSubmit}>
+      {/* <form onSubmit={handleSubmit}>
         <div className="pb-12">
           <h2 className="text-base font-semibold leading-7 text-gray-900">
             Basic information
@@ -168,7 +168,7 @@ const SetCompanyProfile = ({ userData, setUserData, cType, setCtype }) => {
             Save
           </button>
         </div>
-      </form>
+      </form> */}
     </div>
   );
 };
