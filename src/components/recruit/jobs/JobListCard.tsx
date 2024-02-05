@@ -10,7 +10,40 @@ import {
 } from "../../../ui/dialog";
 import EditJobForm from "../companyProfile/EditJobForm";
 import { convertDate } from "../../../pages/company/MyJobs";
-const JobListCard = ({ job }) => {
+
+type jobType = {
+    _id: string,
+    title: string,
+    category: string,
+    description: string,
+    tags: [string],
+    active: boolean,
+    comapanyId: {
+        _id: string,
+        companyName: string,
+        companyProfileId: {
+            _id: string,
+            logo: string
+        }
+    },
+    info: {
+        vacancies: number,
+        jobType: string,
+        workplaceType: string,
+        startDate: string,
+        endDate: string,
+        roles: string,
+        skills: [string],
+        minExprience: number,
+        maxExprience: number,
+        minSalary: number,
+        maxSalary: number,
+        location: string,
+        maxQualification: string,
+        degree: string
+    },
+}
+const JobListCard = ({ job }: { job: jobType }) => {
     const [open, setOpen] = useState(false);
     const [deleteJob] = useDeleteJobMutation();
 

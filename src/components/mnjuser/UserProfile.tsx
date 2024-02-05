@@ -6,9 +6,13 @@ import InfoSVG from "../../assets/icons/info.svg";
 import JobsSVG from "../../assets/icons/jobs.svg";
 import UserDefault from "../../assets/user-default-profile.png";
 import { useViewUserProfileQuery } from "../../features/user/get/viewUserProfileApiSlice";
+import { useSelector } from "react-redux";
+import { selectCurrentUserData } from "../../features/user/userSlice";
 
 const UserProfile = () => {
-  const { data } = useViewUserProfileQuery();
+  // const { data } = useViewUserProfileQuery();
+  const { user } = useSelector(selectCurrentUserData);
+  console.log(user);
 
   return (
     <div className="p-4 text-center">
@@ -20,10 +24,10 @@ const UserProfile = () => {
           alt="user_default"
           className="rounded-full object-cover border"
         />
-        <h1 className="font-bold capitalize">{data?.name}</h1>
+        <h1 className="font-bold capitalize">{user?.name}</h1>
         {/* <p className="text-xs font-medium">MERN Full Stack Developer</p> */}
         {/* <p className="text-xs font-medium my-1">@ designx.digital</p> */}
-        <p className="text-xs font-medium capitalize">{data?.workStatus}</p>
+        <p className="text-xs font-medium capitalize">{user?.workStatus}</p>
         <p className="text-xs text-gray-400">Last updated 29m ago</p>
         <Link
           to="/mnjuser/profile"

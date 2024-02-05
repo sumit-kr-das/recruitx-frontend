@@ -34,22 +34,30 @@ const ShowEduData = ({ item, setEdudata, isSuccess, setOpen }) => {
   };
 
   return (
-    <div className="mb-4 flex items-center justify-between">
+    <div className="mb-4 flex items-center justify-between p-5 bg-[#FAFAFA] rounded-lg border mt-4">
       <div>
         <div className="flex items-center gap-2">
           <h2 className="font-bold text-lg"> {item?.course}</h2>
-          <Pen className="w-[12px] cursor-pointer" onClick={openModal} />
+          {/* <Pen className="w-[12px] cursor-pointer" onClick={openModal} /> */}
         </div>
         <h3 className="font-semibold">{item?.college}</h3>
         <h3>
           {item?.passYear} | {item?.courseType}
         </h3>
       </div>
-      <div
-        onClick={() => handleDelete(item?._id)}
-        className="bg-red-100 px-3 py-2 rounded-lg cursor-pointer"
-      >
-        <Trash2 className="w-[20px] text-red-600" />{" "}
+      <div className="flex items-center gap-5">
+        <div
+          onClick={openModal}
+          className="bg-green-100 px-3 py-2 rounded-lg cursor-pointer hover:bg-green-200 "
+        >
+          <Pen className="w-5 text-green-600" />
+        </div>
+        <div
+          onClick={() => handleDelete(item?._id)}
+          className="bg-red-100 px-3 py-2 rounded-lg cursor-pointer hover:bg-red-200 "
+        >
+          <Trash2 className="w-5 text-red-600" />
+        </div>
       </div>
     </div>
   );
@@ -58,9 +66,11 @@ const ShowEduData = ({ item, setEdudata, isSuccess, setOpen }) => {
 const ViewEducation = ({ setOpen, resData, setEdudata, isSuccess }) => {
   return (
     <>
-      <div className="mt-4 bg-white p-5 rounded-lg shadow-lg">
+      <div className="relative mt-4 bg-white p-10 rounded-lg border shadow">
         <div className="flex items-center justify-between mb-4">
-          <h2 className="font-bold text-lg">Education</h2>
+          <h2 className="text-2xl font-semibold leading-7 text-gray-900">
+            Education
+          </h2>
           <h2
             onClick={() => {
               setEdudata(INITIAL_EDU_DATA);
@@ -72,7 +82,7 @@ const ViewEducation = ({ setOpen, resData, setEdudata, isSuccess }) => {
           </h2>
         </div>
         {resData && resData.length == 0 && (
-          <h2>
+          <h2 className="mt-1 text-sm leading-6 text-gray-600">
             Mention your educational details including your current and previous
             educational details.
           </h2>

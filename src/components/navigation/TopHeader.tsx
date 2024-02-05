@@ -19,11 +19,11 @@ const TopHeader = () => {
   const user = useSelector(selectCurrentUser);
   const role = useSelector(selectCurrentRole);
   return (
-    <header className=" bg-white shadow-sm fixed w-full z-20">
+    <header className="bg-white shadow-sm fixed w-full z-20">
       <nav className="max-w-screen-xl mx-auto px-4 py-5 flex items-center justify-between">
         <div className="flex items-center gap-12">
           <Link to="/">
-            <img className="w-32" src={MainLogo} alt="main logo" />
+            <img className="w-24 md:w-32" src={MainLogo} alt="main logo" />
           </Link>
           <div className="hidden md:block">
             <NavigationMenus />

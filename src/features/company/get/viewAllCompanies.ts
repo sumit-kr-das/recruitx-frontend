@@ -1,4 +1,5 @@
-import { TCompany } from "../../../@types/TCompany";
+
+import { TCompany } from "../../../@types/publicTypes/TCompany";
 import { apiSlice } from "../../../app/api/apiSlice";
 
 export const viewAllCompaniesApiSlice = apiSlice.injectEndpoints({

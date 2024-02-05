@@ -59,22 +59,22 @@ import {
 
 const App = () => {
   const role = useSelector(selectCurrentRole);
-  const [trigger, data] = useLazyGetUserGlobalQuery();
-  const dispatch = useDispatch()
-  if (!role) console.log("role", role);
+  const [trigger, user] = useLazyGetUserGlobalQuery();
+  const dispatch = useDispatch();
+
   useEffect(() => {
+    console.log("Data triggered", user.data);
     if (role && role === "user") {
       trigger();
-      console.log("user global data", data.data);
     }
   }, [role]);
 
   useEffect(() => {
-    console.log("user global data", data.data);
-    dispatch(setUserData(data));
-  }, [data]);
-
-
+    console.log("user global data", user.data);
+    if (user.data) {
+      dispatch(setUserData(user.data));
+    }
+  }, [user]);
 
   return (
     <BrowserRouter>

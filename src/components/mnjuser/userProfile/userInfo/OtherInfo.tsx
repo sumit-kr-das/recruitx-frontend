@@ -5,6 +5,24 @@ import { useUserInfoDataQuery } from "../../../../features/user/get/getUserInfoD
 import SetUserInfo from "./SetUserInfo";
 import ViewInfo from "./ViewInfo";
 
+export type FormValue = {
+  github: string;
+  linkedIn: string;
+  dateOfBirth: string;
+  age: string;
+  address: string;
+  bio: string;
+  objective: string;
+  language: string[];
+  gender: string;
+  skills: string[];
+  maxQualification: string;
+  photo?: string;
+  userID?:string;
+  _id?:string;
+  __v?:string;
+};
+
 export const INITIAL_DATA = {
   github: "",
   linkedIn: "",
@@ -26,11 +44,6 @@ const OtherInfo = () => {
 
   const { data, isSuccess, isLoading } = useUserInfoDataQuery();
 
-
-
-  if (isSuccess) {
-    console.log(data);
-  }
   const otherInfo = (
     <>
       {data?.length !== 0 ? (
@@ -46,7 +59,6 @@ const OtherInfo = () => {
         />
       ) : (
         <SetUserInfo
-          userData={userData}
           setUserData={setUserData}
           lang={lang}
           setLang={setLang}
