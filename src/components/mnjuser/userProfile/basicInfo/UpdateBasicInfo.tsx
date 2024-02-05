@@ -39,8 +39,8 @@ type UserBasicInfoProps = {
 };
 
 const UpdateBasicInfo = ({ user }: UserBasicInfoProps) => {
-  const [isOpen, setIsOpen] = useState(false);
-  const [isFormDirty, setIsFormDirty] = useState(false);
+  const [isOpen, setIsOpen] = useState<boolean>(false);
+  const [isFormDirty, setIsFormDirty] = useState<boolean>(false);
   const [updateUser] = useUpdateUserMutation();
   const { toast } = useToast();
 

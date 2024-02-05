@@ -12,9 +12,7 @@ const UserProfilePage = () => {
     <div className="bg-[#FAFAFA]">
       <TopHeader />
       <Container className="pt-24 w-full">
-        {/* Basic info */}
         <BasicInfo />
-        {/* Other info */}
         <OtherInfo />
         {/* Educational details */}
         <UserEducation />

@@ -4,6 +4,7 @@ import ViewInfo from "../../../components/mnjuser/userProfile/userInfo/ViewInfo"
 import { languageData } from "../../../constants/languageData";
 import { tagsData } from "../../../constants/tagsData";
 import { useUserInfoDataQuery } from "../../../features/user/get/getUserInfoDataApiSlice";
+import Loader from "../../../components/loader/Loader";
 
 export type FormValue = {
   github: string;
@@ -38,46 +39,25 @@ export const INITIAL_DATA = {
 };
 
 const OtherInfo = () => {
-  const [userData, setUserData] = useState(INITIAL_DATA);
   const [lang, setLang] = useState([languageData[0]]);
   const [tags, setTags] = useState([tagsData[0]]);
 
-  const { data, isSuccess, isLoading } = useUserInfoDataQuery();
+  const { data } = useUserInfoDataQuery();
 
-  const otherInfo = (
+  if (!data) return <Loader />;
+
+  return (
     <>
       {data?.length !== 0 ? (
-        <ViewInfo
-          data={data}
-          isSuccess={isSuccess}
-          setUserData={setUserData}
-          userData={userData}
-          tags={tags}
-          setTags={setTags}
-          lang={lang}
-          setLang={setLang}
-        />
+        <ViewInfo data={data} setTags={setTags} setLang={setLang} />
       ) : (
         <SetUserInfo
-          setUserData={setUserData}
           lang={lang}
           setLang={setLang}
           tags={tags}
           setTags={setTags}
         />
       )}
-    </>
-  );
-
-  return isLoading ? (
-    <>
-      <p>Loading...</p>
-    </>
-  ) : isSuccess ? (
-    otherInfo
-  ) : (
-    <>
-      <p>Error</p>
     </>
   );
 };
