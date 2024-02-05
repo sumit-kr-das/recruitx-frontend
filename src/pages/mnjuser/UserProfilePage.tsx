@@ -1,6 +1,6 @@
 import { useState } from "react";
 import Footer from "../../components/footer/Footer";
-import BasicInfo from "../../components/mnjuser/userProfile/BasicInfo";
+import BasicInfo from "../../components/mnjuser/userProfile/basicInfo/BasicInfo";
 import UserCareer from "../../components/mnjuser/userProfile/userCareer/UserCareer";
 import UserEducation from "../../components/mnjuser/userProfile/userEducation/UserEducation";
 import OtherInfo from "../../components/mnjuser/userProfile/userInfo/OtherInfo";
@@ -15,7 +15,7 @@ const UserProfilePage = () => {
         {/* Basic info */}
         <BasicInfo />
         {/* Other info */}
-        <OtherInfo  />
+        <OtherInfo />
         {/* Educational details */}
         <UserEducation />
         {/* Career details */}

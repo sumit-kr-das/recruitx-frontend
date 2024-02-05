@@ -17,6 +17,10 @@ export type FormValue = {
   gender: string;
   skills: string[];
   maxQualification: string;
+  photo?: string;
+  userID?:string;
+  _id?:string;
+  __v?:string;
 };
 
 export const INITIAL_DATA = {

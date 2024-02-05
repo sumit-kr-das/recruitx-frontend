@@ -9,9 +9,10 @@ import { useToast } from "../../../../ui/use-toast";
 import Modal from "../../../Modal";
 import SelectInput from "../../../form/multiSelectInput/SelectInput";
 import { FormValue } from "./OtherInfo";
+import Loader from "../../../loader/Loader";
 
 type TSetUserInfoProps = {
-  data: FormValue[];
+  data?: FormValue[];
   userData: FormValue;
   isSuccess: boolean;
   setUserData: (value: FormValue) => void;
@@ -34,9 +35,10 @@ const ViewInfo = ({
   const [open, setOpen] = useState(false);
   const [updateUserInfo] = useUpdateUserInfoMutation();
   const { toast } = useToast();
+  console.log("This is data", data);
 
   useEffect(() => {
-    if (isSuccess) {
+    if (data?.length && isSuccess) {
       setUserData({
         github: data[0]?.github || "",
         linkedIn: data[0]?.linkedIn || "",
@@ -68,6 +70,7 @@ const ViewInfo = ({
       });
     }
   };
+  if (!data) return <Loader />;
   return (
     <>
       <div className="relative mt-4 bg-white p-10 rounded-lg border shadow">
