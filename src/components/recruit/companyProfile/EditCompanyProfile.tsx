@@ -21,8 +21,29 @@ type FormValues = {
     pin: string
 }
 
+type CompanyProps = {
+    _id: string,
+    name: string,
+    email: string,
+    phone: string,
+    password: string,
+    companyName: string,
+    industry: string,
+    designation: string,
+    pin: string,
+    address: string,
+    role: string,
+    status: string,
+    createdAt: string,
+    updatedAt: string,
+    companyProfileId: {
+        _id: string,
+        logo: string
+    }
+}
 
-const EditCompanyProfile = ({ company, setOpen }: { company: any, setOpen: Function }) => {
+
+const EditCompanyProfile = ({ company, setOpen }: { company: CompanyProps, setOpen: Function }) => {
     const { toast } = useToast();
     const [updateCompany] = useApproveCompanyMutation();
 
