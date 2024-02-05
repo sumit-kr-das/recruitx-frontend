@@ -7,7 +7,7 @@ type Profiledata = {
   description: string,
   type: string,
   tags: string[],
-  teamSize: string,
+  teamSize: number,
   founded: string,
   logo: string
 }
