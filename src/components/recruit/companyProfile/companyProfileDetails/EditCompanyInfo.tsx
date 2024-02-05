@@ -35,8 +35,6 @@ const EditCompanyInfo = ({ data, setOpen }: { data: Profiledata, setOpen: Functi
     const [value, setValue] = useState([...data?.tags || tagsData[0]]);
     const [updateCompanyProfile] = useUpdateCompanyProfileMutation();
 
-    console.log(data)
-
     const form = useForm<z.infer<typeof CompanyProfileUpdateSchema>>({
         resolver: zodResolver(CompanyProfileUpdateSchema),
         defaultValues: {
