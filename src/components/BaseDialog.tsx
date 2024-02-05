@@ -1,4 +1,4 @@
-import React, { ReactNode } from 'react'
+import React, { ReactNode, useEffect, useState } from 'react'
 import {
     Dialog,
     DialogContent,
@@ -17,9 +17,14 @@ interface BaseDialogProps {
 }
 
 const BaseDialog: React.FC<BaseDialogProps> = ({ open, setOpen, trigger, content, contentClassName, title }) => {
+    const [show, setShow] = useState(false);
+
+    useEffect(() => {
+        setShow(open)
+    }, [open]);
     return (
         <>
-            <Dialog open={open} onOpenChange={setOpen()}>
+            <Dialog open={show} onOpenChange={setShow}>
                 <DialogTrigger>
                     {trigger}
                 </DialogTrigger>

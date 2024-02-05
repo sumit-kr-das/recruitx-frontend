@@ -9,7 +9,8 @@ import { convertDate } from "../../../pages/company/MyJobs";
 import Modal from "../../Modal";
 import { useApproveCompanyMutation } from "../../../features/admin/post/updateApproveCompanyApiSlice";
 import ChangeProfile from "../../mnjuser/userProfile/ChangeProfile";
-import { BASE_URL } from "../../../config/config";
+import BaseDialog from "../../BaseDialog";
+import EditCompanyProfile from "./EditCompanyProfile";
 const INITIAL_DATA = {
   name: "",
   email: "",
@@ -58,16 +59,32 @@ const CompanyInfo = () => {
     }
   };
 
-  const companyProfile = (
-    <>
-      <div className="relative flex items-center justify-between bg-white p-5 rounded-lg gap-5">
+  const EditPencil = () => {
+    return (
+      <>
         <div
-          onClick={() => setOpen((prev) => !prev)}
+          onClick={() => setOpen(true)}
           title="edit"
           className=" absolute top-4 right-4 bg-slate-200 p-4 rounded-full cursor-pointer"
         >
           <Pencil className="w-[15px] h-[15px]" />
         </div>
+      </>
+    )
+  }
+
+  const companyProfile = (
+    <>
+      <div className="relative flex items-center justify-between bg-white p-5 rounded-lg gap-5">
+        {/* <div
+          onClick={() => setOpen((prev) => !prev)}
+          title="edit"
+          className=" absolute top-4 right-4 bg-slate-200 p-4 rounded-full cursor-pointer"
+        >
+          <Pencil className="w-[15px] h-[15px]" />
+        </div> */}
+        {/* <EditPencil /> */}
+        <BaseDialog open={open} setOpen={setOpen} trigger={<EditPencil />} content={<EditCompanyProfile company={data} setOpen={setOpen} />} title="Edit Profile Info" />
         <div className="w-[15%] flex items-center flex-col">
           <img
             src={isSuccess && data.companyProfileId.logo}

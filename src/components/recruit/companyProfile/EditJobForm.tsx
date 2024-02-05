@@ -77,6 +77,7 @@ interface job {
         degree: string
     },
 }
+
 const EditJobForm = ({ job, setOpen }: { job: job, setOpen: Function }) => {
 
     const [value, setValue] = useState([...job?.tags || tagsData[0]]);
@@ -145,6 +146,8 @@ const EditJobForm = ({ job, setOpen }: { job: job, setOpen: Function }) => {
                 variant: "destructive",
                 description: error?.data.message,
             });
+            setOpen(false);
+
         }
     };
 
@@ -248,7 +251,7 @@ const EditJobForm = ({ job, setOpen }: { job: job, setOpen: Function }) => {
                     </TabsContent>
                     <TabsContent value="password">
                         <Form {...form}>
-                            <form className="" onSubmit={form.handleSubmit(updateJob)} >
+                            <form className="" onSubmit={form.handleSubmit(updateJobData)} >
                                 <div className='sm:flex sm:gap-4'>
                                     <FormField
                                         control={form.control}
