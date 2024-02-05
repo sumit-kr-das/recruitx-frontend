@@ -1,25 +1,14 @@
-import { useState } from 'react'
-import { Input } from '../../../ui/input'
-import { Button } from '../../../ui/button'
-import {
-    Tabs,
-    TabsContent,
-    TabsList,
-    TabsTrigger,
-} from '../../../ui/tabs'
-import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "../../../ui/form";
-import { Textarea } from "../../../ui/textarea";
+import { Input } from '../../../ui/input';
+import { Button } from '../../../ui/button';
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '../../../ui/form';
 import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from "../../../ui/select";
-import { Controller, useForm } from 'react-hook-form'
-import { zodResolver } from '@hookform/resolvers/zod'
+import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from "zod";
-import SelectInput from '../../form/multiSelectInput/SelectInput'
-import { tagsData } from '../../../constants/tagsData'
-import { industryTypes } from '../../../constants/industryTypes'
-import { skillData } from '../../../constants/skillData'
-import { useToast } from '../../../ui/use-toast'
-import { DialogClose } from '../../../ui/dialog';
+import { industryTypes } from '../../../constants/industryTypes';
+import { useToast } from '../../../ui/use-toast';
 import CompanyUpdateSchema from '../../../@types/zod/CompanyUpdateSchema';
+import { useApproveCompanyMutation } from '../../../features/admin/post/updateApproveCompanyApiSlice';
 
 type FormValues = {
     companyName: string,
@@ -35,6 +24,8 @@ type FormValues = {
 
 const EditCompanyProfile = ({ company, setOpen }: { company: any, setOpen: Function }) => {
     const { toast } = useToast();
+    const [updateCompany] = useApproveCompanyMutation();
+
     console.log(company);
     const form = useForm<z.infer<typeof CompanyUpdateSchema>>({
         resolver: zodResolver(CompanyUpdateSchema),
@@ -51,8 +42,18 @@ const EditCompanyProfile = ({ company, setOpen }: { company: any, setOpen: Funct
         mode: "onSubmit"
     });
 
-    const updateCompanyData = (data: FormValues) => {
-        console.log(data, "edit data");
+    const updateCompanyData = async (data: FormValues) => {
+        try {
+            await updateCompany(data).unwrap();
+            toast({
+                description: "Job updated",
+            });
+        } catch (err: any) {
+            toast({
+                variant: "destructive",
+                description: err?.message
+            })
+        }
         setOpen(false);
     }
 

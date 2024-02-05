@@ -8,7 +8,7 @@ export const updateCompanyApiSlice = apiSlice.injectEndpoints({
         method: "PUT",
         // body: { ...credentials },
       }),
-      // invalidatesTags: ["Company"],
+      invalidatesTags: ["Company"],
     }),
   }),
 });
