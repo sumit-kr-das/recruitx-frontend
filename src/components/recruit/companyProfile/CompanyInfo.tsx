@@ -16,7 +16,7 @@ const CompanyInfo = () => {
 
   const companyProfile = (
     <>
-      <div className="relative flex items-center justify-between bg-white p-5 rounded-lg gap-5">
+      <div className="relative sm:flex items-center justify-between bg-white p-5 rounded-lg sm:gap-5">
 
         <Dialog open={open} onOpenChange={setOpen}>
           <DialogTrigger>
@@ -35,7 +35,7 @@ const CompanyInfo = () => {
             <EditCompanyProfile company={data} setOpen={setOpen} />
           </DialogContent>
         </Dialog>
-        <div className="w-[15%] flex items-center flex-col">
+        <div className="w-full sm:w-[15%] flex items-center flex-col">
           <img
             src={data?.companyProfileId?.logo || UserDefault}
             width={180}
@@ -46,11 +46,11 @@ const CompanyInfo = () => {
             Change Profile
           </button>
         </div>
-        <div className="w-[85%]">
-          <div className="border-b flex items-end justify-between mb-4 pb-4">
+        <div className="w-full mt-3 sm:mt-0 sm:w-[85%]">
+          <div className="border-b sm:flex sm:items-end justify-between mb-4 pb-4">
             <div>
               <div className="flex items-center gap-2">
-                <h2 className="text-2xl font-bold capitalize">
+                <h2 className="text-2xl font-bold capitalize text-center">
                   {isSuccess && data?.companyName}
                 </h2>
                 <div
@@ -72,7 +72,7 @@ const CompanyInfo = () => {
                 {isSuccess && data?.pin}
               </h3>
             </div>
-            <div className="flex items-center gap-4">
+            <div className="sm:flex mt-2 sm:mt-0 items-center gap-4">
               <p className="text-sm">
                 <span className="text-slate-500 ">Profile Created - </span>
                 {isSuccess && data && convertDate(data?.createdAt)}
@@ -83,7 +83,7 @@ const CompanyInfo = () => {
               </p>
             </div>
           </div>
-          <div className="flex items-center gap-5">
+          <div className="sm:flex items-center gap-5">
             <div className="flex items-center gap-2">
               <Phone className="w-[50px] h-[50px] bg-slate-200 p-4 rounded-md" />
               <div>
@@ -91,7 +91,7 @@ const CompanyInfo = () => {
                 <p className="text-sm">+91 {isSuccess && data?.phone}</p>
               </div>
             </div>
-            <div className="flex items-center gap-2">
+            <div className="flex mt-2 sm:mt-0 items-center gap-2">
               <Mail className="w-[50px] h-[50px] bg-slate-200 p-4 rounded-md" />
               <div>
                 <h3 className="text-slate-500 text-sm">Email</h3>
