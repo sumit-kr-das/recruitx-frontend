@@ -2,7 +2,7 @@ import { Pencil } from "lucide-react";
 import { useState } from "react";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "../../../../ui/dialog";
 import EditCompanyInfo from "./EditCompanyInfo";
-
+import { Card } from "../../../../ui/card";
 type Profiledata = {
   description: string,
   type: string,
@@ -21,7 +21,7 @@ const ViewCompanyProfile = ({
 
   return (
     <>
-      <div className="relative bg-white p-10 rounded-lg mt-5">
+      <Card className="relative p-10 mt-5">
         <Dialog open={open} onOpenChange={setOpen}>
           <DialogTrigger>
             <div
@@ -98,7 +98,7 @@ const ViewCompanyProfile = ({
             </div>
           </dl>
         </div>
-      </div>
+      </Card>
     </>
   );
 };

@@ -7,6 +7,7 @@ import EditCompanyProfile from "./EditCompanyProfile";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "../../../ui/dialog";
 import Loader from "../../loader/Loader";
 import UserDefault from "../../../assets/default-company-logo.png";
+import { Card } from "../../../ui/card";
 
 const CompanyInfo = () => {
   const [open, setOpen] = useState(false);
@@ -19,7 +20,7 @@ const CompanyInfo = () => {
       {
         isSuccess && (
           <>
-            <div className="relative sm:flex items-center justify-between bg-white p-5 rounded-lg sm:gap-5">
+            <Card className="relative sm:flex items-center justify-between  p-5 rounded-lg sm:gap-5">
               <Dialog open={open} onOpenChange={setOpen}>
                 <DialogTrigger>
                   <div
@@ -102,7 +103,8 @@ const CompanyInfo = () => {
                   </div>
                 </div>
               </div>
-            </div>
+            </Card>
+
             {profile && <ChangeProfile profile={profile} setProfile={setProfile} type="company" />}
 
           </>

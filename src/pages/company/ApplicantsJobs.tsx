@@ -12,6 +12,7 @@ import { useDeleteApplicantMutation } from "../../features/company/delete/delete
 import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from "../../ui/select";
 import Loader from "../../components/loader/Loader";
 import { useToast } from "../../ui/use-toast";
+import { Card } from "../../ui/card";
 
 type Result = {
 	_id: string,
@@ -114,9 +115,9 @@ const ApplicantsJobs = () => {
 				</div>
 				<div>
 					{result && result.map((item: Result, index: number) => (
-						<div
+						<Card
 							key={index}
-							className="sm:flex items-center sm:justify-between p-4 mt-5 rounded-lg border bg-white gap-2"
+							className="sm:flex items-center sm:justify-between p-4 mt-5 gap-2"
 						>
 							<div className="sm:flex sm:items-center sm:gap-5">
 								<img
@@ -148,7 +149,7 @@ const ApplicantsJobs = () => {
 									<Trash2 className="w-[20px] text-red-600" onClick={() => deleteApplicants(item?.jobId, item?.userId?._id)} />
 								</span>
 							</div>
-						</div>
+						</Card>
 					))}
 				</div>
 			</div>

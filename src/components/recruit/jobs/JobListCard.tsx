@@ -10,6 +10,7 @@ import {
 } from "../../../ui/dialog";
 import EditJobForm from "../companyProfile/EditJobForm";
 import { convertDate } from "../../../pages/company/MyJobs";
+import { Card } from "../../../ui/card";
 
 type jobType = {
     _id: string,
@@ -59,8 +60,8 @@ const JobListCard = ({ job }: { job: jobType }) => {
 
     return (
         <>
-            <div
-                className="flex flex-col md:flex-row items-center md:justify-between p-4 mt-5 rounded-lg border bg-white gap-2"
+            <Card
+                className="flex flex-col md:flex-row items-center md:justify-between p-4 mt-5 gap-2"
             >
                 <div>
                     <h2 className="font-bold text-slate-600 text-lg">
@@ -68,11 +69,7 @@ const JobListCard = ({ job }: { job: jobType }) => {
                     </h2>
                     <p className="mt-2 text-sm text-center md:text-left">{job?.info.roles}</p>
                 </div>
-                <div>
-                    <p className="text-white text-sm bg-blue-600 px-2 py-1 rounded-md">
-                        Applicants
-                    </p>
-                </div>
+
                 <div>
                     <p className="text-sm text-teal-600">
                         <span className="text-slate-500">Posted: </span>
@@ -103,7 +100,7 @@ const JobListCard = ({ job }: { job: jobType }) => {
                         <Trash2 className="w-[20px] text-red-600" />
                     </span>
                 </div>
-            </div>
+            </Card>
         </>
     )
 }

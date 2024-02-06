@@ -9,6 +9,7 @@ import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectVa
 import Loader from "../../components/loader/Loader";
 import { Link } from "react-router-dom";
 import { Eye } from "lucide-react";
+import { Card } from "../../ui/card";
 
 type Result = {
 	_id: string,
@@ -77,9 +78,9 @@ const ShortlistedCandidates = () => {
 				</div>
 				<div>
 					{result && result.map((item: Result, index: number) => (
-						<div
+						<Card
 							key={index}
-							className="sm:flex items-center sm:justify-between p-4 mt-5 rounded-lg border bg-white gap-2"
+							className="sm:flex items-center sm:justify-between p-4 mt-5  gap-2"
 						>
 							<div className="sm:flex sm:items-center sm:gap-5">
 								<img
@@ -105,7 +106,7 @@ const ShortlistedCandidates = () => {
 									<Link to={`/dashboard/cv?userId=${item?.userId?._id}`}><Eye className="w-[20px] text-orange-600" /></Link>
 								</span>
 							</div>
-						</div>
+						</Card>
 					))}
 				</div>
 			</div>

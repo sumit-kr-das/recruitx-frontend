@@ -11,6 +11,7 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "
 import { Input } from "../../ui/input";
 import { Button } from "../../ui/button";
 import { useToast } from "../../ui/use-toast";
+import { Card } from "../../ui/card";
 
 type FormValue = {
   newPassword: string,
@@ -52,7 +53,7 @@ const ChangePassword = () => {
         title="Employer Update Password"
         path="Employer / Dashboard / Update Password"
       />
-      <div className="bg-white p-10 rounded-lg mt-5 sm:w-[450px] sm:m-auto">
+      <Card className=" p-10 mt-5 sm:w-[450px] sm:m-auto">
         <Form {...form}>
           <form className="" onSubmit={form.handleSubmit(UpdatePassword)} >
             <FormField
@@ -88,7 +89,7 @@ const ChangePassword = () => {
             </Button>
           </form>
         </Form>
-      </div>
+      </Card>
     </Container>
   );
 };
