@@ -69,11 +69,11 @@ const ApplicantsJobs = () => {
 				path="Employer / Dashboard / All Applicants"
 			/>
 			<div>
-				<div className="flex justify-between gap-x-5">
-					<div className="sm:col-span-4">
+				<div className="sm:flex justify-between gap-x-5">
+					<div className="flex items-center sm:block sm:col-span-4">
 						<label
 							htmlFor="country"
-							className="block text-sm font-medium leading-6 text-gray-900"
+							className="block text-md sm:text-sm font-medium leading-6 text-gray-900 mr-3 sm:mr-0 "
 						>
 							Job role
 						</label>
@@ -95,7 +95,7 @@ const ApplicantsJobs = () => {
 							</Select>
 						</div>
 					</div>
-					<div className="flex items-center gap-x-5">
+					<div className="flex items-center gap-x-5 justify-center mt-4 sm:mt-0">
 						<button>All: {stats?.all}</button>
 						<button>Approved: {stats?.approved}</button>
 						<button>Pending: {stats?.rejected}</button>
