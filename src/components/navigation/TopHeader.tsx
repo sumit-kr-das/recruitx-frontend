@@ -13,7 +13,6 @@ import { Button } from "../../ui/button";
 import SearchComponent from "../mnjuser/userHome/search/Search";
 import NavigationMenus from "./NavigationMenus";
 import Sidebar from "./Sidebar";
-import { Menu } from 'lucide-react';
 import MobileSidebar from "../recruit/MobileSidebar";
 
 
