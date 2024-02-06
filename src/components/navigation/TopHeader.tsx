@@ -13,6 +13,9 @@ import { Button } from "../../ui/button";
 import SearchComponent from "../mnjuser/userHome/search/Search";
 import NavigationMenus from "./NavigationMenus";
 import Sidebar from "./Sidebar";
+import { Menu } from 'lucide-react';
+import MobileSidebar from "../recruit/MobileSidebar";
+
 
 const TopHeader = () => {
   const [search, setSearch] = useState<boolean>(false);
@@ -76,9 +79,21 @@ const TopHeader = () => {
             <RadixMenu menu={recruiterMenu} />
           )}
         </div>
-        <div className="md:hidden">
-          <Sidebar />
-        </div>
+        {
+          role && role === "user" ? (
+            <>
+              <div className="md:hidden">
+                <Sidebar />
+              </div>
+            </>
+          ) : (
+            <>
+              <div className="md:hidden">
+                <MobileSidebar />
+              </div>
+            </>
+          )
+        }
       </nav>
     </header>
   );
