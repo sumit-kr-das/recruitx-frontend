@@ -1,89 +1,93 @@
-import { useState } from "react";
 import TitleBar from "../../components/recruit/titleBar/TitleBar";
 import Container from "../../layout/Container";
-import { toast } from "react-hot-toast";
 import { useChangePassMutation } from "../../features/company/put/changePasswordApiSlice";
 import { useDispatch } from "react-redux";
 import { logout } from "../../features/auth/authSlice";
+import ChangePasswordSchema from "../../@types/zod/ChangePasswordSchema";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import * as z from "zod"
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "../../ui/form";
+import { Input } from "../../ui/input";
+import { Button } from "../../ui/button";
+import { useToast } from "../../ui/use-toast";
 
-const INITIAL_DATA = {
-  oldPassword: "",
-  newPassword: "",
-};
-
+type FormValue = {
+  newPassword: string,
+  oldPassword: string
+}
 const ChangePassword = () => {
-  const [data, setData] = useState(INITIAL_DATA);
   const [changePass] = useChangePassMutation();
   const dispatch = useDispatch();
+  const { toast } = useToast();
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  const form = useForm<z.infer<typeof ChangePasswordSchema>>({
+    resolver: zodResolver(ChangePasswordSchema),
+    defaultValues: {
+      newPassword: "",
+      oldPassword: ""
+    },
+    mode: "onSubmit"
+  });
+
+  const UpdatePassword = async (data: FormValue) => {
+    console.log(data)
     try {
       await changePass(data).unwrap();
-      toast.success("Password update successfull");
+      toast({
+        description: "Password update successfull"
+      })
       dispatch(logout());
-    } catch (err) {
-      toast.success(err.data.msg);
-      console.log("Error on company login", err);
+    } catch (error: any) {
+      toast({
+        variant: "destructive",
+        description: error.message
+      })
     }
-  };
+  }
+
   return (
     <Container>
       <TitleBar
         title="Employer Update Password"
         path="Employer / Dashboard / Update Password"
       />
-      <div className="bg-white p-10 rounded-lg mt-5">
-        <form onSubmit={handleSubmit}>
-          <div className="w-1/2">
-            <label
-              htmlFor="first-name"
-              className="block text-sm font-medium leading-6 text-gray-900"
+      <div className="bg-white p-10 rounded-lg mt-5 sm:w-[450px] sm:m-auto">
+        <Form {...form}>
+          <form className="" onSubmit={form.handleSubmit(UpdatePassword)} >
+            <FormField
+              control={form.control}
+              name="newPassword"
+              render={({ field }) => (
+                <FormItem className="">
+                  <FormLabel>New Password</FormLabel>
+                  <FormControl>
+                    <Input placeholder="Enter New Password" {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="oldPassword"
+              render={({ field }) => (
+                <FormItem className="mt-3">
+                  <FormLabel>Old Password</FormLabel>
+                  <FormControl>
+                    <Input placeholder="Enter Old Password" {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <Button
+              type="submit" className="mt-4"
             >
-              Old password
-            </label>
-            <div className="mt-2">
-              <input
-                value={data.oldPassword}
-                onChange={(e) =>
-                  setData({ ...data, oldPassword: e.target.value })
-                }
-                type="password"
-                name="minExprience"
-                id="minExprience"
-                autoComplete="given-name"
-                className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-              />
-            </div>
-          </div>
-          <div className="w-1/2 mt-4">
-            <label
-              htmlFor="first-name"
-              className="block text-sm font-medium leading-6 text-gray-900"
-            >
-              New password
-            </label>
-            <div className="mt-2">
-              <input
-                value={data.newPassword}
-                onChange={(e) =>
-                  setData({ ...data, newPassword: e.target.value })
-                }
-                type="password"
-                name="newPassword"
-                id="newPassword"
-                autoComplete="given-name"
-                className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-              />
-            </div>
-          </div>
-          <button
-            type="submit"
-            className="mt-4 rounded-md bg-cyan-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-cyan-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-          >
-            Change password
-          </button>
-        </form>
+              Update
+            </Button>
+          </form>
+        </Form>
       </div>
     </Container>
   );

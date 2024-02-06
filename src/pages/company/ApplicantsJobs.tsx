@@ -6,12 +6,12 @@ import { useState } from "react";
 import { useApproveApplyMutation } from "../../features/company/put/approveApplyApiSlice";
 import { useViewJobsQuery } from "../../features/company/get/viewJobsApiSlice";
 import { useViewApplicantQuery } from "../../features/company/get/viewApplicantApiSlice";
-import toast from "react-hot-toast";
 import { useViewApplicantStatsQuery } from "../../features/company/get/viewApplicantStats";
 import { Link } from "react-router-dom";
 import { useDeleteApplicantMutation } from "../../features/company/delete/deleteApplicantApiSlice";
 import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from "../../ui/select";
 import Loader from "../../components/loader/Loader";
+import { useToast } from "../../ui/use-toast";
 
 type Result = {
 	_id: string,
@@ -28,6 +28,7 @@ type Result = {
 const ApplicantsJobs = () => {
 	const [title, setTitle] = useState("");
 	const [approveApplication] = useApproveApplyMutation();
+	const { toast } = useToast();
 
 	const { data, isLoading } = useViewJobsQuery();
 	const [skip, setSkip] = useState(true)
@@ -38,9 +39,14 @@ const ApplicantsJobs = () => {
 	const deleteApplicants = async (id: string, userId: string) => {
 		try {
 			await deleteApplicant({ id, userId }).unwrap();
-			toast.success("Applicant removed");
-		} catch (error) {
-			console.log(error);
+			toast({
+				description: "Applicant Removed"
+			})
+		} catch (error: any) {
+			toast({
+				variant: "destructive",
+				description: error.message
+			})
 		}
 	}
 
@@ -54,9 +60,14 @@ const ApplicantsJobs = () => {
 		try {
 			console.log(id);
 			await approveApplication(id).unwrap();
-			toast.success('Application Shortlisted')
-		} catch (error) {
-			console.log(error);
+			toast({
+				description: "Applicant Shortlisted"
+			})
+		} catch (error: any) {
+			toast({
+				variant: "destructive",
+				description: error.message
+			})
 		}
 	}
 
