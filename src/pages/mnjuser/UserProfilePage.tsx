@@ -14,7 +14,6 @@ const UserProfilePage = () => {
       <Container className="pt-24 w-full">
         <BasicInfo />
         <OtherInfo />
-        {/* Educational details */}
         <UserEducation />
         {/* Career details */}
         {/* <UserCareer /> */}
