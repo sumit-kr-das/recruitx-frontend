@@ -1,11 +1,10 @@
-import { useState } from "react";
 import Footer from "../../components/footer/Footer";
-import BasicInfo from "./_components/BasicInfo";
-import UserCareer from "../../components/mnjuser/userProfile/userCareer/UserCareer";
-import UserEducation from "./_components/UserEducation";
-import OtherInfo from "./_components/OtherInfo";
 import TopHeader from "../../components/navigation/TopHeader";
 import Container from "../../layout/Container";
+import BasicInfo from "./_components/BasicInfo";
+import OtherInfo from "./_components/OtherInfo";
+import UserCareer from "./_components/UserCareer";
+import UserEducation from "./_components/UserEducation";
 
 const UserProfilePage = () => {
   return (
@@ -15,8 +14,7 @@ const UserProfilePage = () => {
         <BasicInfo />
         <OtherInfo />
         <UserEducation />
-        {/* Career details */}
-        {/* <UserCareer /> */}
+        <UserCareer />
       </Container>
       <Footer />
     </div>

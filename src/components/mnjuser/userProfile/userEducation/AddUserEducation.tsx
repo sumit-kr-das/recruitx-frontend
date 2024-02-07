@@ -70,6 +70,7 @@ const AddUserEducation = ({ isOpen, setIsOpen }: TAddUserEducationProps) => {
       });
       setIsFormDirty(false);
       setIsOpen(false);
+      form.reset();
     } catch (err) {
       const apiError = err as TApiError;
       toast({
