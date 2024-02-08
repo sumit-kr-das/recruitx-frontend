@@ -6,7 +6,7 @@ import { companyDashboard } from "../constants/companyDashboard";
 import { useViewAdminQuery } from "../features/admin/get/viewAdminApiSlice";
 import { selectCurrentRole } from "../features/auth/authSlice";
 import { useViewCompanyQuery } from "../features/company/get/viewCompanyApiSlice";
-
+import { selectCurrentStatus } from "../features/auth/authSlice";
 const AdminProfile = () => {
   const { data, isSuccess } = useViewAdminQuery();
   return (
@@ -54,6 +54,9 @@ const CompanyProfile = () => {
 
 const SideBar = () => {
   const role = useSelector(selectCurrentRole);
+  let status = useSelector(selectCurrentStatus);
+
+
   return (
     <div className="pt-[15px] py-">
       {role === "admin" ? <AdminProfile /> : <CompanyProfile />}
@@ -62,23 +65,23 @@ const SideBar = () => {
       </h3>
       {role === "admin"
         ? adminDashboard.map((item, index) => (
-            <Link
-              to={item.src}
-              className="block px-5 text-slate-500 text-[13px] leading-[18px] px-full py-4 cursor-pointer border-l-4 border-white hover:text-cyan-600 hover:border-l-cyan-400 hover:bg-green-100"
-              key={index}
-            >
-              {item.menu}
-            </Link>
-          ))
+          <Link
+            to={item.src}
+            className="block px-5 text-slate-500 text-[13px] leading-[18px] px-full py-4 cursor-pointer border-l-4 border-white hover:text-cyan-600 hover:border-l-cyan-400 hover:bg-green-100"
+            key={index}
+          >
+            {item.menu}
+          </Link>
+        ))
         : companyDashboard.map((item, index) => (
-            <Link
-              to={item.src}
-              className="block px-5 text-slate-500 text-[13px] leading-[18px] px-full py-4 cursor-pointer border-l-4 border-white hover:text-cyan-600 hover:border-l-cyan-400 hover:bg-green-100"
-              key={index}
-            >
-              {item.menu}
-            </Link>
-          ))}
+          <Link
+            to={item.src}
+            className={`block px-5 text-slate-500 text-[13px] leading-[18px] px-full py-4 cursor-pointer border-l-4 border-white hover:text-cyan-600 hover:border-l-cyan-400  ${status === "approved" ? 'hover:bg-green-100' : 'hover:bg-black-100'}`}
+            key={index}
+          >
+            {item.menu}
+          </Link>
+        ))}
     </div>
   );
 };

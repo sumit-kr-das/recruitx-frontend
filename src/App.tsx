@@ -54,6 +54,7 @@ import {
   AuthenticateRoute,
   CompanyRoute,
   UserRoute,
+  VerifyCompanyRoute,
   VerifyUserRoutes,
 } from "./protectedRoutes";
 
@@ -227,7 +228,9 @@ const App = () => {
             path="/dashboard/submit_jobs"
             element={
               <CompanyRoute>
-                <SubmitJobs />
+                <VerifyCompanyRoute>
+                  <SubmitJobs />
+                </VerifyCompanyRoute>
               </CompanyRoute>
             }
           />
@@ -235,7 +238,10 @@ const App = () => {
             path="/dashboard/my_jobs"
             element={
               <CompanyRoute>
-                <MyJobs />
+                <VerifyCompanyRoute>
+                  <MyJobs />
+
+                </VerifyCompanyRoute>
               </CompanyRoute>
             }
           />
@@ -243,7 +249,10 @@ const App = () => {
             path="/dashboard/applicants_jobs"
             element={
               <CompanyRoute>
-                <ApplicantsJobs />
+                <VerifyCompanyRoute>
+                  <ApplicantsJobs />
+
+                </VerifyCompanyRoute>
               </CompanyRoute>
             }
           />
@@ -251,7 +260,10 @@ const App = () => {
             path="/dashboard/shortlisted_candidates"
             element={
               <CompanyRoute>
-                <ShortlistedCandidates />
+                <VerifyCompanyRoute>
+                  <ShortlistedCandidates />
+
+                </VerifyCompanyRoute>
               </CompanyRoute>
             }
           />
@@ -259,7 +271,10 @@ const App = () => {
             path="/dashboard/cv"
             element={
               <CompanyRoute>
-                <ViewCvPage />
+                <VerifyCompanyRoute>
+                  <ViewCvPage />
+
+                </VerifyCompanyRoute>
               </CompanyRoute>
             }
           />
