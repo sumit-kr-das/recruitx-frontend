@@ -33,10 +33,13 @@ const userSlice = createSlice({
         education: { ...action.payload.education },
       };
     },
+    removeUserData: () => {
+      return initialState;
+    },
   },
 });
 
-export const { setUserData } = userSlice.actions;
+export const { setUserData, removeUserData } = userSlice.actions;
 
 export default userSlice.reducer;
 
