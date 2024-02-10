@@ -76,10 +76,11 @@ const SideBar = () => {
         : companyDashboard.map((item, index) => (
           <Link
             to={item.src}
-            className={`block px-5 text-slate-500 text-[13px] leading-[18px] px-full py-4 cursor-pointer border-l-4 border-white hover:text-cyan-600 hover:border-l-cyan-400  ${status === "approved" ? 'hover:bg-green-100' : 'hover:bg-black-100'}`}
+            className={`block px-5 text-slate-500 text-[13px] leading-[18px] px-full py-4 cursor-pointer border-l-4 border-white hover:text-cyan-600 hover:border-l-cyan-400  ${status !== "approved" && (item.menu != "Company Profile" && item.menu != "Employer Dashboard" && item.menu != "Log Out") ? 'hover:bg-black-100' : 'hover:bg-green-100'}`}
             key={index}
           >
-            {item.menu}
+
+            {item.menu} {status !== "approved" && (item.menu != "Company Profile" && item.menu != "Employer Dashboard" && item.menu != "Log Out") ? "(disable)" : ""}
           </Link>
         ))}
     </div>

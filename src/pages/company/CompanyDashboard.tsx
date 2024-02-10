@@ -1,14 +1,16 @@
 import { Bookmark, Briefcase, MessageCircle, UserCog } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ReactApexChart from "react-apexcharts";
 import TitleBar from "../../components/recruit/titleBar/TitleBar";
 import { chartData1, chartData2 } from "../../constants/chartData";
 import Container from "../../layout/Container";
 import { Card } from "../../ui/card";
+import { Alert, AlertDescription, AlertTitle } from "../../ui/alert";
 
 const CompanyDashboard = () => {
 	const [areaChart, setAresChart] = useState(chartData1);
 	const [donutChart, setDonutChart] = useState(chartData2);
+
 
 	return (
 		<Container>
