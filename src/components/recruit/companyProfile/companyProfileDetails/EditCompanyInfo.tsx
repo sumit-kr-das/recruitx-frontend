@@ -12,6 +12,7 @@ import { tagsData } from '../../../../constants/tagsData';
 import SelectInput from '../../../form/multiSelectInput/SelectInput';
 import { useState } from 'react';
 import { useUpdateCompanyProfileMutation } from '../../../../features/company/put/updateCompanyProfileDetailsApiSlice';
+import { TApiError } from '../../../../@types/TApiError';
 
 type FormValues = {
     description: string,
@@ -59,10 +60,11 @@ const EditCompanyInfo = ({ data, setOpen }: { data: Profiledata, setOpen: Functi
             toast({
                 description: "Company profile updated successfully"
             })
-        } catch (error: any) {
+        } catch (err) {
+            const apiError = err as TApiError;
             toast({
                 variant: "destructive",
-                description: error?.message
+                description: apiError.data.message
             })
         }
         setOpen(false);

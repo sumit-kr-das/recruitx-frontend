@@ -9,6 +9,7 @@ import { industryTypes } from '../../../constants/industryTypes';
 import { useToast } from '../../../ui/use-toast';
 import CompanyUpdateSchema from '../../../@types/zod/CompanyUpdateSchema';
 import { useApproveCompanyMutation } from '../../../features/admin/post/updateApproveCompanyApiSlice';
+import { TApiError } from '../../../@types/TApiError';
 
 type FormValues = {
     companyName: string,
@@ -68,10 +69,11 @@ const EditCompanyProfile = ({ company, setOpen }: { company: CompanyProps, setOp
             toast({
                 description: "Job updated",
             });
-        } catch (err: any) {
+        } catch (err) {
+            const apiError = err as TApiError;
             toast({
                 variant: "destructive",
-                description: err?.message
+                description: apiError.data.message
             })
         }
         setOpen(false);

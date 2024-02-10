@@ -21,6 +21,7 @@ import { skillData } from "../../constants/skillData";
 import { Button } from "../../ui/button";
 import { usePostJobMutation } from "../../features/company/post/setJobApiSlice";
 import { useToast } from "../../ui/use-toast";
+import { TApiError } from "../../@types/TApiError";
 type FormValues = {
   title: string,
   category: string,
@@ -120,11 +121,12 @@ const SubmitJob = () => {
         description: "Job Submitted Successfully",
       });
       navigate("/dashboard/my_jobs");
-    } catch (err: any) {
+    } catch (err) {
+      const apiError = err as TApiError;
       toast({
         variant: "destructive",
-        description: err?.data.message,
-      });
+        description: apiError.data.message
+      })
     }
   };
   return (

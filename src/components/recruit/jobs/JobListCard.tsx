@@ -1,5 +1,4 @@
 import { Pencil, Trash2 } from "lucide-react";
-import { toast } from "react-hot-toast";
 import { useDeleteJobMutation } from "../../../features/company/delete/deleteJobApiSlice";
 import { useState } from "react";
 import {
@@ -11,6 +10,8 @@ import {
 import EditJobForm from "../companyProfile/EditJobForm";
 import { convertDate } from "../../../pages/company/MyJobs";
 import { Card } from "../../../ui/card";
+import { TApiError } from "../../../@types/TApiError";
+import { useToast } from "../../../ui/use-toast";
 
 type jobType = {
     _id: string,
@@ -47,14 +48,20 @@ type jobType = {
 const JobListCard = ({ job }: { job: jobType }) => {
     const [open, setOpen] = useState(false);
     const [deleteJob] = useDeleteJobMutation();
+    const { toast } = useToast();
 
     const handleDelete = async (id: string) => {
         try {
             await deleteJob(id).unwrap();
-            toast.success("Job deleted successfully");
-        } catch (err: any) {
-            toast.error(err.data.message);
-            console.log("Error on company register", err);
+            toast({
+                description: "Job deleted successfully"
+            })
+        } catch (err) {
+            const apiError = err as TApiError;
+            toast({
+                variant: "destructive",
+                description: apiError.data.message
+            })
         }
     };
 

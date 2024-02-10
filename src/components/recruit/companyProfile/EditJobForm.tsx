@@ -25,6 +25,7 @@ import { workPlaceTypes } from '../../../constants/workplaceTypes'
 import { jobRoles } from '../../../constants/jobRoles'
 import { useUpdateJobMutation } from '../../../features/company/put/updateJobApiSlice';
 import { DialogClose } from '../../../ui/dialog';
+import { TApiError } from '../../../@types/TApiError';
 type FormValues = {
     title: string,
     category: string,
@@ -84,6 +85,8 @@ const EditJobForm = ({ job, setOpen }: { job: job, setOpen: Function }) => {
     const [skills, setSkills] = useState([...job?.info?.skills || skillData[0]])
     const { toast } = useToast();
     const [updateJob] = useUpdateJobMutation();
+    const [isFormDirty, setIsFormDirty] = useState<boolean>(false);
+
 
     const getDate = (srcDate: string) => {
         const originalDate = new Date(srcDate);
@@ -141,11 +144,12 @@ const EditJobForm = ({ job, setOpen }: { job: job, setOpen: Function }) => {
                 description: "Job updated",
             });
             setOpen(false);
-        } catch (error: any) {
+        } catch (err) {
+            const apiError = err as TApiError;
             toast({
                 variant: "destructive",
-                description: error?.data.message,
-            });
+                description: apiError.data.message
+            })
             setOpen(false);
 
         }
@@ -243,7 +247,7 @@ const EditJobForm = ({ job, setOpen }: { job: job, setOpen: Function }) => {
                                     )}
                                 />
                                 <DialogClose asChild>
-                                    <Button className='float-right mt-5' type='submit'>Update</Button>
+                                    <Button disabled={!form.formState.isDirty} className='float-right mt-5' type='submit'>Update</Button>
                                 </DialogClose>
 
                             </form>
@@ -518,7 +522,7 @@ const EditJobForm = ({ job, setOpen }: { job: job, setOpen: Function }) => {
                                         )}
                                     />
                                 </div>
-                                <Button type='submit' className='float-right mt-5'>Update</Button>
+                                <Button disabled={!form.formState.isDirty} type='submit' className='float-right mt-5'>Update</Button>
                             </form>
                         </Form>
                     </TabsContent>

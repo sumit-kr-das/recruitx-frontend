@@ -14,6 +14,7 @@ import { tagsData } from '../../../../constants/tagsData';
 import SelectInput from '../../../form/multiSelectInput/SelectInput';
 import { useState } from 'react';
 import { Card } from "../../../../ui/card";
+import { TApiError } from "../../../../@types/TApiError";
 
 type FormValues = {
   description: string,
@@ -52,10 +53,11 @@ const SetCompanyProfile = () => {
       toast({
         description: "Company profile added successfully"
       })
-    } catch (error: any) {
+    } catch (err) {
+      const apiError = err as TApiError;
       toast({
         variant: "destructive",
-        description: error?.message
+        description: apiError.data.message
       })
     }
   }
