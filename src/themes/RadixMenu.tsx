@@ -4,6 +4,7 @@ import { ChevronDown } from "lucide-react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { logout, selectCurrentUser } from "../features/auth/authSlice";
+import { removeUserData } from "../features/user/userSlice";
 
 const RadixMenu = ({ menu }) => {
   const name = useSelector(selectCurrentUser);
@@ -11,6 +12,7 @@ const RadixMenu = ({ menu }) => {
 
   const handleLogOut = () => {
     dispatch(logout());
+    dispatch(removeUserData());
   };
   return (
     <Menubar.Root className="flex">

@@ -6,6 +6,7 @@ import { languageData } from "../../../../constants/languageData";
 import { qualificationData } from "../../../../constants/qualificationData";
 import { tagsData } from "../../../../constants/tagsData";
 import { useSetUserMutation } from "../../../../features/user/post/setUserInfoDataApiSlice";
+import { FormValue } from "../../../../pages/mnjuser/_components/OtherInfo";
 import { Button } from "../../../../ui/button";
 import {
   Form,
@@ -27,23 +28,15 @@ import {
 import { Textarea } from "../../../../ui/textarea";
 import { useToast } from "../../../../ui/use-toast";
 import SelectInput from "../../../form/multiSelectInput/SelectInput";
-import { FormValue, INITIAL_DATA } from "./OtherInfo";
 
 type TSetUserInfoProps = {
-  setUserData: (value: FormValue) => void;
   lang: string[];
   setLang: (value: string[]) => void;
   tags: string[];
   setTags: (value: string[]) => void;
 };
 
-const SetUserInfo = ({
-  setUserData,
-  lang,
-  setLang,
-  tags,
-  setTags,
-}: TSetUserInfoProps) => {
+const SetUserInfo = ({ lang, setLang, tags, setTags }: TSetUserInfoProps) => {
   const [setUser] = useSetUserMutation();
   const { toast } = useToast();
 
@@ -76,10 +69,6 @@ const SetUserInfo = ({
         description: "Something went wrong",
       });
     }
-  };
-
-  const handleCancel = () => {
-    setUserData(INITIAL_DATA);
   };
 
   return (
@@ -314,9 +303,7 @@ const SetUserInfo = ({
             </div>
           </div>
           <div className="flex gap-5">
-            <Button variant="outline" onClick={handleCancel}>
-              Cancel
-            </Button>
+            <Button variant="outline" onClick={() => form.reset()}>Cancel</Button>
             <Button type="submit">Save</Button>
           </div>
         </form>

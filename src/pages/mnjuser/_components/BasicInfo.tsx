@@ -1,13 +1,13 @@
 import { Mail, Phone } from "lucide-react";
 import { useState } from "react";
 import { useSelector } from "react-redux";
-import UserDefault from "../../../../assets/user-default-profile.png";
-import { selectCurrentUserData } from "../../../../features/user/userSlice";
-import { convertDate } from "../../../../pages/company/MyJobs";
-import { Button } from "../../../../ui/button";
-import Loader from "../../../loader/Loader";
-import ChangeProfile from "../ChangeProfile";
-import UpdateBasicInfo from "./UpdateBasicInfo";
+import UserDefault from "../../../assets/user-default-profile.png";
+import { selectCurrentUserData } from "../../../features/user/userSlice";
+import { convertDate } from "../../company/MyJobs";
+import { Button } from "../../../ui/button";
+import Loader from "../../../components/loader/Loader";
+import ChangeProfile from "../../../components/mnjuser/userProfile/ChangeProfile";
+import UpdateBasicInfo from "../../../components/mnjuser/userProfile/basicInfo/UpdateBasicInfo";
 
 export type BasicInfoFormData = {
   name: string | null;
