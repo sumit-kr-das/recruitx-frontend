@@ -89,6 +89,7 @@ const UpdateUserEducation = ({
 
   const submitForm: SubmitHandler<EduFormData> = async (val) => {
     const id = data?._id;
+    console.log(val);
     try {
       if (id) {
         await updateUserEdu({ id, val }).unwrap();
