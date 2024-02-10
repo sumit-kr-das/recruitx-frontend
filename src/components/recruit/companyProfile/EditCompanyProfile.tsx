@@ -207,7 +207,7 @@ const EditCompanyProfile = ({ company, setOpen }: { company: CompanyProps, setOp
                             )}
                         />
                     </div>
-                    <Button type='submit' className='float-right mt-5'>Update</Button>
+                    <Button disabled={!form.formState.isDirty} type='submit' className='float-right mt-5'>Update</Button>
 
                 </form>
             </Form>

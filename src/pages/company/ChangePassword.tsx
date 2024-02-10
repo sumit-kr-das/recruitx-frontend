@@ -83,7 +83,7 @@ const ChangePassword = () => {
               )}
             />
             <Button
-              type="submit" className="mt-4"
+              type="submit" className="mt-4" disabled={!form.formState.isDirty}
             >
               Update
             </Button>

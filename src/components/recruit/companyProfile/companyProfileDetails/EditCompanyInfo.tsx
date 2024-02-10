@@ -174,7 +174,7 @@ const EditCompanyInfo = ({ data, setOpen }: { data: Profiledata, setOpen: Functi
                             )}
                         />
                     </div>
-                    <Button type='submit' className='float-right mt-5'>Update</Button>
+                    <Button type='submit' disabled={!form.formState.isDirty} className='float-right mt-5'>Update</Button>
 
                 </form>
             </Form>
