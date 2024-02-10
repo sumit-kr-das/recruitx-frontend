@@ -43,7 +43,7 @@ const CompanyInfo = () => {
                   src={data?.companyProfileId?.logo || UserDefault}
                   width={180}
                   alt="user_default"
-                  className="rounded-full object-cover border"
+                  className="rounded-full object-cover border w-[180px] h-[180px]"
                 />
                 <button className="mt-2 bg-orange-500 text-white text-sm px-5 py-2 rounded-md hover:bg-orange-600" onClick={() => setProfile(true)}>
                   Change Profile

@@ -38,16 +38,16 @@ const CompanyProfile = () => {
         <div className="flex items-center justify-center flex-col">
           <img
             src={company?.info?.logo || UserDefault}
-            width={120}
+            width={120} height={120}
             alt="user_default"
-            className="rounded-full object-cover border mb-2"
+            className="rounded-full object-cover border mb-2 w-[120px] h-[120px]"
           />
-          <h1 className="font-bold">{data && data?.name}</h1>
-          <p className="text-xs font-medium">{data && data?.designation}</p>
+          <h1 className="font-bold">{company && company?.company?.name}</h1>
+          <p className="text-xs font-medium">{company && company?.company?.designation}</p>
           <p className="text-xs font-medium my-1">
-            @ {data && data?.companyName}
+            @ {company && company?.company?.companyName}
           </p>
-          <p className="text-xs text-gray-400">{data && data?.industry}</p>
+          <p className="text-xs text-gray-400">{company && company?.company?.industry}</p>
         </div>
       )}
     </>
