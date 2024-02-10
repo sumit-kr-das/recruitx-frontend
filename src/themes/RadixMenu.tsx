@@ -8,15 +8,18 @@ import userSlice, {
   removeUserData,
   selectCurrentUserData,
 } from "../features/user/userSlice";
+import { selectCurrentCompanyData, removeCompanyData } from "../features/company/companySlice";
 
 const RadixMenu = ({ menu }) => {
   const name = useSelector(selectCurrentUser);
   const { info } = useSelector(selectCurrentUserData);
+  const company = useSelector(selectCurrentCompanyData);
   const dispatch = useDispatch();
 
   const handleLogOut = () => {
     dispatch(logout());
     dispatch(removeUserData());
+    dispatch(removeCompanyData());
   };
   return (
     <Menubar.Root className="flex">
@@ -25,7 +28,7 @@ const RadixMenu = ({ menu }) => {
           <RadixAvatar.Root className="inline-flex h-[30px] w-[30px] select-none items-center justify-center overflow-hidden rounded-full align-middle cursor-pointer border-2">
             <RadixAvatar.Image
               className="h-full w-full rounded-[inherit] object-cover"
-              src={info?.photo || "/user_img.png"}
+              src={info?.photo || company?.info?.logo || "/user_img.png"}
               alt="Colm Tuite"
             />
           </RadixAvatar.Root>
