@@ -7,6 +7,7 @@ import { useViewAdminQuery } from "../features/admin/get/viewAdminApiSlice";
 import { selectCurrentRole } from "../features/auth/authSlice";
 import { useViewCompanyQuery } from "../features/company/get/viewCompanyApiSlice";
 import { selectCurrentStatus } from "../features/auth/authSlice";
+import { selectCurrentCompanyData } from "../features/company/companySlice";
 const AdminProfile = () => {
   const { data, isSuccess } = useViewAdminQuery();
   return (
@@ -30,12 +31,13 @@ const AdminProfile = () => {
 
 const CompanyProfile = () => {
   const { data, isSuccess } = useViewCompanyQuery();
+  const company = useSelector(selectCurrentCompanyData);
   return (
     <>
       {isSuccess && (
         <div className="flex items-center justify-center flex-col">
           <img
-            src={UserDefault}
+            src={company?.info?.logo || UserDefault}
             width={120}
             alt="user_default"
             className="rounded-full object-cover border mb-2"
