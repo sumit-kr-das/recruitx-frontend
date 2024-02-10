@@ -21,14 +21,14 @@ export type BasicInfoFormData = {
 
 const BasicInfo = () => {
   const [profile, setProfile] = useState<boolean>(false);
-  const { user } = useSelector(selectCurrentUserData);
+  const { user, info } = useSelector(selectCurrentUserData);
 
   const basicInfo = (
     <>
       <div className="relative flex items-center justify-between bg-white p-10 rounded-lg gap-10 border shadow">
         <div className="flex items-start justify-start flex-col">
           <img
-            src={UserDefault}
+            src={info?.photo || UserDefault}
             // width={180}
             alt="user_default"
             className="w-[120px] h-[120px] rounded-full border"
@@ -80,7 +80,9 @@ const BasicInfo = () => {
         {user?.name && <UpdateBasicInfo user={user} />}
       </div>
       {/* setProfile */}
-      {profile && <ChangeProfile profile={profile} setProfile={setProfile} />}
+      {profile && (
+        <ChangeProfile profile={profile} setProfile={setProfile} type="user" />
+      )}
     </>
   );
 

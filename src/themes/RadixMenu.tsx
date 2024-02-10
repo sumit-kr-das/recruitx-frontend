@@ -4,10 +4,14 @@ import { ChevronDown } from "lucide-react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { logout, selectCurrentUser } from "../features/auth/authSlice";
-import { removeUserData } from "../features/user/userSlice";
+import userSlice, {
+  removeUserData,
+  selectCurrentUserData,
+} from "../features/user/userSlice";
 
 const RadixMenu = ({ menu }) => {
   const name = useSelector(selectCurrentUser);
+  const { info } = useSelector(selectCurrentUserData);
   const dispatch = useDispatch();
 
   const handleLogOut = () => {
@@ -21,7 +25,7 @@ const RadixMenu = ({ menu }) => {
           <RadixAvatar.Root className="inline-flex h-[30px] w-[30px] select-none items-center justify-center overflow-hidden rounded-full align-middle cursor-pointer border-2">
             <RadixAvatar.Image
               className="h-full w-full rounded-[inherit] object-cover"
-              src="/user_img.png"
+              src={info?.photo || "/user_img.png"}
               alt="Colm Tuite"
             />
           </RadixAvatar.Root>
