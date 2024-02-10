@@ -13,7 +13,7 @@ const AuthenticateRoutes = ({ children }: TReactNodeProps) => {
   const isExist = useSelector(selectCurrentToken);
   const isVarified = useSelector(selectCurrentStatus);
   const role = useSelector(selectCurrentRole);
-  
+
   return !isExist ? (
     <>
       <Suspense fallback={<Loader />}>{children}</Suspense>
@@ -24,7 +24,7 @@ const AuthenticateRoutes = ({ children }: TReactNodeProps) => {
     ) : (
       <Navigate to="/verify-user" />
     )
-  ) : isVarified === "verified" ? (
+  ) : isVarified === "verified" || "approved" ? (
     <Navigate to="/dashboard" />
   ) : (
     <Navigate to="/verify-user" />

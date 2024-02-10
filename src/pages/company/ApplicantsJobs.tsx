@@ -92,7 +92,7 @@ const ApplicantsJobs = () => {
 						<div className="mt-2">
 							<Select defaultValue={title} onValueChange={viewApplicants}>
 								<SelectTrigger className="w-[180px]">
-									<SelectValue placeholder="Select a fruit" />
+									<SelectValue placeholder="Select a Job" />
 								</SelectTrigger>
 								<SelectContent>
 									<SelectGroup>
