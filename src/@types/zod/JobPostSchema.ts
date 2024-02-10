@@ -11,10 +11,11 @@ const JobPostSchema = z.object({
         message: "Description should minimum contain 100 words"
     }),
     tags: z.array(z.string().min(1, {
-        message: "Atlease one tag should be selected"
+        message: "At least one tag should be selected"
     })),
-    vacancies: z.preprocess((a) => parseInt(z.string().parse(a), 10),
-        z.number().gte(0, 'Must be there have 1 vacancy')),
+    vacancies: z.string().min(1, {
+        message: "Please enter vacancy"
+    }),
     jobType: z.string().min(1, {
         message: "Please select job type"
     }),
@@ -29,15 +30,19 @@ const JobPostSchema = z.object({
     skills: z.array(z.string().min(1, {
         message: 'Please select skill'
     })),
-    minExprience: z.preprocess((a) => parseInt(z.string().parse(a)),
-        z.number()),
-    maxExprience: z.preprocess((a) => parseInt(z.string().parse(a), 10),
-        z.number().gte(0, 'Maximum exprience must be grater than 0')),
-    minSalary: z.preprocess((a) => parseInt(z.string().parse(a), 10),
-        z.number().gte(100000, 'Minimum salary must be more than 1 Lakh')),
-    maxSalary: z.preprocess((a) => parseInt(z.string().parse(a), 10),
-        z.number()),
-    location: z.string(),
+    minExprience: z.string(),
+    maxExprience: z.string().min(1, {
+        message: "Please enter maximum exprience"
+    }),
+    minSalary: z.string().min(1, {
+        message: "Please enter minimum Salary"
+    }),
+    maxSalary: z.string().min(1, {
+        message: "Please enter maximum salary"
+    }),
+    location: z.string().min(1, {
+        message: "Please enter location"
+    }),
     maxQualification: z.string().min(1, {
         message: "Please enter maximum qualification"
     }),
@@ -46,4 +51,4 @@ const JobPostSchema = z.object({
     })
 });
 
-export default JobPostSchema
+export default JobPostSchema;

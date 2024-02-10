@@ -2,10 +2,11 @@ import { useRef } from "react";
 import { toast } from "react-hot-toast";
 import { useUpdateUserInfoMutation } from "../../../features/user/put/updateUserInfoDataApiSlice";
 import Modal from "../../Modal";
-
-const ChangeProfile = ({ profile, setProfile }) => {
+import { useUpdateCompanyProfileMutation } from "../../../features/company/put/updateCompanyProfileDetailsApiSlice";
+const ChangeProfile = ({ profile, setProfile, type }) => {
   const inputRef = useRef(null);
   const [updateUserInfo] = useUpdateUserInfoMutation();
+  const [updateCompanyProfile] = useUpdateCompanyProfileMutation();
 
   const handleUpload = async (e) => {
     const file = e.target.files[0];
@@ -15,8 +16,13 @@ const ChangeProfile = ({ profile, setProfile }) => {
 
     const formData = new FormData();
     formData.append("photo", file);
+
     try {
-      await updateUserInfo(formData).unwrap();
+      if (type === "user") {
+        await updateUserInfo(formData).unwrap();
+      } else if (type === "company") {
+        await updateCompanyProfile(formData).unwrap();
+      }
       toast.success("Photo uploaded successfully!");
       setProfile(false);
     } catch (error) {

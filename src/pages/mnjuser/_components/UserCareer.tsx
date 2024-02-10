@@ -1,7 +1,7 @@
 import { useState } from "react";
-import { useGetUserCareerQuery } from "../../../../features/user/get/getUserCareerApiSlice";
-import SetUserCareer from "./SetUserCareer";
-import ViewCareer from "./ViewCareer";
+import { useGetUserCareerQuery } from "../../../features/user/get/getUserCareerApiSlice";
+import SetUserCareer from "../../../components/mnjuser/userProfile/userCareer/SetUserCareer";
+import ViewCareer from "../../../components/mnjuser/userProfile/userCareer/ViewCareer";
 
 export const INITIAL_CAREER_DATA = {
   id: "",
@@ -20,7 +20,7 @@ const UserCareer = () => {
   const { data, isSuccess } = useGetUserCareerQuery();
 
   return (
-    <div>
+    <>
       <ViewCareer
         resData={data}
         setOpen={setOpen}
@@ -34,7 +34,7 @@ const UserCareer = () => {
           setEdudata={setEdudata}
         />
       )}
-    </div>
+    </>
   );
 };
 

@@ -46,7 +46,7 @@ const ViewAppliedPage = lazy(() => import("./pages/mnjuser/ViewAppliedPage"));
 
 // --------------------------- route authenticator ---------------------------
 import Loader from "./components/loader/Loader";
-import { useGetUserGlobalQuery } from "./features/user/get/getUserGlobalApiSlice";
+import { useLazyGetUserGlobalQuery } from "./features/user/get/getUserGlobalApiSlice";
 import { setUserData } from "./features/user/userSlice";
 import {
   AdminRoute,
@@ -54,21 +54,28 @@ import {
   AuthenticateRoute,
   CompanyRoute,
   UserRoute,
+  VerifyCompanyRoute,
   VerifyUserRoutes,
 } from "./protectedRoutes";
 
 const App = () => {
   const role = useSelector(selectCurrentRole);
-  // const { data, isLoading } = useGetUserGlobalQuery();
-  // const dispatch  = useDispatch()
-  if (!role) console.log("role", role);
+  const [trigger, user] = useLazyGetUserGlobalQuery();
+  const dispatch = useDispatch();
 
-  // useEffect(() => {
-  //   if (role && role === "user" && !isLoading) {
-  //     console.log("user global data",data);
-  //     dispatch(setUserData(data));
-  //   }
-  // }, [role, isLoading, data, dispatch]);
+  useEffect(() => {
+    console.log("Data triggered", user.data);
+    if (role && role === "user") {
+      trigger();
+    }
+  }, [role]);
+
+  useEffect(() => {
+    console.log("user global data", user.data);
+    if (user.data) {
+      dispatch(setUserData(user.data));
+    }
+  }, [user]);
 
   return (
     <BrowserRouter>
@@ -221,7 +228,9 @@ const App = () => {
             path="/dashboard/submit_jobs"
             element={
               <CompanyRoute>
-                <SubmitJobs />
+                <VerifyCompanyRoute>
+                  <SubmitJobs />
+                </VerifyCompanyRoute>
               </CompanyRoute>
             }
           />
@@ -229,7 +238,10 @@ const App = () => {
             path="/dashboard/my_jobs"
             element={
               <CompanyRoute>
-                <MyJobs />
+                <VerifyCompanyRoute>
+                  <MyJobs />
+
+                </VerifyCompanyRoute>
               </CompanyRoute>
             }
           />
@@ -237,7 +249,10 @@ const App = () => {
             path="/dashboard/applicants_jobs"
             element={
               <CompanyRoute>
-                <ApplicantsJobs />
+                <VerifyCompanyRoute>
+                  <ApplicantsJobs />
+
+                </VerifyCompanyRoute>
               </CompanyRoute>
             }
           />
@@ -245,7 +260,10 @@ const App = () => {
             path="/dashboard/shortlisted_candidates"
             element={
               <CompanyRoute>
-                <ShortlistedCandidates />
+                <VerifyCompanyRoute>
+                  <ShortlistedCandidates />
+
+                </VerifyCompanyRoute>
               </CompanyRoute>
             }
           />
@@ -253,7 +271,10 @@ const App = () => {
             path="/dashboard/cv"
             element={
               <CompanyRoute>
-                <ViewCvPage />
+                <VerifyCompanyRoute>
+                  <ViewCvPage />
+
+                </VerifyCompanyRoute>
               </CompanyRoute>
             }
           />

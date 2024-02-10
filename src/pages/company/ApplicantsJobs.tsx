@@ -1,63 +1,78 @@
 import TitleBar from "../../components/recruit/titleBar/TitleBar";
 import Container from "../../layout/Container";
-import { CheckCheck, Trash2, RotateCw, ArrowDownToLine, Eye } from "lucide-react";
+import { CheckCheck, Trash2, Eye } from "lucide-react";
 import DefaultUser from "../../assets/user-default-profile.png";
 import { useState } from "react";
 import { useApproveApplyMutation } from "../../features/company/put/approveApplyApiSlice";
-
 import { useViewJobsQuery } from "../../features/company/get/viewJobsApiSlice";
 import { useViewApplicantQuery } from "../../features/company/get/viewApplicantApiSlice";
-import toast from "react-hot-toast";
 import { useViewApplicantStatsQuery } from "../../features/company/get/viewApplicantStats";
 import { Link } from "react-router-dom";
 import { useDeleteApplicantMutation } from "../../features/company/delete/deleteApplicantApiSlice";
+import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from "../../ui/select";
+import Loader from "../../components/loader/Loader";
+import { useToast } from "../../ui/use-toast";
+import { Card } from "../../ui/card";
 
-// import { skipToken } from "@reduxjs/toolkit/query";
+type Result = {
+	_id: string,
+	jobId: string,
+	userId: {
+		_id: string,
+		name: string,
+		email: string,
+		phoneNo: string,
+	}
+	selected: boolean
+}
 
 const ApplicantsJobs = () => {
-	const [title, setTitle] = useState();
+	const [title, setTitle] = useState("");
 	const [approveApplication] = useApproveApplyMutation();
+	const { toast } = useToast();
 
-	const { data, isSuccess } = useViewJobsQuery();
+	const { data, isLoading } = useViewJobsQuery();
 	const [skip, setSkip] = useState(true)
-	// const [myState, setState] = useState(skipToken) // initialize with skipToken to skip at first
 	const { data: result } = useViewApplicantQuery(title, { skip })
 	const { data: stats } = useViewApplicantStatsQuery(title, { skip });
 	const [deleteApplicant] = useDeleteApplicantMutation();
 
-
-
-	// if (title) {
-	// 	setSkip(false);
-	// 	console.log(result, "data");
-
-	// }
-
-	const deleteApplicants = async (id, userId) => {
+	const deleteApplicants = async (id: string, userId: string) => {
 		try {
 			await deleteApplicant({ id, userId }).unwrap();
-			toast.success("Applicant removed");
-		} catch (error) {
-			console.log(error);
+			toast({
+				description: "Applicant Removed"
+			})
+		} catch (error: any) {
+			toast({
+				variant: "destructive",
+				description: error.message
+			})
 		}
 	}
 
-	const viewApplicants = (e) => {
-		setTitle(e.target.value);
+	const viewApplicants = (value: string) => {
+		setTitle(value);
 		setSkip(false);
 	}
+
 
 	const approve = async (id: string) => {
 		try {
 			console.log(id);
 			await approveApplication(id).unwrap();
-			toast.success('Application Shortlisted')
-		} catch (error) {
-			console.log(error);
+			toast({
+				description: "Applicant Shortlisted"
+			})
+		} catch (error: any) {
+			toast({
+				variant: "destructive",
+				description: error.message
+			})
 		}
 	}
 
-
+	if (isLoading || !data) return (<Loader />)
 
 	return (
 		<Container>
@@ -66,66 +81,64 @@ const ApplicantsJobs = () => {
 				path="Employer / Dashboard / All Applicants"
 			/>
 			<div>
-				<div className="flex justify-between gap-x-5">
-					<div className="sm:col-span-4">
+				<div className="sm:flex justify-between gap-x-5">
+					<div className="flex items-center sm:block sm:col-span-4">
 						<label
 							htmlFor="country"
-							className="block text-sm font-medium leading-6 text-gray-900"
+							className="block text-md sm:text-sm font-medium leading-6 text-gray-900 mr-3 sm:mr-0 "
 						>
 							Job role
 						</label>
 						<div className="mt-2">
-							<select
-								id="country"
-								name="country"
-								value={title}
-								autoComplete="country-name"
-								className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6"
-								onChange={viewApplicants}
-							>
-								<option>Select role</option>
-								{
-									data?.map((item, index) => (
-										<option value={item?._id} key={index}>{item?.title}</option>
-									))
-								}
-								{/* <option>Software Developer (120)</option>
-								<option>Software Tester (50)</option> */}
-							</select>
+							<Select defaultValue={title} onValueChange={viewApplicants}>
+								<SelectTrigger className="w-[180px]">
+									<SelectValue placeholder="Select a Job" />
+								</SelectTrigger>
+								<SelectContent>
+									<SelectGroup>
+										{
+											data?.map((item, index) => (
+												<SelectItem value={item?._id} key={index}>{item?.title}</SelectItem>
+
+											))
+										}
+									</SelectGroup>
+								</SelectContent>
+							</Select>
 						</div>
 					</div>
-					<div className="flex items-center gap-x-5">
+					<div className="flex items-center gap-x-5 justify-center mt-4 sm:mt-0">
 						<button>All: {stats?.all}</button>
 						<button>Approved: {stats?.approved}</button>
 						<button>Pending: {stats?.rejected}</button>
 					</div>
 				</div>
 				<div>
-					{result && result.map((item, index) => (
-						<div
+					{result && result.map((item: Result, index: number) => (
+						<Card
 							key={index}
-							className="flex items-center justify-between p-4 mt-5 rounded-lg border bg-white gap-2"
+							className="sm:flex items-center sm:justify-between p-4 mt-5 gap-2"
 						>
-							<div className="flex items-center gap-5">
+							<div className="sm:flex sm:items-center sm:gap-5">
 								<img
-									className="w-[80px] h-[80px] rounded-full"
+									className="w-[80px] h-[80px] rounded-full m-auto"
 									src={DefaultUser}
 									alt="user"
 								/>
 								<div>
 									<div>
-										<h2 className="font-bold text-slate-600 text-lg">
+										<h2 className="font-bold text-slate-600 text-lg text-center sm:text-left">
 											{item?.userId?.name}
 										</h2>
 									</div>
-									<div className="flex items-center gap-2">
-										<p className="mt-2 text-sm text-slate-600">{item?.userId?.email}</p>
-										<p className="mt-2 text-sm text-slate-600">{item?.userId?.phoneNo}</p>
-										<p className="mt-2 text-sm text-slate-600">Applied: 10 March 2022</p>
+									<div className="sm:flex sm:items-center sm:gap-2">
+										<p className="mt-1 sm:mt-2 text-sm text-slate-600 text-center">{item?.userId?.email}</p>
+										<p className="mt-1 sm:mt-2 text-sm text-slate-600 text-center">{item?.userId?.phoneNo}</p>
+										<p className="mt-1 sm:mt-2 text-sm text-slate-600 text-center">Applied: 10 March 2022</p>
 									</div>
 								</div>
 							</div>
-							<div className="flex items-center gap-x-5">
+							<div className="flex items-center gap-x-5 justify-center mt-2">
 								<span className="bg-teal-100 px-3 py-2 rounded-lg cursor-pointer">
 									<CheckCheck className="w-[20px] text-teal-600" onClick={() => approve(item?._id)} />
 								</span>
@@ -136,7 +149,7 @@ const ApplicantsJobs = () => {
 									<Trash2 className="w-[20px] text-red-600" onClick={() => deleteApplicants(item?.jobId, item?.userId?._id)} />
 								</span>
 							</div>
-						</div>
+						</Card>
 					))}
 				</div>
 			</div>

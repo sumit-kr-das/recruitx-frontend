@@ -5,8 +5,9 @@ export const getUserGlobalApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     getUserGlobal: builder.query<UserState, void>({
       query: () => "/user/globals",
+      providesTags: ["User"],
     }),
   }),
 });
 
-export const { useGetUserGlobalQuery } = getUserGlobalApiSlice;
+export const { useLazyGetUserGlobalQuery } = getUserGlobalApiSlice;

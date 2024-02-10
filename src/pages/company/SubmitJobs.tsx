@@ -1,6 +1,5 @@
-import { FormEvent, useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { INITIAL_JOB_DATA } from "../../@types/recruit/submitJob";
 import TitleBar from "../../components/recruit/titleBar/TitleBar";
 import Container from "../../layout/Container";
 import JobPostSchema from "../../@types/zod/JobPostSchema";
@@ -22,41 +21,47 @@ import { skillData } from "../../constants/skillData";
 import { Button } from "../../ui/button";
 import { usePostJobMutation } from "../../features/company/post/setJobApiSlice";
 import { useToast } from "../../ui/use-toast";
+import { TApiError } from "../../@types/TApiError";
+type FormValues = {
+  title: string,
+  category: string,
+  description: string,
+  tags: string[],
+  vacancies: string,
+  jobType: string
+  workplaceType: string,
+  startDate: string,
+  endDate: string,
+  roles: string,
+  skills: string[],
+  minExprience: string,
+  maxExprience: string,
+  minSalary: string,
+  maxSalary: string,
+  location: string,
+  maxQualification: string,
+  degree: string
+}
 const SubmitJob = () => {
-  // const [data, setData] = useState(INITIAL_JOB_DATA);
-  // const updateFields = (fields: Partial<TINITIAL_JOB_DATA>) => {
-  //   setData((prev) => {
-  //     return { ...prev, ...fields };
-  //   });
-  // };
-  const [submitJob, { isLoading }] = usePostJobMutation();
+  const [submitJob] = usePostJobMutation();
   const navigate = useNavigate();
   const [step, setStep] = useState(0);
   const [value, setValue] = useState([tagsData[0]]);
   const [skills, setSkills] = useState([skillData[0]])
   const { toast } = useToast();
 
-  type FormValues = {
-    title: string,
-    category: string,
-    description: string,
-    tags: string[],
-    vacancies: number,
-    jobType: string
-    workplaceType: string,
-    startDate: string,
-    endDate: string,
-    roles: string,
-    skills: string[],
-    minExprience: number,
-    maxExprience: number,
-    minSalary: number,
-    maxSalary: number,
-    location: string,
-    maxQualification: string,
-    degree: string
+  const steps = [
+    {
+      id: 'Step 1',
+      name: 'Basic Information',
+      fields: ['title', 'category', 'description', 'tags']
+    },
+    {
+      id: 'Step 2',
+      name: 'Technical Infomation'
+    }
+  ]
 
-  }
   const form = useForm<z.infer<typeof JobPostSchema>>({
     resolver: zodResolver(JobPostSchema),
     defaultValues: {
@@ -64,28 +69,44 @@ const SubmitJob = () => {
       category: "",
       description: "",
       tags: [],
-      vacancies: 0,
+      vacancies: '',
       jobType: "",
       workplaceType: "",
       startDate: "",
       endDate: "",
       roles: "",
       skills: [],
-      minExprience: 0,
-      maxExprience: 0,
-      minSalary: 0,
-      maxSalary: 0,
+      minExprience: '',
+      maxExprience: '',
+      minSalary: '0',
+      maxSalary: '',
       location: "",
       maxQualification: "",
       degree: ""
     },
+    mode: "onSubmit"
   });
+  type FieldName = keyof z.infer<typeof JobPostSchema>
 
+  const next = async () => {
+    const fields = steps[0].fields
+
+    const output = await form.trigger(fields as FieldName[], { shouldFocus: true })
+
+    if (!output) return
+    setStep(1);
+  }
 
   const postJob = async (data: FormValues) => {
-    console.log(data);
-
-    const { title, category, description, tags, ...other } = data;
+    const convertedData = {
+      ...data,
+      vacancies: parseInt(data.vacancies.toString(), 10),
+      minExprience: parseInt(data.minExprience.toString(), 10),
+      maxExprience: parseInt(data.maxExprience.toString(), 10),
+      minSalary: parseInt(data.minSalary.toString(), 10),
+      maxSalary: parseInt(data.maxSalary.toString(), 10),
+    };
+    const { title, category, description, tags, ...other } = convertedData;
     const newJobData = {
       title,
       category,
@@ -95,25 +116,24 @@ const SubmitJob = () => {
     };
 
     try {
-      console.log(newJobData);
       await submitJob(newJobData).unwrap();
       toast({
         description: "Job Submitted Successfully",
       });
       navigate("/dashboard/my_jobs");
-    } catch (err: any) {
+    } catch (err) {
+      const apiError = err as TApiError;
       toast({
         variant: "destructive",
-        description: err?.data.message,
-      });
-      console.log("Error on company register", err);
+        description: apiError.data.message
+      })
     }
   };
   return (
     <Container>
       <TitleBar title="Post Jobs" path="Employer / Dashboard / Post Jobs" />
-      <section className="w-full flex gap-5">
-        <div className="flex flex-col items-start gap-y-4">
+      <section className="w-full">
+        {/* <div className="flex flex-col items-start gap-y-4">
           <Button
             onClick={() => setStep(0)}
             className={` px-4 py-2 rounded-md text-white bg-cyan-400 ${step === 0 && "bg-cyan-500"
@@ -128,13 +148,14 @@ const SubmitJob = () => {
           >
             Technical Information
           </Button>
-        </div>
+        </div> */}
 
 
-        <div className="w-full h-auto flex justify-center">
-          <div className="h-fit rounded-xl bg-white p-10 mb-10 shadow md:w-[800px]">
+        <div className="w-full h-auto m-auto">
+          <div className="h-fit rounded-xl bg-white p-10 mb-10 shadow md:w-[800px] m-auto">
             <h2 className="text-base font-semibold leading-7 text-gray-900">
-              Basic information
+              {steps[step]?.name}
+
             </h2>
             <p className="mt-1 text-sm leading-6 text-gray-600">
               Increase the quality of your hire
@@ -166,7 +187,7 @@ const SubmitJob = () => {
                             <FormControl>
                               <Textarea rows={8} placeholder="Enter Description" {...field} />
                             </FormControl>
-                            <FormMessage />
+                            {/* <FormMessage>{errors.description?.message}</FormMessage> */}
                           </FormItem>
                         )}
                       />
@@ -200,7 +221,7 @@ const SubmitJob = () => {
                       <FormField
                         control={form.control}
                         name="tags"
-                        render={({ field }) => (
+                        render={() => (
                           <FormItem className="mt-3">
                             <FormLabel>Select Tags</FormLabel>
                             <FormControl>
@@ -231,12 +252,12 @@ const SubmitJob = () => {
                 }
                 {
                   step === 1 && (<>
-                    <div className="flex flex-col">
+                    <div className="sm:flex sm:gap-4">
                       <FormField
                         control={form.control}
                         name="roles"
                         render={({ field }) => (
-                          <FormItem className="mt-3">
+                          <FormItem className="sm:flex-1 mt-3">
                             <FormLabel>Select Role</FormLabel>
                             <FormControl>
                               <Select onValueChange={field.onChange} defaultValue={field.value}>
@@ -262,7 +283,7 @@ const SubmitJob = () => {
                         control={form.control}
                         name="minExprience"
                         render={({ field }) => (
-                          <FormItem className="flex-1">
+                          <FormItem className="sm:flex-1 mt-3">
                             <FormLabel>Minimum Exprience</FormLabel>
                             <FormControl>
                               <Input placeholder="Enter miminum exprience" {...field} />
@@ -271,11 +292,13 @@ const SubmitJob = () => {
                           </FormItem>
                         )}
                       />
+                    </div>
+                    <div className="sm:flex sm:gap-4">
                       <FormField
                         control={form.control}
                         name="maxExprience"
                         render={({ field }) => (
-                          <FormItem className="flex-1">
+                          <FormItem className="sm:flex-1 flex-1">
                             <FormLabel>Maximum Exprience</FormLabel>
                             <FormControl>
                               <Input placeholder="Enter maximum exprience" {...field} />
@@ -289,7 +312,7 @@ const SubmitJob = () => {
                         control={form.control}
                         name="workplaceType"
                         render={({ field }) => (
-                          <FormItem className="mt-3">
+                          <FormItem className="sm:flex-1 mt-3">
                             <FormLabel>Select Role</FormLabel>
                             <FormControl>
                               <Select onValueChange={field.onChange} defaultValue={field.value}>
@@ -310,12 +333,13 @@ const SubmitJob = () => {
                           </FormItem>
                         )}
                       />
-
+                    </div>
+                    <div className="sm:flex sm:gap-4">
                       <FormField
                         control={form.control}
                         name="jobType"
                         render={({ field }) => (
-                          <FormItem className="mt-3">
+                          <FormItem className="sm:flex-1 mt-3">
                             <FormLabel>Select Role</FormLabel>
                             <FormControl>
                               <Select onValueChange={field.onChange} defaultValue={field.value}>
@@ -341,7 +365,7 @@ const SubmitJob = () => {
                         control={form.control}
                         name="location"
                         render={({ field }) => (
-                          <FormItem className="flex-1 mt-3">
+                          <FormItem className="sm:flex-1 mt-3">
                             <FormLabel>Enter location</FormLabel>
                             <FormControl>
                               <Input placeholder="Enter maximum exprience" {...field} />
@@ -351,11 +375,14 @@ const SubmitJob = () => {
                         )}
                       />
 
+                    </div>
+
+                    <div className="sm:flex sm:gap-4">
                       <FormField
                         control={form.control}
                         name="vacancies"
                         render={({ field }) => (
-                          <FormItem className="flex-1 mt-3">
+                          <FormItem className="sm:flex-1 mt-3">
                             <FormLabel>Enter No of Vacancies</FormLabel>
                             <FormControl>
                               <Input placeholder="Enter No of Vacancies" {...field} />
@@ -369,7 +396,7 @@ const SubmitJob = () => {
                         control={form.control}
                         name="minSalary"
                         render={({ field }) => (
-                          <FormItem className="flex-1 mt-3">
+                          <FormItem className="sm:flex-1 mt-3">
                             <FormLabel>Minimum Salary</FormLabel>
                             <FormControl>
                               <Input placeholder="Enter Minimum Salary" {...field} />
@@ -379,11 +406,14 @@ const SubmitJob = () => {
                         )}
                       />
 
+                    </div>
+
+                    <div className="sm:flex sm:gap-4">
                       <FormField
                         control={form.control}
                         name="maxSalary"
                         render={({ field }) => (
-                          <FormItem className="flex-1 mt-3">
+                          <FormItem className="sm:flex-1 mt-3">
                             <FormLabel>Maximum Salary</FormLabel>
                             <FormControl>
                               <Input placeholder="Enter Maximum Salary" {...field} />
@@ -397,7 +427,7 @@ const SubmitJob = () => {
                         control={form.control}
                         name="maxQualification"
                         render={({ field }) => (
-                          <FormItem className="mt-3">
+                          <FormItem className="sm:flex-1 mt-3">
                             <FormLabel>Select max qualification</FormLabel>
                             <FormControl>
                               <Select onValueChange={field.onChange} defaultValue={field.value}>
@@ -418,12 +448,14 @@ const SubmitJob = () => {
                           </FormItem>
                         )}
                       />
+                    </div>
 
+                    <div className="sm:gap-4 sm:flex">
                       <FormField
                         control={form.control}
                         name="degree"
                         render={({ field }) => (
-                          <FormItem className="flex-1 mt-3">
+                          <FormItem className="sm:flex-1 mt-3">
                             <FormLabel>Enter Degree Title</FormLabel>
                             <FormControl>
                               <Input placeholder="Enter Degree" {...field} />
@@ -437,7 +469,7 @@ const SubmitJob = () => {
                         control={form.control}
                         name="startDate"
                         render={({ field }) => (
-                          <FormItem className="flex-1 mt-3">
+                          <FormItem className="sm:flex-1 mt-3">
                             <FormLabel>Start Date</FormLabel>
                             <FormControl>
                               <Input type="date"  {...field} />
@@ -447,11 +479,13 @@ const SubmitJob = () => {
                         )}
                       />
 
+                    </div>
+                    <div className="sm:flex sm:gap-4">
                       <FormField
                         control={form.control}
                         name="endDate"
                         render={({ field }) => (
-                          <FormItem className="flex-1 mt-3">
+                          <FormItem className="sm:flex-1 mt-3">
                             <FormLabel>End Date</FormLabel>
                             <FormControl>
                               <Input type="date"  {...field} />
@@ -464,8 +498,8 @@ const SubmitJob = () => {
                       <FormField
                         control={form.control}
                         name="skills"
-                        render={({ field }) => (
-                          <FormItem className="mt-3">
+                        render={() => (
+                          <FormItem className="sm:flex-1 mt-3">
                             <FormLabel>Select Tags</FormLabel>
                             <FormControl>
                               <Controller
@@ -479,7 +513,6 @@ const SubmitJob = () => {
                                     value={skills}
                                     onChange={(selectedOptions) => {
                                       setSkills(selectedOptions);
-                                      // Update the RHF form value and trigger validation
                                       field.onChange(selectedOptions);
                                     }}
                                   />
@@ -490,33 +523,37 @@ const SubmitJob = () => {
                           </FormItem>
                         )}
                       />
-
                     </div>
+
+
                   </>)
                 }
 
                 <div className="mt-6 flex items-center justify-end gap-x-6">
-                  {step === 1 && (
-                    <Button
-                      onClick={() => setStep(0)}
-                    >
-                      Back
-                    </Button>
-                  )}
                   {
-                    step === 1 ? (
+                    step === 0 && (<>
+                      <Button
+                        onClick={next}
+                        type="button"
+                      >
+                        Next
+                      </Button>
+                    </>)
+                  }
+                  {
+                    step === 1 && (<>
+                      <Button
+                        onClick={() => setStep(0)}
+                      >
+                        Back
+                      </Button>
                       <Button
                         type="submit"
                       >
                         Finish
                       </Button>
-                    ) : (
-                      <Button
-                        onClick={() => setStep(1)}
-                      >
-                        Next
-                      </Button>
-                    )
+
+                    </>)
                   }
                 </div>
               </form>

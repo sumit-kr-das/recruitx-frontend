@@ -1,5 +1,5 @@
-import { Pen, Trash2 } from "lucide-react";
-import { INITIAL_CAREER_DATA } from "./UserCareer";
+import { Pen, Plus, Trash2 } from "lucide-react";
+import { INITIAL_CAREER_DATA } from "../../../../pages/mnjuser/_components/UserCareer";
 import { useDeleteUserEduMutation } from "../../../../features/user/delete/deleteUserEduApiSlice";
 import { toast } from "react-hot-toast";
 import { TApiError } from "../../../../@types/TApiError";
@@ -58,18 +58,18 @@ const ShowCareerData = ({ item, setEdudata, isSuccess, setOpen }) => {
 const ViewCareer = ({ setOpen, resData, setEdudata, isSuccess }) => {
   return (
     <>
-      <div className="mt-4 bg-white p-5 rounded-lg shadow-lg">
+      <div className="relative mt-4 bg-white p-10 rounded-lg border shadow">
         <div className="flex items-center justify-between mb-4">
-          <h2 className="font-bold text-lg">Employment</h2>
-          <h2
-            onClick={() => {
-              setEdudata(INITIAL_CAREER_DATA);
-              setOpen((prev) => !prev);
-            }}
-            className="font-bold text-blue-500 cursor-pointer"
-          >
-           Add employment
+          <h2 className="text-2xl font-semibold leading-7 text-gray-900">
+            Employment
           </h2>
+        </div>
+        <div
+          // onClick={() => setIsOpen(true)}
+          title="edit"
+          className=" absolute top-4 right-4 bg-slate-200 p-4 rounded-full cursor-pointer"
+        >
+          <Plus className="w-[15px] h-[15px]" />
         </div>
         {resData && resData.length == 0 && (
           <h2>

@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { X, ChevronDown } from "lucide-react";
 
 // export type TSelectOptions = {
@@ -93,24 +93,24 @@ const SelectInput = ({ value, multiple, onChange, options }: TSelectProps) => {
 			<span className="flex-1 flex flex-wrap gap-2">
 				{multiple
 					? value.map((val) => (
-							<div
-								onClick={(e) => {
-									e.stopPropagation();
-									selectOption(val)
-								}}
-								key={val}
-								className="flex items-center gap-1 border-2 rounded-md px-1"
-							>
-								{val}
-								<X
-									// onClick={(e) => {
-									// 	e.stopPropagation();
-									// 	clearOptions();
-									// }}
-									className="w-[18px] cursor-pointer"
-								/>
-							</div>
-					  ))
+						<div
+							onClick={(e) => {
+								e.stopPropagation();
+								selectOption(val)
+							}}
+							key={val}
+							className="flex items-center gap-1 border-2 rounded-md px-1"
+						>
+							{val}
+							<X
+								// onClick={(e) => {
+								// 	e.stopPropagation();
+								// 	clearOptions();
+								// }}
+								className="w-[18px] cursor-pointer"
+							/>
+						</div>
+					))
 					: value}
 			</span>
 
@@ -127,9 +127,8 @@ const SelectInput = ({ value, multiple, onChange, options }: TSelectProps) => {
 			</div>
 
 			<ul
-				className={`${
-					open ? "block" : "hidden"
-				} absolute top-10 left-0 w-full max-h-48 overflow-y-auto bg-white rounded-md border-0 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300`}
+				className={`${open ? "block" : "hidden"
+					} absolute top-10 left-0 w-full max-h-48 overflow-y-auto bg-white rounded-md border-0 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300`}
 			>
 				{options.map((option, index) => (
 					<li
