@@ -8,7 +8,7 @@ import { Button } from "../../../ui/button";
 import Loader from "../../../components/loader/Loader";
 import ChangeProfile from "../../../components/mnjuser/userProfile/ChangeProfile";
 import UpdateBasicInfo from "../../../components/mnjuser/userProfile/basicInfo/UpdateBasicInfo";
-import { PDFDownloadLink, Document } from '@react-pdf/renderer'
+import { PDFDownloadLink } from '@react-pdf/renderer'
 import { useGetAllUserInfoQuery } from "../../../features/user/get/getAllUserInfoApiSlice";
 import ResumeDoc from "../../pdf/ResumeDoc";
 export type BasicInfoFormData = {
@@ -25,7 +25,6 @@ const BasicInfo = () => {
   const [profile, setProfile] = useState<boolean>(false);
   const { user, info } = useSelector(selectCurrentUserData);
   const { data } = useGetAllUserInfoQuery();
-  console.log(data);
 
   const basicInfo = (
     <>

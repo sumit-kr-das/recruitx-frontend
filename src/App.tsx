@@ -78,10 +78,8 @@ const App = () => {
 
   useEffect(() => {
     if (role === "user" && user.data) {
-      console.log("user global data", user.data);
       dispatch(setUserData(user.data));
     } else if (role === "company" && company.data) {
-      console.log("company global data", company.data);
       dispatch(setCompanyData(company.data));
     }
   }, [user, company]);
