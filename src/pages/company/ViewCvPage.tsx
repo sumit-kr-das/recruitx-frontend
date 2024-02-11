@@ -10,9 +10,7 @@ import countDays from "../../customFunctions/countDays"
 const ViewCvPage = () => {
     const [searchParams] = useSearchParams();
     const userId = searchParams.get("userId");
-    console.log(userId);
     const { data } = useViewCvQuery(userId);
-    console.log(data, "data");
 
     return (
         <>

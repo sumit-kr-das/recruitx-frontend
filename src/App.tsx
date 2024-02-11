@@ -43,6 +43,7 @@ const ManageUsers = lazy(() => import("./pages/admin/ManageUsers"));
 
 const ErrorPage = lazy(() => import("./pages/error/ErrorPage"));
 const ViewAppliedPage = lazy(() => import("./pages/mnjuser/ViewAppliedPage"));
+const Resume = lazy(() => import("./pages/pdf/Resume"));
 
 // --------------------------- route authenticator ---------------------------
 import Loader from "./components/loader/Loader";
@@ -136,6 +137,14 @@ const App = () => {
           element={
             <UserRoute>
               <UserProfilePage />
+            </UserRoute>
+          }
+        />
+        <Route
+          path="/mnjuser/cv/view"
+          element={
+            <UserRoute>
+              <Resume />
             </UserRoute>
           }
         />
