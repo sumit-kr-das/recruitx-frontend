@@ -121,7 +121,7 @@ const EditCompanyInfo = ({ data, setOpen }: { data: Profiledata, setOpen: Functi
                             control={form.control}
                             name="tags"
                             render={() => (
-                                <FormItem className="mt-3">
+                                <FormItem className="mt-3 sm:flex-1">
                                     <FormLabel>Select Tags</FormLabel>
                                     <FormControl>
                                         <Controller

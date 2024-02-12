@@ -21,7 +21,7 @@ const ViewCompanyProfile = ({
 
   return (
     <>
-      <Card className="relative p-10 mt-5">
+      <Card className="relative p-10 bg-white rounded-lg border shadow mt-4">
         <Dialog open={open} onOpenChange={setOpen}>
           <DialogTrigger>
             <div
@@ -39,65 +39,46 @@ const ViewCompanyProfile = ({
             <EditCompanyInfo data={data} setOpen={setOpen} />
           </DialogContent>
         </Dialog>
-        <div className="px-4 sm:px-0">
-          <h3 className="text-base font-semibold leading-7 text-gray-900">
+        <div className="px-4 sm:px-0 mb-5">
+          <h2 className="text-2xl font-semibold leading-7 text-gray-900">
             Applicant Information
-          </h3>
-          <p className="mt-1 max-w-2xl text-sm leading-6 text-gray-500">
+          </h2>
+          <p className="mt-1 text-sm leading-6 text-gray-600">
             Personal details and application.
           </p>
         </div>
-        <div className="mt-6 border-t border-gray-100">
-          <dl className="divide-y divide-gray-100">
-            <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
-              <dt className="text-sm font-medium leading-6 text-gray-900">
-                Company type
-              </dt>
-              <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
-                {data?.type}
-              </dd>
-            </div>
-            <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
-              <dt className="text-sm font-medium leading-6 text-gray-900">
-                Founded year
-              </dt>
-              <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
-                {data?.founded}
-              </dd>
-            </div>
-            <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
-              <dt className="text-sm font-medium leading-6 text-gray-900">
-                Team size
-              </dt>
-              <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
-                {data?.teamSize}
-              </dd>
-            </div>
-            <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
-              <dt className="text-sm font-medium leading-6 text-gray-900">
-                Tags
-              </dt>
-              <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
-                {data?.tags?.map((item, index) => (
-                  <span
-                    className="mr-2 bg-slate-200 p-2 rounded-lg"
-                    key={index}
-                  >
-                    {item}
-                  </span>
-                ))}
-              </dd>
-            </div>
-            <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
-              <dt className="text-sm font-medium leading-6 text-gray-900">
-                About
-              </dt>
-              <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
-                {data?.description}
-              </dd>
-            </div>
-          </dl>
+        <div className="mx-auto mt-5">
+          <div className="p-5 bg-[#FAFAFA] rounded-lg border mt-4">
+            <h2 className="text-xl font-semibold mb-2">Company type</h2>
+            <p className="text-gray-700">{data?.type}</p>
+          </div>
+          <div className="p-5 bg-[#FAFAFA] rounded-lg border mt-4">
+            <h2 className="text-xl font-semibold mb-2">Founded Year</h2>
+            <p className="text-gray-700">{data?.founded}</p>
+          </div>
+          <div className="p-5 bg-[#FAFAFA] rounded-lg border mt-4">
+            <h2 className="text-xl font-semibold mb-2">Team Size</h2>
+            <p className="text-gray-700">{data?.teamSize}</p>
+          </div>
+          <div className="p-5 bg-[#FAFAFA] rounded-lg border mt-4">
+            <h2 className="text-xl font-semibold mb-2">Tags</h2>
+            <ul className="flex items-center gap-x-5 mt-2">
+              {data?.tags?.map((item) => (
+                <li
+                  className="px-4 py-1 bg-white border rounded-full capitalize"
+                  key={item}
+                >
+                  {item}
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div className="p-5 bg-[#FAFAFA] rounded-lg border mt-4">
+            <h2 className="text-xl font-semibold mb-2">About</h2>
+            <p className="text-gray-700">{data?.description}</p>
+          </div>
         </div>
+
       </Card>
     </>
   );

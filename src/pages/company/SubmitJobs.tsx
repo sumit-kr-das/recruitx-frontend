@@ -133,26 +133,8 @@ const SubmitJob = () => {
     <Container>
       <TitleBar title="Post Jobs" path="Employer / Dashboard / Post Jobs" />
       <section className="w-full">
-        {/* <div className="flex flex-col items-start gap-y-4">
-          <Button
-            onClick={() => setStep(0)}
-            className={` px-4 py-2 rounded-md text-white bg-cyan-400 ${step === 0 && "bg-cyan-500"
-              }`}
-          >
-            Basic Information
-          </Button>
-          <Button
-            onClick={() => setStep(1)}
-            className={` px-4 py-2 rounded-md text-white bg-cyan-400 ${step === 1 && "bg-cyan-500 "
-              }`}
-          >
-            Technical Information
-          </Button>
-        </div> */}
-
-
         <div className="w-full h-auto m-auto">
-          <div className="h-fit rounded-xl bg-white p-10 mb-10 shadow md:w-[800px] m-auto">
+          <div className="h-fit rounded-lg bg-white p-10 mb-10 shadow md:w-full m-auto">
             <h2 className="text-base font-semibold leading-7 text-gray-900">
               {steps[step]?.name}
 
