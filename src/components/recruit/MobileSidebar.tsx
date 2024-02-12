@@ -7,10 +7,17 @@ import {
 } from "../../ui/sheet";
 import SideBar from '../../layout/SideBar';
 import { ScrollArea } from '../../ui/scroll-area';
+import { useEffect, useState } from 'react';
+import { useLocation } from 'react-router-dom';
 
 const MobileSidebar = () => {
+    const [open, setOpen] = useState(false);
+    const { pathname } = useLocation();
+    useEffect(() => {
+        setOpen(false);
+    }, [pathname])
     return (
-        <Sheet >
+        <Sheet onOpenChange={setOpen} open={open}>
             <SheetTrigger asChild>
                 <Button className="px-2" variant="outline"><Menu /></Button>
             </SheetTrigger>
