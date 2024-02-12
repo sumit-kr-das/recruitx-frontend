@@ -53,7 +53,7 @@ const ChangePassword = () => {
         title="Employer Update Password"
         path="Employer / Dashboard / Update Password"
       />
-      <Card className=" p-10 mt-5 sm:w-[450px] sm:m-auto">
+      <Card className=" p-10 mt-5 sm:w-[450px]">
         <Form {...form}>
           <form className="" onSubmit={form.handleSubmit(UpdatePassword)} >
             <FormField
