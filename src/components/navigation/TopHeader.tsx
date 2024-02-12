@@ -28,7 +28,11 @@ const TopHeader = () => {
             <img className="w-24 md:w-32" src={MainLogo} alt="main logo" />
           </Link>
           <div className="hidden md:block">
-            <NavigationMenus />
+            {
+              role ? (role === "user" && <NavigationMenus />) : (<NavigationMenus />
+              )
+            }
+            {/* <NavigationMenus /> */}
           </div>
         </div>
 
