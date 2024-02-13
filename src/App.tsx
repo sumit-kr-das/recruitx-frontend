@@ -68,7 +68,6 @@ const App = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    console.log("Data triggered", user.data);
     if (role && role === "user") {
       trigger();
     } else if (role && role === "company") {
