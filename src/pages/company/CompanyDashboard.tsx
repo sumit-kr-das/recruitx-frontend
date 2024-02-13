@@ -5,15 +5,14 @@ import TitleBar from "../../components/recruit/titleBar/TitleBar";
 import { chartData1, chartData2 } from "../../constants/chartData";
 import Container from "../../layout/Container";
 import { Card } from "../../ui/card";
-import { Alert, AlertDescription, AlertTitle } from "../../ui/alert";
+import ApproveAlert from "../../components/recruit/ApproveAlert";
 
 const CompanyDashboard = () => {
 	const [areaChart, setAresChart] = useState(chartData1);
 	const [donutChart, setDonutChart] = useState(chartData2);
-
-
 	return (
 		<Container>
+			<ApproveAlert />
 			<TitleBar
 				title="Company Dashboard"
 				path="Employer / Dashboard / Employer Dashboard"

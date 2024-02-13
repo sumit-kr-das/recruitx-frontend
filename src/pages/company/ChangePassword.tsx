@@ -12,6 +12,7 @@ import { Input } from "../../ui/input";
 import { Button } from "../../ui/button";
 import { useToast } from "../../ui/use-toast";
 import { Card } from "../../ui/card";
+import ApproveAlert from "../../components/recruit/ApproveAlert";
 
 type FormValue = {
   newPassword: string,
@@ -49,6 +50,7 @@ const ChangePassword = () => {
 
   return (
     <Container>
+      <ApproveAlert />
       <TitleBar
         title="Employer Update Password"
         path="Employer / Dashboard / Update Password"
