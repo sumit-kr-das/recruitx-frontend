@@ -2,7 +2,7 @@ import TitleBar from "../../components/recruit/titleBar/TitleBar";
 import Container from "../../layout/Container";
 import { CheckCheck, Trash2, Eye } from "lucide-react";
 import DefaultUser from "../../assets/user-default-profile.png";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useApproveApplyMutation } from "../../features/company/put/approveApplyApiSlice";
 import { useViewJobsQuery } from "../../features/company/get/viewJobsApiSlice";
 import { useViewApplicantQuery } from "../../features/company/get/viewApplicantApiSlice";
@@ -32,7 +32,8 @@ const ApplicantsJobs = () => {
 	const [approveApplication] = useApproveApplyMutation();
 	const { toast } = useToast();
 
-	const { data, isLoading } = useViewJobsQuery();
+	const { data, isLoading, isSuccess } = useViewJobsQuery();
+
 	const [skip, setSkip] = useState(true)
 	const { data: result } = useViewApplicantQuery(title, { skip })
 	const { data: stats } = useViewApplicantStatsQuery(title, { skip });
@@ -52,15 +53,17 @@ const ApplicantsJobs = () => {
 		}
 	}
 
+
 	const viewApplicants = (value: string) => {
 		setTitle(value);
 		setSkip(false);
 	}
 
 
+
+
 	const approve = async (id: string) => {
 		try {
-			console.log(id);
 			await approveApplication(id).unwrap();
 			toast({
 				description: "Applicant Shortlisted"
@@ -72,6 +75,14 @@ const ApplicantsJobs = () => {
 			})
 		}
 	}
+	useEffect(() => {
+		if (data && data?.length > 0) {
+			setTitle(data[0]._id);
+		}
+		if (title) {
+			viewApplicants(title);
+		}
+	}, [data, isLoading, isSuccess, title]);
 
 	if (isLoading || !data) return (<Loader />)
 
@@ -91,7 +102,7 @@ const ApplicantsJobs = () => {
 							Job role
 						</label>
 						<div className="mt-2">
-							<Select defaultValue={title} onValueChange={viewApplicants}>
+							<Select defaultValue={data.length > 0 ? data[0]._id : ""} onValueChange={viewApplicants}>
 								<SelectTrigger className="w-[180px]">
 									<SelectValue placeholder="Select a Job" />
 								</SelectTrigger>

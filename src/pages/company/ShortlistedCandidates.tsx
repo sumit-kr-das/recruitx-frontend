@@ -4,7 +4,7 @@ import DefaultUser from "../../assets/user-default-profile.png";
 import { useViewShortlistedApplicantsQuery } from "../../features/company/get/viewShortlistedApplicant";
 import { useViewJobsQuery } from "../../features/company/get/viewJobsApiSlice";
 import { useViewApplicantStatsQuery } from "../../features/company/get/viewApplicantStats";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from "../../ui/select";
 import Loader from "../../components/loader/Loader";
 import { Link } from "react-router-dom";
@@ -27,7 +27,7 @@ type Result = {
 const ShortlistedCandidates = () => {
 	const [title, setTitle] = useState("");
 	const [skip, setSkip] = useState(true)
-	const { data, isLoading } = useViewJobsQuery();
+	const { data, isLoading, isSuccess } = useViewJobsQuery();
 	const { data: result } = useViewShortlistedApplicantsQuery(title, { skip })
 	const { data: stats } = useViewApplicantStatsQuery(title, { skip });
 
@@ -35,6 +35,16 @@ const ShortlistedCandidates = () => {
 		setTitle(value);
 		setSkip(false);
 	}
+
+	useEffect(() => {
+		if (data && data?.length > 0) {
+			setTitle(data[0]._id);
+		}
+		if (title) {
+			viewApplicants(title);
+		}
+	}, [data, isLoading, isSuccess, title]);
+
 
 	if (isLoading || !data) return (<Loader />)
 
@@ -54,7 +64,7 @@ const ShortlistedCandidates = () => {
 							Job role
 						</label>
 						<div className="mt-2">
-							<Select defaultValue={title} onValueChange={viewApplicants}>
+							<Select defaultValue={data.length > 0 ? data[0]._id : ""} onValueChange={viewApplicants}>
 								<SelectTrigger className="w-[180px]">
 									<SelectValue placeholder="Select a Job" />
 								</SelectTrigger>
