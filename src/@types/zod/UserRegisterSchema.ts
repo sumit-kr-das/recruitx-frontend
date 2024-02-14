@@ -40,7 +40,7 @@ const UserRegisterSchema = z
       }),
   })
   .refine((data) => data.password === data.confirmPassword, {
-    message: "Password no not match",
+    message: "Password do not match",
     path: ["confirmPassword"],
   });
 
