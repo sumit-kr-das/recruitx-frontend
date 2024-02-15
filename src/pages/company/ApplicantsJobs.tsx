@@ -129,7 +129,7 @@ const ApplicantsJobs = () => {
 					{
 						result && result.length === 0 || !result ? (<>
 							<div className="items-center">
-								<img src={EmptyData} className="h-[500px] m-auto" />
+								<img src={EmptyData} className="h-[500px] m-auto object-cover" />
 							</div>
 						</>) : (<>
 							{result && result.map((item: Result, index: number) => (

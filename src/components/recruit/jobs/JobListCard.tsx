@@ -92,7 +92,7 @@ const JobListCard = ({ job }: { job: jobType }) => {
                         <DialogTrigger>
                             <Pencil className="w-[20px] text-white-600" onClick={() => setOpen(true)} />
                         </DialogTrigger>
-                        <DialogContent className={"sm:max-w-[800px] rounded scrollbar-hide overflow-y-scroll max-h-[90%]"}>
+                        <DialogContent className={"w-[90%] sm:max-w-[800px] rounded scrollbar-hide overflow-y-scroll max-h-[90%]"}>
                             <DialogHeader>
                                 <DialogTitle>Edit Job</DialogTitle>
                             </DialogHeader>

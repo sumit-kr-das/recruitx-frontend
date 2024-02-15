@@ -32,7 +32,7 @@ const CompanyInfo = () => {
                     <Pencil className="w-[15px] h-[15px]" />
                   </div>
                 </DialogTrigger>
-                <DialogContent className={"sm:max-w-[800px] rounded scrollbar-hide overflow-y-scroll max-h-[530px]"}>
+                <DialogContent className={"w-[90%] sm:max-w-[800px] rounded scrollbar-hide overflow-y-scroll max-h-[530px]"}>
                   <DialogHeader>
                     <DialogTitle>Edit Company Profile</DialogTitle>
                   </DialogHeader>

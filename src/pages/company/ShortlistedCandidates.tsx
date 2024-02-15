@@ -73,7 +73,6 @@ const ShortlistedCandidates = () => {
 										{
 											data?.map((item, index) => (
 												<SelectItem value={item?._id} key={index}>{item?.title}</SelectItem>
-
 											))
 										}
 									</SelectGroup>
@@ -91,7 +90,7 @@ const ShortlistedCandidates = () => {
 					{
 						result && result.length === 0 || !result ? (<>
 							<div className="items-center">
-								<img src={EmptyData} className="h-[500px] m-auto" />
+								<img src={EmptyData} className="h-[500px] m-auto object-cover" />
 							</div>
 						</>) : (<>
 							{result && result.map((item: Result, index: number) => (

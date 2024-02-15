@@ -32,7 +32,7 @@ const ViewCompanyProfile = ({
               <Pencil className="w-[15px] h-[15px]" />
             </div>
           </DialogTrigger>
-          <DialogContent className={"sm:max-w-[800px] rounded scrollbar-hide overflow-y-scroll max-h-[530px]"}>
+          <DialogContent className={"w-[90%] sm:max-w-[800px] rounded scrollbar-hide overflow-y-scroll max-h-[530px]"}>
             <DialogHeader>
               <DialogTitle>Edit Company Profile</DialogTitle>
             </DialogHeader>
@@ -62,7 +62,7 @@ const ViewCompanyProfile = ({
           </div>
           <div className="p-5 bg-[#FAFAFA] rounded-lg border mt-4">
             <h2 className="text-xl font-semibold mb-2">Tags</h2>
-            <ul className="flex items-center gap-x-5 mt-2">
+            <ul className="flex flex-wrap items-center gap-2  sm:gap-x-5 mt-2">
               {data?.tags?.map((item) => (
                 <li
                   className="px-4 py-1 bg-white border rounded-full capitalize"

@@ -66,7 +66,7 @@ const TopHeader = () => {
           </div>
         )}
 
-        <div className="hidden md:flex items-center gap-4">
+        <div className="hidden lg:flex items-center gap-4">
           {!user ? (
             <>
               <Link to="/login">
