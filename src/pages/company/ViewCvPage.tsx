@@ -7,6 +7,65 @@ import { useViewCvQuery } from "../../features/company/get/viewCvApiSlice"
 import { convertDate } from "./MyJobs"
 import { Card } from "../../ui/card"
 
+type Education = {
+    userId: string,
+    degree: string,
+    college: string,
+    course: string,
+    courseType: string,
+    admissionYear: number,
+    passYear: number,
+    marks: number,
+    createdAt: Date,
+    updatedAt?: Date
+}
+
+type Project = {
+    userId: string,
+    name: string,
+    description: string,
+    skills: string[],
+    startDate: string,
+    endDate?: string,
+    associate: string
+}
+
+type Exprience = {
+    userId: string,
+    skills: string[],
+    companyName: string,
+    designation: string,
+    experience: number,
+    type: string,
+    startDate: string,
+    endDate: string,
+    jobProfile: string,
+    createdAt: string,
+    updatedAt?: string
+}
+
+type Certificate = {
+    userId: string,
+    title: string,
+    source: string,
+    description: string,
+    startDate: string,
+    endDate?: string
+}
+
+type Carrer = {
+    userId: string,
+    industry: string,
+    jobType?: string,
+    role: string,
+    jobRole: string,
+    employmentType: string,
+    skills: string[],
+    expectedSalary: number,
+    location?: string[],
+    __v: number
+}
+
 const ViewCvPage = () => {
     const [searchParams] = useSearchParams();
     const userId = searchParams.get("userId");
@@ -75,7 +134,7 @@ const ViewCvPage = () => {
                                     <h2 className="text-xl font-semibold mt-4 mb-2">Skills</h2>
                                     <ul className="list-disc list-inside text-gray-700">
                                         {
-                                            data && data?.info?.skills.map((item, index) => (
+                                            data && data?.info?.skills.map((item: string, index: number) => (
                                                 <>
                                                     <li key={index}>{item}</li>
                                                 </>
@@ -123,7 +182,7 @@ const ViewCvPage = () => {
                                     <h2 className="text-xl font-semibold mt-4 mb-2">Languages</h2>
                                     <ul className="list-disc list-inside text-gray-700">
                                         {
-                                            data && data?.info?.language.map((item, index) => (
+                                            data && data?.info?.language.map((item: string, index: number) => (
                                                 <li key={index}>{item}</li>
                                             ))
                                         }
@@ -164,7 +223,7 @@ const ViewCvPage = () => {
                         <h2 className="font-bold text-lg">Education</h2>
                     </div>
                     {
-                        data && data?.education?.map((edu, index) => (
+                        data && data?.education?.map((edu: Education, index: number) => (
                             <div className="mx-auto mt-5" key={index}>
                                 <div className="p-5 bg-[#FAFAFA] rounded-lg border mt-4">
                                     <div className="mb-4 flex items-center justify-between">
@@ -192,8 +251,8 @@ const ViewCvPage = () => {
                         <h2 className="font-bold text-lg">Projects</h2>
                     </div>
                     {
-                        data && data?.project?.map((pro, index) => (
-                            <div className="mx-auto mt-5">
+                        data && data?.project?.map((pro: Project, index: number) => (
+                            <div className="mx-auto mt-5" key={index}>
                                 <div className="p-5 bg-[#FAFAFA] rounded-lg border mt-4">
                                     <div className="mb-4 flex items-center justify-between">
                                         <div>
@@ -225,7 +284,7 @@ const ViewCvPage = () => {
                         <h2 className="font-bold text-lg">Exprience</h2>
                     </div>
                     {
-                        data && data?.exprience?.map((exp, index) => (
+                        data && data?.exprience?.map((exp: Exprience, index: number) => (
                             <div className="mx-auto mt-5" key={index}>
                                 <div className="p-5 bg-[#FAFAFA] rounded-lg border mt-4">
                                     <div className="mb-4 flex items-center justify-between">
@@ -240,11 +299,11 @@ const ViewCvPage = () => {
                                             </div>
                                             <div>
                                                 {
-                                                    exp?.skills?.map((item, index) => {
+                                                    exp?.skills?.map((item: string, index: number) => (
                                                         <>
                                                             <li key={index}>{item}</li>
                                                         </>
-                                                    })
+                                                    ))
                                                 }
                                             </div>
                                             <h3>
@@ -264,13 +323,13 @@ const ViewCvPage = () => {
                         <h2 className="font-bold text-lg">Certificate</h2>
                     </div>
                     {
-                        data && data?.certificate?.map((cer, index) => (
+                        data && data?.certificate?.map((cer: Certificate, index: number) => (
                             <div className="mx-auto mt-5" key={index}>
                                 <div className="p-5 bg-[#FAFAFA] rounded-lg border mt-4">
                                     <div className="mb-4 flex items-center justify-between">
                                         <div>
                                             <div className="flex items-center gap-2">
-                                                <h2 className="font-bold text-lg"> {cer?.name}</h2>
+                                                <h2 className="font-bold text-lg"> {cer?.title}</h2>
                                             </div>
                                             <h3 className="font-semibold">{cer?.source}</h3>
                                             <h3 className="font-semibold">{cer?.description}</h3>
@@ -288,7 +347,7 @@ const ViewCvPage = () => {
                 <div className="relative">
                     <div className="mx-auto mt-5">
                         {
-                            data && data?.carrer?.map((carrer, index) => (
+                            data && data?.carrer?.map((carrer: Carrer, index: number) => (
                                 <Card className="relative mt-4 justify-between bg-white p-5 rounded-lg sm:gap-5" key={index}>
                                     <h2 className="text-xl font-semibold mb-2">User Career Profile</h2>
                                     <div className="mx-auto mt-5">
@@ -309,7 +368,7 @@ const ViewCvPage = () => {
                                     <div className="mx-auto mt-5">
                                         <div className="p-5 bg-[#FAFAFA] rounded-lg border mt-4">
                                             <h2 className="text-xl font-semibold mt-2">Job Type</h2>
-                                            <p className="text-gray-700">{carrer?.type}</p>
+                                            <p className="text-gray-700">{carrer?.jobType}</p>
 
                                         </div>
                                     </div>
@@ -330,7 +389,7 @@ const ViewCvPage = () => {
                                         <div className="p-5 bg-[#FAFAFA] rounded-lg border mt-4">
                                             <h2 className="text-xl font-semibold mt-2">Location</h2>
                                             {
-                                                carrer?.location?.map((l, index) => (
+                                                carrer?.location?.map((l: string, index: number) => (
                                                     <li key={index}>{l}</li>
                                                 ))
                                             }
