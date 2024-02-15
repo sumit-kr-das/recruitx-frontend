@@ -21,7 +21,7 @@ const ViewCompanyProfile = ({
 
   return (
     <>
-      <Card className="relative p-10 bg-white rounded-lg border shadow mt-4">
+      <Card className="relative p-5 bg-white rounded-lg border shadow mt-4">
         <Dialog open={open} onOpenChange={setOpen}>
           <DialogTrigger>
             <div

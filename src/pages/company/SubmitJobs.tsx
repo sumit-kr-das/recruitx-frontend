@@ -134,7 +134,7 @@ const SubmitJob = () => {
       <TitleBar title="Post Jobs" path="Employer / Dashboard / Post Jobs" />
       <section className="w-full">
         <div className="w-full h-auto m-auto">
-          <div className="h-fit rounded-lg bg-white p-10 mb-10 shadow md:w-full m-auto">
+          <div className="h-fit rounded-lg bg-white p-5 sm:p-10 mb-10 shadow md:w-full m-auto">
             <h2 className="text-base font-semibold leading-7 text-gray-900">
               {steps[step]?.name}
 
@@ -193,7 +193,6 @@ const SubmitJob = () => {
                                   </SelectGroup>
                                 </SelectContent>
                                 <FormMessage />
-
                               </Select>
                             </FormControl>
 

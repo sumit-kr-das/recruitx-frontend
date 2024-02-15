@@ -111,10 +111,10 @@ const ShortlistedCandidates = () => {
 													{item?.userId?.name}
 												</h2>
 											</div>
-											<div className="sm:flex sm:items-center sm:gap-2">
-												<p className="mt-1 sm:mt-2 text-sm text-slate-600 text-center">{item?.userId?.email}</p>
-												<p className="mt-1 sm:mt-2 text-sm text-slate-600 text-center">{item?.userId?.phoneNo}</p>
-												<p className="mt-1 sm:mt-2 text-sm text-slate-600 text-center">Applied: 10 March 2022</p>
+											<div className="lg:flex lg:items-center lg:gap-2">
+												<p className="mt-1 sm:lg-2 text-sm text-slate-600 text-center md:text-left">{item?.userId?.email}</p>
+												<p className="mt-1 sm:lg-2 text-sm text-slate-600 text-center md:text-left">{item?.userId?.phoneNo}</p>
+												<p className="mt-1 lg:mt-2 text-sm text-slate-600 text-center md:text-left">Applied: 10 March 2022</p>
 											</div>
 										</div>
 									</div>

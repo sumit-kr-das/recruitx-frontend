@@ -39,7 +39,7 @@ const CompanyInfo = () => {
                   <EditCompanyProfile company={data} setOpen={setOpen} />
                 </DialogContent>
               </Dialog>
-              <div className="w-full sm:w-[15%] flex items-center flex-col">
+              <div className="w-full sm:w-[15%] sm:flex items-center flex-col">
                 <img
                   src={data?.companyProfileId?.logo || UserDefault}
                   width={180}
@@ -89,14 +89,14 @@ const CompanyInfo = () => {
                 </div>
                 <div className="sm:flex items-center gap-5">
                   <div className="flex items-center gap-2">
-                    <Phone className="w-[50px] h-[50px] bg-slate-200 p-4 rounded-md" />
+                    <Phone className="w-[50px] h-[50px] bg-slate-200 p-4 rounded-md hidden sm:block" />
                     <div>
                       <h3 className="text-slate-500 text-sm">Call</h3>
                       <p className="text-sm">+91 {isSuccess && data?.phone}</p>
                     </div>
                   </div>
                   <div className="flex mt-2 sm:mt-0 items-center gap-2">
-                    <Mail className="w-[50px] h-[50px] bg-slate-200 p-4 rounded-md" />
+                    <Mail className="w-[50px] sm:h-[50px] bg-slate-200 p-4 rounded-md hidden sm:block" />
                     <div>
                       <h3 className="text-slate-500 text-sm">Email</h3>
                       <p className="text-sm">{isSuccess && data?.email}</p>

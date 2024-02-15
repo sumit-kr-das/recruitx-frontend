@@ -71,7 +71,7 @@ const JobListCard = ({ job }: { job: jobType }) => {
                 className="flex flex-col md:flex-row items-center md:justify-between p-4 mt-5 gap-2"
             >
                 <div>
-                    <h2 className="font-bold text-slate-600 text-lg">
+                    <h2 className="font-bold text-slate-600 text-lg text-center sm:text-left">
                         {job?.title}
                     </h2>
                     <p className="mt-2 text-sm text-center md:text-left">{job?.info.roles}</p>

@@ -10,7 +10,7 @@ const CompanyProfile = () => {
 			<ApproveAlert />
 			<TitleBar title="View Profile" path="Employer / Dashboard / My Profile" />
 			{/* user profile details */}
-			<CompanyInfo />
+			{/* <CompanyInfo /> */}
 			{/* other details */}
 			<CompanyProfileDetails />
 		</Container>
