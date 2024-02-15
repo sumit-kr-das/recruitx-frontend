@@ -26,7 +26,9 @@ export const apiSlice = createApi({
     "Admin",
     "ApproveCompany",
     "ApproveCandidate",
-    "CompanyGlobal"
+    "CompanyGlobal",
+    "JobChart",
+    "CompanyStats"
   ],
   endpoints: (builder) => ({}),
 });
