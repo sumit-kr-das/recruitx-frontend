@@ -32,7 +32,7 @@ const RadixMenu = ({ menu }) => {
               alt="Colm Tuite"
             />
           </RadixAvatar.Root>
-          <h2 className="text-sm ml-1">{name}</h2>
+          <h2 className="text-sm ml-1">{company?.company?.name || name}</h2>
           <ChevronDown className="w-[18px]" />
         </Menubar.Trigger>
         <Menubar.Portal>
