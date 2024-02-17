@@ -1,27 +1,32 @@
-import toast from "react-hot-toast";
 import { useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import DefaultJob from "../../../assets/default-company-logo.png";
 import { selectCurrentRole } from "../../../features/auth/authSlice";
 import { useSetUserApplyMutation } from "../../../features/user/post/setUserApplyAPiSlice";
+import { TApiError } from "../../../@types/TApiError";
+import { useToast } from "../../../ui/use-toast";
+import { TJobDetails } from "../../../@types/publicTypes/TJobDetails";
 
-
-const JobDetailMain = ({ job }) => {
+const JobDetailMain = ({ job }: { job: TJobDetails }) => {
   const navigate = useNavigate()
   const [setApply] = useSetUserApplyMutation();
   const user = useSelector(selectCurrentRole);
-
+  const { toast } = useToast();
   const applyForJob = async () => {
     try {
       const jobId = job?._id;
       await setApply(jobId).unwrap();
-      toast.success("Your application has been submited");
+      toast({
+        description: "Job Applied Successfully"
+      })
       navigate("/mnjuser/appliedJobs")
-    } catch (error) {
-      toast.error(error?.data?.msg);
-      console.log("Error on company login", error);
+    } catch (err) {
+      const apiError = err as TApiError;
+      toast({
+        variant: "destructive",
+        description: apiError.data.message
+      })
     }
-    console.log("apply");
   };
 
   return (

@@ -1,5 +1,4 @@
 import { Link } from "react-router-dom";
-import CompanySlider from "../../CompanySlider";
 import { Loader } from "lucide-react";
 import { useViewAllCompaniesQuery } from "../../../../features/company/get/viewAllCompanies";
 
@@ -18,7 +17,8 @@ const Company = () => {
         </Link>
       </div>
       <div className="w-[750px]">
-        <CompanySlider slidesPerview={3} data={data} />
+        {/* company slider was here */}
+        {/* <CompanySlider slidesPerview={3} data={data} /> */}
       </div>
     </div>
   );
