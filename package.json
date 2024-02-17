@@ -46,6 +46,7 @@
     "swiper": "^11.0.4",
     "tailwind-merge": "^2.2.0",
     "tailwindcss-animate": "^1.0.7",
+    "vite-plugin-pwa": "^0.18.2",
     "zod": "^3.22.4"
   },
   "devDependencies": {
