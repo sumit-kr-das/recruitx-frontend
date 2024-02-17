@@ -4,13 +4,14 @@ import { Navigate } from "react-router-dom";
 import { TReactNodeProps } from "../@types/TReactNodeProps";
 import Loader from "../components/loader/Loader";
 import {
-    selectCurrentRole
+  selectCurrentRole
 } from "../features/auth/authSlice";
 
 const VerifyUserRoutes = ({ children }: TReactNodeProps) => {
   const role = useSelector(selectCurrentRole);
+  const forgetCredentials = localStorage.getItem("forgetCredentials");
 
-  return role ? (
+  return role || forgetCredentials ? (
     <>
       <Suspense fallback={<Loader />}>{children}</Suspense>
     </>

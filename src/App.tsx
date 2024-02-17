@@ -44,6 +44,7 @@ const ManageUsers = lazy(() => import("./pages/admin/ManageUsers"));
 const ErrorPage = lazy(() => import("./pages/error/ErrorPage"));
 const ViewAppliedPage = lazy(() => import("./pages/mnjuser/ViewAppliedPage"));
 const Resume = lazy(() => import("./pages/pdf/Resume"));
+const ForgetPassword = lazy(() => import("./pages/auth/ForgotPassword"));
 
 // --------------------------- route authenticator ---------------------------
 import Loader from "./components/loader/Loader";
@@ -112,6 +113,15 @@ const App = () => {
             </VerifyUserRoutes>
           }
         />
+        <Route
+          path="/forget-password/:type"
+          element={
+            <AuthenticateRoute>
+              <ForgetPassword />
+            </AuthenticateRoute>
+          }
+        />
+
         {/* user */}
         <Route
           path="/mnjuser/register"
