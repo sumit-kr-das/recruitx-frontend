@@ -3,7 +3,7 @@ import { Loader } from "lucide-react";
 import { useViewAllCompaniesQuery } from "../../../../features/company/get/viewAllCompanies";
 
 const Company = () => {
-  const { data, isLoading } = useViewAllCompaniesQuery();
+  const { data, isLoading } = useViewAllCompaniesQuery({limit:10});
 
   const company = (
     <div className="bg-white border rounded-lg mt-4 shadow-md">
