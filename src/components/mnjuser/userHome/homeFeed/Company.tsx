@@ -3,8 +3,8 @@ import { Loader } from "lucide-react";
 import { useViewAllCompaniesQuery } from "../../../../features/company/get/viewAllCompanies";
 
 const Company = () => {
-  const { data, isLoading } = useViewAllCompaniesQuery({limit:10});
-
+  const { data, isLoading } = useViewAllCompaniesQuery({ limit: 10 });
+  console.log(data);
   const company = (
     <div className="bg-white border rounded-lg mt-4 shadow-md">
       <div className="flex justify-between p-6">

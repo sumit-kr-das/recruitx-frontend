@@ -5,7 +5,6 @@ import HomeSVG from "../../assets/icons/home.svg";
 import InfoSVG from "../../assets/icons/info.svg";
 import JobsSVG from "../../assets/icons/jobs.svg";
 import UserDefault from "../../assets/user-default-profile.png";
-import { useViewUserProfileQuery } from "../../features/user/get/viewUserProfileApiSlice";
 import { useSelector } from "react-redux";
 import { selectCurrentUserData } from "../../features/user/userSlice";
 
@@ -25,8 +24,7 @@ const UserProfile = () => {
           className="rounded-full object-cover border"
         />
         <h1 className="font-bold capitalize">{user?.name}</h1>
-        {/* <p className="text-xs font-medium">MERN Full Stack Developer</p> */}
-        {/* <p className="text-xs font-medium my-1">@ designx.digital</p> */}
+
         <p className="text-xs font-medium capitalize">{user?.workStatus}</p>
         <p className="text-xs text-gray-400">Last updated 29m ago</p>
         <Link
@@ -101,15 +99,6 @@ const UserProfile = () => {
               <p>Companies</p>
             </Link>
           </li>
-          {/* <li>
-            <Link
-              to="/mnjuser/home"
-              className="flex gap-1 py-2 px-4 rounded-lg hover:bg-green-100"
-            >
-              <img src={BlogSVG} width={20} alt="nav_logo" />
-              <p>Blogs</p>
-            </Link>
-          </li> */}
         </ul>
       </div>
     </div>
