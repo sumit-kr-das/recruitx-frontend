@@ -85,7 +85,6 @@ const EditJobForm = ({ job, setOpen }: { job: job, setOpen: Function }) => {
     const [skills, setSkills] = useState([...job?.info?.skills || skillData[0]])
     const { toast } = useToast();
     const [updateJob] = useUpdateJobMutation();
-    const [isFormDirty, setIsFormDirty] = useState<boolean>(false);
 
 
     const getDate = (srcDate: string) => {

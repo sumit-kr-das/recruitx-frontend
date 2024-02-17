@@ -1,13 +1,13 @@
 import { Bookmark, Briefcase, MessageCircle, UserCog } from "lucide-react";
-import { useState } from "react";
-import ReactApexChart from "react-apexcharts";
+// import { useState } from "react";
+// import ReactApexChart from "react-apexcharts";
 import TitleBar from "../../components/recruit/titleBar/TitleBar";
-import { chartData1, chartData2 } from "../../constants/chartData";
+// import { chartData1, chartData2 } from "../../constants/chartData";
 import Container from "../../layout/Container";
 
 const AdminDashboard = () => {
-  const [areaChart, setAresChart] = useState(chartData1);
-  const [donutChart, setDonutChart] = useState(chartData2);
+  // const [areaChart] = useState(chartData1);
+  // const [donutChart] = useState(chartData2);
 
   return (
     <Container>
@@ -58,20 +58,20 @@ const AdminDashboard = () => {
       <div className="flex gap-5">
         <div className="bg-white mt-5 w-3/5 p-5 border rounded-lg">
           <h2 className="font-bold text-lg mb-5">Overall Application Rate</h2>
-          <ReactApexChart
+          {/* <ReactApexChart
             options={areaChart.options}
             series={areaChart.series}
             type="area"
             height={350}
-          />
+          /> */}
         </div>
         <div className="bg-white mt-5 w-2/6 p-5 border rounded-lg">
           <h2 className="font-bold text-lg mb-5">Traffic Source</h2>
-          <ReactApexChart
+          {/* <ReactApexChart
             options={donutChart.options}
             series={donutChart.series}
             type="donut"
-          />
+          /> */}
         </div>
       </div>
     </Container>
