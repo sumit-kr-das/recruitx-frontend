@@ -278,7 +278,7 @@ const CompanyRegister = () => {
 													</Button>
 													<Button
 														className="w-[100px] mt-4"
-														type="submit"
+														type="submit" disabled={isLoading}
 													>
 														Register
 													</Button>

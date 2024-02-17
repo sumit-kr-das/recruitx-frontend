@@ -9,7 +9,6 @@ import { Toaster } from "./ui/toaster";
 
 // --------------------------- pages ---------------------------
 const HomePage = lazy(() => import("./pages/user/HomePage"));
-const AllCompanies = lazy(() => import("./pages/user/AllCompanies"));
 const CompanyDetails = lazy(() => import("./pages/user/CompanyDetails"));
 
 const Login = lazy(() => import("./pages/auth/Login"));
@@ -179,14 +178,14 @@ const App = () => {
             </Suspense>
           }
         />
-        <Route
+        {/* <Route
           path="/mnjuser/companies"
           element={
             <Suspense fallback={<Loader />}>
               <AllCompanies />
             </Suspense>
           }
-        />
+        /> */}
         <Route
           path="/mnjuser/company/:cimpanyId"
           element={

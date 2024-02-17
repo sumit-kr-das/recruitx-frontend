@@ -25,7 +25,6 @@ const CompanyLogin = () => {
   const [cLogin, { isLoading }] = useCLoginMutation();
   const [aLogin] = useALoginMutation();
   const dispatch = useDispatch();
-  const navigate = useNavigate();
 
   const handleUserValue = (e: React.ChangeEvent<HTMLInputElement>) => {
     setUser({
@@ -107,21 +106,19 @@ const CompanyLogin = () => {
                   <nav className="-mb-px flex items-center justify-center gap-6">
                     <div
                       onClick={() => setTab(false)}
-                      className={`${
-                        !tab
+                      className={`${!tab
                           ? "rounded-t-lg border text-sky-600 border-gray-300 border-b-white"
                           : "border-transparent"
-                      } shrink-0 border  p-3 text-sm font-semibold text-gray-500  cursor-pointer`}
+                        } shrink-0 border  p-3 text-sm font-semibold text-gray-500  cursor-pointer`}
                     >
                       Company
                     </div>
                     <div
                       onClick={() => setTab(true)}
-                      className={`${
-                        tab
+                      className={`${tab
                           ? "rounded-t-lg border text-sky-600 border-gray-300 border-b-white"
                           : "border-transparent"
-                      } font-semibold shrink-0 text-gray-500 p-3 text-sm cursor-pointer`}
+                        } font-semibold shrink-0 text-gray-500 p-3 text-sm cursor-pointer`}
                     >
                       Admin
                     </div>

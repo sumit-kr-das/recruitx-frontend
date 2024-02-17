@@ -5,6 +5,7 @@ import TopHeader from "../../components/navigation/TopHeader";
 import { useViewCompanyDetailsQuery } from "../../features/company/get/viewCompanyDetails";
 import Container from "../../layout/Container";
 
+
 const CompanyDetails = () => {
   const { cimpanyId } = useParams();
   const { data: job } = useViewCompanyDetailsQuery({ id: cimpanyId });
@@ -171,8 +172,8 @@ const CompanyDetails = () => {
                           <div className="ms-4">
                             <p className="font-medium">Tags:</p>
                             <div className="text-emerald-600 font-medium text-sm flex flex-wrap gap-2">
-                              {job?.profile[0]?.tags.map((item, index) => (
-                                <p className="bg-gray-200 px-2 py-1 rounded-full">
+                              {job?.profile[0]?.tags.map((item: string, index: number) => (
+                                <p className="bg-gray-200 px-2 py-1 rounded-full" key={index}>
                                   {item}
                                 </p>
                               ))}

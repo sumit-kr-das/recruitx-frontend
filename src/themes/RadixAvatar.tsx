@@ -1,6 +1,6 @@
 import * as Avatar from "@radix-ui/react-avatar";
 
-const RadixAvatar = ({ url, initial }: { url: string; initial: string }) => {
+const RadixAvatar = () => {
 	return (
 		<Avatar.Root className="bg-blackA1 inline-flex h-[45px] w-[45px] select-none items-center justify-center overflow-hidden rounded-full align-middle">
 			<Avatar.Image

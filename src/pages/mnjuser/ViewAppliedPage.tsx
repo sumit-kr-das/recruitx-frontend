@@ -1,5 +1,4 @@
 import Footer from "../../components/footer/Footer";
-import HomeFeed from "../../components/mnjuser/userHome/homeFeed/HomeFeed";
 import UserNotices from "../../components/mnjuser/UserNotices";
 import UserProfile from "../../components/mnjuser/UserProfile";
 import TopHeader from "../../components/navigation/TopHeader";
@@ -35,11 +34,6 @@ const ViewAppliedPage = () => {
                             </section>
                         </>)
                     }
-                    {/* <section className="flex-1 h-fit mt-24 px-4">
-                        <AppliedJob />
-                        <AppliedJob />
-                        <AppliedJob />
-                    </section> */}
                     <section className="w-[240px] mt-24">
                         <UserNotices />
                     </section>
