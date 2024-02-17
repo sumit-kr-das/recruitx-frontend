@@ -15,7 +15,6 @@ type TMenu = {
   shortHand: string
 }
 const RadixMenu = ({ menu }: { menu: TMenu[] }) => {
-  console.log(menu);
   const name = useSelector(selectCurrentUser);
   const { info } = useSelector(selectCurrentUserData);
   const company = useSelector(selectCurrentCompanyData);
