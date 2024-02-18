@@ -1,5 +1,6 @@
 import { apiSlice } from "../../../app/api/apiSlice";
 
+
 export const viewCvApiSlice = apiSlice.injectEndpoints({
     endpoints: (builder) => ({
         viewCv: builder.query({

@@ -7,6 +7,7 @@ import { useViewAdminQuery } from "../features/admin/get/viewAdminApiSlice";
 import { selectCurrentRole } from "../features/auth/authSlice";
 import { useViewCompanyQuery } from "../features/company/get/viewCompanyApiSlice";
 import { selectCurrentStatus } from "../features/auth/authSlice";
+import { selectCurrentCompanyData } from "../features/company/companySlice";
 const AdminProfile = () => {
   const { data, isSuccess } = useViewAdminQuery();
   return (
@@ -30,22 +31,23 @@ const AdminProfile = () => {
 
 const CompanyProfile = () => {
   const { data, isSuccess } = useViewCompanyQuery();
+  const company = useSelector(selectCurrentCompanyData);
   return (
     <>
       {isSuccess && (
         <div className="flex items-center justify-center flex-col">
           <img
-            src={UserDefault}
-            width={120}
+            src={company?.info?.logo || UserDefault}
+            width={120} height={120}
             alt="user_default"
-            className="rounded-full object-cover border mb-2"
+            className="rounded-full object-cover border mb-2 w-[120px] h-[120px]"
           />
-          <h1 className="font-bold">{data && data?.name}</h1>
-          <p className="text-xs font-medium">{data && data?.designation}</p>
+          <h1 className="font-bold">{company && company?.company?.name}</h1>
+          <p className="text-xs font-medium">{company && company?.company?.designation}</p>
           <p className="text-xs font-medium my-1">
-            @ {data && data?.companyName}
+            @ {company && company?.company?.companyName}
           </p>
-          <p className="text-xs text-gray-400">{data && data?.industry}</p>
+          <p className="text-xs text-gray-400">{company && company?.company?.industry}</p>
         </div>
       )}
     </>

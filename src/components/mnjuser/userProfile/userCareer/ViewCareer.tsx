@@ -77,7 +77,7 @@ const ViewCareer = ({ setOpen, resData, setEdudata, isSuccess }) => {
             company work experience.
           </h2>
         )}
-        {resData?.map((item, index) => (
+        {resData && resData.length == 0 && resData?.map((item, index) => (
           <ShowCareerData
             key={index}
             item={item}

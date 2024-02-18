@@ -3,6 +3,7 @@ import TitleBar from "../../components/recruit/titleBar/TitleBar";
 import { logout } from "../../features/auth/authSlice";
 import { removeUserData } from "../../features/user/userSlice";
 import Container from "../../layout/Container";
+import ApproveAlert from "../../components/recruit/ApproveAlert";
 
 const Logout = () => {
   const dispatch = useDispatch();
@@ -12,6 +13,7 @@ const Logout = () => {
   };
   return (
     <Container>
+      <ApproveAlert />
       <TitleBar
         title="Employer Logout Profile"
         path="Employer / Dashboard / Logout Account"

@@ -8,7 +8,9 @@ import { Button } from "../../../ui/button";
 import Loader from "../../../components/loader/Loader";
 import ChangeProfile from "../../../components/mnjuser/userProfile/ChangeProfile";
 import UpdateBasicInfo from "../../../components/mnjuser/userProfile/basicInfo/UpdateBasicInfo";
-
+import { PDFDownloadLink } from '@react-pdf/renderer'
+import { useGetAllUserInfoQuery } from "../../../features/user/get/getAllUserInfoApiSlice";
+import ResumeDoc from "../../pdf/ResumeDoc";
 export type BasicInfoFormData = {
   name: string | null;
   email: string | null;
@@ -21,14 +23,15 @@ export type BasicInfoFormData = {
 
 const BasicInfo = () => {
   const [profile, setProfile] = useState<boolean>(false);
-  const { user } = useSelector(selectCurrentUserData);
+  const { user, info } = useSelector(selectCurrentUserData);
+  const { data } = useGetAllUserInfoQuery();
 
   const basicInfo = (
     <>
       <div className="relative flex items-center justify-between bg-white p-10 rounded-lg gap-10 border shadow">
         <div className="flex items-start justify-start flex-col">
           <img
-            src={UserDefault}
+            src={info?.photo || UserDefault}
             // width={180}
             alt="user_default"
             className="w-[120px] h-[120px] rounded-full border"
@@ -60,27 +63,38 @@ const BasicInfo = () => {
               </p>
             </div>
           </div>
-          <div className="flex items-center gap-5">
-            <div className="flex items-center gap-2">
-              <Phone className="w-[50px] h-[50px] bg-slate-200 p-4 rounded-md" />
-              <div>
-                <h3 className="text-slate-500 text-sm">Call</h3>
-                <p className="text-sm">+91 {user?.phoneNo}</p>
+          <div className="flex items-center justify-between">
+            <div className="flex-1 flex gap-5">
+              <div className="flex items-center gap-2">
+                <Phone className="w-[50px] h-[50px] bg-slate-200 p-4 rounded-md" />
+                <div>
+                  <h3 className="text-slate-500 text-sm">Call</h3>
+                  <p className="text-sm">+91 {user?.phoneNo}</p>
+                </div>
+              </div>
+              <div className="flex items-center gap-2">
+                <Mail className="w-[50px] h-[50px] bg-slate-200 p-4 rounded-md" />
+                <div>
+                  <h3 className="text-slate-500 text-sm">Email</h3>
+                  <p className="text-sm">{user?.email}</p>
+                </div>
               </div>
             </div>
-            <div className="flex items-center gap-2">
-              <Mail className="w-[50px] h-[50px] bg-slate-200 p-4 rounded-md" />
-              <div>
-                <h3 className="text-slate-500 text-sm">Email</h3>
-                <p className="text-sm">{user?.email}</p>
-              </div>
-            </div>
+            <Button variant="outline"
+            > <PDFDownloadLink
+              document={<ResumeDoc data={data} />}
+              fileName='resume.pdf'
+            >
+                {({ loading }) => (loading ? 'Loading resume..' : 'Download Resume')}
+              </PDFDownloadLink></Button>
           </div>
         </div>
         {user?.name && <UpdateBasicInfo user={user} />}
       </div>
       {/* setProfile */}
-      {profile && <ChangeProfile profile={profile} setProfile={setProfile} />}
+      {profile && (
+        <ChangeProfile profile={profile} setProfile={setProfile} type="user" />
+      )}
     </>
   );
 

@@ -33,7 +33,6 @@ const JobsStat = () => {
 const MyJobs = () => {
   const { data, isSuccess } = useViewJobsQuery();
 
-
   const myJobs = (
     <>
       <Container>

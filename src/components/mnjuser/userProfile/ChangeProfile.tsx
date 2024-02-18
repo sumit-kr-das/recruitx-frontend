@@ -3,12 +3,19 @@ import { toast } from "react-hot-toast";
 import { useUpdateUserInfoMutation } from "../../../features/user/put/updateUserInfoDataApiSlice";
 import Modal from "../../Modal";
 import { useUpdateCompanyProfileMutation } from "../../../features/company/put/updateCompanyProfileDetailsApiSlice";
-const ChangeProfile = ({ profile, setProfile, type }) => {
+
+
+type Props = {
+  setProfile: Function,
+  type: string,
+  profile: boolean
+}
+const ChangeProfile = ({ profile, setProfile, type }: Props) => {
   const inputRef = useRef(null);
   const [updateUserInfo] = useUpdateUserInfoMutation();
   const [updateCompanyProfile] = useUpdateCompanyProfileMutation();
 
-  const handleUpload = async (e) => {
+  const handleUpload = async (e: any) => {
     const file = e.target.files[0];
     if (!file) {
       return;

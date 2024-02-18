@@ -8,7 +8,7 @@ type TRecruitTitle = {
 const TitleBar = ({ title, path }: TRecruitTitle) => {
   return (
     <div className="mt-5 mb-10">
-      <h1 className="text-2xl font-semibold">{title}</h1>
+      <h1 className="text-xl sm:text-2xl font-semibold">{title}</h1>
       <nav aria-label="Breadcrumb" className="flex mt-4">
         <ol className="flex overflow-hidden rounded-lg border border-gray-200 text-gray-600">
           <li className="flex items-center">
@@ -31,7 +31,7 @@ const TitleBar = ({ title, path }: TRecruitTitle) => {
                 />
               </svg>
 
-              <span className="ms-1.5 text-xs font-medium"> Dashboard </span>
+              <span className="ms-1.5 text-xs sm:font-medium font-small hidden sm:block"> Dashboard </span>
             </Link>
           </li>
 
@@ -40,7 +40,7 @@ const TitleBar = ({ title, path }: TRecruitTitle) => {
 
             <a
               href="#"
-              className="flex h-10 items-center bg-white pe-4 ps-8 text-xs font-medium transition hover:text-gray-900"
+              className="flex h-10 items-center bg-white pe-4 ps-8 text-xs md:font-medium transition hover:text-gray-900"
             >
               {path}
             </a>

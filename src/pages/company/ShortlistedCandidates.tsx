@@ -4,12 +4,13 @@ import DefaultUser from "../../assets/user-default-profile.png";
 import { useViewShortlistedApplicantsQuery } from "../../features/company/get/viewShortlistedApplicant";
 import { useViewJobsQuery } from "../../features/company/get/viewJobsApiSlice";
 import { useViewApplicantStatsQuery } from "../../features/company/get/viewApplicantStats";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from "../../ui/select";
 import Loader from "../../components/loader/Loader";
 import { Link } from "react-router-dom";
 import { Eye } from "lucide-react";
 import { Card } from "../../ui/card";
+import EmptyData from "../../assets/recruit/empty.png"
 
 type Result = {
 	_id: string,
@@ -26,7 +27,7 @@ type Result = {
 const ShortlistedCandidates = () => {
 	const [title, setTitle] = useState("");
 	const [skip, setSkip] = useState(true)
-	const { data, isLoading } = useViewJobsQuery();
+	const { data, isLoading, isSuccess } = useViewJobsQuery();
 	const { data: result } = useViewShortlistedApplicantsQuery(title, { skip })
 	const { data: stats } = useViewApplicantStatsQuery(title, { skip });
 
@@ -35,13 +36,23 @@ const ShortlistedCandidates = () => {
 		setSkip(false);
 	}
 
+	useEffect(() => {
+		if (data && data?.length > 0) {
+			setTitle(data[0]._id);
+		}
+		if (title) {
+			viewApplicants(title);
+		}
+	}, [data, isLoading, isSuccess, title]);
+
+
 	if (isLoading || !data) return (<Loader />)
 
 	return (
 		<Container>
 			<TitleBar
-				title="Manage Applicants"
-				path="Employer / Dashboard / All Applicants"
+				title="Manage Shortlisted Applicants"
+				path="Employer / Dashboard / Shortlisted Applicants"
 			/>
 			<div>
 				<div className="sm:flex justify-between gap-x-5">
@@ -53,7 +64,7 @@ const ShortlistedCandidates = () => {
 							Job role
 						</label>
 						<div className="mt-2">
-							<Select defaultValue={title} onValueChange={viewApplicants}>
+							<Select defaultValue={data.length > 0 ? data[0]._id : ""} onValueChange={viewApplicants}>
 								<SelectTrigger className="w-[180px]">
 									<SelectValue placeholder="Select a Job" />
 								</SelectTrigger>
@@ -62,7 +73,6 @@ const ShortlistedCandidates = () => {
 										{
 											data?.map((item, index) => (
 												<SelectItem value={item?._id} key={index}>{item?.title}</SelectItem>
-
 											))
 										}
 									</SelectGroup>
@@ -77,37 +87,45 @@ const ShortlistedCandidates = () => {
 					</div>
 				</div>
 				<div>
-					{result && result.map((item: Result, index: number) => (
-						<Card
-							key={index}
-							className="sm:flex items-center sm:justify-between p-4 mt-5  gap-2"
-						>
-							<div className="sm:flex sm:items-center sm:gap-5">
-								<img
-									className="w-[80px] h-[80px] rounded-full m-auto"
-									src={DefaultUser}
-									alt="user"
-								/>
-								<div>
-									<div>
-										<h2 className="font-bold text-slate-600 text-lg text-center sm:text-left">
-											{item?.userId?.name}
-										</h2>
-									</div>
-									<div className="sm:flex sm:items-center sm:gap-2">
-										<p className="mt-1 sm:mt-2 text-sm text-slate-600 text-center">{item?.userId?.email}</p>
-										<p className="mt-1 sm:mt-2 text-sm text-slate-600 text-center">{item?.userId?.phoneNo}</p>
-										<p className="mt-1 sm:mt-2 text-sm text-slate-600 text-center">Applied: 10 March 2022</p>
-									</div>
-								</div>
+					{
+						result && result.length === 0 || !result ? (<>
+							<div className="items-center">
+								<img src={EmptyData} className="h-[500px] m-auto object-cover" />
 							</div>
-							<div className="flex justify-center mt-2">
-								<span className="bg-orange-100 px-3 py-2 rounded-lg cursor-pointer">
-									<Link to={`/dashboard/cv?userId=${item?.userId?._id}`}><Eye className="w-[20px] text-orange-600" /></Link>
-								</span>
-							</div>
-						</Card>
-					))}
+						</>) : (<>
+							{result && result.map((item: Result, index: number) => (
+								<Card
+									key={index}
+									className="sm:flex items-center sm:justify-between p-4 mt-5  gap-2"
+								>
+									<div className="sm:flex sm:items-center sm:gap-5">
+										<img
+											className="w-[80px] h-[80px] rounded-full m-auto"
+											src={DefaultUser}
+											alt="user"
+										/>
+										<div>
+											<div>
+												<h2 className="font-bold text-slate-600 text-lg text-center sm:text-left">
+													{item?.userId?.name}
+												</h2>
+											</div>
+											<div className="lg:flex lg:items-center lg:gap-2">
+												<p className="mt-1 sm:lg-2 text-sm text-slate-600 text-center md:text-left">{item?.userId?.email}</p>
+												<p className="mt-1 sm:lg-2 text-sm text-slate-600 text-center md:text-left">{item?.userId?.phoneNo}</p>
+												<p className="mt-1 lg:mt-2 text-sm text-slate-600 text-center md:text-left">Applied: 10 March 2022</p>
+											</div>
+										</div>
+									</div>
+									<div className="flex justify-center mt-2">
+										<span className="bg-orange-100 px-3 py-2 rounded-lg cursor-pointer">
+											<Link to={`/dashboard/cv?userId=${item?.userId?._id}`}><Eye className="w-[20px] text-orange-600" /></Link>
+										</span>
+									</div>
+								</Card>
+							))}
+						</>)
+					}
 				</div>
 			</div>
 		</Container>

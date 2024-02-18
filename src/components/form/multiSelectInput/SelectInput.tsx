@@ -30,7 +30,7 @@ const SelectInput = ({ value, multiple, onChange, options }: TSelectProps) => {
 	const clearOptions = () => {
 		multiple ? onChange([]) : onChange(undefined);
 	};
-	const selectOption = (option: string[]) => {
+	const selectOption = (option: string) => {
 		if (multiple) {
 			if (value.includes(option)) {
 				onChange(value.filter((o) => o !== option));
@@ -38,13 +38,13 @@ const SelectInput = ({ value, multiple, onChange, options }: TSelectProps) => {
 				onChange([...value, option]);
 			}
 		} else {
-			if (option !== value) {
+			if (option !== value?.[0]) {
 				onChange(option);
 			}
 		}
 	};
-	const isOptionSelected = (option: string[]) => {
-		return multiple ? value.includes(option) : option === value;
+	const isOptionSelected = (option: string) => {
+		return multiple ? value.includes(option) : option === value?.[0];
 	};
 	useEffect(() => {
 		if (open) setHighlitedIndex(0);

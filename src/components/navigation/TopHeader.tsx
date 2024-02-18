@@ -28,7 +28,11 @@ const TopHeader = () => {
             <img className="w-24 md:w-32" src={MainLogo} alt="main logo" />
           </Link>
           <div className="hidden md:block">
-            <NavigationMenus />
+            {
+              role ? (role === "user" && <NavigationMenus />) : (<NavigationMenus />
+              )
+            }
+            {/* <NavigationMenus /> */}
           </div>
         </div>
 
@@ -62,7 +66,7 @@ const TopHeader = () => {
           </div>
         )}
 
-        <div className="hidden md:flex items-center gap-4">
+        <div className="hidden lg:flex items-center gap-4">
           {!user ? (
             <>
               <Link to="/login">
@@ -81,13 +85,13 @@ const TopHeader = () => {
         {
           role && role === "user" ? (
             <>
-              <div className="md:hidden">
+              <div className="lg:hidden">
                 <Sidebar />
               </div>
             </>
           ) : (
             <>
-              <div className="md:hidden">
+              <div className="lg:hidden">
                 <MobileSidebar />
               </div>
             </>
