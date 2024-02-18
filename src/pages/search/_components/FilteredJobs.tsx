@@ -1,9 +1,9 @@
 const FilteredJobs = () => {
-    return(
-      <div>
-        <h1>Filter Jobs</h1>
-      </div>
-    )
-  }
+  return (
+    <div className="bg-orange-100 border-2 h-40">
+      <h1>Filter Jobs</h1>
+    </div>
+  );
+};
 
-  export default FilteredJobs
+export default FilteredJobs;
