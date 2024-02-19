@@ -4,6 +4,8 @@ import { logout } from "../../features/auth/authSlice";
 import { removeUserData } from "../../features/user/userSlice";
 import Container from "../../layout/Container";
 import ApproveAlert from "../../components/recruit/ApproveAlert";
+import { Button } from "../../ui/button";
+import { Card } from "../../ui/card";
 
 const Logout = () => {
   const dispatch = useDispatch();
@@ -18,14 +20,13 @@ const Logout = () => {
         title="Employer Logout Profile"
         path="Employer / Dashboard / Logout Account"
       />
-      <div className="bg-white p-10 rounded-lg mt-5">
-        <button
+      <Card className="bg-white p-10 rounded-lg mt-5">
+        <Button
           onClick={handleLogout}
-          className="mt-4 rounded-md bg-cyan-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-syan-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
         >
           Logout account
-        </button>
-      </div>
+        </Button>
+      </Card>
     </Container>
   );
 };
