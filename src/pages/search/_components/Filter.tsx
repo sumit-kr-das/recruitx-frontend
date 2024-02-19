@@ -8,6 +8,7 @@ const Filter = () => {
   const [sliderValue, setSliderValue] = useState([33]);
 
   const handleChange = (newValue) => {
+    console.log(newValue)
     setSliderValue(newValue);
   };
   return (
@@ -27,13 +28,13 @@ const Filter = () => {
         <p className="font-semibold">Salary</p>
         <Slider
           defaultValue={sliderValue}
+          onValueChange={handleChange}
           max={5000}
           step={1}
-          onChange={handleChange}
           className="my-4"
         />
         <div className="flex align-center justify-between">
-          <p>₹{sliderValue[0]}</p>
+          <p>{sliderValue}</p>
           <p>₹5000</p>
         </div>
       </div>
