@@ -10,7 +10,7 @@ type Props = {
   type: string,
   profile: boolean
 }
-const ChangeProfile = ({ profile, setProfile, type }: Props) => {
+const ChangeProfile = ({ setProfile, type }: Props) => {
   const inputRef = useRef(null);
   const [updateUserInfo] = useUpdateUserInfoMutation();
   const [updateCompanyProfile] = useUpdateCompanyProfileMutation();

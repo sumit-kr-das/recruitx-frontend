@@ -1,7 +1,6 @@
-import React from "react";
 import { convertDate } from "../../../pages/company/MyJobs";
-
-const JobDetailSideBar = ({ job }) => {
+import { TJobDetails } from "../../../@types/publicTypes/TJobDetails";
+const JobDetailSideBar = ({ job }: { job: TJobDetails }) => {
   return (
     <div className="lg:col-span-4 md:col-span-6">
       <div className="shadow rounded-md bg-white sticky top-20">

@@ -1,6 +1,5 @@
 import { Link } from "react-router-dom";
 import RocketImg from "../../../../assets/icons/ear-section.png";
-import JobsSlider from "../../JobsSlider";
 import { useGetJobRecomandationQuery } from "../../../../features/user/get/getJobRecomendationApiSlice";
 import { Loader } from "lucide-react";
 
@@ -28,7 +27,8 @@ const OtherJobs = () => {
         </Link>
       </div>
       <div className="w-[750px]">
-        <JobsSlider data={data} slidesPerView={2.5} />
+        {/* jobs slider was here */}
+        {/* <JobsSlider data={data} slidesPerView={2.5} /> */}
       </div>
     </div>
   );

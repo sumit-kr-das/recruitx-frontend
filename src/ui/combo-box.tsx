@@ -1,5 +1,3 @@
-"use client";
-
 import { Check, ChevronsUpDown } from "lucide-react";
 import * as React from "react";
 
@@ -41,8 +39,8 @@ export function ComboboxBox({ label, value, setValue, data }: TProps) {
           {value
             ? data.find((framework) => framework.value === value)?.label
             : label
-            ? label
-            : "Select framework..."}
+              ? label
+              : "Select framework..."}
           <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
         </Button>
       </PopoverTrigger>

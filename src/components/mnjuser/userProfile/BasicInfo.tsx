@@ -1,9 +1,8 @@
 import { Mail, Phone, Pencil } from "lucide-react";
 import UserDefault from "../../../assets/user-default-profile.png";
-import { useViewUserProfileQuery } from "../../../features/user/get/viewUserProfileApiSlice";
 import { convertDate } from "../../../pages/company/MyJobs";
 import Modal from "../../Modal";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useUpdateUserMutation } from "../../../features/user/put/updateUserProfileApiSlice";
 import { toast } from "react-hot-toast";
 import ChangeProfile from "./ChangeProfile";
@@ -32,18 +31,8 @@ const BasicInfo = () => {
   console.log(user);
   console.log("====================================");
 
-  // useEffect(() => {
-  //   if (isSuccess) {
-  //     setUpdate({
-  //       name: user?.name || "",
-  //       email: user?.email || "",
-  //       phoneNo: user?.phoneNo || "",
-  //       workStatus: user?.workStatus || "",
-  //     });
-  //   }
-  // }, [isSuccess, data]);
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
       await updateUser(update).unwrap();
@@ -91,11 +80,11 @@ const BasicInfo = () => {
             <div className="flex items-center gap-4">
               <p className="text-sm">
                 <span className="text-slate-500 ">Profile Created - </span>
-                {user && convertDate(user?.createdAt)}
+                {user && convertDate(user?.createdAt || '')}
               </p>
               <p className="text-sm">
                 <span className="text-slate-500 ">Profile last updated - </span>
-                {user && convertDate(user?.updatedAt)}
+                {user && convertDate(user?.updatedAt || '')}
               </p>
             </div>
           </div>

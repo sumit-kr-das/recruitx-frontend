@@ -97,9 +97,8 @@ const Login = () => {
                   <div
                     key={index}
                     onClick={() => setType(item.id)}
-                    className={`mt-2  border border-gray-200 p-2 rounded-md cursor-pointer ${
-                      type === item.id && "bg-slate-200"
-                    }  `}
+                    className={`mt-2  border border-gray-200 p-2 rounded-md cursor-pointer ${type === item.id && "bg-slate-200"
+                      }  `}
                   >
                     <h3 className="font-medium">{item.type}</h3>
                     <p className="text-xs">{item.desc}</p>
@@ -170,7 +169,7 @@ const Login = () => {
                   </Button>
                 </section>
                 <div className="mt-2 float-right font-medium text-blue-600">
-                  <Link to={`/reset-password/${type}`}>
+                  <Link to={`/forget-password/${type}`}>
                     <p>Forgot password? Click here</p>
                   </Link>
                 </div>

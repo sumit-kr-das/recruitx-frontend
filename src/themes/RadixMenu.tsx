@@ -4,13 +4,17 @@ import { ChevronDown } from "lucide-react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { logout, selectCurrentUser } from "../features/auth/authSlice";
-import userSlice, {
+import {
   removeUserData,
   selectCurrentUserData,
 } from "../features/user/userSlice";
 import { selectCurrentCompanyData, removeCompanyData } from "../features/company/companySlice";
-
-const RadixMenu = ({ menu }) => {
+type TMenu = {
+  title: string,
+  src: string,
+  shortHand: string
+}
+const RadixMenu = ({ menu }: { menu: TMenu[] }) => {
   const name = useSelector(selectCurrentUser);
   const { info } = useSelector(selectCurrentUserData);
   const company = useSelector(selectCurrentCompanyData);

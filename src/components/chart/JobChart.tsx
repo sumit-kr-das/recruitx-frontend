@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useViewJobChartQuery } from '../../features/company/get/viewJobChartApiSlice'
 import { Card } from '../../ui/card';
 import Chart from "react-apexcharts";

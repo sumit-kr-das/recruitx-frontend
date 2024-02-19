@@ -1,4 +1,3 @@
-
 import {
 	MdDescription,
 	MdLocationOn,
@@ -8,9 +7,9 @@ import {
 
 import { convertDate } from "../../../pages/company/MyJobs";
 import { useNavigate } from "react-router-dom";
+import { TJobs } from "../../../@types/publicTypes/TJobs";
 
-
-const Job = ({ jobs }) => {
+const Job = ({ jobs }: { jobs: TJobs[] }) => {
 	const navigate = useNavigate();
 	const navigateDetailsPage = (id: string) => {
 		navigate(`/jobDetails/${id}`)
@@ -25,7 +24,7 @@ const Job = ({ jobs }) => {
 				>
 					<div>
 						<h2 className="font-semibold text-xl">{item?.title}</h2>
-						<p className="font-semibold">{item?.info.company}</p>
+						<p className="font-semibold">{item?.companyId?.companyName}</p>
 					</div>
 					<div className="flex items-center mt-2">
 						<div className="flex items-center gap-1">
@@ -42,7 +41,7 @@ const Job = ({ jobs }) => {
 						<p className="mx-2 text-sm font-semibold text-gray-300">&#124;</p>
 						<div className="flex items-center gap-1">
 							<MdLocationOn className="text-slate-400" />
-							<p className="text-sm font-semibold text-slate-400">{item?.info.type}</p>
+							<p className="text-sm font-semibold text-slate-400">{item?.info.jobType}</p>
 						</div>
 					</div>
 					<div className="flex items-center gap-1">

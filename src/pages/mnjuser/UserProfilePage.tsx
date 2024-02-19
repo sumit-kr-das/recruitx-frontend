@@ -3,7 +3,7 @@ import TopHeader from "../../components/navigation/TopHeader";
 import Container from "../../layout/Container";
 import BasicInfo from "./_components/BasicInfo";
 import OtherInfo from "./_components/OtherInfo";
-import UserCareer from "./_components/UserCareer";
+// import UserCareer from "./_components/UserCareer";
 import UserEducation from "./_components/UserEducation";
 
 const UserProfilePage = () => {
@@ -14,7 +14,7 @@ const UserProfilePage = () => {
         <BasicInfo />
         <OtherInfo />
         <UserEducation />
-        <UserCareer />
+        {/* <UserCareer /> */}
       </Container>
       <Footer />
     </div>
