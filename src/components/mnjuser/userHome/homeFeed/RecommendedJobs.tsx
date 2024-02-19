@@ -1,7 +1,5 @@
 import { useGetJobRecomandationQuery } from "../../../../features/user/get/getJobRecomendationApiSlice";
 import Loader from "../../../loader/Loader";
-import JobSlider from "../../JobSlider";
-import { Link } from "react-router-dom";
 
 const RecommendedJobs = () => {
   const { data, isSuccess, isLoading } = useGetJobRecomandationQuery({
@@ -21,7 +19,8 @@ const RecommendedJobs = () => {
             </Link> */}
           </div>
           <div className="w-[750px]">
-            <JobSlider slidesPerview={3.5} data={data} />
+            {/* job slider was here */}
+            {/* <JobSlider slidesPerview={3.5} data={data} /> */}
           </div>
         </div>
       )}

@@ -1,4 +1,3 @@
-import React from 'react'
 import { Alert, AlertTitle, AlertDescription } from '../../ui/alert'
 import { ShieldX } from 'lucide-react';
 import { useSelector } from 'react-redux';

@@ -1,17 +1,14 @@
-
 import {
     MdDescription,
     MdLocationOn,
     MdOutlineAttachMoney,
     MdOutlineWork,
 } from "react-icons/md";
-
-import { convertDate } from "../../../pages/company/MyJobs";
 import { useNavigate } from "react-router-dom";
 import countDays from "../../customFunctions/countDays";
+import { TAppliedJobDetail } from "../../@types/publicTypes/TAppliedJobDetail";
 
-
-const AppliedJob = ({ job }) => {
+const AppliedJob = ({ job }: { job: TAppliedJobDetail }) => {
     const navigate = useNavigate();
     const navigateDetailsPage = (id: string) => {
         navigate(`/jobDetails/${id}`)
@@ -24,7 +21,7 @@ const AppliedJob = ({ job }) => {
             >
                 <div>
                     <h2 className="font-semibold text-xl">{job?.jobId?.title}</h2>
-                    <p className="font-semibold">{job?.jobId?.info.company}</p>
+                    <p className="font-semibold">{job?.jobId?.companyId?.companyName}</p>
                 </div>
                 <div className="flex items-center mt-2">
                     <div className="flex items-center gap-1">
@@ -41,7 +38,7 @@ const AppliedJob = ({ job }) => {
                     <p className="mx-2 text-sm font-semibold text-gray-300">&#124;</p>
                     <div className="flex items-center gap-1">
                         <MdLocationOn className="text-slate-400" />
-                        <p className="text-sm font-semibold text-slate-400">{job?.jobId?.info.type}</p>
+                        <p className="text-sm font-semibold text-slate-400">{job?.jobId?.info.jobType}</p>
                     </div>
                 </div>
                 <div className="flex items-center gap-1">
@@ -63,7 +60,7 @@ const AppliedJob = ({ job }) => {
                 </div>
                 <div className="mt-3">
                     <p className="font-bold text-blue-600 mt-1">Status : {
-                        job?.isSelected ? (
+                        job?.selected ? (
                             <>
                                 Short Listed
                             </>

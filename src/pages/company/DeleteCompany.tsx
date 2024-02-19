@@ -1,10 +1,11 @@
 import { useState } from "react";
-import { toast } from "react-hot-toast";
 import { useDispatch } from "react-redux";
 import TitleBar from "../../components/recruit/titleBar/TitleBar";
 import { logout } from "../../features/auth/authSlice";
 import { useDeleteAccountMutation } from "../../features/company/delete/deleteAccountApiSlice";
 import Container from "../../layout/Container";
+import { useToast } from "../../ui/use-toast";
+import { TApiError } from "../../@types/TApiError";
 
 const INITIAL_DATA = {
   password: "",
@@ -14,16 +15,22 @@ const DeleteCompany = () => {
   const [data, setData] = useState(INITIAL_DATA);
   const [deleteAccount] = useDeleteAccountMutation();
   const dispatch = useDispatch();
+  const { toast } = useToast();
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
       await deleteAccount(data).unwrap();
-      toast.success("Password update successfull");
+      toast({
+        description: "Account deleted successfully"
+      })
       dispatch(logout());
     } catch (err) {
-      toast.success(err.data.msg);
-      console.log("Error on company login", err);
+      const apiError = err as TApiError;
+      toast({
+        variant: "destructive",
+        description: apiError.data.message
+      })
     }
   };
   return (

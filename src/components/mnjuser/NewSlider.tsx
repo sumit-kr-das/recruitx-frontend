@@ -11,10 +11,10 @@ import Loader from "../loader/Loader";
 import { useViewAllCompaniesQuery } from "../../features/company/get/viewAllCompanies";
 import DefaultCompanyImg from "../../assets/default-company-logo.png";
 import StarSVG from "../../assets/icons/star.svg";
-import { TCompany } from "../../@types/TCompany";
+import { TCompany } from "../../@types/publicTypes/TCompany";
 
 interface SliderProps {
-  data: TCompany[];
+  data?: TCompany[];
 }
 
 const Slider = ({ data }: SliderProps) => {
@@ -60,9 +60,11 @@ const Slider = ({ data }: SliderProps) => {
 };
 
 const NewSlider = () => {
-  const { data, isLoading } = useViewAllCompaniesQuery();
-
-  const CompanyCarousel = (
+  const { data } = useViewAllCompaniesQuery({ limit: 10 });
+  if (data?.length === 0) {
+    return <Loader />
+  }
+  return (
     <div className="w-full bg-white py-4 px-8 rounded-lg my-10">
       <div className="flex justify-between p-6">
         <div>
@@ -73,13 +75,14 @@ const NewSlider = () => {
           View all
         </Link>
       </div>
+
       <div className="flex items-center justify-center">
-        <Slider data={data as TCompany[]} />
+        <Slider data={data} />
       </div>
+
     </div>
   );
 
-  return isLoading ? <Loader /> : data && CompanyCarousel;
 };
 
 export default NewSlider;
