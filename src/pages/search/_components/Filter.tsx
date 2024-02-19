@@ -1,13 +1,14 @@
 import { useEffect, useState } from "react";
+import { citiesArray } from "../../../constants/citiesArray";
 import { jobTypes } from "../../../constants/jobTypes";
-import { Input } from "../../../ui/input";
+import { useSearchDataMutation } from "../../../features/user/get/getSearchDataApiSlice";
+import { ComboboxBox } from "../../../ui/combo-box";
 import { Label } from "../../../ui/label";
 import { RadioGroup, RadioGroupItem } from "../../../ui/radio-group";
 import { Slider } from "../../../ui/slider";
-import { useSearchDataMutation } from "../../../features/user/get/getSearchDataApiSlice";
 
 const Filter = () => {
-  const [location, setlocation] = useState<string>("");
+  const [value, setValue] = useState("");
   const [salary, setSalary] = useState<number[]>([100000]);
   const [exp, setExp] = useState<number[]>([0]);
   const [jobType, setJobType] = useState<string>("Full-time");
@@ -44,14 +45,10 @@ const Filter = () => {
       </div>
       <div className="mt-8">
         <div className="grid w-full max-w-sm items-center gap-1.5">
-          <Label htmlFor="location">Search Location</Label>
-          <Input
-            type="text"
-            id="location"
-            placeholder="Banglore"
-            value={location}
-            onChange={(e) => setlocation(e.target.value)}
-          />
+          <Label className="mb-4" htmlFor="location">
+            Search Location
+          </Label>
+          <ComboboxBox value={value} setValue={setValue} data={citiesArray} />
         </div>
       </div>
 
