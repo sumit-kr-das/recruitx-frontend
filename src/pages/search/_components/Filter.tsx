@@ -1,12 +1,14 @@
+import { FilterIcon } from "lucide-react";
 import { useEffect, useState } from "react";
 import { citiesArray } from "../../../constants/citiesArray";
 import { jobTypes } from "../../../constants/jobTypes";
 import { useFilterJobsQuery } from "../../../features/user/get/filterJobsApiSlice";
+import { Button } from "../../../ui/button";
 import { ComboboxBox } from "../../../ui/combo-box";
 import { Label } from "../../../ui/label";
 import { RadioGroup, RadioGroupItem } from "../../../ui/radio-group";
 import { Slider } from "../../../ui/slider";
-import { Button } from "../../../ui/button";
+import { useNavigate } from "react-router-dom";
 
 const Filter = () => {
   const [value, setValue] = useState("");
@@ -15,18 +17,8 @@ const Filter = () => {
   const [jobType, setJobType] = useState<string>("Full-time");
   const [workplaceType, setWorkplaceType] = useState<string>("On-site");
   const [fetchData, setFetchData] = useState(true);
-  // const { data } = useFilterJobsQuery(
-  //   {
-  //     value,
-  //     workplaceType,
-  //     jobType,
-  //     salary,
-  //     exp,
-  //   },
-  //   { skip: fetchData }
-  // );
+  const navigate = useNavigate();
 
-  // console.log(data);
   const { data } = useFilterJobsQuery(
     {
       value,
@@ -49,6 +41,9 @@ const Filter = () => {
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setFetchData(false);
+    navigate(
+      `?location=${value}&jobTypes=${jobType}&workplaceType=${workplaceType}&minSalary=${salary}&minExprience=${exp}`
+    );
   };
 
   useEffect(() => {
@@ -58,21 +53,6 @@ const Filter = () => {
   return (
     <aside className="w-[300px] h-fit bg-white p-8 rounded-lg border shadow">
       <h1 className="text-lg font-semibold">Filter</h1>
-      <div className="mt-8">
-        <div className="grid w-full max-w-sm items-center gap-1.5">
-          <p className="font-semibold mb-2">Search Location</p>
-          <ComboboxBox
-            label="Select Location"
-            value={value}
-            setValue={setValue}
-            data={citiesArray}
-          />
-        </div>
-      </div>
-      <div className="flex items-center justify-between">
-        <h1 className="text-lg font-semibold">Filter</h1>
-        <p className="text-cyan-600">Clear all</p>
-      </div>
       <form onSubmit={handleSubmit}>
         <div className="mt-8">
           <div className="grid w-full max-w-sm items-center gap-1.5">
@@ -146,26 +126,9 @@ const Filter = () => {
             ))}
           </RadioGroup>
         </div>
-        <Button className="mt-6" onClick={handleSubmit}>
+        <Button className="mt-6 gap-2" type="submit">
+          <FilterIcon className="w-4 h-4" />
           Filter
-        </Button>
-        <div className="mt-6">
-          <p className="font-semibold mb-4">Select WorkplaceType</p>
-          <RadioGroup
-            defaultValue={workplaceType}
-            onValueChange={(e) => setWorkplaceType(e)}
-          >
-            {["On-site", "Hybrid", "Remote"].map((type, index) => (
-              <div key={index} className="flex items-center space-x-2">
-                <RadioGroupItem value={type} id="r2" />
-                <Label htmlFor="r2">{type}</Label>
-              </div>
-            ))}
-          </RadioGroup>
-        </div>
-
-        <Button className="mt-6" type="submit">
-          Search
         </Button>
       </form>
     </aside>
