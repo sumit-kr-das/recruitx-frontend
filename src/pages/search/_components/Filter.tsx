@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { citiesArray } from "../../../constants/citiesArray";
 import { jobTypes } from "../../../constants/jobTypes";
 import { useFilterJobsQuery } from "../../../features/user/get/filterJobsApiSlice";
@@ -26,8 +26,6 @@ const Filter = () => {
     { skip: fetchData }
   );
 
-  console.log(data);
-
   const handleSalary = (event: number[]) => {
     setSalary(event);
   };
@@ -36,88 +34,98 @@ const Filter = () => {
     setExp(event);
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
     setFetchData(false);
   };
+
+  useEffect(() => {
+    setFetchData(true);
+  }, [fetchData]);
+
+
+
   return (
     <aside className="w-[300px] h-fit bg-white p-8 rounded-lg border shadow">
       <div className="flex items-center justify-between">
         <h1 className="text-lg font-semibold">Filter</h1>
         <p className="text-cyan-600">Clear all</p>
       </div>
-      <div className="mt-8">
-        <div className="grid w-full max-w-sm items-center gap-1.5">
-          <p className="font-semibold mb-2">Search Location</p>
-          <ComboboxBox
-            label="Select Location"
-            value={value}
-            setValue={setValue}
-            data={citiesArray}
+      <form onSubmit={handleSubmit}>
+        <div className="mt-8">
+          <div className="grid w-full max-w-sm items-center gap-1.5">
+            <p className="font-semibold mb-2">Search Location</p>
+            <ComboboxBox
+              label="Select Location"
+              value={value}
+              setValue={setValue}
+              data={citiesArray}
+            />
+          </div>
+        </div>
+
+        <div className="mt-6">
+          <p className="font-semibold">Salary</p>
+          <Slider
+            defaultValue={salary}
+            min={100000}
+            max={5000000}
+            step={100000}
+            onValueChange={handleSalary}
+            className="my-4"
           />
+          <div className="flex align-center justify-between">
+            <p>₹{salary}</p>
+            <p>₹5000000</p>
+          </div>
         </div>
-      </div>
 
-      <div className="mt-6">
-        <p className="font-semibold">Salary</p>
-        <Slider
-          defaultValue={salary}
-          min={100000}
-          max={5000000}
-          step={100000}
-          onValueChange={handleSalary}
-          className="my-4"
-        />
-        <div className="flex align-center justify-between">
-          <p>₹{salary}</p>
-          <p>₹5000000</p>
+        <div className="mt-6">
+          <p className="font-semibold">Experience</p>
+          <Slider
+            defaultValue={exp}
+            max={15}
+            step={1}
+            onValueChange={handleExp}
+            className="my-4"
+          />
+          <div className="flex align-center justify-between">
+            <p>{exp} years</p>
+            <p>15 years</p>
+          </div>
         </div>
-      </div>
 
-      <div className="mt-6">
-        <p className="font-semibold">Experience</p>
-        <Slider
-          defaultValue={exp}
-          max={15}
-          step={1}
-          onValueChange={handleExp}
-          className="my-4"
-        />
-        <div className="flex align-center justify-between">
-          <p>{exp} years</p>
-          <p>15 years</p>
+        <div className="mt-6">
+          <p className="font-semibold mb-4">Job Type</p>
+          <RadioGroup defaultValue={jobType} onValueChange={(e) => setJobType(e)}>
+            {jobTypes.map((type, index) => (
+              <div key={index} className="flex items-center space-x-2">
+                <RadioGroupItem value={type} id="r1" />
+                <Label htmlFor="r1">{type}</Label>
+              </div>
+            ))}
+          </RadioGroup>
         </div>
-      </div>
 
-      <div className="mt-6">
-        <p className="font-semibold mb-4">Job Type</p>
-        <RadioGroup defaultValue={jobType} onValueChange={(e) => setJobType(e)}>
-          {jobTypes.map((type, index) => (
-            <div key={index} className="flex items-center space-x-2">
-              <RadioGroupItem value={type} id="r1" />
-              <Label htmlFor="r1">{type}</Label>
-            </div>
-          ))}
-        </RadioGroup>
-      </div>
+        <div className="mt-6">
+          <p className="font-semibold mb-4">Select WorkplaceType</p>
+          <RadioGroup
+            defaultValue={workplaceType}
+            onValueChange={(e) => setWorkplaceType(e)}
+          >
+            {["On-site", "Hybrid", "Remote"].map((type, index) => (
+              <div key={index} className="flex items-center space-x-2">
+                <RadioGroupItem value={type} id="r2" />
+                <Label htmlFor="r2">{type}</Label>
+              </div>
+            ))}
+          </RadioGroup>
+        </div>
 
-      <div className="mt-6">
-        <p className="font-semibold mb-4">Select WorkplaceType</p>
-        <RadioGroup
-          defaultValue={workplaceType}
-          onValueChange={(e) => setWorkplaceType(e)}
-        >
-          {["On-site", "Hybrid", "Remote"].map((type, index) => (
-            <div key={index} className="flex items-center space-x-2">
-              <RadioGroupItem value={type} id="r2" />
-              <Label htmlFor="r2">{type}</Label>
-            </div>
-          ))}
-        </RadioGroup>
-      </div>
-
-      <Button className="mt-6" onClick={handleSubmit}>
-        Search
-      </Button>
+        <Button className="mt-6" type="submit">
+          Search
+        </Button>
+      </form>
     </aside>
   );
 };
