@@ -15,17 +15,13 @@ import {
 import { Popover, PopoverContent, PopoverTrigger } from "./popover";
 
 type TProps = {
+  label: string;
   value: string;
   setValue: (props: string) => void;
-  data?: [
-    {
-      value: string;
-      label: string;
-    }
-  ];
+  data: [];
 };
 
-export function ComboboxBox({ value, setValue, data }: TProps) {
+export function ComboboxBox({ label, value, setValue, data }: TProps) {
   const [open, setOpen] = React.useState(false);
 
   return (
@@ -39,6 +35,8 @@ export function ComboboxBox({ value, setValue, data }: TProps) {
         >
           {value
             ? data.find((framework) => framework.value === value)?.label
+            : label
+            ? label
             : "Select framework..."}
           <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
         </Button>

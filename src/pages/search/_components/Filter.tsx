@@ -1,11 +1,12 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { citiesArray } from "../../../constants/citiesArray";
 import { jobTypes } from "../../../constants/jobTypes";
-import { useSearchDataMutation } from "../../../features/user/get/getSearchDataApiSlice";
+import { useFilterJobsQuery } from "../../../features/user/get/filterJobsApiSlice";
 import { ComboboxBox } from "../../../ui/combo-box";
 import { Label } from "../../../ui/label";
 import { RadioGroup, RadioGroupItem } from "../../../ui/radio-group";
 import { Slider } from "../../../ui/slider";
+import { Button } from "../../../ui/button";
 
 const Filter = () => {
   const [value, setValue] = useState("");
@@ -13,30 +14,31 @@ const Filter = () => {
   const [exp, setExp] = useState<number[]>([0]);
   const [jobType, setJobType] = useState<string>("Full-time");
   const [workplaceType, setWorkplaceType] = useState<string>("On-site");
-  const [searchData, { isError }] = useSearchDataMutation();
+  const [fetchData, setFetchData] = useState(true);
+  const { data } = useFilterJobsQuery(
+    {
+      value,
+      workplaceType,
+      jobType,
+      salary,
+      exp,
+    },
+    { skip: fetchData }
+  );
+
+  console.log(data);
 
   const handleSalary = (event: number[]) => {
     setSalary(event);
   };
+
   const handleExp = (event: number[]) => {
     setExp(event);
   };
 
-  useEffect(() => {
-    const searchFilters = async () => {
-      try {
-        const jobData = await searchData({
-          title,
-          exprience,
-          location,
-        }).unwrap();
-        console.log(searchFilters);
-      } catch (err) {
-        console.log(err);
-      }
-    };
-  }, []);
-
+  const handleSubmit = () => {
+    setFetchData(false);
+  };
   return (
     <aside className="w-[300px] h-fit bg-white p-8 rounded-lg border shadow">
       <div className="flex items-center justify-between">
@@ -48,7 +50,12 @@ const Filter = () => {
           <Label className="mb-4" htmlFor="location">
             Search Location
           </Label>
-          <ComboboxBox value={value} setValue={setValue} data={citiesArray} />
+          <ComboboxBox
+            label="Select Location"
+            value={value}
+            setValue={setValue}
+            data={citiesArray}
+          />
         </div>
       </div>
 
@@ -109,6 +116,10 @@ const Filter = () => {
           ))}
         </RadioGroup>
       </div>
+
+      <Button className="mt-6" onClick={handleSubmit}>
+        Search
+      </Button>
     </aside>
   );
 };
