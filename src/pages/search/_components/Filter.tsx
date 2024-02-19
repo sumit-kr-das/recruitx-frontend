@@ -9,6 +9,8 @@ import { Label } from "../../../ui/label";
 import { RadioGroup, RadioGroupItem } from "../../../ui/radio-group";
 import { Slider } from "../../../ui/slider";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { setUserJobsData } from "../../../features/user/userJobsSlice";
 
 const Filter = () => {
   const [value, setValue] = useState("");
@@ -18,8 +20,9 @@ const Filter = () => {
   const [workplaceType, setWorkplaceType] = useState<string>("On-site");
   const [fetchData, setFetchData] = useState(true);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
-  const { data } = useFilterJobsQuery(
+  const { data, isLoading, isSuccess } = useFilterJobsQuery(
     {
       value,
       workplaceType,
@@ -41,18 +44,29 @@ const Filter = () => {
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setFetchData(false);
-    navigate(
-      `?location=${value}&jobTypes=${jobType}&workplaceType=${workplaceType}&minSalary=${salary}&minExprience=${exp}`
-    );
+
+    // navigate(
+    //   `?location=${value}&jobTypes=${jobType}&workplaceType=${workplaceType}&minSalary=${salary}&minExprience=${exp}`
+    // );
   };
+
+  // if (!isLoading) {
+  //   dispatch(setUserJobsData(data));
+  // }
+  useEffect(() => {
+    console.log("hdfjhdjfj", data);
+    console.log("data process...");
+  }, [data, isLoading, isSuccess]);
 
   useEffect(() => {
     setFetchData(true);
-  }, [fetchData]);
+  }, [fetchData, data]);
 
   return (
     <aside className="w-[300px] h-fit bg-white p-8 rounded-lg border shadow">
-      <h1 className="text-lg font-semibold">Filter</h1>
+      <h1 className="text-lg font-semibold">
+        Filter {!isLoading && data?.page}
+      </h1>
       <form onSubmit={handleSubmit}>
         <div className="mt-8">
           <div className="grid w-full max-w-sm items-center gap-1.5">
