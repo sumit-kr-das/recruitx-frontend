@@ -4,7 +4,7 @@ export const filterJobsApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     filterJobs: builder.query({
       query: ({ value, workplaceType, jobType, salary, exp }) =>
-        `/job/search?jobTypes=${jobType}&workplaceType=${workplaceType}&minSalary=${salary}&minExprience=${exp}`,
+        `/job/search?location=${value}&jobTypes=${jobType}&workplaceType=${workplaceType}&minSalary=${salary}&minExprience=${exp}`,
       //   providesTags: ["User"],
     }),
   }),

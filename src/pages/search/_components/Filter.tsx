@@ -47,9 +47,7 @@ const Filter = () => {
       </div>
       <div className="mt-8">
         <div className="grid w-full max-w-sm items-center gap-1.5">
-          <Label className="mb-4" htmlFor="location">
-            Search Location
-          </Label>
+          <p className="font-semibold mb-2">Search Location</p>
           <ComboboxBox
             label="Select Location"
             value={value}

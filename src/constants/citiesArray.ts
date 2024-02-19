@@ -36,7 +36,7 @@ export const citiesArray = [
     label: "Kolkata",
   },
   {
-    value: "delhi-ncr",
+    value: "delhi",
     label: "Delhi / NCR",
   },
   {
