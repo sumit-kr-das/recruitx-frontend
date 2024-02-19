@@ -15,18 +15,18 @@ const Filter = () => {
   const [jobType, setJobType] = useState<string>("Full-time");
   const [workplaceType, setWorkplaceType] = useState<string>("On-site");
   const [fetchData, setFetchData] = useState(true);
-  const { data } = useFilterJobsQuery(
-    {
-      value,
-      workplaceType,
-      jobType,
-      salary,
-      exp,
-    },
-    { skip: fetchData }
-  );
+  // const { data } = useFilterJobsQuery(
+  //   {
+  //     value,
+  //     workplaceType,
+  //     jobType,
+  //     salary,
+  //     exp,
+  //   },
+  //   { skip: fetchData }
+  // );
 
-  console.log(data);
+  // console.log(data);
 
   const handleSalary = (event: number[]) => {
     setSalary(event);
@@ -41,10 +41,7 @@ const Filter = () => {
   };
   return (
     <aside className="w-[300px] h-fit bg-white p-8 rounded-lg border shadow">
-      <div className="flex items-center justify-between">
-        <h1 className="text-lg font-semibold">Filter</h1>
-        <p className="text-cyan-600">Clear all</p>
-      </div>
+      <h1 className="text-lg font-semibold">Filter</h1>
       <div className="mt-8">
         <div className="grid w-full max-w-sm items-center gap-1.5">
           <p className="font-semibold mb-2">Search Location</p>
@@ -114,9 +111,8 @@ const Filter = () => {
           ))}
         </RadioGroup>
       </div>
-
       <Button className="mt-6" onClick={handleSubmit}>
-        Search
+        Filter
       </Button>
     </aside>
   );
