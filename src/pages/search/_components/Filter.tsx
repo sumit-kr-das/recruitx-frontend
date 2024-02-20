@@ -1,12 +1,16 @@
+import { FilterIcon } from "lucide-react";
 import { useEffect, useState } from "react";
 import { citiesArray } from "../../../constants/citiesArray";
 import { jobTypes } from "../../../constants/jobTypes";
 import { useFilterJobsQuery } from "../../../features/user/get/filterJobsApiSlice";
+import { Button } from "../../../ui/button";
 import { ComboboxBox } from "../../../ui/combo-box";
 import { Label } from "../../../ui/label";
 import { RadioGroup, RadioGroupItem } from "../../../ui/radio-group";
 import { Slider } from "../../../ui/slider";
-import { Button } from "../../../ui/button";
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { setUserJobsData } from "../../../features/user/userJobsSlice";
 
 const Filter = () => {
   const [value, setValue] = useState("");
@@ -15,7 +19,10 @@ const Filter = () => {
   const [jobType, setJobType] = useState<string>("Full-time");
   const [workplaceType, setWorkplaceType] = useState<string>("On-site");
   const [fetchData, setFetchData] = useState(true);
-  const { data } = useFilterJobsQuery(
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const { data, isLoading, isSuccess } = useFilterJobsQuery(
     {
       value,
       workplaceType,
@@ -37,20 +44,29 @@ const Filter = () => {
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setFetchData(false);
+
+    // navigate(
+    //   `?location=${value}&jobTypes=${jobType}&workplaceType=${workplaceType}&minSalary=${salary}&minExprience=${exp}`
+    // );
   };
+
+  // if (!isLoading) {
+  //   dispatch(setUserJobsData(data));
+  // }
+  useEffect(() => {
+    console.log("hdfjhdjfj", data);
+    console.log("data process...");
+  }, [data, isLoading, isSuccess]);
 
   useEffect(() => {
     setFetchData(true);
-  }, [fetchData]);
-
-
+  }, [fetchData, data]);
 
   return (
     <aside className="w-[300px] h-fit bg-white p-8 rounded-lg border shadow">
-      <div className="flex items-center justify-between">
-        <h1 className="text-lg font-semibold">Filter</h1>
-        <p className="text-cyan-600">Clear all</p>
-      </div>
+      <h1 className="text-lg font-semibold">
+        Filter {!isLoading && data?.page}
+      </h1>
       <form onSubmit={handleSubmit}>
         <div className="mt-8">
           <div className="grid w-full max-w-sm items-center gap-1.5">
@@ -97,7 +113,10 @@ const Filter = () => {
 
         <div className="mt-6">
           <p className="font-semibold mb-4">Job Type</p>
-          <RadioGroup defaultValue={jobType} onValueChange={(e) => setJobType(e)}>
+          <RadioGroup
+            defaultValue={jobType}
+            onValueChange={(e) => setJobType(e)}
+          >
             {jobTypes.map((type, index) => (
               <div key={index} className="flex items-center space-x-2">
                 <RadioGroupItem value={type} id="r1" />
@@ -121,9 +140,9 @@ const Filter = () => {
             ))}
           </RadioGroup>
         </div>
-
-        <Button className="mt-6" type="submit">
-          Search
+        <Button className="mt-6 gap-2" type="submit">
+          <FilterIcon className="w-4 h-4" />
+          Filter
         </Button>
       </form>
     </aside>

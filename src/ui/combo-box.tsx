@@ -12,11 +12,16 @@ import {
 } from "./command";
 import { Popover, PopoverContent, PopoverTrigger } from "./popover";
 
+type Item = {
+  value: string;
+  label: string;
+};
+
 type TProps = {
   label: string;
   value: string;
   setValue: (props: string) => void;
-  data: [];
+  data: Item[];
 };
 
 export function ComboboxBox({ label, value, setValue, data }: TProps) {
