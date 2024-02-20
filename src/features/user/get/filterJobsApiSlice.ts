@@ -1,4 +1,5 @@
 import { apiSlice } from "../../../app/api/apiSlice";
+import { createAsyncThunk } from "@reduxjs/toolkit";
 
 export const filterJobsApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
@@ -10,4 +11,4 @@ export const filterJobsApiSlice = apiSlice.injectEndpoints({
   }),
 });
 
-export const { useFilterJobsQuery } = filterJobsApiSlice;
+export const { useLazyFilterJobsQuery } = filterJobsApiSlice;

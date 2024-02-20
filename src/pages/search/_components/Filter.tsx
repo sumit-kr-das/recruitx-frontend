@@ -2,7 +2,7 @@ import { FilterIcon } from "lucide-react";
 import { useEffect, useState } from "react";
 import { citiesArray } from "../../../constants/citiesArray";
 import { jobTypes } from "../../../constants/jobTypes";
-import { useFilterJobsQuery } from "../../../features/user/get/filterJobsApiSlice";
+import { useLazyFilterJobsQuery } from "../../../features/user/get/filterJobsApiSlice";
 import { Button } from "../../../ui/button";
 import { ComboboxBox } from "../../../ui/combo-box";
 import { Label } from "../../../ui/label";
@@ -12,25 +12,19 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { setUserJobsData } from "../../../features/user/userJobsSlice";
 
+
 const Filter = () => {
   const [value, setValue] = useState("");
   const [salary, setSalary] = useState<number[]>([100000]);
   const [exp, setExp] = useState<number[]>([0]);
   const [jobType, setJobType] = useState<string>("Full-time");
   const [workplaceType, setWorkplaceType] = useState<string>("On-site");
-  const [fetchData, setFetchData] = useState(true);
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const { data, isLoading, isSuccess } = useFilterJobsQuery(
-    {
-      value,
-      workplaceType,
-      jobType,
-      salary,
-      exp,
-    },
-    { skip: fetchData }
+
+  const [trigger, { data, isLoading, isSuccess }] = useLazyFilterJobsQuery(
+
   );
 
   const handleSalary = (event: number[]) => {
@@ -43,7 +37,13 @@ const Filter = () => {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setFetchData(false);
+    trigger({
+      value,
+      workplaceType,
+      jobType,
+      salary,
+      exp,
+    });
 
     // navigate(
     //   `?location=${value}&jobTypes=${jobType}&workplaceType=${workplaceType}&minSalary=${salary}&minExprience=${exp}`
@@ -53,19 +53,20 @@ const Filter = () => {
   // if (!isLoading) {
   //   dispatch(setUserJobsData(data));
   // }
+
+
+
   useEffect(() => {
-    console.log("hdfjhdjfj", data);
+    console.log("data", data);
     console.log("data process...");
   }, [data, isLoading, isSuccess]);
 
-  useEffect(() => {
-    setFetchData(true);
-  }, [fetchData, data]);
 
   return (
+
     <aside className="w-[300px] h-fit bg-white p-8 rounded-lg border shadow">
       <h1 className="text-lg font-semibold">
-        Filter {!isLoading && data?.page}
+        Filter {data && data?.jobs.length}
       </h1>
       <form onSubmit={handleSubmit}>
         <div className="mt-8">
