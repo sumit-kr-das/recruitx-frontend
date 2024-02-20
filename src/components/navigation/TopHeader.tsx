@@ -83,17 +83,20 @@ const TopHeader = () => {
           )}
         </div>
         {
-          role && role === "user" ? (
-            <>
-              <div className="lg:hidden">
-                <Sidebar />
-              </div>
-            </>
-          ) : (
+          role && (role === "company" || role === "admin") ? (
+
             <>
               <div className="lg:hidden">
                 <MobileSidebar />
               </div>
+            </>
+          ) : (
+            <>
+              <>
+                <div className="lg:hidden">
+                  <Sidebar />
+                </div>
+              </>
             </>
           )
         }
