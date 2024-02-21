@@ -1,6 +1,7 @@
 import { useSelector } from "react-redux";
 import Footer from "../../components/footer/Footer";
 import TopHeader from "../../components/navigation/TopHeader";
+import { selectCurrentUserJobsData } from "../../features/user/userJobsSlice";
 import Container from "../../layout/Container";
 import {
   Pagination,
@@ -14,8 +15,6 @@ import {
 import Filter from "./_components/Filter";
 import FilteredJobs from "./_components/FilteredJobs";
 import SearchFilter from "./_components/SearchFilter";
-import { selectCurrentUserJobsData } from "../../features/user/userJobsSlice";
-import Loader from "../../components/loader/Loader";
 
 const SearchPage = () => {
   const jobsData = useSelector(selectCurrentUserJobsData);

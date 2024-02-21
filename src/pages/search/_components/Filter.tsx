@@ -15,6 +15,7 @@ import { Slider } from "../../../ui/slider";
 const Filter = () => {
   const [searchParams] = useSearchParams();
   const paramsLocation = searchParams.get("location") || "";
+  const paramsTitle = searchParams.get("search") || "";
 
   const [value, setValue] = useState(paramsLocation);
   const [salary, setSalary] = useState<number[]>([100000]);
@@ -36,6 +37,7 @@ const Filter = () => {
 
   const handleSubmit = () => {
     trigger({
+      title: paramsTitle,
       value,
       workplaceType,
       jobType,
@@ -44,14 +46,17 @@ const Filter = () => {
     });
 
     navigate(
-      `?location=${value}&jobTypes=${jobType}&workplaceType=${workplaceType}&minSalary=${salary}&minExprience=${exp}`
+      `?search=${paramsTitle}&location=${value}&jobTypes=${jobType}&workplaceType=${workplaceType}&minSalary=${salary}&minExprience=${exp}`
     );
   };
 
   useEffect(() => {
     handleSubmit();
+  }, []);
+
+  useEffect(() => {
     dispatch(setUserJobsData(data));
-  }, [data, dispatch]);
+  }, [data]);
 
   return (
     <aside className="w-[300px] h-fit bg-white p-8 rounded-lg border shadow">

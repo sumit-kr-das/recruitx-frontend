@@ -3,27 +3,23 @@ import { Button } from "../../../ui/button";
 import { useEffect, useState } from "react";
 import { useDebounce } from "../../../customHooks/useDebounce";
 import { useSearchParams } from "react-router-dom";
+import { useLazySearchJobsTitleQuery } from "../../../features/user/get/searchJobsTitleApiSlice";
 
 const SearchFilter = () => {
   const [searchParams] = useSearchParams();
-  const paramsTitle = searchParams.get("title") || "";
+  const paramsTitle = searchParams.get("search") || "";
 
   const [search, setSearch] = useState<string>(paramsTitle);
-  const [data, setData] = useState([]);
+  const [titleData, setTitleData] = useState([]);
   const [show, setShow] = useState<boolean>(false);
   const debounceSearch = useDebounce(search);
+  const [trigger, { data }] = useLazySearchJobsTitleQuery();
 
   useEffect(() => {
-    const loadData = () => {
-      fetch(
-        `http://localhost:8000/api/job/search/title?search=${debounceSearch}`
-      )
-        .then((res) => res.json())
-        .then((resData) => setData(resData))
-        .then((err) => console.log(err));
-    };
-    loadData();
-    console.log(search, data);
+    trigger({
+      title: debounceSearch,
+    });
+    setTitleData(data);
   }, [debounceSearch]);
 
   const setInputSearch = (title) => {
@@ -58,7 +54,7 @@ const SearchFilter = () => {
         </Button>
         {show && (
           <div className="w-full h-fit absolute top-12 left-0 bg-white border border-t-0 rounded-bl-lg rounded-br-lg">
-            {data?.map((item, index) => (
+            {titleData?.map((item, index) => (
               <p
                 key={index}
                 onClick={() => setInputSearch(item?.title)}
