@@ -2,23 +2,34 @@ import { Search } from "lucide-react";
 import { Button } from "../../../ui/button";
 import { useEffect, useState } from "react";
 import { useDebounce } from "../../../customHooks/useDebounce";
+import { useSearchParams } from "react-router-dom";
 
 const SearchFilter = () => {
-  const [search, setSearch] = useState<string>("");
+  const [searchParams] = useSearchParams();
+  const paramsTitle = searchParams.get("title") || "";
+
+  const [search, setSearch] = useState<string>(paramsTitle);
   const [data, setData] = useState([]);
   const [show, setShow] = useState<boolean>(false);
   const debounceSearch = useDebounce(search);
 
   useEffect(() => {
     const loadData = () => {
-      fetch(`https://api.escuelajs.co/api/v1/products?title=${debounceSearch}`)
+      fetch(
+        `http://localhost:8000/api/job/search/title?search=${debounceSearch}`
+      )
         .then((res) => res.json())
         .then((resData) => setData(resData))
         .then((err) => console.log(err));
     };
-    // loadData();
+    loadData();
     console.log(search, data);
   }, [debounceSearch]);
+
+  const setInputSearch = (title) => {
+    setSearch(title);
+    setShow(false);
+  };
 
   return (
     <div className="relative p-8 rounded-lg border shadow bg-gradient-to-r from-cyan-500 to-blue-500">
@@ -47,18 +58,15 @@ const SearchFilter = () => {
         </Button>
         {show && (
           <div className="w-full h-fit absolute top-12 left-0 bg-white border border-t-0 rounded-bl-lg rounded-br-lg">
-            <p
-              onClick={() => setSearch("Clicked")}
-              className="pl-8 py-1.5 cursor-pointer"
-            >
-              Search
-            </p>
-            <p
-              onClick={() => setSearch("Clicked")}
-              className="pl-8 py-1.5 cursor-pointer"
-            >
-              Search
-            </p>
+            {data?.map((item, index) => (
+              <p
+                key={index}
+                onClick={() => setInputSearch(item?.title)}
+                className="pl-8 py-1.5 cursor-pointer"
+              >
+                {item?.title}
+              </p>
+            ))}
           </div>
         )}
       </div>

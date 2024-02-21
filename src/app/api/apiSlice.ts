@@ -15,6 +15,8 @@ const baseQuery = fetchBaseQuery({
 
 export const apiSlice = createApi({
   baseQuery,
+  refetchOnFocus: true,
+  refetchOnReconnect: true,
   tagTypes: [
     "User",
     "UserInfo",
@@ -28,7 +30,7 @@ export const apiSlice = createApi({
     "ApproveCandidate",
     "CompanyGlobal",
     "JobChart",
-    "CompanyStats"
+    "CompanyStats",
   ],
   endpoints: () => ({}),
 });

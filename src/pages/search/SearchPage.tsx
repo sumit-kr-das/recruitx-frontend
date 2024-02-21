@@ -1,3 +1,4 @@
+import { useSelector } from "react-redux";
 import Footer from "../../components/footer/Footer";
 import TopHeader from "../../components/navigation/TopHeader";
 import Container from "../../layout/Container";
@@ -13,8 +14,12 @@ import {
 import Filter from "./_components/Filter";
 import FilteredJobs from "./_components/FilteredJobs";
 import SearchFilter from "./_components/SearchFilter";
+import { selectCurrentUserJobsData } from "../../features/user/userJobsSlice";
+import Loader from "../../components/loader/Loader";
 
 const SearchPage = () => {
+  const jobsData = useSelector(selectCurrentUserJobsData);
+
   return (
     <div className="bg-[#FAFAFA]">
       <TopHeader />
@@ -23,37 +28,44 @@ const SearchPage = () => {
           <Filter />
           <div>
             <SearchFilter />
-            <div className="mt-8 grid gap-x-4 gap-y-4 grid-cols-[repeat(auto-fill,minmax(300px,1fr))]">
-              {[...Array(4)].map((_, index) => (
-                <FilteredJobs key={index} />
-              ))}
-            </div>
-            <div className="mt-8 flex items-center justify-center">
-              <Pagination>
-                <PaginationContent>
-                  <PaginationItem>
-                    <PaginationPrevious href="#" />
-                  </PaginationItem>
-                  <PaginationItem>
-                    <PaginationLink href="#">1</PaginationLink>
-                  </PaginationItem>
-                  <PaginationItem>
-                    <PaginationLink href="#" isActive>
-                      2
-                    </PaginationLink>
-                  </PaginationItem>
-                  <PaginationItem>
-                    <PaginationLink href="#">3</PaginationLink>
-                  </PaginationItem>
-                  <PaginationItem>
-                    <PaginationEllipsis />
-                  </PaginationItem>
-                  <PaginationItem>
-                    <PaginationNext href="#" />
-                  </PaginationItem>
-                </PaginationContent>
-              </Pagination>
-            </div>
+            {jobsData?.jobs?.length !== 0 ? (
+              <>
+                <div className="mt-8 grid gap-x-4 gap-y-4 grid-cols-[repeat(auto-fill,minmax(300px,1fr))]">
+                  {jobsData?.jobs.map((job, index) => (
+                    <FilteredJobs key={index} job={job} />
+                  ))}
+                </div>
+                <div className="mt-8 flex items-center justify-center">
+                  <Pagination>
+                    <PaginationContent>
+                      <PaginationItem>
+                        <PaginationPrevious href="#" />
+                      </PaginationItem>
+                      <PaginationItem>
+                        <PaginationLink href="#">1</PaginationLink>
+                      </PaginationItem>
+                      <PaginationItem>
+                        <PaginationLink href="#" isActive>
+                          2
+                        </PaginationLink>
+                      </PaginationItem>
+                      <PaginationItem>
+                        <PaginationLink href="#">3</PaginationLink>
+                      </PaginationItem>
+                      <PaginationItem>
+                        <PaginationEllipsis />
+                      </PaginationItem>
+                      <PaginationItem>
+                        <PaginationNext href="#" />
+                      </PaginationItem>
+                    </PaginationContent>
+                  </Pagination>
+                </div>
+              </>
+            ) : (
+              // <Loader />
+              <h1>Nothing found</h1>
+            )}
           </div>
         </div>
       </Container>

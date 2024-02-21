@@ -37,10 +37,11 @@ export function ComboboxBox({ label, value, setValue, data }: TProps) {
           className="w-full justify-between"
         >
           {value
-            ? data.find((framework) => framework.value === value)?.label
+            ? data.find((framework) => framework.value === value.toLowerCase())
+                ?.label
             : label
-              ? label
-              : "Select framework..."}
+            ? label
+            : "Select framework..."}
           <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
         </Button>
       </PopoverTrigger>
