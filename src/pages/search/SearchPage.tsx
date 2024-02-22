@@ -7,6 +7,7 @@ import Filter from "./_components/Filter";
 import FilterPagination from "./_components/FilterPagination";
 import FilteredJobs from "./_components/FilteredJobs";
 import SearchFilter from "./_components/SearchFilter";
+import NotFoundImg from "../../assets/not-found.png";
 
 const SearchPage = () => {
   const jobsData = useSelector(selectCurrentUserJobsData);
@@ -29,8 +30,14 @@ const SearchPage = () => {
                 <FilterPagination />
               </>
             ) : (
-              // <Loader />
-              <h1>Nothing found</h1>
+              <div className="w-full mt-20 flex items-center justify-center flex-col">
+                <img
+                  className="w-40 h-40 border p-8 bg-white rounded-full"
+                  src={NotFoundImg}
+                  alt="not found"
+                />
+                <p className="text-xl mt-4 text-center">No job found</p>
+              </div>
             )}
           </div>
         </div>

@@ -26,7 +26,7 @@ const FilterPagination = () => {
   const paramsExp = searchParams.get("minExprience") || "";
 
   const { page, total } = useSelector(selectCurrentUserJobsData);
-  const totalPages = Math.ceil(total / 1);
+  const totalPages = Math.ceil(total / 6);
   const [trigger, { data }] = useLazyWithFilterJobsQuery();
   const dispatch = useDispatch();
 
@@ -45,6 +45,10 @@ const FilterPagination = () => {
   useEffect(() => {
     dispatch(setUserJobsData(data));
   }, [data]);
+
+  if (totalPages === 1) {
+    return "";
+  }
 
   return (
     <div className="mt-8 flex items-center justify-center">
