@@ -1,12 +1,12 @@
 import { Search } from "lucide-react";
-import { Button } from "../../../ui/button";
-import { useEffect, useState } from "react";
-import { useDebounce } from "../../../customHooks/useDebounce";
-import { useSearchParams } from "react-router-dom";
-import { useLazySearchJobsTitleQuery } from "../../../features/user/get/searchJobsTitleApiSlice";
-import { useLazyWithFilterJobsQuery } from "../../../features/user/get/filterJobsApiSlice";
+import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
+import { useSearchParams } from "react-router-dom";
+import { useDebounce } from "../../../customHooks/useDebounce";
+import { useLazyWithFilterJobsQuery } from "../../../features/user/get/filterJobsApiSlice";
+import { useLazySearchJobsTitleQuery } from "../../../features/user/get/searchJobsTitleApiSlice";
 import { setUserJobsData } from "../../../features/user/userJobsSlice";
+import { Button } from "../../../ui/button";
 
 const SearchFilter = () => {
   const [searchParams] = useSearchParams();
@@ -37,7 +37,7 @@ const SearchFilter = () => {
     setShow(false);
   };
 
-  const handleSearch = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSearch = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     setShow(false);
     filterData({

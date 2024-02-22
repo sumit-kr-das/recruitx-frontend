@@ -1,10 +1,54 @@
 import { IndianRupee } from "lucide-react";
 import DefaultCompany from "../../../assets/default-company-logo.png";
-import { Separator } from "../../../ui/separator";
 import { Button } from "../../../ui/button";
 import { Card, CardContent, CardFooter, CardHeader } from "../../../ui/card";
+import { Separator } from "../../../ui/separator";
 
-const FilteredJobs = ({ job }) => {
+type TJob = {
+  _id: string;
+  title: string;
+  category: string;
+  description: string;
+  tags: string[];
+  active: boolean;
+  info: {
+    vacancies: number;
+    jobType: string;
+    workplaceType: string;
+    startDate: string;
+    endDate: string;
+    roles: string;
+    minExprience: number;
+    maxExprience: number;
+    minSalary: number;
+    maxSalary: number;
+    location: string;
+    maxQualification: string;
+    degree: string;
+    skills: string[];
+  };
+  companyId: {
+    _id: string;
+    companyName: string;
+    pin: string;
+    address: string;
+    companyProfileId: {
+      _id: string;
+      logo: string;
+      createdAt: string;
+      updatedAt: string;
+      __v: number;
+    };
+  };
+};
+
+type JobProps = {
+  job: TJob;
+};
+
+const FilteredJobs = ({ job }: JobProps) => {
+  console.log(job);
+
   return (
     <Card className="w-full h-full flex flex-col justify-between bg-white rounded-lg border shadow">
       <CardHeader className="flex items-center flex-row gap-4">
