@@ -4,12 +4,14 @@ import { RootState } from "../../app/store";
 type JobState = {
   page: number;
   limit: number;
+  total: number;
   jobs: [];
 };
 
 const initialState: JobState = {
   page: 0,
   limit: 0,
+  total: 0,
   jobs: [],
 };
 

@@ -3,16 +3,8 @@ import Footer from "../../components/footer/Footer";
 import TopHeader from "../../components/navigation/TopHeader";
 import { selectCurrentUserJobsData } from "../../features/user/userJobsSlice";
 import Container from "../../layout/Container";
-import {
-  Pagination,
-  PaginationContent,
-  PaginationEllipsis,
-  PaginationItem,
-  PaginationLink,
-  PaginationNext,
-  PaginationPrevious,
-} from "../../ui/pagination";
 import Filter from "./_components/Filter";
+import FilterPagination from "./_components/FilterPagination";
 import FilteredJobs from "./_components/FilteredJobs";
 import SearchFilter from "./_components/SearchFilter";
 
@@ -34,32 +26,7 @@ const SearchPage = () => {
                     <FilteredJobs key={index} job={job} />
                   ))}
                 </div>
-                <div className="mt-8 flex items-center justify-center">
-                  <Pagination>
-                    <PaginationContent>
-                      <PaginationItem>
-                        <PaginationPrevious href="#" />
-                      </PaginationItem>
-                      <PaginationItem>
-                        <PaginationLink href="#">1</PaginationLink>
-                      </PaginationItem>
-                      <PaginationItem>
-                        <PaginationLink href="#" isActive>
-                          2
-                        </PaginationLink>
-                      </PaginationItem>
-                      <PaginationItem>
-                        <PaginationLink href="#">3</PaginationLink>
-                      </PaginationItem>
-                      <PaginationItem>
-                        <PaginationEllipsis />
-                      </PaginationItem>
-                      <PaginationItem>
-                        <PaginationNext href="#" />
-                      </PaginationItem>
-                    </PaginationContent>
-                  </Pagination>
-                </div>
+                <FilterPagination />
               </>
             ) : (
               // <Loader />

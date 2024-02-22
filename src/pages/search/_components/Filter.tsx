@@ -43,6 +43,7 @@ const Filter = () => {
       jobType,
       salary,
       exp,
+      page: 1,
     });
 
     navigate(
