@@ -4,16 +4,26 @@ import { useEffect, useState } from "react";
 import { useDebounce } from "../../../customHooks/useDebounce";
 import { useSearchParams } from "react-router-dom";
 import { useLazySearchJobsTitleQuery } from "../../../features/user/get/searchJobsTitleApiSlice";
+import { useLazyWithFilterJobsQuery } from "../../../features/user/get/filterJobsApiSlice";
+import { useDispatch } from "react-redux";
+import { setUserJobsData } from "../../../features/user/userJobsSlice";
 
 const SearchFilter = () => {
   const [searchParams] = useSearchParams();
   const paramsTitle = searchParams.get("search") || "";
+  const paramsLocation = searchParams.get("location") || "";
+  const paramsworkplaceType = searchParams.get("workplaceType") || "";
+  const paramsJobType = searchParams.get("jobTypes") || "";
+  const paramsSalary = searchParams.get("minSalary") || "";
+  const paramsExp = searchParams.get("minExprience") || "";
 
   const [search, setSearch] = useState<string>(paramsTitle);
   const [titleData, setTitleData] = useState([]);
   const [show, setShow] = useState<boolean>(false);
   const debounceSearch = useDebounce(search);
+  const dispatch = useDispatch();
   const [trigger, { data }] = useLazySearchJobsTitleQuery();
+  const [filterData, results] = useLazyWithFilterJobsQuery();
 
   useEffect(() => {
     trigger({
@@ -22,10 +32,27 @@ const SearchFilter = () => {
     setTitleData(data);
   }, [debounceSearch]);
 
-  const setInputSearch = (title) => {
+  const setInputSearch = (title: string) => {
     setSearch(title);
     setShow(false);
   };
+
+  const handleSearch = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setShow(false);
+    filterData({
+      title: search,
+      value: paramsLocation,
+      workplaceType: paramsworkplaceType,
+      jobType: paramsJobType,
+      salary: paramsSalary,
+      exp: paramsExp,
+    });
+  };
+
+  useEffect(() => {
+    dispatch(setUserJobsData(results.data));
+  }, [results]);
 
   return (
     <div className="relative p-8 rounded-lg border shadow bg-gradient-to-r from-cyan-500 to-blue-500">
@@ -47,7 +74,7 @@ const SearchFilter = () => {
           onChange={(e) => setSearch(e.target.value)}
         />
         <Button
-          onClick={() => setShow(false)}
+          onClick={handleSearch}
           className="bg-gradient-to-r from-cyan-500 to-blue-500 hover:bg-gradient-to-r hover:from-cyan-600 hover:to-blue-600"
         >
           Search
