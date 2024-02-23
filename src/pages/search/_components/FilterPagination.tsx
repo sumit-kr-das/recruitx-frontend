@@ -1,20 +1,17 @@
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  Pagination,
-  PaginationContent,
-  PaginationEllipsis,
-  PaginationItem,
-  PaginationLink,
-  PaginationNext,
-  PaginationPrevious,
-} from "../../../ui/pagination";
+import { useSearchParams } from "react-router-dom";
+import { useLazyWithFilterJobsQuery } from "../../../features/user/get/filterJobsApiSlice";
 import {
   selectCurrentUserJobsData,
   setUserJobsData,
 } from "../../../features/user/userJobsSlice";
-import { useLazyWithFilterJobsQuery } from "../../../features/user/get/filterJobsApiSlice";
-import { useSearchParams } from "react-router-dom";
-import { useEffect } from "react";
+import {
+  Pagination,
+  PaginationContent,
+  PaginationItem,
+  PaginationLink,
+} from "../../../ui/pagination";
 
 const FilterPagination = () => {
   const [searchParams] = useSearchParams();
