@@ -10,6 +10,7 @@ const initialState: UserState = {
     workStatus: null,
     createdAt: null,
     updatedAt: null,
+    status: null,
   },
   info: {
     photo: null,

@@ -6,6 +6,7 @@ export interface UserState {
     workStatus: string | null;
     createdAt: string | null;
     updatedAt: string | null;
+    status: string | null;
   };
   info: {
     photo: string | null;
