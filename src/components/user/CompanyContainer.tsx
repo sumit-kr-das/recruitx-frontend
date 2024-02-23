@@ -9,7 +9,7 @@ const CompanyContainer = ({ data }: TCompanyProps) => {
   return (
     <div className="bg-white w-[320px] h-[320px] flex items-center flex-col justify-center text-center p-6 shadow border rounded-xl mt-8">
       <img
-        className="relative -top-[30px] w-[140px] h-[140px] rounded-full object-cover"
+        className="relative -top-[30px] w-[140px] h-[140px] rounded-full object-cover border bg-gray-50"
         src={data?.companyProfileId?.logo || DefaultCompany}
         alt="company icon"
       />

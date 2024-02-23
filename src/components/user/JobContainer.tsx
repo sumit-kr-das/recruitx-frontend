@@ -11,7 +11,7 @@ const JobContainer = ({ data }: TJobProps) => {
     <div className="bg-white w-[350px] h-[350px] p-6 shadow border rounded-xl">
       <div className="flex items-center gap-2">
         <img
-          className="w-[60px] h-[60px] rounded-full object-cover"
+          className="w-[60px] h-[60px] rounded-full object-cover border bg-gray-50"
           src={data?.companyId?.companyProfileId.logo || DefaultCompany}
           alt="company icon"
         />

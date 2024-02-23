@@ -29,9 +29,6 @@ const PublicCompanies = () => {
               <CompanyContainer key={index} data={item} />
             ))}
           </UserTitleWrapper>
-          <>
-            <h1>{data.length}</h1>
-          </>
           <div className="mt-8 flex items-center justify-center">
             <Button onClick={handleLoadCompanyes}>Load more</Button>
           </div>
