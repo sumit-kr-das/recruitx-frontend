@@ -263,7 +263,6 @@ const App = () => {
               <CompanyRoute>
                 <VerifyCompanyRoute>
                   <MyJobs />
-
                 </VerifyCompanyRoute>
               </CompanyRoute>
             }
@@ -274,7 +273,6 @@ const App = () => {
               <CompanyRoute>
                 <VerifyCompanyRoute>
                   <ApplicantsJobs />
-
                 </VerifyCompanyRoute>
               </CompanyRoute>
             }
@@ -285,7 +283,6 @@ const App = () => {
               <CompanyRoute>
                 <VerifyCompanyRoute>
                   <ShortlistedCandidates />
-
                 </VerifyCompanyRoute>
               </CompanyRoute>
             }
@@ -296,7 +293,6 @@ const App = () => {
               <CompanyRoute>
                 <VerifyCompanyRoute>
                   <ViewCvPage />
-
                 </VerifyCompanyRoute>
               </CompanyRoute>
             }
