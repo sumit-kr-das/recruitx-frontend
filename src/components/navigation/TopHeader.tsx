@@ -34,7 +34,7 @@ const TopHeader = () => {
                 <Link to="/mnjuser/jobs">Jobs</Link>
               </li>
               <li>
-                <Link to="">Company</Link>
+                <Link to="/mnjuser/companies">Company</Link>
               </li>
             </ul>
           </div>
