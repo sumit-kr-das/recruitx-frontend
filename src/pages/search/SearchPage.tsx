@@ -8,6 +8,7 @@ import Filter from "./_components/Filter";
 import FilterPagination from "./_components/FilterPagination";
 import FilteredJobs from "./_components/FilteredJobs";
 import SearchFilter from "./_components/SearchFilter";
+import FilterMobile from "./_components/FilterMobile";
 
 const SearchPage = () => {
   const jobsData = useSelector(selectCurrentUserJobsData);
@@ -16,10 +17,18 @@ const SearchPage = () => {
     <div className="bg-[#FAFAFA]">
       <TopHeader />
       <Container className="pt-28 relative">
-        <div className="grid grid-cols-[auto,1fr] flex-grow-1 gap-x-8">
-          <Filter />
+        <div className="grid grid-cols-[auto,1fr] flex-grow-1 md:gap-x-8">
+          <div className="hidden md:block">
+            <Filter />
+          </div>
           <div>
             <SearchFilter />
+            <div className="md:hidden">
+              <div className="px-2 mt-8 flex items-center justify-between">
+                <p className="font-semibold">Available jobs</p>
+                <FilterMobile />
+              </div>
+            </div>
             {jobsData?.jobs?.length !== 0 ? (
               <>
                 <div className="mt-8 grid gap-x-4 gap-y-4 grid-cols-[repeat(auto-fill,minmax(300px,1fr))]">
