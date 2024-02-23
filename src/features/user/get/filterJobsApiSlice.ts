@@ -2,12 +2,12 @@ import { apiSlice } from "../../../app/api/apiSlice";
 
 export const filterJobsApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
-    filterJobs: builder.query({
-      query: ({ value, workplaceType, jobType, salary, exp }) =>
-        `/job/search?location=${value}&jobTypes=${jobType}&workplaceType=${workplaceType}&minSalary=${salary}&minExprience=${exp}`,
+    withFilterJobs: builder.query({
+      query: ({ title, value, workplaceType, jobType, salary, exp, page }) =>
+        `/job/search?search=${title}&location=${value}&jobTypes=${jobType}&workplaceType=${workplaceType}&minSalary=${salary}&minExprience=${exp}&page=${page}`,
       //   providesTags: ["User"],
     }),
   }),
 });
 
-export const { useFilterJobsQuery } = filterJobsApiSlice;
+export const { useLazyWithFilterJobsQuery } = filterJobsApiSlice;

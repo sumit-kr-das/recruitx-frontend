@@ -39,8 +39,4 @@ export const citiesArray = [
     value: "delhi",
     label: "Delhi / NCR",
   },
-  {
-    value: "remote",
-    label: "Remote",
-  },
 ];

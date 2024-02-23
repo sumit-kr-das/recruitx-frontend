@@ -13,7 +13,7 @@ const Search = () => {
 
   const search = () => {
     navigate(
-      `../../mnjuser/jobs?skills=${data.skill}&exprience=${data.exprience}&location=${data.location}`
+      `../../mnjuser/jobs?search=${data.skill}&location=${data.location}`
     );
   };
 
