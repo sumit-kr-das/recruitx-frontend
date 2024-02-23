@@ -28,7 +28,6 @@ import TopHeader from "../../../components/navigation/TopHeader";
 import UserRegisterSchema from "../../../@types/zod/UserRegisterSchema";
 import { useToast } from "../../../ui/use-toast";
 
-
 type FormValues = {
   name: string;
   email: string;
@@ -41,7 +40,7 @@ const Register = () => {
   const [userRegister, { isLoading }] = useUserRegisterMutation();
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { toast } = useToast()
+  const { toast } = useToast();
 
   const form = useForm<z.infer<typeof UserRegisterSchema>>({
     resolver: zodResolver(UserRegisterSchema),
@@ -50,7 +49,7 @@ const Register = () => {
       email: "",
       phoneNo: "",
       password: "",
-      confirmPassword: ""
+      confirmPassword: "",
     },
   });
 
@@ -74,17 +73,24 @@ const Register = () => {
   return (
     <div className="bg-[#FAFAFA]">
       <TopHeader />
-      <div className="pt-40 w-full h-screen flex justify-center">
-        <div className="w-[800px] h-fit rounded-xl bg-white p-10 shadow">
-          <h1 className="text-2xl mb-10 font-extrabold text-center">
+      <div className="pt-24 md:pt-40 w-full h-screen flex justify-center">
+        <div className="md:w-[800px] h-fit md:rounded-xl bg-white p-10 md:shadow">
+          <h1 className="text-2xl font-extrabold text-center">
             Register Your RecruitX Account
           </h1>
+          <p className="mt-2 mb-5 md:mb-10 text-center">
+            Already have an account ?
+            <Link className="text-blue-500" to="/login">
+              {" "}
+              Login now
+            </Link>
+          </p>
           <Form {...form}>
             <form
               onSubmit={form.handleSubmit(submitForm)}
-              className="space-y-8"
+              className="space-y-4 md:space-y-8"
             >
-              <div className="flex gap-4">
+              <div className="flex gap-4 flex-col md:flex-row">
                 <FormField
                   control={form.control}
                   name="name"
@@ -112,7 +118,7 @@ const Register = () => {
                   )}
                 />
               </div>
-              <div className="flex gap-4">
+              <div className="flex gap-4 flex-col md:flex-row">
                 <FormField
                   control={form.control}
                   name="email"
@@ -156,7 +162,7 @@ const Register = () => {
                   )}
                 />
               </div>
-              <div className="flex gap-4">
+              <div className="flex gap-4 flex-col md:flex-row">
                 <FormField
                   control={form.control}
                   name="password"
@@ -197,7 +203,11 @@ const Register = () => {
               </Button>
 
               <FormDescription>
-                Already have an account ?<Link to="/login"> Login now</Link>.
+                Are you a nrw company ?
+                <Link className="text-blue-500" to="/recruit/register">
+                  {" "}
+                  Register now
+                </Link>
               </FormDescription>
             </form>
           </Form>
