@@ -81,7 +81,7 @@ const SearchFilter = () => {
         </Button>
         {show && (
           <div className="w-full h-fit absolute top-12 left-0 bg-white border border-t-0 rounded-bl-lg rounded-br-lg">
-            {titleData?.map((item, index) => (
+            {titleData?.map((item: { title: string }, index) => (
               <p
                 key={index}
                 onClick={() => setInputSearch(item?.title)}

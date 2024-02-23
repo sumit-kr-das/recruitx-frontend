@@ -44,6 +44,7 @@ const ErrorPage = lazy(() => import("./pages/error/ErrorPage"));
 const ViewAppliedPage = lazy(() => import("./pages/mnjuser/ViewAppliedPage"));
 const Resume = lazy(() => import("./pages/pdf/Resume"));
 const ForgetPassword = lazy(() => import("./pages/auth/ForgotPassword"));
+const CompanySearch = lazy(() => import("./pages/user/CompanySearch"));
 
 // --------------------------- route authenticator ---------------------------
 import Loader from "./components/loader/Loader";
@@ -162,6 +163,11 @@ const App = () => {
             </Suspense>
           }
         />
+        <Route path="/mnjuser/companies" element={
+          <Suspense fallback={<Loader />}>
+            <CompanySearch />
+          </Suspense>
+        } />
         <Route
           path="/jobDetails/:jobId"
           element={
