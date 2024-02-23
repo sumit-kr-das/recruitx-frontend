@@ -71,9 +71,9 @@ const Register = () => {
   };
 
   return (
-    <div className="bg-[#FAFAFA]">
+    <section className="bg-[#FAFAFA]">
       <TopHeader />
-      <div className="pt-24 md:pt-40 w-full h-screen flex justify-center">
+      <div className="pt-20 md:pt-40 w-full h-screen flex justify-center">
         <div className="md:w-[800px] h-fit md:rounded-xl bg-white p-10 md:shadow">
           <h1 className="text-2xl font-extrabold text-center">
             Register Your RecruitX Account
@@ -203,7 +203,7 @@ const Register = () => {
               </Button>
 
               <FormDescription>
-                Are you a nrw company ?
+                Are you a new company ?
                 <Link className="text-blue-500" to="/recruit/register">
                   {" "}
                   Register now
@@ -213,7 +213,7 @@ const Register = () => {
           </Form>
         </div>
       </div>
-    </div>
+    </section>
   );
 };
 
