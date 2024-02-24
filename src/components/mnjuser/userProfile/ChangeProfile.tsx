@@ -1,8 +1,7 @@
 import React, { useRef, useState } from "react";
-import { toast } from "react-hot-toast";
-import { useUpdateUserInfoMutation } from "../../../features/user/put/updateUserInfoDataApiSlice";
-import Modal from "../../Modal";
 import { useUpdateCompanyProfileMutation } from "../../../features/company/put/updateCompanyProfileDetailsApiSlice";
+import { useUpdateUserInfoMutation } from "../../../features/user/put/updateUserInfoDataApiSlice";
+import { Button } from "../../../ui/button";
 import {
   Dialog,
   DialogContent,
@@ -10,7 +9,9 @@ import {
   DialogHeader,
   DialogTitle,
 } from "../../../ui/dialog";
-import { Button } from "../../../ui/button";
+import { useToast } from "../../../ui/use-toast";
+import { useDispatch } from "react-redux";
+import { updateUserPhoto } from "../../../features/user/userSlice";
 
 type Props = {
   setProfile: (props: boolean) => void;
@@ -23,15 +24,16 @@ const ChangeProfile = ({ setProfile, profile, type }: Props) => {
   const [image, setImage] = useState(null);
   const [updateUserInfo] = useUpdateUserInfoMutation();
   const [updateCompanyProfile] = useUpdateCompanyProfileMutation();
+  const dispatch = useDispatch();
+  const { toast } = useToast();
 
   const handleClick = () => {
     if (inputRef.current) {
       inputRef.current.click();
     }
   };
-  console.log(inputRef.current);
 
-  const handleUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const fileInput = e.target;
     if (!fileInput || !fileInput.files || fileInput.files.length === 0) {
       return;
@@ -41,23 +43,30 @@ const ChangeProfile = ({ setProfile, profile, type }: Props) => {
     if (file.name) {
       setImage(file);
     }
-    console.log("file", file);
+  };
 
+  const handleUpload = async (e: React.FormEvent<HTMLButtonElement>) => {
+    e.preventDefault();
     const formData = new FormData();
-    formData.append("photo", file);
+    formData.append("photo", image);
 
     try {
+      let res;
       if (type === "user") {
-        // await updateUserInfo(formData).unwrap();
+        res = await updateUserInfo(formData).unwrap();
       } else if (type === "company") {
-        // await updateCompanyProfile(formData).unwrap();
+        res = await updateCompanyProfile(formData).unwrap();
       }
-      toast.success("Photo uploaded successfully!");
-      // setProfile(false);
+      dispatch(updateUserPhoto({ photo: res?.data?.photo }));
+      toast({
+        description: "Profile update successfull",
+      });
+      setProfile(false);
     } catch (error) {
-      console.error(error);
-      toast.error("Failed to upload photo");
-      // setProfile(false);
+      toast({
+        description: "Internal server error",
+      });
+      setProfile(false);
     }
   };
 
@@ -108,7 +117,7 @@ const ChangeProfile = ({ setProfile, profile, type }: Props) => {
           <input
             type="file"
             ref={inputRef}
-            onChange={handleUpload}
+            onChange={handleChange}
             className="hidden"
           />
         </div>

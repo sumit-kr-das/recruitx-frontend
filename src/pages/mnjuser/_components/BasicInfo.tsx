@@ -96,7 +96,7 @@ const BasicInfo = () => {
       </div>
       {/* setProfile */}
 
-      {/* <ChangeProfile profile={profile} setProfile={setProfile} type="user" /> */}
+      <ChangeProfile profile={profile} setProfile={setProfile} type="user" />
     </>
   );
 
