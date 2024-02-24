@@ -1,28 +1,22 @@
 import { apiSlice } from "../../../app/api/apiSlice";
 
-interface SearchCompany {
+export interface SearchCompany {
     total: number,
     companies: [{
-        _id: string,
-        name: string,
-        email: string,
-        phone: string,
-        password: string,
-        companyName: string,
-        industry: string,
-        designation: string,
-        pin: string,
-        address: string,
-        role: string,
+        _id: string;
+        address: string;
+        companyName: string;
+        email: string;
+        industry: string;
+        name: string;
+        phone: string;
+        pin: string;
         status: string,
-        createdAt: string,
-        updatedAt: string,
-        __v: number,
-        companyProfileId: {
-            _id: string,
-            logo: string,
-            type: string
-        }
+        companyProfileId?: {
+            _id?: string;
+            logo?: string;
+            type: string;
+        };
     }],
     limit: number
 }

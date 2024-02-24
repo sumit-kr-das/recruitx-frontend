@@ -28,7 +28,7 @@ const CompanyContainer = ({ data }: TCompanyProps) => {
             {data.address}
           </p>
           <p className="bg-cyan-50 text-cyan-500 text-sm font-semibold px-4 py-2 rounded-xl">
-            {data.companyProfileId.type}
+            {data?.companyProfileId?.type}
           </p>
           {/* <p className="bg-orange-50 text-orange-500 text-sm font-semibold px-4 py-2 rounded-xl">
             {data.info.workplaceType}

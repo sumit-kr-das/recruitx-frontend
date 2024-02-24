@@ -21,7 +21,7 @@ type Props = {
 
 const ChangeProfile = ({ setProfile, profile, type }: Props) => {
   const inputRef = useRef<HTMLInputElement | null>(null);
-  const [image, setImage] = useState(null);
+  const [image, setImage] = useState<File | null>(null);
   const [updateUserInfo] = useUpdateUserInfoMutation();
   const [updateCompanyProfile] = useUpdateCompanyProfileMutation();
   const dispatch = useDispatch();
@@ -48,6 +48,9 @@ const ChangeProfile = ({ setProfile, profile, type }: Props) => {
   const handleUpload = async (e: React.FormEvent<HTMLButtonElement>) => {
     e.preventDefault();
     const formData = new FormData();
+    if (!image) {
+      return;
+    }
     formData.append("photo", image);
 
     try {
