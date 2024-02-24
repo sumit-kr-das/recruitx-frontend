@@ -9,10 +9,7 @@ import { useSelector } from "react-redux";
 import { selectCurrentUserData } from "../../features/user/userSlice";
 
 const UserProfile = () => {
-  // const { data } = useViewUserProfileQuery();
   const { user } = useSelector(selectCurrentUserData);
-  console.log(user);
-
   return (
     <div className="p-4 text-center">
       {/* user profile section */}
