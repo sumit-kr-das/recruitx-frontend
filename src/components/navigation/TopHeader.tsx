@@ -11,10 +11,8 @@ import {
 import RadixMenu from "../../themes/RadixMenu";
 import { Button } from "../../ui/button";
 import SearchComponent from "../mnjuser/userHome/search/Search";
-import NavigationMenus from "./NavigationMenus";
 import Sidebar from "./Sidebar";
 import MobileSidebar from "../recruit/MobileSidebar";
-
 
 const TopHeader = () => {
   const [search, setSearch] = useState<boolean>(false);
@@ -28,11 +26,17 @@ const TopHeader = () => {
             <img className="w-24 md:w-32" src={MainLogo} alt="main logo" />
           </Link>
           <div className="hidden md:block">
-            {
-              role ? (role === "user" && <NavigationMenus />) : (<NavigationMenus />
-              )
-            }
-            {/* <NavigationMenus /> */}
+            <ul className="flex items-center justify-center gap-x-8">
+              <li>
+                <Link to="/">Home</Link>
+              </li>
+              <li>
+                <Link to="/mnjuser/jobs">Jobs</Link>
+              </li>
+              <li>
+                <Link to="/mnjuser/companies">Company</Link>
+              </li>
+            </ul>
           </div>
         </div>
 
@@ -82,24 +86,21 @@ const TopHeader = () => {
             <RadixMenu menu={recruiterMenu} />
           )}
         </div>
-        {
-          role && (role === "company" || role === "admin") ? (
-
+        {role && (role === "company" || role === "admin") ? (
+          <>
+            <div className="lg:hidden">
+              <MobileSidebar />
+            </div>
+          </>
+        ) : (
+          <>
             <>
               <div className="lg:hidden">
-                <MobileSidebar />
+                <Sidebar />
               </div>
             </>
-          ) : (
-            <>
-              <>
-                <div className="lg:hidden">
-                  <Sidebar />
-                </div>
-              </>
-            </>
-          )
-        }
+          </>
+        )}
       </nav>
     </header>
   );

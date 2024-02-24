@@ -47,8 +47,6 @@ type JobProps = {
 };
 
 const FilteredJobs = ({ job }: JobProps) => {
-  console.log(job);
-
   return (
     <Card className="w-full h-full flex flex-col justify-between bg-white rounded-lg border shadow">
       <CardHeader className="flex items-center flex-row gap-4">
