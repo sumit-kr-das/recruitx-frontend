@@ -7,7 +7,7 @@
   --slide-spacing-sm: 1.6rem;
   --slide-size-sm: 50%;
   --slide-spacing-lg: 2rem;
-  --slide-size-lg: calc(100% / 3.5);
+  --slide-size-lg: calc(100% / 3);
 }
 .embla__viewport {
   overflow: hidden;
