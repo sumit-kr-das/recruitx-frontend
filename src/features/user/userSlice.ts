@@ -10,6 +10,7 @@ const initialState: UserState = {
     workStatus: null,
     createdAt: null,
     updatedAt: null,
+    status: null,
   },
   info: {
     photo: null,
@@ -33,13 +34,17 @@ const userSlice = createSlice({
         education: { ...action.payload.education },
       };
     },
+    updateUserPhoto: (state: UserState, action) => {
+      state.info.photo = action.payload.photo;
+    },
     removeUserData: () => {
       return initialState;
     },
   },
 });
 
-export const { setUserData, removeUserData } = userSlice.actions;
+export const { setUserData, removeUserData, updateUserPhoto } =
+  userSlice.actions;
 
 export default userSlice.reducer;
 

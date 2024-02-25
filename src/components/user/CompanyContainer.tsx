@@ -1,5 +1,7 @@
+import { Link } from "react-router-dom";
 import { TCompany } from "../../@types/publicTypes/TCompany";
 import DefaultCompany from "../../assets/default-company-logo.png";
+import { Button } from "../../ui/button";
 
 type TCompanyProps = {
   data: TCompany;
@@ -7,9 +9,9 @@ type TCompanyProps = {
 
 const CompanyContainer = ({ data }: TCompanyProps) => {
   return (
-    <div className="bg-white w-[320px] h-[320px] flex items-center flex-col justify-center text-center p-6 shadow border rounded-xl mt-8">
+    <div className="bg-white w-[320px] h-[375px] flex items-center flex-col justify-center text-center p-6 shadow border rounded-xl mt-8">
       <img
-        className="relative -top-[30px] w-[140px] h-[140px] rounded-full object-cover"
+        className="relative -top-[30px] w-[140px] h-[140px] rounded-full object-cover border bg-gray-50"
         src={data?.companyProfileId?.logo || DefaultCompany}
         alt="company icon"
       />
@@ -28,13 +30,18 @@ const CompanyContainer = ({ data }: TCompanyProps) => {
             {data.address}
           </p>
           <p className="bg-cyan-50 text-cyan-500 text-sm font-semibold px-4 py-2 rounded-xl">
-            {data.companyProfileId.type}
+            {data?.companyProfileId?.type}
           </p>
           {/* <p className="bg-orange-50 text-orange-500 text-sm font-semibold px-4 py-2 rounded-xl">
             {data.info.workplaceType}
           </p> */}
+
+        </div>
+        <div className="mt-5 flex justify-center items-center">
+          <Button className="bg-cyan-500 hover:bg-cyan-600"><Link to={`/mnjuser/company/${data._id}`}>View Details</Link> </Button>
         </div>
       </div>
+
     </div>
   );
 };

@@ -7,9 +7,10 @@ export type TCompany = {
   name: string;
   phone: string;
   pin: string;
-  companyProfileId: {
-    _id: string;
+  status: string,
+  companyProfileId?: {
+    _id?: string;
     logo?: string;
-    type: string;
+    type?: string;
   };
 };

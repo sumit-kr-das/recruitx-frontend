@@ -51,9 +51,9 @@ const Filter = () => {
     );
   };
 
-  useEffect(() => {
-    handleSubmit();
-  }, []);
+  // useEffect(() => {
+  //   handleSubmit();
+  // }, []);
 
   useEffect(() => {
     dispatch(setUserJobsData(data));

@@ -22,6 +22,11 @@ import { Button } from "../../ui/button";
 import { usePostJobMutation } from "../../features/company/post/setJobApiSlice";
 import { useToast } from "../../ui/use-toast";
 import { TApiError } from "../../@types/TApiError";
+import { Popover, PopoverContent, PopoverTrigger } from "../../ui/popover";
+import { cn } from "../../lib/utils.ts";
+import { citiesArray } from "../../constants/citiesArray.ts";
+import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem } from "../../ui/command";
+import { ArrowUpDown, CheckIcon } from "lucide-react";
 type FormValues = {
   title: string,
   category: string,
@@ -114,6 +119,7 @@ const SubmitJob = () => {
       tags,
       info: { ...other },
     };
+    console.log(newJobData);
 
     try {
       await submitJob(newJobData).unwrap();
@@ -344,21 +350,69 @@ const SubmitJob = () => {
                           </FormItem>
                         )}
                       />
-
-                      <FormField
-                        control={form.control}
-                        name="location"
-                        render={({ field }) => (
-                          <FormItem className="sm:flex-1 mt-3">
-                            <FormLabel>Enter location</FormLabel>
-                            <FormControl>
-                              <Input placeholder="Enter maximum exprience" {...field} />
-                            </FormControl>
-                            <FormMessage />
-                          </FormItem>
-                        )}
-                      />
-
+                      <div className="sm:flex-1 mt-3">
+                        <FormField
+                          control={form.control}
+                          name="location"
+                          render={({ field }) => (
+                            <FormItem className="flex flex-col">
+                              <FormLabel>Location</FormLabel>
+                              <Popover>
+                                <PopoverTrigger asChild>
+                                  <FormControl>
+                                    <Button
+                                      variant="outline"
+                                      role="combobox"
+                                      className={cn(
+                                        "w-full justify-between",
+                                        !field.value && "text-muted-foreground"
+                                      )}
+                                    >
+                                      {field.value
+                                        ? citiesArray.find(
+                                          (city) => city.value === field.value
+                                        )?.label
+                                        : "Select location"}
+                                      <ArrowUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
+                                    </Button>
+                                  </FormControl>
+                                </PopoverTrigger>
+                                <PopoverContent className="w-[200px] p-0">
+                                  <Command>
+                                    <CommandInput
+                                      placeholder="Search framework..."
+                                      className="h-9"
+                                    />
+                                    <CommandEmpty>No framework found.</CommandEmpty>
+                                    <CommandGroup>
+                                      {citiesArray.map((city) => (
+                                        <CommandItem
+                                          value={city.label}
+                                          key={city.value}
+                                          onSelect={() => {
+                                            form.setValue("location", city.value)
+                                          }}
+                                        >
+                                          {city.label}
+                                          <CheckIcon
+                                            className={cn(
+                                              "ml-auto h-4 w-4",
+                                              city.value === field.value
+                                                ? "opacity-100"
+                                                : "opacity-0"
+                                            )}
+                                          />
+                                        </CommandItem>
+                                      ))}
+                                    </CommandGroup>
+                                  </Command>
+                                </PopoverContent>
+                              </Popover>
+                              <FormMessage />
+                            </FormItem>
+                          )}
+                        />
+                      </div>
                     </div>
 
                     <div className="sm:flex sm:gap-4">

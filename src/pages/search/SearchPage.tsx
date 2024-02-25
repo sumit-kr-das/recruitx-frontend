@@ -1,17 +1,40 @@
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import NotFoundImg from "../../assets/not-found.png";
 import Footer from "../../components/footer/Footer";
 import TopHeader from "../../components/navigation/TopHeader";
-import { selectCurrentUserJobsData } from "../../features/user/userJobsSlice";
+import {
+  selectCurrentUserJobsData,
+  setUserJobsData,
+} from "../../features/user/userJobsSlice";
 import Container from "../../layout/Container";
 import Filter from "./_components/Filter";
 import FilterPagination from "./_components/FilterPagination";
 import FilteredJobs from "./_components/FilteredJobs";
 import SearchFilter from "./_components/SearchFilter";
 import FilterMobile from "./_components/FilterMobile";
+import { useLazyWithFilterJobsQuery } from "../../features/user/get/filterJobsApiSlice";
+import { useEffect } from "react";
 
 const SearchPage = () => {
   const jobsData = useSelector(selectCurrentUserJobsData);
+  const [trigger, { data }] = useLazyWithFilterJobsQuery();
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    trigger({
+      title: "",
+      value: "",
+      workplaceType: "On-site",
+      jobType: "Full-time",
+      salary: 100000,
+      exp: 0,
+      page: 1,
+    });
+  }, []);
+
+  useEffect(() => {
+    dispatch(setUserJobsData(data));
+  }, [data]);
 
   return (
     <div className="bg-[#FAFAFA]">

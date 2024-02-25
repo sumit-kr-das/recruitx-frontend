@@ -8,7 +8,7 @@ import { Button } from "../../../ui/button";
 import Loader from "../../../components/loader/Loader";
 import ChangeProfile from "../../../components/mnjuser/userProfile/ChangeProfile";
 import UpdateBasicInfo from "../../../components/mnjuser/userProfile/basicInfo/UpdateBasicInfo";
-import { PDFDownloadLink } from '@react-pdf/renderer'
+import { PDFDownloadLink } from "@react-pdf/renderer";
 import { useGetAllUserInfoQuery } from "../../../features/user/get/getAllUserInfoApiSlice";
 import ResumeDoc from "../../pdf/ResumeDoc";
 export type BasicInfoFormData = {
@@ -80,21 +80,23 @@ const BasicInfo = () => {
                 </div>
               </div>
             </div>
-            <Button variant="outline"
-            > <PDFDownloadLink
-              document={<ResumeDoc data={data} />}
-              fileName='resume.pdf'
-            >
-                {({ loading }) => (loading ? 'Loading resume..' : 'Download Resume')}
-              </PDFDownloadLink></Button>
+            <Button variant="outline">
+              <PDFDownloadLink
+                document={<ResumeDoc data={data} />}
+                fileName="resume.pdf"
+              >
+                {({ loading }) =>
+                  loading ? "Loading resume.." : "Download Resume"
+                }
+              </PDFDownloadLink>
+            </Button>
           </div>
         </div>
         {user?.name && <UpdateBasicInfo user={user} />}
       </div>
       {/* setProfile */}
-      {profile && (
-        <ChangeProfile profile={profile} setProfile={setProfile} type="user" />
-      )}
+
+      <ChangeProfile profile={profile} setProfile={setProfile} type="user" />
     </>
   );
 

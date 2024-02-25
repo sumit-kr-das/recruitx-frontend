@@ -80,43 +80,67 @@ const Login = () => {
     }
   };
   return (
-    <>
-      {/* navigation */}
+    <section className="bg-[#FAFAFA]">
       <TopHeader />
       <div className="pt-40 w-full h-screen flex justify-center">
-        <div className="w-96">
-          <h1 className="text-4xl font-extrabold text-center">
-            Login Your <br /> RecruitX Account
+        <div className="md:w-[500px] h-fit md:rounded-xl md:bg-white p-10 md:shadow">
+          <h1 className="text-2xl font-extrabold text-center">
+            Login Your RecruitX Account
           </h1>
           <form onSubmit={handleSubmit(submitForm)}>
             {/* select options */}
             {formStep === 0 && (
-              <section>
-                <p className="text-xs mt-6">Login Type</p>
-                {userRoles?.map((item, index) => (
-                  <div
-                    key={index}
-                    onClick={() => setType(item.id)}
-                    className={`mt-2  border border-gray-200 p-2 rounded-md cursor-pointer ${type === item.id && "bg-slate-200"
+              <>
+                <p className="mt-2 mb-5 md:mb-10 text-center">
+                  Choose according to your usability
+                </p>
+                <section>
+                  <p className="text-xs mt-6">Login Type</p>
+                  {userRoles?.map((item, index) => (
+                    <div
+                      key={index}
+                      onClick={() => setType(item.id)}
+                      className={`mt-2  border border-gray-200 p-2 rounded-md cursor-pointer ${
+                        type === item.id && "bg-slate-200"
                       }  `}
+                    >
+                      <h3 className="font-medium">{item.type}</h3>
+                      <p className="text-xs">{item.desc}</p>
+                    </div>
+                  ))}
+                  <Button
+                    onClick={completeFormStep}
+                    type="button"
+                    className="w-full mt-4"
                   >
-                    <h3 className="font-medium">{item.type}</h3>
-                    <p className="text-xs">{item.desc}</p>
-                  </div>
-                ))}
-                <Button
-                  onClick={completeFormStep}
-                  type="button"
-                  className="w-full mt-4"
-                >
-                  Continue
-                </Button>
-              </section>
+                    Continue
+                  </Button>
+                </section>
+              </>
             )}
 
             {/* form */}
             {formStep === 1 && (
               <>
+                {" "}
+                {type === 1 || type === 2 ? (
+                  <p className="mt-2 mb-5 md:mb-10 text-center">
+                    Don't have an account ?
+                    <Link
+                      className="text-blue-500"
+                      to={
+                        type === 1 ? "/mnjuser/register" : "/recruit/register"
+                      }
+                    >
+                      {" "}
+                      Register now
+                    </Link>
+                  </p>
+                ) : (
+                  <p className="mt-2 mb-5 md:mb-10 text-center">
+                    Don't have an account ? Contact with admin
+                  </p>
+                )}
                 <section>
                   <Input
                     type="email"
@@ -168,17 +192,22 @@ const Login = () => {
                     Log In
                   </Button>
                 </section>
-                <div className="mt-2 float-right font-medium text-blue-600">
-                  <Link to={`/forget-password/${type}`}>
-                    <p>Forgot password? Click here</p>
+                <p className="mt-2 float-right font-medium ">
+                  Forgot password?
+                  <Link
+                    className="text-blue-500"
+                    to={`/forget-password/${type}`}
+                  >
+                    {" "}
+                    Click here
                   </Link>
-                </div>
+                </p>
               </>
             )}
           </form>
         </div>
       </div>
-    </>
+    </section>
   );
 };
 
