@@ -9,11 +9,15 @@ import Loader from "../../loader/Loader";
 import UserDefault from "../../../assets/default-company-logo.png";
 import { Card } from "../../../ui/card";
 import { Button } from "../../../ui/button";
+import { selectCurrentCompanyData } from "../../../features/company/companySlice";
+import { useSelector } from "react-redux";
 
 const CompanyInfo = () => {
   const [open, setOpen] = useState(false);
   const [profile, setProfile] = useState<boolean>(false);
   const { data, isLoading, isSuccess } = useViewCompanyQuery();
+  const company = useSelector(selectCurrentCompanyData);
+
   if (isLoading) return (<Loader />);
 
   const companyProfile = (
@@ -41,7 +45,7 @@ const CompanyInfo = () => {
               </Dialog>
               <div className="w-full sm:w-[15%] sm:flex items-center flex-col">
                 <img
-                  src={data?.companyProfileId?.logo || UserDefault}
+                  src={company?.info?.logo || UserDefault}
                   width={180}
                   alt="user_default"
                   className="w-[120px] h-[120px] rounded-full border"
