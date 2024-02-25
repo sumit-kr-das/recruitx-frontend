@@ -1,29 +1,30 @@
 import { Link } from "react-router-dom";
 import { Loader } from "lucide-react";
 import { useViewAllCompaniesQuery } from "../../../../features/company/get/viewAllCompanies";
+import NewSlider from "../../../../pages/mnjuser/_components/SliderContainer";
+import "../../../../embla.css";
+import { EmblaOptionsType } from "embla-carousel";
+import SliderContainer from "../../../../pages/mnjuser/_components/SliderContainer";
+
+const OPTIONS: EmblaOptionsType = { align: "start" };
+const SLIDE_COUNT = 6;
+const SLIDES = Array.from(Array(SLIDE_COUNT).keys());
 
 const Company = () => {
   const { data, isLoading } = useViewAllCompaniesQuery({ limit: 10 });
-  console.log(data);
-  const company = (
-    <div className="bg-white border rounded-lg mt-4 shadow-md">
-      <div className="flex justify-between p-6">
-        <div>
-          <p className="font-bold">Top companies</p>
-          <p className="text-xs">Hiring for Software Development</p>
-        </div>
-        <Link to="/mnjuser/companies" className="text-blue-600 font-semibold">
-          View all
-        </Link>
+  // console.log(data);
+
+  return (
+    <div className="relative mt-4 bg-white p-8 rounded-xl border">
+      <div>
+        <p className="font-semibold text-xl">Top companies</p>
+        <p className="text-sm">Hiring for Software Development</p>
       </div>
-      <div className="w-[750px]">
-        {/* company slider was here */}
-        {/* <CompanySlider slidesPerview={3} data={data} /> */}
+      <div className="w-[100%] pt-4">
+        <SliderContainer data={data} slides={SLIDES} options={OPTIONS} />
       </div>
     </div>
   );
-
-  return isLoading ? <Loader /> : company;
 };
 
 export default Company;
