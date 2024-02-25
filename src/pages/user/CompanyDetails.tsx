@@ -10,8 +10,8 @@ import Loader from "../../components/loader/Loader";
 import CompanyReviewForm from "./_components/CompanyReviewForm";
 
 const CompanyDetails = () => {
-  const { cimpanyId } = useParams();
-  const { data, isLoading, isSuccess } = useGetCompanyDetailQuery({ id: cimpanyId });
+  const { companyId } = useParams();
+  const { data, isLoading, isSuccess } = useGetCompanyDetailQuery({ id: companyId });
   console.log(data);
 
   if (!data && isLoading) return <Loader />

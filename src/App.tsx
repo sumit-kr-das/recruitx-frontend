@@ -193,7 +193,7 @@ const App = () => {
           }
         /> */}
         <Route
-          path="/mnjuser/company/:cimpanyId"
+          path="/mnjuser/company/:companyId"
           element={
             <Suspense fallback={<Loader />}>
               <CompanyDetails />

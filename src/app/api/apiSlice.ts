@@ -31,6 +31,7 @@ export const apiSlice = createApi({
     "CompanyGlobal",
     "JobChart",
     "CompanyStats",
+    "Review"
   ],
   endpoints: () => ({}),
 });
