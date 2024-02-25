@@ -7,6 +7,7 @@ import UserTitleWrapper from "../../components/user/UserTitleWrapper";
 import { Button } from "../../ui/button";
 import { TJobs } from "../../@types/publicTypes/TJobs";
 import Loader from "../../components/loader/Loader";
+import CompanyReviewForm from "./_components/CompanyReviewForm";
 
 const CompanyDetails = () => {
   const { cimpanyId } = useParams();
@@ -60,6 +61,9 @@ const CompanyDetails = () => {
                         <p className="text-slate-600 mt-4">
                           {data?.companyDetail?.companyProfileId?.description}
                         </p>
+                        <div className="mt-5">
+                          <CompanyReviewForm />
+                        </div>
                       </div>
                       {/* sidebar */}
                       <div className="lg:col-span-4 md:col-span-6">
@@ -218,6 +222,7 @@ const CompanyDetails = () => {
                         </div>
                       </div>
                     </div>
+
                     <UserTitleWrapper title="Available Jobs" titleVariant="hiring now" des="This company has the available jobs for now">
                       {
                         data?.jobs?.map((item: TJobs, index: number) => (
