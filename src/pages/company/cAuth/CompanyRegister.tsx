@@ -10,7 +10,7 @@ import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectVa
 import { useToast } from "../../../ui/use-toast";
 import { industryTypes } from "../../../constants/industryTypes";
 import { useForm } from "react-hook-form";
-import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "../../../ui/form";
+import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "../../../ui/form";
 import CompanyRegisterSchema from "../../../@types/zod/CompanyRegisterSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
@@ -86,19 +86,17 @@ const CompanyRegister = () => {
 
 	return (
 		<>
-			<div className="bg-cyan-50">
+			<div className="bg-[#FAFAFA]">
 				<TopHeader />
 				<div className="pt-40 w-full h-auto flex justify-center">
 					<div className="h-fit rounded-xl bg-white p-10 mb-10 shadow md:w-[800px]">
 						<h1 className="text-2xl mb-5 font-extrabold text-center">
 							Get started with Naukri <br /> Recruitment Solutions
 						</h1>
-						<p className="text-sm text-gray-500 text-center mb-5">
-							or already registered?{" "}
-							<Link
-								to="/recruit/login"
-								className="font-semibold leading-6 text-cyan-500 hover:text-cyan-600"
-							>
+						<p className="mt-2 mb-5 md:mb-10 text-center">
+							Already have an account ?
+							<Link className="text-blue-500" to="/login">
+								{" "}
 								Login now
 							</Link>
 						</p>
@@ -108,7 +106,7 @@ const CompanyRegister = () => {
 								{
 									step === 0 && (
 										<>
-											<div className="flex gap-4">
+											<div className="flex gap-4 flex-col md:flex-row">
 												<FormField
 													control={form.control}
 													name="name"
@@ -136,7 +134,7 @@ const CompanyRegister = () => {
 													)}
 												/>
 											</div>
-											<div className="flex gap-4">
+											<div className="flex gap-4 flex-col md:flex-row">
 												<FormField
 													control={form.control}
 													name="phone"
@@ -172,7 +170,7 @@ const CompanyRegister = () => {
 								{
 									step === 1 && (
 										<>
-											<div className="flex gap-4">
+											<div className="flex gap-4 flex-col md:flex-row">
 												<FormField
 													control={form.control}
 													name="companyName"
@@ -200,7 +198,7 @@ const CompanyRegister = () => {
 													)}
 												/>
 											</div>
-											<div className="flex gap-4">
+											<div className="flex gap-4 flex-col md:flex-row">
 												<FormField
 													control={form.control}
 													name="pin"
@@ -286,7 +284,15 @@ const CompanyRegister = () => {
 											</>
 										)
 									}
+
 								</div>
+								<FormDescription>
+									Are you a new company ?
+									<Link className="text-blue-500" to="/mnjuser/register">
+										{" "}
+										Register now
+									</Link>
+								</FormDescription>
 							</form>
 						</Form>
 					</div>
