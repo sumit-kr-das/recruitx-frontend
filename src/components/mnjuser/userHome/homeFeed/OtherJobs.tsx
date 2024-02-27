@@ -1,10 +1,9 @@
-import { Link } from "react-router-dom";
-import RocketImg from "../../../../assets/icons/ear-section.png";
-import { useGetJobRecomandationQuery } from "../../../../features/user/get/getJobRecomendationApiSlice";
-import { Loader } from "lucide-react";
-import "../../../../embla.css";
-import JobSlider from "./JobSlider";
 import { EmblaOptionsType } from "embla-carousel";
+import { Loader } from "lucide-react";
+import RocketImg from "../../../../assets/icons/ear-section.png";
+import "../../../../embla.css";
+import { useGetJobRecomandationQuery } from "../../../../features/user/get/getJobRecomendationApiSlice";
+import JobSlider from "./JobSlider";
 
 const OPTIONS: EmblaOptionsType = { align: "start" };
 
@@ -26,7 +25,7 @@ const OtherJobs = () => {
           </p>
         </div>
       </div>
-      <div className="w-[750px]">
+      <div className="w-[100%] mt-4">
         {/* jobs slider was here */}
         <JobSlider data={data} options={OPTIONS} />
       </div>

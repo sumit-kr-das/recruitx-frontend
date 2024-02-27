@@ -43,52 +43,57 @@ const JobSlider = ({ options, data }) => {
       <div className="embla__viewport" ref={emblaRef}>
         <div className="embla__container">
           {data?.map((item, index) => (
-            <div
-              className="bg-white w-[350px] h-[350px] p-6 shadow border rounded-xl"
-              key={index}
-            >
-              <div className="flex items-center gap-2">
-                {/* <img
-                  className="w-[60px] h-[60px] rounded-full object-cover border bg-gray-50"
-                  src={item?.companyId?.companyProfileId.logo || DefaultCompany}
-                  alt="company icon"
-                /> */}
-                <div>
-                  <h2 className="font-bold line-clamp-1">
-                    {item.companyId.companyName}
-                  </h2>
-                  <p className="text-sm">{item.info.location}</p>
+            <div className="embla__slide" key={index}>
+              <div className="bg-white w-[280px] h-[320px] p-6 shadow border rounded-xl">
+                <div className="flex items-center gap-2">
+                  <img
+                    className="w-[60px] h-[60px] rounded-full object-cover border bg-gray-50"
+                    src={
+                      item?.companyId?.companyProfileId?.logo || DefaultCompany
+                    }
+                    alt="company icon"
+                  />
+                  <div>
+                    <h2 className="font-bold line-clamp-1">
+                      {item.companyId.companyName}
+                    </h2>
+                    <p className="text-sm line-clamp-1">{item.info.location}</p>
+                  </div>
                 </div>
-              </div>
 
-              <div className="mt-4">
-                <h3 className="font-bold text-xl line-clamp-1">{item.title}</h3>
-                <p className="line-clamp-2">{item.description}</p>
-              </div>
+                <div className="mt-4">
+                  <h3 className="font-bold text-lg line-clamp-1">
+                    {item.title}
+                  </h3>
+                  <p className="line-clamp-2 text-sm">{item.description}</p>
+                </div>
 
-              <div className="flex items-center flex-wrap gap-2 my-4">
-                <p className="bg-blue-50 text-blue-500 text-sm font-semibold px-4 py-2 rounded-xl">
-                  {item.info.vacancies} Positions
-                </p>
-                <p className="bg-red-50 text-red-500 text-sm font-semibold px-4 py-2 rounded-xl">
-                  {item.info.jobType}
-                </p>
-                <p className="bg-green-50 text-green-500 text-sm font-semibold px-4 py-2 rounded-xl">
-                  {item.info.minExprience} Years
-                </p>
-                <p className="bg-cyan-50 text-cyan-500 text-sm font-semibold px-4 py-2 rounded-xl">
-                  {item.info.maxSalary}/Year
-                </p>
-                <p className="bg-orange-50 text-orange-500 text-sm font-semibold px-4 py-2 rounded-xl">
-                  {item.info.workplaceType}
-                </p>
-              </div>
+                <div className="flex items-center flex-wrap gap-2 my-4">
+                  <p className="bg-blue-50 text-blue-500 text-xs font-semibold px-2 py-1 rounded-xl">
+                    {item.info.vacancies} Positions
+                  </p>
+                  <p className="bg-red-50 text-red-500 text-xs font-semibold px-2 py-1 rounded-xl">
+                    {item.info.jobType}
+                  </p>
+                  <p className="bg-green-50 text-green-500 text-xs font-semibold px-2 py-1 rounded-xl">
+                    {item.info.minExprience} Years
+                  </p>
+                  <p className="bg-cyan-50 text-cyan-500 text-xs font-semibold px-2 py-1 rounded-xl">
+                    {item.info.maxSalary}/Year
+                  </p>
+                  <p className="bg-orange-50 text-orange-500 text-xs font-semibold px-2 py-1 rounded-xl">
+                    {item.info.workplaceType}
+                  </p>
+                </div>
 
-              <div className="flex items-center gap-4">
-                <Button className="bg-cyan-500 hover:bg-cyan-600">
-                  Apply Now
-                </Button>
-                <Button variant="outline">View Details</Button>
+                <div className="flex items-center gap-4">
+                  <Button className="bg-cyan-500 hover:bg-cyan-600 text-xs">
+                    Apply Now
+                  </Button>
+                  <Button className="text-xs" variant="outline">
+                    View Details
+                  </Button>
+                </div>
               </div>
             </div>
           ))}
