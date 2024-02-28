@@ -59,7 +59,7 @@ const CompanySearch = () => {
             </Button>
           </div>
         </div>
-        <div className="flex items-center justify-center flex-wrap md:gap-x-5 gap-y-10 mt-4">
+        <div className="grid gap-x-4 gap-y-8 grid-cols-[repeat(auto-fill,minmax(300px,1fr))] mt-4">
           {isSuccess &&
             data &&
             data.companies.length > 0 &&
@@ -72,7 +72,6 @@ const CompanySearch = () => {
             handelSearch={handelSearch}
             data={data}
             page={page}
-            setPage={setPage}
           />
         )}
       </Container>
