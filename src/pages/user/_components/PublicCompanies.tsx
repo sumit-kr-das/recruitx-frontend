@@ -1,24 +1,20 @@
 import { useState } from "react";
+import { BaseSkeletonCard } from "../../../components/skeleton/BaseSkeletonCard";
 import CompanyContainer from "../../../components/user/CompanyContainer";
 import UserTitleWrapper from "../../../components/user/UserTitleWrapper";
 import { useViewAllCompaniesQuery } from "../../../features/company/get/viewAllCompanies";
 import { Button } from "../../../ui/button";
-import Loader from "../../../components/loader/Loader";
 
 const PublicCompanies = () => {
   const [loadcompanies, setLoadCompanies] = useState<number>(8);
 
-  const { data } = useViewAllCompaniesQuery({
+  const { data, isLoading } = useViewAllCompaniesQuery({
     limit: loadcompanies,
   });
 
   const handleLoadCompanyes = () => {
     setLoadCompanies((prev) => prev + 3);
   };
-
-  if (!data || data?.length === 0) {
-    return <Loader />;
-  }
 
   return (
     <>
@@ -28,9 +24,19 @@ const PublicCompanies = () => {
         des="Popular companies are hiring actively the skilled and suitable
           candidates on recruitx."
       >
-        {data?.map((item, index) => (
-          <CompanyContainer key={index} data={item} />
-        ))}
+        {data || !isLoading ? (
+          <>
+            {data?.map((item, index) => (
+              <CompanyContainer key={index} data={item} />
+            ))}
+          </>
+        ) : (
+          <>
+            {[...Array(6)].map((_, index) => (
+              <BaseSkeletonCard key={index} />
+            ))}
+          </>
+        )}
       </UserTitleWrapper>
       <div className="mt-8 flex items-center justify-center">
         <Button onClick={handleLoadCompanyes}>Load more</Button>
