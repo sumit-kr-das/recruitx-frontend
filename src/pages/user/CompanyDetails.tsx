@@ -8,6 +8,7 @@ import { Button } from "../../ui/button";
 import { TJobs } from "../../@types/publicTypes/TJobs";
 import Loader from "../../components/loader/Loader";
 import CompanyReviewForm from "./_components/CompanyReviewForm";
+import CompanyReviews from "./_components/CompanyReviews";
 
 const CompanyDetails = () => {
   const { companyId } = useParams();
@@ -63,6 +64,9 @@ const CompanyDetails = () => {
                         </p>
                         <div className="mt-5">
                           <CompanyReviewForm />
+                        </div>
+                        <div className="mt-5">
+                          <CompanyReviews />
                         </div>
                       </div>
                       {/* sidebar */}
