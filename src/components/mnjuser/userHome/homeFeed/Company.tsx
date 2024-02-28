@@ -8,7 +8,6 @@ const OPTIONS: EmblaOptionsType = { align: "start" };
 
 const Company = () => {
   const { data } = useViewAllCompaniesQuery({ limit: 10 });
-  console.log(data);
 
   if (!data && data?.length === 0) {
     return <Loader />;

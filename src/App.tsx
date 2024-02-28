@@ -67,7 +67,6 @@ const App = () => {
   const [trigger, user] = useLazyGetUserGlobalQuery();
   const [compnayTrigger, company] = useLazyGetCompanyGlobalQuery();
   const dispatch = useDispatch();
-  console.log(process.env.API_BASE_URL);
 
   useEffect(() => {
     if (role && role === "user") {

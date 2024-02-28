@@ -10,8 +10,8 @@ import {
 } from "../../../../ui/EmblaCarouselArrowButtons";
 
 type PropType = {
-  data: TCompany[];
   options?: EmblaOptionsType;
+  data: TCompany[];
 };
 
 const CompanySlider: React.FC<PropType> = ({ options, data }) => {

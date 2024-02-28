@@ -1,13 +1,15 @@
+import { Star } from "lucide-react";
 import { useParams } from "react-router-dom";
-import Footer from "../../components/footer/Footer";
-import TopHeader from "../../components/navigation/TopHeader";
-import Container from "../../layout/Container";
-import { useGetCompanyDetailQuery } from "../../features/user/get/getCompanyDetailApiSlice";
-import UserTitleWrapper from "../../components/user/UserTitleWrapper";
-import { Button } from "../../ui/button";
 import { TJobs } from "../../@types/publicTypes/TJobs";
+import Footer from "../../components/footer/Footer";
 import Loader from "../../components/loader/Loader";
+import TopHeader from "../../components/navigation/TopHeader";
+import UserTitleWrapper from "../../components/user/UserTitleWrapper";
+import { useGetCompanyDetailQuery } from "../../features/user/get/getCompanyDetailApiSlice";
+import Container from "../../layout/Container";
+import { Button } from "../../ui/button";
 import CompanyReviewForm from "./_components/CompanyReviewForm";
+import CompanyReviews from "./_components/CompanyReviews";
 
 const CompanyDetails = () => {
   const { companyId } = useParams();
@@ -37,9 +39,19 @@ const CompanyDetails = () => {
                           />
 
                           <div className="md:ms-4 md:mt-0 mt-6">
-                            <h5 className="text-xl font-semibold">
-                              {data?.companyDetail?.companyName}
-                            </h5>
+                            <div className="flex items-center">
+                              <h5 className="text-xl font-semibold">
+                                {data?.companyDetail?.companyName}
+                              </h5>
+                              <span className="ml-2 flex text-orange-300">
+                                <Star fill="orange" size={20} />
+                                <span className="ml-1">
+                                  {(ratings && ratings.rating) ||
+                                    "No ratings yet"}
+                                </span>
+                              </span>
+                            </div>
+
                             <div className="mt-2">
                               <span className="text-slate-400 font-medium me-2 inline-block">
                                 <i className="uil uil-building text-[18px] text-emerald-600 me-1"></i>{" "}
@@ -64,6 +76,9 @@ const CompanyDetails = () => {
                         </p>
                         <div className="mt-5">
                           <CompanyReviewForm />
+                        </div>
+                        <div className="mt-5">
+                          <CompanyReviews />
                         </div>
                       </div>
                       {/* sidebar */}
