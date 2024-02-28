@@ -20,7 +20,7 @@ const UserProfile = () => {
           src={info?.photo || UserDefault}
           width={120}
           alt="user_default"
-          className="rounded-full object-cover border"
+          className="rounded-full object-cover border w-[120] h-[120]"
         />
         <div
           className="flex items-center gap-2"
