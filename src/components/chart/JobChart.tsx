@@ -38,7 +38,7 @@ const JobChart = () => {
 
     console.log(option, 'options data');
     return (
-        <Card className="mt-5 w-full sm:w-3/5 p-5">
+        <Card className="mt-5 w-full p-5">
             <h2 className="font-bold text-lg mb-5">Job Posted Per Date</h2>
             {
                 option && Object.keys(option?.series).length > 0 ? (<Chart
