@@ -13,10 +13,11 @@ import { PublicStatsSkeletion } from "../skeleton/PublicStatsSkeletion";
 
 const UserProfile = () => {
   const { user, info } = useSelector(selectCurrentUserData);
+
   return (
     <div className="p-4 text-center">
       {/* user profile section */}
-      {user ? (
+      {user.name ? (
         <div className="flex items-center justify-center flex-col">
           <img
             src={info?.photo || UserDefault}
