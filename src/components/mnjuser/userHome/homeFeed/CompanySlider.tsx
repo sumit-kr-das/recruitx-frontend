@@ -7,18 +7,17 @@ import {
   PrevButton,
   usePrevNextButtons,
 } from "../../../../ui/EmblaCarouselArrowButtons";
-import { useDotButton } from "../../../../ui/EmblaCarouselDotButton";
-
+import { TCompany } from "../../../../@types/publicTypes/TCompany";
 type PropType = {
   slides: number[];
   options?: EmblaOptionsType;
+  data: TCompany[]
 };
 
 const CompanySlider: React.FC<PropType> = ({ options, data }) => {
   const [emblaRef, emblaApi] = useEmblaCarousel(options);
 
-  const { selectedIndex, scrollSnaps, onDotButtonClick } =
-    useDotButton(emblaApi);
+
 
   const {
     prevBtnDisabled,

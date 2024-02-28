@@ -1,6 +1,5 @@
 import { EmblaOptionsType } from "embla-carousel";
 import useEmblaCarousel from "embla-carousel-react";
-import React from "react";
 import DefaultCompany from "../../../../assets/default-company-logo.png";
 import {
   NextButton,
@@ -18,8 +17,8 @@ type PropType = {
   };
 };
 
-const JobSlider = ({ options, data }) => {
-  const [emblaRef, emblaApi] = useEmblaCarousel(options);
+const JobSlider = ({ options, data }: PropType) => {
+  const [emblaRef, emblaApi] = useEmblaCarousel(option);
   console.log("data", data);
 
   const { selectedIndex, scrollSnaps, onDotButtonClick } =

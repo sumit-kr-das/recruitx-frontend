@@ -9,10 +9,13 @@ import { TJobs } from "../../@types/publicTypes/TJobs";
 import Loader from "../../components/loader/Loader";
 import CompanyReviewForm from "./_components/CompanyReviewForm";
 import CompanyReviews from "./_components/CompanyReviews";
+import { useAvgRatingDataQuery } from "../../features/user/get/getAvgReviewApiSlice";
+import { Star } from "lucide-react";
 
 const CompanyDetails = () => {
   const { companyId } = useParams();
   const { data, isLoading, isSuccess } = useGetCompanyDetailQuery({ id: companyId });
+  const { data: ratings } = useAvgRatingDataQuery(companyId);
   console.log(data);
 
   if (!data && isLoading) return <Loader />
@@ -38,9 +41,17 @@ const CompanyDetails = () => {
                           />
 
                           <div className="md:ms-4 md:mt-0 mt-6">
-                            <h5 className="text-xl font-semibold">
-                              {data?.companyDetail?.companyName}
-                            </h5>
+                            <div className="flex items-center">
+                              <h5 className="text-xl font-semibold">
+                                {data?.companyDetail?.companyName}
+                              </h5>
+                              <span className="ml-2 flex text-orange-300">
+                                <Star fill="orange" size={20} />
+                                <span className="ml-1">{ratings && ratings.rating || "No ratings yet"}</span>
+                              </span>
+                            </div>
+
+
                             <div className="mt-2">
                               <span className="text-slate-400 font-medium me-2 inline-block">
                                 <i className="uil uil-building text-[18px] text-emerald-600 me-1"></i>{" "}
@@ -52,6 +63,7 @@ const CompanyDetails = () => {
                                 Address: {data?.companyDetail?.address}, Pin: {data?.companyDetail?.pin}
                               </span>
                             </div>
+
                           </div>
                         </div>
 

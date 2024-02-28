@@ -25,6 +25,8 @@ const CompanyReviewForm = () => {
         console.log(data);
         try {
             await setReview({ ...data }).unwrap();
+            setCurrentValue(0);
+            setDesc("");
             toast({
                 description: "Your review submitted successfully"
             })
@@ -47,7 +49,7 @@ const CompanyReviewForm = () => {
 
                     {
                         stars.map((_, index) => (
-                            <Star key={index} color='grey' onClick={() => setCurrentValue(index + 1)} onMouseOver={() => setHoverValue(index + 1)} onMouseOut={() => setHoverValue(undefined)} className='cursor-pointer' fill={(hoverValue || currentValue) > index ? 'orange' : 'white'}
+                            <Star size={20} key={index} color='grey' onClick={() => setCurrentValue(index + 1)} onMouseOver={() => setHoverValue(index + 1)} onMouseOut={() => setHoverValue(undefined)} className='cursor-pointer' fill={(hoverValue || currentValue) > index ? 'orange' : 'white'}
                             />
                         ))
                     }

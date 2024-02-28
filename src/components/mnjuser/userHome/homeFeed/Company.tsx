@@ -6,7 +6,7 @@ import CompanySlider from "./CompanySlider";
 const OPTIONS: EmblaOptionsType = { align: "start" };
 
 const Company = () => {
-  const { data, isLoading } = useViewAllCompaniesQuery({ limit: 10 });
+  const { data } = useViewAllCompaniesQuery({ limit: 10 });
 
   return (
     <div className="relative mt-4 bg-white p-8 rounded-xl border">

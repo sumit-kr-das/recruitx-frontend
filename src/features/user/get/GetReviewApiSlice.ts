@@ -3,9 +3,9 @@ import { apiSlice } from "../../../app/api/apiSlice";
 export const getReviewApiSlice = apiSlice.injectEndpoints({
     endpoints: (builder) => ({
         reviewsData: builder.query({
-            query: (companyId) => ({
-                url: `/company/rating/view/${companyId}`,
-            })
+            query: (companyId) =>
+                `/company/rating/view/${companyId}`,
+            providesTags: ["Review"],
         })
     })
 })
