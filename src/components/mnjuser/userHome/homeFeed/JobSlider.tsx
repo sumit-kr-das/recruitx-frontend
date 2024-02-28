@@ -1,29 +1,22 @@
 import { EmblaOptionsType } from "embla-carousel";
 import useEmblaCarousel from "embla-carousel-react";
 import React from "react";
+import { TJobs } from "../../../../@types/publicTypes/TJobs";
 import DefaultCompany from "../../../../assets/default-company-logo.png";
 import {
   NextButton,
   PrevButton,
   usePrevNextButtons,
 } from "../../../../ui/EmblaCarouselArrowButtons";
-import { useDotButton } from "../../../../ui/EmblaCarouselDotButton";
 import { Button } from "../../../../ui/button";
 
 type PropType = {
-  data: string[];
-  options: {
-    slides: number[];
-    options?: EmblaOptionsType;
-  };
+  data: TJobs[];
+  options?: EmblaOptionsType;
 };
 
-const JobSlider = ({ options, data }) => {
+const JobSlider: React.FC<PropType> = ({ options, data }) => {
   const [emblaRef, emblaApi] = useEmblaCarousel(options);
-  console.log("data", data);
-
-  const { selectedIndex, scrollSnaps, onDotButtonClick } =
-    useDotButton(emblaApi);
 
   const {
     prevBtnDisabled,

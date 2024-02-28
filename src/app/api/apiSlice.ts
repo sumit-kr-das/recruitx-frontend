@@ -2,7 +2,7 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { RootState } from "../store";
 
 const baseQuery = fetchBaseQuery({
-  baseUrl: "http://localhost:8000/api",
+  baseUrl: process.env.API_BASE_URL,
   credentials: "include",
   prepareHeaders: (headers, { getState }) => {
     const token = (getState() as RootState).auth.data.access_token;
@@ -31,7 +31,7 @@ export const apiSlice = createApi({
     "CompanyGlobal",
     "JobChart",
     "CompanyStats",
-    "Review"
+    "Review",
   ],
   endpoints: () => ({}),
 });

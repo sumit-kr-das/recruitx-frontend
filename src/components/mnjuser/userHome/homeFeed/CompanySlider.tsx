@@ -1,24 +1,21 @@
 import { EmblaOptionsType } from "embla-carousel";
 import useEmblaCarousel from "embla-carousel-react";
 import React from "react";
+import { TCompany } from "../../../../@types/publicTypes/TCompany";
 import DefaultCompany from "../../../../assets/default-company-logo.png";
 import {
   NextButton,
   PrevButton,
   usePrevNextButtons,
 } from "../../../../ui/EmblaCarouselArrowButtons";
-import { useDotButton } from "../../../../ui/EmblaCarouselDotButton";
 
 type PropType = {
-  slides: number[];
+  data: TCompany[];
   options?: EmblaOptionsType;
 };
 
 const CompanySlider: React.FC<PropType> = ({ options, data }) => {
   const [emblaRef, emblaApi] = useEmblaCarousel(options);
-
-  const { selectedIndex, scrollSnaps, onDotButtonClick } =
-    useDotButton(emblaApi);
 
   const {
     prevBtnDisabled,
@@ -39,7 +36,7 @@ const CompanySlider: React.FC<PropType> = ({ options, data }) => {
         <div className="embla__container">
           {data?.map((item, index) => (
             <div className="embla__slide" key={index}>
-              <div className="bg-white w-[250px] h-[260px] flex items-center flex-col justify-center text-center p-6 shadow border rounded-xl mt-8">
+              <div className="bg-white w-[280px] h-[260px] flex items-center flex-col justify-center text-center p-6 shadow border rounded-xl mt-8">
                 <img
                   className="relative -top-[30px] w-[100px] h-[100px] rounded-full object-cover border bg-gray-50"
                   src={item?.companyProfileId?.logo || DefaultCompany}

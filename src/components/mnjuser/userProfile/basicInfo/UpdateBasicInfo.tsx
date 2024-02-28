@@ -1,9 +1,12 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Pencil } from "lucide-react";
+import { useEffect, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import * as z from "zod";
+import { TApiError } from "../../../../@types/TApiError";
 import BasicInfoSchema from "../../../../@types/zod/BasicInfoSchema";
 import { useUpdateUserMutation } from "../../../../features/user/put/updateUserProfileApiSlice";
+import { BasicInfoFormData } from "../../../../pages/mnjuser/_components/BasicInfo";
 import { Button } from "../../../../ui/button";
 import {
   Dialog,
@@ -29,9 +32,6 @@ import {
   SelectTrigger,
   SelectValue,
 } from "../../../../ui/select";
-import { BasicInfoFormData } from "../../../../pages/mnjuser/_components/BasicInfo";
-import { useEffect, useState } from "react";
-import { TApiError } from "../../../../@types/TApiError";
 import { useToast } from "../../../../ui/use-toast";
 
 type UserBasicInfoProps = {

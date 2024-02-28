@@ -1,3 +1,4 @@
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import BlogSVG from "../../assets/icons/blog.svg";
 import CompanyeSVG from "../../assets/icons/company.svg";
@@ -5,30 +6,37 @@ import HomeSVG from "../../assets/icons/home.svg";
 import InfoSVG from "../../assets/icons/info.svg";
 import JobsSVG from "../../assets/icons/jobs.svg";
 import UserDefault from "../../assets/user-default-profile.png";
-import { useSelector } from "react-redux";
 import { selectCurrentUserData } from "../../features/user/userSlice";
+import { Button } from "../../ui/button";
+import { BadgeAlert, ShieldCheck } from "lucide-react";
 
 const UserProfile = () => {
-  const { user } = useSelector(selectCurrentUserData);
+  const { user, info } = useSelector(selectCurrentUserData);
   return (
     <div className="p-4 text-center">
       {/* user profile section */}
       <div className="flex items-center justify-center flex-col">
         <img
-          src={UserDefault}
+          src={info?.photo || UserDefault}
           width={120}
           alt="user_default"
           className="rounded-full object-cover border"
         />
-        <h1 className="font-bold capitalize">{user?.name}</h1>
-
-        <p className="text-xs font-medium capitalize">{user?.workStatus}</p>
-        <p className="text-xs text-gray-400">Last updated 29m ago</p>
-        <Link
-          to="/mnjuser/profile"
-          className="mt-2 bg-cyan-500 text-white text-sm px-5 py-2 rounded-md hover:bg-cyan-600"
+        <div
+          className="flex items-center gap-2"
+          title={user?.status === "verified" ? "verified" : "not verified"}
         >
-          View profile
+          <h1 className="font-bold capitalize">{user?.name}</h1>
+          {user?.status === "verified" ? (
+            <ShieldCheck className="w-4 h-4 text-green-600" />
+          ) : (
+            <BadgeAlert className="w-4 h-4 text-red-600" />
+          )}
+        </div>
+        <p className="text-sm font-medium capitalize">{user?.workStatus}</p>
+        <p className="text-xs text-gray-400">Last updated 29m ago</p>
+        <Link to="/mnjuser/profile" className="mt-2 ">
+          <Button variant="outline">View Profile</Button>
         </Link>
       </div>
       {/* profile performence section */}
@@ -75,7 +83,7 @@ const UserProfile = () => {
               className="flex gap-1 py-2 px-4 rounded-lg hover:bg-green-100"
             >
               <img src={JobsSVG} width={20} alt="nav_logo" />
-              <p>Jobs</p>
+              <p>Search Jobs</p>
             </Link>
           </li>
           <li>

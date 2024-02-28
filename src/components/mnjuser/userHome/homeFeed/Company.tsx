@@ -2,12 +2,17 @@ import { EmblaOptionsType } from "embla-carousel";
 import "../../../../embla.css";
 import { useViewAllCompaniesQuery } from "../../../../features/company/get/viewAllCompanies";
 import CompanySlider from "./CompanySlider";
+import Loader from "../../../loader/Loader";
 
 const OPTIONS: EmblaOptionsType = { align: "start" };
 
 const Company = () => {
-  const { data, isLoading } = useViewAllCompaniesQuery({ limit: 10 });
+  const { data } = useViewAllCompaniesQuery({ limit: 10 });
+  console.log(data);
 
+  if (!data && data?.length === 0) {
+    return <Loader />;
+  }
   return (
     <div className="relative mt-4 bg-white p-8 rounded-xl border">
       <div>

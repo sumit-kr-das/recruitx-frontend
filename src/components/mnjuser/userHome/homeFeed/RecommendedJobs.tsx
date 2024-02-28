@@ -2,6 +2,7 @@ import { EmblaOptionsType } from "embla-carousel";
 import { useGetJobRecomandationQuery } from "../../../../features/user/get/getJobRecomendationApiSlice";
 import JobSlider from "./JobSlider";
 import "../../../../embla.css";
+import Loader from "../../../loader/Loader";
 
 const OPTIONS: EmblaOptionsType = { align: "start" };
 
@@ -10,6 +11,9 @@ const RecommendedJobs = () => {
     hasInfo: true,
     limit: 20,
   });
+  if (!data && data?.length === 0) {
+    return <Loader />;
+  }
   return (
     <div className="relative mt-4 bg-white p-8 rounded-xl border">
       <div>
