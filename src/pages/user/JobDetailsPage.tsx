@@ -5,13 +5,16 @@ import JobDetailSideBar from "../../components/mnjuser/jobDetail/JobDetailSideBa
 import TopHeader from "../../components/navigation/TopHeader";
 import { useGetJobDetailQuery } from "../../features/user/get/getJobDetailApiSlice";
 import Container from "../../layout/Container";
+import Loader from "../../components/loader/Loader";
 
 const JobDetailsPage = () => {
   const { jobId } = useParams();
-  const { data } = useGetJobDetailQuery({ id: jobId });
+  const { data, isLoading, isSuccess } = useGetJobDetailQuery({ id: jobId });
+
+  if (!data && isLoading && !isSuccess) return <Loader />
 
   return (
-    <div className="bg-green-50">
+    <div className="bg-[#FAFAFA]">
       <TopHeader />
       {/* <Conta className="max-w-screen-xl mx-auto pb-10 flex justify-between"> */}
       <Container>
