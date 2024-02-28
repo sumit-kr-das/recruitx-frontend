@@ -1,33 +1,26 @@
+import { EmblaOptionsType } from "embla-carousel";
 import { useGetJobRecomandationQuery } from "../../../../features/user/get/getJobRecomendationApiSlice";
-import Loader from "../../../loader/Loader";
+import JobSlider from "./JobSlider";
+import "../../../../embla.css";
+
+const OPTIONS: EmblaOptionsType = { align: "start" };
 
 const RecommendedJobs = () => {
-  const { data, isSuccess, isLoading } = useGetJobRecomandationQuery({
+  const { data } = useGetJobRecomandationQuery({
     hasInfo: true,
-    limit: "",
+    limit: 20,
   });
-  const recommendedJobs = (
-    <>
-      {data?.length && (
-        <div className="bg-white border rounded-lg mt-4 shadow-md">
-          <div className="flex justify-between p-6">
-            <h1 className="font-bold">
-              {isSuccess && data?.length} recommended jobs for you
-            </h1>
-            {/* <Link to="/" className="text-blue-600 font-semibold">
-              View all
-            </Link> */}
-          </div>
-          <div className="w-[750px]">
-            {/* job slider was here */}
-            {/* <JobSlider slidesPerview={3.5} data={data} /> */}
-          </div>
-        </div>
-      )}
-    </>
+  return (
+    <div className="relative mt-4 bg-white p-8 rounded-xl border">
+      <div>
+        <p className="font-semibold text-xl">Recommanded jobs ony for you</p>
+        <p className="text-sm">Top result based on your profile</p>
+      </div>
+      <div className="w-[100%] pt-4">
+        <JobSlider data={data} options={OPTIONS} />
+      </div>
+    </div>
   );
-
-  return isLoading ? <Loader /> : recommendedJobs;
 };
 
 export default RecommendedJobs;
