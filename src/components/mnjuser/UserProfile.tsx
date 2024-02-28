@@ -9,36 +9,41 @@ import UserDefault from "../../assets/user-default-profile.png";
 import { selectCurrentUserData } from "../../features/user/userSlice";
 import { Button } from "../../ui/button";
 import { BadgeAlert, ShieldCheck } from "lucide-react";
+import { PublicStatsSkeletion } from "../skeleton/PublicStatsSkeletion";
 
 const UserProfile = () => {
   const { user, info } = useSelector(selectCurrentUserData);
   return (
     <div className="p-4 text-center">
       {/* user profile section */}
-      <div className="flex items-center justify-center flex-col">
-        <img
-          src={info?.photo || UserDefault}
-          width={120}
-          alt="user_default"
-          className="rounded-full object-cover border w-[120] h-[120]"
-        />
-        <div
-          className="flex items-center gap-2"
-          title={user?.status === "verified" ? "verified" : "not verified"}
-        >
-          <h1 className="font-bold capitalize">{user?.name}</h1>
-          {user?.status === "verified" ? (
-            <ShieldCheck className="w-4 h-4 text-green-600" />
-          ) : (
-            <BadgeAlert className="w-4 h-4 text-red-600" />
-          )}
+      {user ? (
+        <div className="flex items-center justify-center flex-col">
+          <img
+            src={info?.photo || UserDefault}
+            width={120}
+            alt="user_default"
+            className="rounded-full object-cover border w-[120] h-[120]"
+          />
+          <div
+            className="flex items-center gap-2"
+            title={user?.status === "verified" ? "verified" : "not verified"}
+          >
+            <h1 className="font-bold capitalize">{user?.name}</h1>
+            {user?.status === "verified" ? (
+              <ShieldCheck className="w-4 h-4 text-green-600" />
+            ) : (
+              <BadgeAlert className="w-4 h-4 text-red-600" />
+            )}
+          </div>
+          <p className="text-sm font-medium capitalize">{user?.workStatus}</p>
+          <p className="text-xs text-gray-400">Last updated 29m ago</p>
+          <Link to="/mnjuser/profile" className="mt-2 ">
+            <Button variant="outline">View Profile</Button>
+          </Link>
         </div>
-        <p className="text-sm font-medium capitalize">{user?.workStatus}</p>
-        <p className="text-xs text-gray-400">Last updated 29m ago</p>
-        <Link to="/mnjuser/profile" className="mt-2 ">
-          <Button variant="outline">View Profile</Button>
-        </Link>
-      </div>
+      ) : (
+        <PublicStatsSkeletion />
+      )}
       {/* profile performence section */}
       <div className="bg-slate-100 mt-4 rounded-xl p-2">
         <div className="flex items-center justify-center gap-1">
