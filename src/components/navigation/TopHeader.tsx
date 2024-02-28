@@ -42,15 +42,15 @@ const TopHeader = () => {
 
         {/* search */}
         {role && role === "user" && (
-          <div className="relative mx-auto cursor-pointer">
-            <div
-              onClick={() => setSearch((prev) => !prev)}
-              className="text-gray-400 flex items-center border-2 border-gray-300 bg-white h-10 px-5 pr-16 rounded-full text-sm focus:outline-none"
-            >
+          <div
+            className="absolute top-5 left-1/2 -translate-x-1/2  mx-auto cursor-pointer"
+            onClick={() => setSearch((prev) => !prev)}
+          >
+            <div className="text-gray-400 flex items-center border border-gray-300 bg-white h-10 px-5 pr-16 rounded-full text-sm focus:outline-none">
               Search jobs
             </div>
             <button type="button" className="absolute right-0 top-0 mt-2 mr-4">
-              <Search className="w-[15px]" />
+              <Search className="w-[15px] text-gray-400" />
             </button>
           </div>
         )}
@@ -63,7 +63,7 @@ const TopHeader = () => {
             <div className="bg-gradient-to-b from-white to-transparent h-[100px]"></div>
             <div
               onClick={() => setSearch((prev) => !prev)}
-              className="absolute top-[20%] right-[20%] cursor-pointer"
+              className="absolute top-[20%] right-[10%] cursor-pointer"
             >
               <X className="w-[40px]" />
             </div>
