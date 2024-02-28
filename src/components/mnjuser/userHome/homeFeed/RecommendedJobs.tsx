@@ -1,19 +1,17 @@
 import { EmblaOptionsType } from "embla-carousel";
-import { useGetJobRecomandationQuery } from "../../../../features/user/get/getJobRecomendationApiSlice";
-import JobSlider from "./JobSlider";
 import "../../../../embla.css";
-import Loader from "../../../loader/Loader";
+import { useGetJobRecomandationQuery } from "../../../../features/user/get/getJobRecomendationApiSlice";
+import { BaseSkeletonCard } from "../../../skeleton/BaseSkeletonCard";
+import JobSlider from "./JobSlider";
 
 const OPTIONS: EmblaOptionsType = { align: "start" };
 
 const RecommendedJobs = () => {
-  const { data } = useGetJobRecomandationQuery({
+  const { data, isLoading } = useGetJobRecomandationQuery({
     hasInfo: true,
     limit: 20,
   });
-  if (!data && data?.length === 0) {
-    return <Loader />;
-  }
+
   return (
     <div className="relative mt-4 bg-white p-8 rounded-xl border">
       <div>
@@ -21,7 +19,15 @@ const RecommendedJobs = () => {
         <p className="text-sm">Top result based on your profile</p>
       </div>
       <div className="w-[100%] pt-4">
-        <JobSlider data={data} options={OPTIONS} />
+        {data || !isLoading ? (
+          <JobSlider data={data} options={OPTIONS} />
+        ) : (
+          <div className="w-full flex items-center justify-between gap-4">
+            {[...Array(3)].map((_, index) => (
+              <BaseSkeletonCard key={index} className="w-[280px] h-[320px]" />
+            ))}
+          </div>
+        )}
       </div>
     </div>
   );

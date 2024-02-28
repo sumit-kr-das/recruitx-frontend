@@ -8,24 +8,25 @@ import { useToast } from "../../../ui/use-toast";
 import { TJobDetails } from "../../../@types/publicTypes/TJobDetails";
 
 const JobDetailMain = ({ job }: { job: TJobDetails }) => {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const [setApply] = useSetUserApplyMutation();
   const user = useSelector(selectCurrentRole);
   const { toast } = useToast();
+
   const applyForJob = async () => {
     try {
       const jobId = job?._id;
       await setApply(jobId).unwrap();
       toast({
-        description: "Job Applied Successfully"
-      })
-      navigate("/mnjuser/appliedJobs")
+        description: "Job Applied Successfully",
+      });
+      navigate("/mnjuser/appliedJobs");
     } catch (err) {
       const apiError = err as TApiError;
       toast({
         variant: "destructive",
-        description: apiError.data.message
-      })
+        description: apiError.data.message,
+      });
     }
   };
 
@@ -67,7 +68,7 @@ const JobDetailMain = ({ job }: { job: TJobDetails }) => {
           </button>
         ) : (
           <Link
-            to="/mnjuser/login"
+            to="/login"
             className="bg-cyan-500 text-white text-sm px-5 py-2 rounded-md hover:bg-cyan-600"
           >
             Login to Apply

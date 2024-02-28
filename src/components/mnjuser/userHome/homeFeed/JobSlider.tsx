@@ -9,6 +9,13 @@ import {
   usePrevNextButtons,
 } from "../../../../ui/EmblaCarouselArrowButtons";
 import { Button } from "../../../../ui/button";
+import { useNavigate } from "react-router";
+import { useSetUserApplyMutation } from "../../../../features/user/post/setUserApplyAPiSlice";
+import { useSelector } from "react-redux";
+import { useToast } from "../../../../ui/use-toast";
+import { selectCurrentRole } from "../../../../features/auth/authSlice";
+import { TApiError } from "../../../../@types/TApiError";
+import { Link } from "react-router-dom";
 
 type PropType = {
   data: TJobs[];
@@ -17,6 +24,27 @@ type PropType = {
 
 const JobSlider: React.FC<PropType> = ({ options, data }) => {
   const [emblaRef, emblaApi] = useEmblaCarousel(options);
+
+  const navigate = useNavigate();
+  const [setApply] = useSetUserApplyMutation();
+  const user = useSelector(selectCurrentRole);
+  const { toast } = useToast();
+
+  const applyForJob = async (jobId: string) => {
+    try {
+      await setApply(jobId).unwrap();
+      toast({
+        description: "Job Applied Successfully",
+      });
+      navigate("/mnjuser/appliedJobs");
+    } catch (err) {
+      const apiError = err as TApiError;
+      toast({
+        variant: "destructive",
+        description: apiError.data.message,
+      });
+    }
+  };
 
   const {
     prevBtnDisabled,
@@ -80,12 +108,25 @@ const JobSlider: React.FC<PropType> = ({ options, data }) => {
                 </div>
 
                 <div className="flex items-center gap-4">
-                  <Button className="bg-cyan-500 hover:bg-cyan-600 text-xs">
-                    Apply Now
-                  </Button>
-                  <Button className="text-xs" variant="outline">
-                    View Details
-                  </Button>
+                  {user ? (
+                    <Button
+                      onClick={() => applyForJob(item?._id)}
+                      className="bg-cyan-500 hover:bg-cyan-600 text-xs"
+                    >
+                      Apply Now
+                    </Button>
+                  ) : (
+                    <Link to="/login">
+                      <Button className="bg-cyan-500 hover:bg-cyan-600 text-xs">
+                        Apply Now
+                      </Button>
+                    </Link>
+                  )}
+                  <Link to={`/jobDetails/${item._id}`}>
+                    <Button variant="outline" className="tex-xs">
+                      View Details
+                    </Button>
+                  </Link>
                 </div>
               </div>
             </div>
