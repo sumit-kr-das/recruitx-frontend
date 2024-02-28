@@ -7,6 +7,7 @@ import { useLazySearchCompanyQuery } from "../../features/company/get/searchComp
 import Container from "../../layout/Container";
 import { Button } from "../../ui/button";
 import CompanyPegination from "./_components/CompanyPegination";
+import Footer from "../../components/footer/Footer";
 
 const CompanySearch = () => {
   const [search, setSearch] = useState<string>("");
@@ -75,6 +76,8 @@ const CompanySearch = () => {
           />
         )}
       </Container>
+      <Footer />
+
     </div>
   );
 };
