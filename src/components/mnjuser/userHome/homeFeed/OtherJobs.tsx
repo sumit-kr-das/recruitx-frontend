@@ -1,8 +1,8 @@
 import { EmblaOptionsType } from "embla-carousel";
-import { Loader } from "lucide-react";
 import RocketImg from "../../../../assets/icons/ear-section.png";
 import "../../../../embla.css";
 import { useGetJobRecomandationQuery } from "../../../../features/user/get/getJobRecomendationApiSlice";
+import { BaseSkeletonCard } from "../../../skeleton/BaseSkeletonCard";
 import JobSlider from "./JobSlider";
 
 const OPTIONS: EmblaOptionsType = { align: "start" };
@@ -12,7 +12,8 @@ const OtherJobs = () => {
     hasInfo: false,
     limit: 20,
   });
-  const otherJobs = (
+
+  return (
     <div className="relative mt-4 bg-white p-8 rounded-xl border">
       <div className="flex gap-2">
         <img src={RocketImg} width={40} height={40} alt="rocket_default" />
@@ -26,13 +27,18 @@ const OtherJobs = () => {
         </div>
       </div>
       <div className="w-[100%] mt-4">
-        {/* jobs slider was here */}
-        <JobSlider data={data} options={OPTIONS} />
+        {data || !isLoading ? (
+          <JobSlider data={data} options={OPTIONS} />
+        ) : (
+          <div className="w-full flex items-center justify-between gap-4">
+            {[...Array(3)].map((_, index) => (
+              <BaseSkeletonCard key={index} className="w-[280px] h-[320px]" />
+            ))}
+          </div>
+        )}
       </div>
     </div>
   );
-
-  return isLoading ? <Loader /> : otherJobs;
 };
 
 export default OtherJobs;

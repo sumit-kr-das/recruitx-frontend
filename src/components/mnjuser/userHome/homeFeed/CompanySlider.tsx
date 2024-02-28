@@ -8,6 +8,8 @@ import {
   PrevButton,
   usePrevNextButtons,
 } from "../../../../ui/EmblaCarouselArrowButtons";
+import { Link } from "react-router-dom";
+import { Button } from "../../../../ui/button";
 
 type PropType = {
   options?: EmblaOptionsType;
@@ -36,7 +38,7 @@ const CompanySlider: React.FC<PropType> = ({ options, data }) => {
         <div className="embla__container">
           {data?.map((item, index) => (
             <div className="embla__slide" key={index}>
-              <div className="bg-white w-[280px] h-[260px] flex items-center flex-col justify-center text-center p-6 shadow border rounded-xl mt-8">
+              <div className="bg-white w-[280px] h-[300px] flex items-center flex-col justify-center text-center p-6 shadow border rounded-xl mt-8">
                 <img
                   className="relative -top-[30px] w-[100px] h-[100px] rounded-full object-cover border bg-gray-50"
                   src={item?.companyProfileId?.logo || DefaultCompany}
@@ -60,6 +62,11 @@ const CompanySlider: React.FC<PropType> = ({ options, data }) => {
                       {item?.companyProfileId?.type}
                     </p>
                   </div>
+                  <Link to={`/mnjuser/company/${item._id}`}>
+                    <Button variant="outline" className="tex-xs mt-4">
+                      View Details
+                    </Button>
+                  </Link>
                 </div>
               </div>
             </div>

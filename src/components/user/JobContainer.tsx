@@ -1,12 +1,39 @@
 import { Button } from "../../ui/button";
 import DefaultCompany from "../../assets/default-company-logo.png";
 import { TJobs } from "../../@types/publicTypes/TJobs";
+import { Link, useNavigate } from "react-router-dom";
+import { useSetUserApplyMutation } from "../../features/user/post/setUserApplyAPiSlice";
+import { selectCurrentRole } from "../../features/auth/authSlice";
+import { useSelector } from "react-redux";
+import { useToast } from "../../ui/use-toast";
+import { TApiError } from "../../@types/TApiError";
 
 type TJobProps = {
   data: TJobs;
 };
 
 const JobContainer = ({ data }: TJobProps) => {
+  const [setApply] = useSetUserApplyMutation();
+  const user = useSelector(selectCurrentRole);
+  const navigate = useNavigate();
+
+  const { toast } = useToast();
+
+  const applyForJob = async (jobId: string) => {
+    try {
+      await setApply(jobId).unwrap();
+      toast({
+        description: "Job Applied Successfully",
+      });
+      navigate("/mnjuser/appliedJobs");
+    } catch (err) {
+      const apiError = err as TApiError;
+      toast({
+        variant: "destructive",
+        description: apiError.data.message,
+      });
+    }
+  };
   return (
     <div className="bg-white w-[350px] h-[350px] p-6 shadow border rounded-xl">
       <div className="flex items-center gap-2">
@@ -47,8 +74,21 @@ const JobContainer = ({ data }: TJobProps) => {
       </div>
 
       <div className="flex items-center gap-4">
-        <Button className="bg-cyan-500 hover:bg-cyan-600">Apply Now</Button>
-        <Button variant="outline">View Details</Button>
+        {user ? (
+          <Button
+            onClick={() => applyForJob(data?._id)}
+            className="bg-cyan-500 hover:bg-cyan-600"
+          >
+            Apply Now
+          </Button>
+        ) : (
+          <Link to="/login">
+            <Button className="bg-cyan-500 hover:bg-cyan-600">Apply Now</Button>
+          </Link>
+        )}
+        <Link to={`/jobDetails/${data._id}`}>
+          <Button variant="outline">View Details</Button>
+        </Link>
       </div>
     </div>
   );
