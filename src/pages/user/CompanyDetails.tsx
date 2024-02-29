@@ -10,12 +10,14 @@ import Container from "../../layout/Container";
 import { Button } from "../../ui/button";
 import CompanyReviewForm from "./_components/CompanyReviewForm";
 import CompanyReviews from "./_components/CompanyReviews";
+import { useAvgRatingDataQuery } from "../../features/user/get/getAvgReviewApiSlice";
 
 const CompanyDetails = () => {
   const { companyId } = useParams();
   const { data, isLoading, isSuccess } = useGetCompanyDetailQuery({
     id: companyId,
   });
+  const { data: ratings } = useAvgRatingDataQuery(companyId);
 
   if (!data && isLoading) return <Loader />;
 
