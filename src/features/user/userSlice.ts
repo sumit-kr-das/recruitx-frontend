@@ -37,8 +37,18 @@ const userSlice = createSlice({
     updateUserPhoto: (state: UserState, action) => {
       state.info.photo = action.payload.photo;
     },
-    removeUserData: () => {
-      return initialState;
+    removeUserData: (state, action) => {
+      state.user.name = null
+      state.user.email = null
+      state.user.phoneNo = null
+      state.user.workStatus = null
+      state.user.createdAt = null
+      state.user.updatedAt = null
+      state.user.status = null
+      state.info.photo = null
+      state.info.objective = null
+      state.education.degree = null
+      state.education.college = null
     },
   },
 });

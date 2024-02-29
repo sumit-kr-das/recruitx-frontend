@@ -21,8 +21,12 @@ const RadixMenu = ({ menu }: { menu: TMenu[] }) => {
   const dispatch = useDispatch();
 
   const handleLogOut = () => {
+    console.log("start");
+
     dispatch(logout());
     dispatch(removeUserData());
+    console.log("User remove");
+
     dispatch(removeCompanyData());
   };
   return (
