@@ -14,11 +14,11 @@ const OtherJobs = () => {
   });
 
   return (
-    <div className="relative mt-4 bg-white p-8 rounded-xl border">
+    <div className="relative mt-8 md:mt-4 md:bg-white md:p-8 md:rounded-xl md:border">
       <div className="flex gap-2">
         <img src={RocketImg} width={40} height={40} alt="rocket_default" />
         <div>
-          <p className="font-semibold text-xl">
+          <p className="font-semibold md:text-xl">
             {isSuccess && data?.length} Early access roles from top companies
           </p>
           <p className="text-xs">

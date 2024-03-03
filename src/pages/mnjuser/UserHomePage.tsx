@@ -9,10 +9,10 @@ const UserHomePage = () => {
     <div className="bg-[#FAFAFA]">
       <TopHeader />
       <Container className="flex justify-between">
-        <section className="bg-white border rounded-lg w-[20%] h-fit mt-28">
+        <section className="bg-white border rounded-lg hidden lg:block lg:w-[20%] h-fit mt-28">
           <UserProfile />
         </section>
-        <section className="w-[80%] h-fit mt-24">
+        <section className="w-full lg:w-[80%] h-fit mt-24">
           <HomeFeed />
         </section>
       </Container>
