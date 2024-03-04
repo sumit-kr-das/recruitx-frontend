@@ -6,7 +6,6 @@ import Container from "../../layout/Container";
 import ApproveAlert from "../../components/recruit/ApproveAlert";
 import { Button } from "../../ui/button";
 import { Card } from "../../ui/card";
-
 const Logout = () => {
   const dispatch = useDispatch();
   const handleLogout = () => {

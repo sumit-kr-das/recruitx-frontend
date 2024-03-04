@@ -40,7 +40,6 @@ type UserBasicInfoProps = {
 
 const UpdateBasicInfo = ({ user }: UserBasicInfoProps) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
-  const [isFormDirty, setIsFormDirty] = useState<boolean>(false);
   const [updateUser] = useUpdateUserMutation();
   const { toast } = useToast();
 
@@ -54,17 +53,12 @@ const UpdateBasicInfo = ({ user }: UserBasicInfoProps) => {
     },
   });
 
-  useEffect(() => {
-    if (form.formState.isDirty) {
-      setIsFormDirty(true);
-    }
-  }, [form.formState.isDirty]);
+
 
   const submitForm: SubmitHandler<BasicInfoFormData> = async (value) => {
     try {
       await updateUser(value).unwrap();
       setIsOpen(false);
-      setIsFormDirty(false);
       toast({
         description: "User information update successfull",
       });
@@ -161,7 +155,7 @@ const UpdateBasicInfo = ({ user }: UserBasicInfoProps) => {
               )}
             />
             <Button
-              disabled={!isFormDirty}
+              disabled={!form.formState.isDirty}
               className="float-right"
               type="submit"
             >

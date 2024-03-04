@@ -28,8 +28,7 @@ type TMenu = {
 };
 
 const DropDownMenu = ({ menu }: { menu: TMenu[] }) => {
-  const name = useSelector(selectCurrentUser);
-  const { info } = useSelector(selectCurrentUserData);
+  const { user, info } = useSelector(selectCurrentUserData);
   const company = useSelector(selectCurrentCompanyData);
   const dispatch = useDispatch();
 
@@ -48,7 +47,7 @@ const DropDownMenu = ({ menu }: { menu: TMenu[] }) => {
             />
             <AvatarFallback>CN</AvatarFallback>
           </Avatar>
-          <h2 className="text-md text-700">{name}</h2>
+          <h2 className="text-md text-700">{user.name}</h2>
           <ChevronDown className="w-[18px]" />
         </DropdownMenuTrigger>
         <DropdownMenuContent className="w-56">

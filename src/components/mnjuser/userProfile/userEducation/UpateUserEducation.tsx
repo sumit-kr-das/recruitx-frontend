@@ -32,7 +32,6 @@ import {
 } from "../../../../ui/select";
 import { useToast } from "../../../../ui/use-toast";
 import Loader from "../../../loader/Loader";
-
 export type EduFormData = {
   _id?: string;
   degree: string;
@@ -64,7 +63,6 @@ const UpdateUserEducation = ({
   openDialog,
   setOpenDialog,
 }: TUpdateUserEducationProps) => {
-  const [isFormDirty, setIsFormDirty] = useState<boolean>(false);
   const [updateUserEdu] = useUpdateUserEduMutation();
   const { toast } = useToast();
 
@@ -81,11 +79,6 @@ const UpdateUserEducation = ({
     },
   });
 
-  useEffect(() => {
-    if (form.formState.isDirty) {
-      setIsFormDirty(true);
-    }
-  }, [form.formState.isDirty]);
 
   const submitForm: SubmitHandler<EduFormData> = async (val) => {
     const id = data?._id;
@@ -98,7 +91,6 @@ const UpdateUserEducation = ({
         });
         setOpenDialog(false);
       }
-      setIsFormDirty(false);
     } catch (err) {
       const apiError = err as TApiError;
       toast({
@@ -248,7 +240,7 @@ const UpdateUserEducation = ({
             />
             <Button
               className="float-right"
-              disabled={!isFormDirty}
+              disabled={!form.formState.isDirty}
               type="submit"
             >
               Save
