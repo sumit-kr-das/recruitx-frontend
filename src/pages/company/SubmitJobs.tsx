@@ -8,7 +8,6 @@ import * as z from 'zod';
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "../../ui/form";
 import { Input } from "../../ui/input";
-import { Textarea } from "../../ui/textarea";
 import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from "../../ui/select";
 import { industryTypes } from "../../constants/industryTypes";
 import SelectInput from "../../components/form/multiSelectInput/SelectInput";
@@ -27,6 +26,7 @@ import { cn } from "../../lib/utils.ts";
 import { citiesArray } from "../../constants/citiesArray.ts";
 import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem } from "../../ui/command";
 import { ArrowUpDown, CheckIcon } from "lucide-react";
+import Tiptap from "../../components/Editor/Tiptap.tsx";
 type FormValues = {
   title: string,
   category: string,
@@ -173,7 +173,8 @@ const SubmitJob = () => {
                           <FormItem className="flex-1 mt-3">
                             <FormLabel>Job Description</FormLabel>
                             <FormControl>
-                              <Textarea rows={8} placeholder="Enter Description" {...field} />
+                              {/* <Textarea rows={8} placeholder="Enter Description" {...field} /> */}
+                              <Tiptap description={field.name} onChange={field.onChange} />
                             </FormControl>
                             {/* <FormMessage>{errors.description?.message}</FormMessage> */}
                           </FormItem>

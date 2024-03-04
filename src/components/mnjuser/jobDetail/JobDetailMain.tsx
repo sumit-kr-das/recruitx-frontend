@@ -56,8 +56,8 @@ const JobDetailMain = ({ job }: { job: TJobDetails }) => {
       </div>
 
       <h5 className="text-lg font-semibold mt-6">Job Description:</h5>
+      <div dangerouslySetInnerHTML={{ __html: job?.description }} />
 
-      <p className="text-slate-600 mt-4">{job?.description}</p>
 
       <div className="mt-5">
         {user && user == "user" ? (
