@@ -43,7 +43,6 @@ import Loader from "../../../loader/Loader";
 
 const UpdateUserInfo = ({ data, setTags, setLang }: TSetUserInfoProps) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
-  const [isFormDirty, setIsFormDirty] = useState<boolean>(false);
   const [updateUserInfo] = useUpdateUserInfoMutation();
   const { toast } = useToast();
 
@@ -64,11 +63,6 @@ const UpdateUserInfo = ({ data, setTags, setLang }: TSetUserInfoProps) => {
     },
   });
 
-  useEffect(() => {
-    if (form.formState.isDirty) {
-      setIsFormDirty(true);
-    }
-  }, [form.formState.isDirty]);
 
   const submitForm: SubmitHandler<FormValue> = async (value) => {
     try {
@@ -77,7 +71,6 @@ const UpdateUserInfo = ({ data, setTags, setLang }: TSetUserInfoProps) => {
         description: "User information update success",
       });
       setIsOpen(false);
-      setIsFormDirty(false);
     } catch (err) {
       toast({
         variant: "destructive",
@@ -332,7 +325,7 @@ const UpdateUserInfo = ({ data, setTags, setLang }: TSetUserInfoProps) => {
 
             <Button
               className="float-right"
-              disabled={!isFormDirty}
+              disabled={!form.formState.isDirty}
               type="submit"
             >
               Save

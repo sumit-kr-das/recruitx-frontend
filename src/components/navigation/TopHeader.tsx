@@ -8,11 +8,11 @@ import {
   selectCurrentRole,
   selectCurrentUser,
 } from "../../features/auth/authSlice";
-import RadixMenu from "../../themes/RadixMenu";
 import { Button } from "../../ui/button";
 import SearchComponent from "../mnjuser/userHome/search/Search";
 import Sidebar from "./Sidebar";
 import MobileSidebar from "../recruit/MobileSidebar";
+import DropDownMenu from "../DropDownMenu";
 
 const TopHeader = () => {
   const [search, setSearch] = useState<boolean>(false);
@@ -56,7 +56,7 @@ const TopHeader = () => {
         )}
         {/* show/hide search */}
         {search && (
-          <div className="absolute top-0 left-0 w-full">
+          <div className="absolute top-0 left-0 w-full z-30">
             <div className="bg-white py-5">
               <SearchComponent />
             </div>
@@ -81,9 +81,9 @@ const TopHeader = () => {
               </Link>
             </>
           ) : role && role === "user" ? (
-            <RadixMenu menu={userMenu} />
+            <DropDownMenu menu={userMenu} />
           ) : (
-            <RadixMenu menu={recruiterMenu} />
+            <DropDownMenu menu={recruiterMenu} />
           )}
         </div>
         {role && (role === "company" || role === "admin") ? (

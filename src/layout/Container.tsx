@@ -7,7 +7,9 @@ type TContainerProp = TReactNodeProps & {
 
 const Container = ({ children, className }: TContainerProp) => {
   return (
-    <div className={cn("max-w-screen-xl mx-auto pb-20 px-5", className)}>
+    <div
+      className={cn("max-w-screen-xl mx-auto pb-20 px-2 md:px-5", className)}
+    >
       {children}
     </div>
   );

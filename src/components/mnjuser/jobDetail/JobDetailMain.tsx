@@ -6,6 +6,7 @@ import { useSetUserApplyMutation } from "../../../features/user/post/setUserAppl
 import { TApiError } from "../../../@types/TApiError";
 import { useToast } from "../../../ui/use-toast";
 import { TJobDetails } from "../../../@types/publicTypes/TJobDetails";
+import { Button } from "../../../ui/button";
 
 const JobDetailMain = ({ job }: { job: TJobDetails }) => {
   const navigate = useNavigate();
@@ -60,19 +61,22 @@ const JobDetailMain = ({ job }: { job: TJobDetails }) => {
 
       <div className="mt-5">
         {user && user == "user" ? (
-          <button
+          <Button
             className="bg-cyan-500 text-white text-sm px-5 py-2 rounded-md hover:bg-cyan-600"
             onClick={applyForJob}
           >
             Apply
-          </button>
+          </Button>
         ) : (
-          <Link
-            to="/login"
-            className="bg-cyan-500 text-white text-sm px-5 py-2 rounded-md hover:bg-cyan-600"
-          >
-            Login to Apply
-          </Link>
+          <Button>
+            <Link
+              to="/login"
+              className=""
+            >
+              Login to Apply
+            </Link>
+          </Button>
+
         )}
       </div>
     </div>

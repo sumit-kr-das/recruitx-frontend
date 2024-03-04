@@ -5,7 +5,7 @@ export const getUserInfoDataApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     userInfoData: builder.query<FormValue[], void>({
       query: () => "/user/info/view",
-      providesTags: ["UserInfo"],
+      providesTags: ["UserInfo", "User"],
     }),
   }),
 });

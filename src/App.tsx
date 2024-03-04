@@ -1,7 +1,7 @@
 import { Suspense, lazy, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import { selectCurrentRole } from "./features/auth/authSlice";
+import { selectCurrentRole, selectCurrentToken } from "./features/auth/authSlice";
 import Layout from "./layout/Layout";
 import UserProfilePage from "./pages/mnjuser/UserProfilePage";
 import SearchPage from "./pages/search/SearchPage";
@@ -64,17 +64,18 @@ import {
 
 const App = () => {
   const role = useSelector(selectCurrentRole);
+  const access_token = useSelector(selectCurrentToken)
   const [trigger, user] = useLazyGetUserGlobalQuery();
   const [compnayTrigger, company] = useLazyGetCompanyGlobalQuery();
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (role && role === "user") {
+    if (role && role === "user" && access_token) {
       trigger();
     } else if (role && role === "company") {
       compnayTrigger();
     }
-  }, [role]);
+  }, [role, access_token]);
 
   useEffect(() => {
     if (role === "user" && user.data) {

@@ -10,9 +10,9 @@ const Company = () => {
   const { data, isLoading } = useViewAllCompaniesQuery({ limit: 10 });
 
   return (
-    <div className="relative mt-4 bg-white p-8 rounded-xl border">
+    <div className="relative mt-8 md:mt-4 md:bg-white md:p-8 md:rounded-xl md:border">
       <div>
-        <p className="font-semibold text-xl">Top companies</p>
+        <p className="font-semibold md:text-xl">Top companies</p>
         <p className="text-sm">Hiring for Software Development</p>
       </div>
       <div className="w-[100%] pt-4">

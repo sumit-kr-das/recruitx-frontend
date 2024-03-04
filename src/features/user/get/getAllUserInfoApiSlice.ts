@@ -4,7 +4,7 @@ export const getAllUserInfoApiSlice = apiSlice.injectEndpoints({
     endpoints: (builder) => ({
         getAllUserInfo: builder.query<UserAllInfo[], void>({
             query: () => '/user/all/info/view',
-            providesTags: []
+            providesTags: ["UserEdu", "UserInfo", 'User']
         }),
     }),
 });

@@ -38,9 +38,9 @@ const CompanySlider: React.FC<PropType> = ({ options, data }) => {
         <div className="embla__container">
           {data?.map((item, index) => (
             <div className="embla__slide" key={index}>
-              <div className="bg-white w-[280px] h-[300px] flex items-center flex-col justify-center text-center p-6 shadow border rounded-xl mt-8">
+              <div className="bg-white w-[280px] h-[220px] md:h-[300px] flex items-center flex-col justify-center text-center p-6 shadow border rounded-xl mt-8">
                 <img
-                  className="relative -top-[30px] w-[100px] h-[100px] rounded-full object-cover border bg-gray-50"
+                  className="relative -top-[30px] w-[80px] md:w-[100px] h-[80px] md:h-[100px] rounded-full object-cover border bg-gray-50"
                   src={item?.companyProfileId?.logo || DefaultCompany}
                   alt="company icon"
                 />
@@ -48,19 +48,21 @@ const CompanySlider: React.FC<PropType> = ({ options, data }) => {
                   <h2 className="font-bold line-clamp-1">{item.companyName}</h2>
                   <p className="text-sm mt-2">{item.address}</p>
                   <p className="line-clamp-2 mt-2">{item.industry}</p>
-                  <div className="flex items-center flex-wrap gap-2 my-2">
-                    <p className="bg-blue-50 text-blue-500 text-xs font-semibold px-2 py-1 rounded-xl">
-                      {item?.industry?.split(" ")[0]}
-                    </p>
-                    <p className="bg-red-50 text-red-500 text-xs font-semibold px-2 py-1 rounded-xl">
-                      Verified
-                    </p>
-                    <p className="bg-green-50 text-green-500 text-xs font-semibold px-2 py-1 rounded-xl">
-                      {item.address}
-                    </p>
-                    <p className="bg-cyan-50 text-cyan-500 text-xs font-semibold px-2 py-1 rounded-xl">
-                      {item?.companyProfileId?.type}
-                    </p>
+                  <div className="hidden md:block">
+                    <div className="flex items-center flex-wrap gap-2 my-2">
+                      <p className="bg-blue-50 text-blue-500 text-xs font-semibold px-2 py-1 rounded-xl">
+                        {item?.industry?.split(" ")[0]}
+                      </p>
+                      <p className="bg-red-50 text-red-500 text-xs font-semibold px-2 py-1 rounded-xl">
+                        Verified
+                      </p>
+                      <p className="bg-green-50 text-green-500 text-xs font-semibold px-2 py-1 rounded-xl">
+                        {item.address}
+                      </p>
+                      <p className="bg-cyan-50 text-cyan-500 text-xs font-semibold px-2 py-1 rounded-xl">
+                        {item?.companyProfileId?.type}
+                      </p>
+                    </div>
                   </div>
                   <Link to={`/mnjuser/company/${item._id}`}>
                     <Button variant="outline" className="tex-xs mt-4">

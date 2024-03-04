@@ -23,6 +23,7 @@ import {
   removeUserData,
   selectCurrentUserData,
 } from "../../features/user/userSlice";
+import { removeCompanyData } from "../../features/company/companySlice";
 
 const Sidebar = () => {
   const role = useSelector(selectCurrentRole);
@@ -32,6 +33,7 @@ const Sidebar = () => {
   const handleLogout = () => {
     dispatch(logout());
     dispatch(removeUserData());
+    dispatch(removeCompanyData());
   };
 
   return (
