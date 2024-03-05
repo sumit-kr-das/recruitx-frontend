@@ -13,7 +13,7 @@ type TJobProps = {
 };
 
 const JobContainer = ({ data }: TJobProps) => {
-  const [setApply] = useSetUserApplyMutation();
+  const [setApply, { isLoading }] = useSetUserApplyMutation();
   const user = useSelector(selectCurrentRole);
   const navigate = useNavigate();
 
@@ -87,7 +87,7 @@ const JobContainer = ({ data }: TJobProps) => {
           </Link>
         )}
         <Link to={`/jobDetails/${data._id}`}>
-          <Button variant="outline">View Details</Button>
+          <Button variant="outline" disabled={isLoading}>View Details</Button>
         </Link>
       </div>
     </div>

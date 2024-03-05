@@ -5,7 +5,7 @@ export const viewAppliedJobsApiSlice = apiSlice.injectEndpoints({
     endpoints: (builder) => ({
         viewAppliedJobs: builder.query<TAppliedJobDetail[], void>({
             query: () => `user/applied/jobs/view`,
-            providesTags: ["User"],
+            providesTags: ["User", "Apply"],
         }),
     }),
 });
