@@ -7,6 +7,9 @@ const JobPostSchema = z.object({
     category: z.string().min(1, {
         message: "Category is required"
     }),
+    shortDescription: z.string().min(30, {
+        message: "Short description mimimum contain 30 words"
+    }),
     description: z.string().min(100, {
         message: "Description should minimum contain 100 words"
     }),

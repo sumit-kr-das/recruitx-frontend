@@ -52,7 +52,7 @@ const JobContainer = ({ data }: TJobProps) => {
 
       <div className="mt-4">
         <h3 className="font-bold text-xl line-clamp-1">{data.title}</h3>
-        <p className="line-clamp-2">{data.description}</p>
+        <p className="line-clamp-2">{data?.shortDescription}</p>
       </div>
 
       <div className="flex items-center flex-wrap gap-2 my-4">

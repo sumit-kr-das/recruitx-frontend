@@ -31,9 +31,11 @@ import { cn } from '../../../lib/utils.ts';
 import { citiesArray } from '../../../constants/citiesArray.ts';
 import { ArrowUpDown, CheckIcon } from 'lucide-react';
 import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem } from '../../../ui/command';
+import Tiptap from '../../Editor/Tiptap.tsx';
 type FormValues = {
     title: string,
     category: string,
+    shortDescription: string,
     description: string,
     tags: string[],
     vacancies: string,
@@ -55,6 +57,7 @@ interface job {
     _id: string,
     title: string,
     category: string,
+    shortDescription: string,
     description: string,
     tags: [string],
     active: boolean,
@@ -105,6 +108,7 @@ const EditJobForm = ({ job, setOpen }: { job: job, setOpen: Function }) => {
         defaultValues: {
             title: job?.title || "",
             category: job?.category || "",
+            shortDescription: job?.shortDescription || "",
             description: job?.description || "",
             tags: job?.tags || [],
             vacancies: job?.info?.vacancies.toString() || '',
@@ -134,10 +138,11 @@ const EditJobForm = ({ job, setOpen }: { job: job, setOpen: Function }) => {
             minSalary: parseInt(data.minSalary.toString(), 10),
             maxSalary: parseInt(data.maxSalary.toString(), 10),
         };
-        const { title, category, description, tags, ...other } = convertedData;
+        const { title, category, shortDescription, description, tags, ...other } = convertedData;
         const credentials = {
             title,
             category,
+            shortDescription,
             description,
             tags,
             info: { ...other },
@@ -186,12 +191,25 @@ const EditJobForm = ({ job, setOpen }: { job: job, setOpen: Function }) => {
                                 />
                                 <FormField
                                     control={form.control}
+                                    name="shortDescription"
+                                    render={({ field }) => (
+                                        <FormItem className="flex-1 mt-3">
+                                            <FormLabel>Job Short Description</FormLabel>
+                                            <FormControl>
+                                                <Textarea rows={5} placeholder="Enter Meta Description" {...field} />
+                                            </FormControl>
+                                            <FormMessage />
+                                        </FormItem>
+                                    )}
+                                />
+                                <FormField
+                                    control={form.control}
                                     name="description"
                                     render={({ field }) => (
                                         <FormItem className="flex-1 mt-3">
                                             <FormLabel>Job Description</FormLabel>
                                             <FormControl>
-                                                <Textarea rows={8} placeholder="Enter Description" {...field} />
+                                                <Tiptap description={field.value} onChange={field.onChange} />
                                             </FormControl>
                                             <FormMessage />
                                         </FormItem>

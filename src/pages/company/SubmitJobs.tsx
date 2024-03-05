@@ -27,9 +27,11 @@ import { citiesArray } from "../../constants/citiesArray.ts";
 import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem } from "../../ui/command";
 import { ArrowUpDown, CheckIcon } from "lucide-react";
 import Tiptap from "../../components/Editor/Tiptap.tsx";
+import { Textarea } from "../../ui/textarea.tsx";
 type FormValues = {
   title: string,
   category: string,
+  shortDescription: string,
   description: string,
   tags: string[],
   vacancies: string,
@@ -72,6 +74,7 @@ const SubmitJob = () => {
     defaultValues: {
       title: "",
       category: "",
+      shortDescription: "",
       description: "",
       tags: [],
       vacancies: '',
@@ -111,10 +114,11 @@ const SubmitJob = () => {
       minSalary: parseInt(data.minSalary.toString(), 10),
       maxSalary: parseInt(data.maxSalary.toString(), 10),
     };
-    const { title, category, description, tags, ...other } = convertedData;
+    const { title, category, shortDescription, description, tags, ...other } = convertedData;
     const newJobData = {
       title,
       category,
+      shortDescription,
       description,
       tags,
       info: { ...other },
@@ -168,13 +172,26 @@ const SubmitJob = () => {
                       />
                       <FormField
                         control={form.control}
+                        name="shortDescription"
+                        render={({ field }) => (
+                          <FormItem className="flex-1 mt-3">
+                            <FormLabel>Job Short Description</FormLabel>
+                            <FormControl>
+                              <Textarea rows={5} placeholder="Enter Meta Description" {...field} />
+                            </FormControl>
+                            <FormMessage />
+                          </FormItem>
+                        )}
+                      />
+                      <FormField
+                        control={form.control}
                         name="description"
                         render={({ field }) => (
                           <FormItem className="flex-1 mt-3">
                             <FormLabel>Job Description</FormLabel>
                             <FormControl>
                               {/* <Textarea rows={8} placeholder="Enter Description" {...field} /> */}
-                              <Tiptap description={field.name} onChange={field.onChange} />
+                              <Tiptap description={field.value} onChange={field.onChange} />
                             </FormControl>
                             {/* <FormMessage>{errors.description?.message}</FormMessage> */}
                           </FormItem>
