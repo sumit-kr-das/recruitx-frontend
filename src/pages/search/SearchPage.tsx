@@ -14,16 +14,19 @@ import SearchFilter from "./_components/SearchFilter";
 import FilterMobile from "./_components/FilterMobile";
 import { useLazyWithFilterJobsQuery } from "../../features/user/get/filterJobsApiSlice";
 import { useEffect } from "react";
+import { useSearchParams } from "react-router-dom";
 
 const SearchPage = () => {
   const jobsData = useSelector(selectCurrentUserJobsData);
   const [trigger, { data }] = useLazyWithFilterJobsQuery();
   const dispatch = useDispatch();
+  const [searchParams] = useSearchParams();
 
   useEffect(() => {
     trigger({
-      title: "",
+      title: searchParams.get("search") || "",
       value: "",
+      location: searchParams.get("location") || "",
       workplaceType: "On-site",
       jobType: "Full-time",
       salary: 100000,

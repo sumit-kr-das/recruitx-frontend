@@ -8,6 +8,7 @@ export const setUserApplyApiSlice = apiSlice.injectEndpoints({
                 method: "POST",
                 body: {},
             }),
+            invalidatesTags: ["Apply"]
         }),
     }),
 });
