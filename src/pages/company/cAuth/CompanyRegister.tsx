@@ -91,7 +91,7 @@ const CompanyRegister = () => {
 				<div className="pt-40 w-full h-auto flex justify-center">
 					<div className="h-fit rounded-xl bg-white p-10 mb-10 shadow md:w-[800px]">
 						<h1 className="text-2xl mb-5 font-extrabold text-center">
-							Get started with Naukri <br /> Recruitment Solutions
+							Get started with Job <br /> Recruitment Solutions
 						</h1>
 						<p className="mt-2 mb-5 md:mb-10 text-center">
 							Already have an account ?

@@ -28,7 +28,7 @@ const CompanyReviews = () => {
                                         <div className="flex p-1 gap-1 text-orange-300">
                                             {
                                                 star?.map((_, index) => (
-                                                    <Star size={20} fill={index < item.rating ? "orange" : "white"} />
+                                                    <Star size={20} fill={index < item.rating ? "orange" : "white"} key={index} />
                                                 ))
                                             }
 

@@ -215,10 +215,10 @@ const SetUserInfo = ({ lang, setLang, tags, setTags }: TSetUserInfoProps) => {
           <div className="flex gap-4">
             <FormField
               control={form.control}
-              name="linkedIn"
+              name="github"
               render={({ field }) => (
                 <FormItem className="flex-1">
-                  <FormLabel>Linkedin username</FormLabel>
+                  <FormLabel>Github username</FormLabel>
                   <FormControl>
                     <Input placeholder="sumit-kr-das" {...field} />
                   </FormControl>
@@ -229,10 +229,10 @@ const SetUserInfo = ({ lang, setLang, tags, setTags }: TSetUserInfoProps) => {
             />
             <FormField
               control={form.control}
-              name="github"
+              name="linkedIn"
               render={({ field }) => (
                 <FormItem className="flex-1">
-                  <FormLabel>Date of birth</FormLabel>
+                  <FormLabel>LinkedIn username</FormLabel>
                   <FormControl>
                     <Input placeholder="sumit-kumar-das-01" {...field} />
                   </FormControl>
