@@ -13,7 +13,7 @@ type TJobProps = {
 };
 
 const JobContainer = ({ data }: TJobProps) => {
-  const [setApply] = useSetUserApplyMutation();
+  const [setApply, { isLoading }] = useSetUserApplyMutation();
   const user = useSelector(selectCurrentRole);
   const navigate = useNavigate();
 
@@ -39,7 +39,7 @@ const JobContainer = ({ data }: TJobProps) => {
       <div className="flex items-center gap-2">
         <img
           className="w-[60px] h-[60px] rounded-full object-cover border bg-gray-50"
-          src={data?.companyId?.companyProfileId.logo || DefaultCompany}
+          src={data?.companyId?.companyProfileId?.logo || DefaultCompany}
           alt="company icon"
         />
         <div>
@@ -52,7 +52,7 @@ const JobContainer = ({ data }: TJobProps) => {
 
       <div className="mt-4">
         <h3 className="font-bold text-xl line-clamp-1">{data.title}</h3>
-        <p className="line-clamp-2">{data.description}</p>
+        <p className="line-clamp-2">{data?.shortDescription}</p>
       </div>
 
       <div className="flex items-center flex-wrap gap-2 my-4">
@@ -87,7 +87,7 @@ const JobContainer = ({ data }: TJobProps) => {
           </Link>
         )}
         <Link to={`/jobDetails/${data._id}`}>
-          <Button variant="outline">View Details</Button>
+          <Button variant="outline" disabled={isLoading}>View Details</Button>
         </Link>
       </div>
     </div>

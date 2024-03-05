@@ -43,6 +43,8 @@ import Loader from "../../../loader/Loader";
 
 const UpdateUserInfo = ({ data, setTags, setLang }: TSetUserInfoProps) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
+  const [value, setValue] = useState([...data[0]?.skills || tagsData[0]]);
+  const [language, setLanguage] = useState([...data[0]?.language || languageData[0]])
   const [updateUserInfo] = useUpdateUserInfoMutation();
   const { toast } = useToast();
 
@@ -190,9 +192,9 @@ const UpdateUserInfo = ({ data, setTags, setLang }: TSetUserInfoProps) => {
                             <SelectInput
                               multiple
                               options={languageData}
-                              value={data[0]?.language}
+                              value={language}
                               onChange={(selectedOptions) => {
-                                setLang(selectedOptions);
+                                setLanguage(selectedOptions)
                                 field.onChange(selectedOptions);
                               }}
                             />
@@ -235,10 +237,10 @@ const UpdateUserInfo = ({ data, setTags, setLang }: TSetUserInfoProps) => {
             <div className="flex gap-4">
               <FormField
                 control={form.control}
-                name="linkedIn"
+                name="github"
                 render={({ field }) => (
                   <FormItem className="flex-1">
-                    <FormLabel>Linkedin username</FormLabel>
+                    <FormLabel>Github username</FormLabel>
                     <FormControl>
                       <Input placeholder="sumit-kr-das" {...field} />
                     </FormControl>
@@ -249,10 +251,10 @@ const UpdateUserInfo = ({ data, setTags, setLang }: TSetUserInfoProps) => {
               />
               <FormField
                 control={form.control}
-                name="github"
+                name="linkedIn"
                 render={({ field }) => (
                   <FormItem className="flex-1">
-                    <FormLabel>Date of birth</FormLabel>
+                    <FormLabel>LinkedIn username</FormLabel>
                     <FormControl>
                       <Input placeholder="sumit-kumar-das-01" {...field} />
                     </FormControl>
@@ -308,9 +310,9 @@ const UpdateUserInfo = ({ data, setTags, setLang }: TSetUserInfoProps) => {
                             <SelectInput
                               multiple
                               options={tagsData}
-                              value={data[0]?.skills}
+                              value={value}
                               onChange={(selectedOptions) => {
-                                setTags(selectedOptions);
+                                setValue(selectedOptions);
                                 field.onChange(selectedOptions);
                               }}
                             />

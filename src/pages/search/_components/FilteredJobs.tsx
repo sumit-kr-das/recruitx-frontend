@@ -3,7 +3,10 @@ import DefaultCompany from "../../../assets/default-company-logo.png";
 import { Button } from "../../../ui/button";
 import { Card, CardContent, CardFooter, CardHeader } from "../../../ui/card";
 import { Separator } from "../../../ui/separator";
-
+import { useSetUserApplyMutation } from "../../../features/user/post/setUserApplyAPiSlice";
+import { useToast } from "../../../ui/use-toast";
+import { useNavigate } from "react-router-dom";
+import { TApiError } from "../../../@types/TApiError";
 type TJob = {
   _id: string;
   title: string;
@@ -47,6 +50,24 @@ type JobProps = {
 };
 
 const FilteredJobs = ({ job }: JobProps) => {
+  const [setApply] = useSetUserApplyMutation();
+  const { toast } = useToast();
+  const navigate = useNavigate();
+  const applyForJob = async (jobId: string) => {
+    try {
+      await setApply(jobId).unwrap();
+      toast({
+        description: "Job Applied Successfully",
+      });
+      navigate("/mnjuser/appliedJobs");
+    } catch (err) {
+      const apiError = err as TApiError;
+      toast({
+        variant: "destructive",
+        description: apiError.data.message,
+      });
+    }
+  };
   return (
     <Card className="w-full h-full flex flex-col justify-between bg-white rounded-lg border shadow">
       <CardHeader className="flex items-center flex-row gap-4">
@@ -86,7 +107,7 @@ const FilteredJobs = ({ job }: JobProps) => {
               <span className="font-semibold">{job.info.minSalary} </span>LPA
             </p>
           </div>
-          <Button className="bg-cyan-500 hover:bg-cyan-600">Apply Now</Button>
+          <Button className="bg-cyan-500 hover:bg-cyan-600" onClick={() => applyForJob(job?._id)}>Apply Now</Button>
         </div>
       </CardFooter>
     </Card>

@@ -10,6 +10,7 @@ export type TJobs = {
     _id: string;
   };
   createdAt: string;
+  shortDescription: string;
   description: string;
   info: {
     degree: string;
@@ -26,7 +27,7 @@ export type TJobs = {
     startDate: string;
     vacancies: number;
     workplaceType: string;
-};
+  };
   title: string;
   _id: string;
 };
