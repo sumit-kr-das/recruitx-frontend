@@ -92,13 +92,13 @@ const SelectInput = ({ value, multiple, onChange, options }: TSelectProps) => {
 		>
 			<span className="flex-1 flex flex-wrap gap-2">
 				{multiple
-					? value.map((val) => (
+					? value.map((val, index) => (
 						<div
 							onClick={(e) => {
 								e.stopPropagation();
 								selectOption(val)
 							}}
-							key={val}
+							key={index}
 							className="flex items-center gap-1 border-2 rounded-md px-1"
 						>
 							{val}
