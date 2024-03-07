@@ -73,9 +73,9 @@ const UpdateUserEducation = ({
       college: data?.college || "",
       course: data?.course || "",
       courseType: data?.courseType || "",
-      admissionYear: data?.admissionYear.toString() || "",
-      passYear: data?.passYear.toString() || "",
-      marks: data?.marks.toString() || "",
+      admissionYear: data?.admissionYear?.toString() || "",
+      passYear: data?.passYear?.toString() || "",
+      marks: data?.marks?.toString() || "",
     },
   });
 

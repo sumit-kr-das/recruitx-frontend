@@ -5,6 +5,7 @@ import BasicInfo from "./_components/BasicInfo";
 import OtherInfo from "./_components/OtherInfo";
 // import UserCareer from "./_components/UserCareer";
 import UserEducation from "./_components/UserEducation";
+import UserCareer from "./_components/UserCareer";
 
 const UserProfilePage = () => {
   return (
@@ -14,6 +15,7 @@ const UserProfilePage = () => {
         <BasicInfo />
         <OtherInfo />
         <UserEducation />
+        <UserCareer />
         {/* <UserCareer /> */}
       </Container>
       <Footer />
