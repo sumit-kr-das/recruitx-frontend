@@ -7,7 +7,7 @@ import OtherInfo from "./_components/OtherInfo";
 import UserEducation from "./_components/UserEducation";
 import UserCareer from "./_components/UserCareer";
 import UserExprience from "./_components/UserExprience";
-
+import UserProject from "./_components/UserProject";
 const UserProfilePage = () => {
   return (
     <div className="bg-[#FAFAFA]">
@@ -18,6 +18,8 @@ const UserProfilePage = () => {
         <UserEducation />
         <UserCareer />
         <UserExprience />
+
+        <UserProject />
         {/* <UserCareer /> */}
       </Container>
       <Footer />

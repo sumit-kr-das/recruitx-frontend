@@ -1,59 +1,62 @@
-import { Dialog, DialogDescription, DialogContent, DialogHeader, DialogTitle } from '../../../../ui/dialog'
-import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '../../../../ui/form';
-import { Controller, useForm } from 'react-hook-form';
-import UserExpSchema from '../../../../@types/zod/UserExp';
+import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from '../../../../ui/dialog'
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '../../../../ui/form'
+import { Button } from '../../../../ui/button'
+import { Controller, useForm } from 'react-hook-form'
+import { zodResolver } from '@hookform/resolvers/zod'
 import * as z from "zod"
-import { zodResolver } from '@hookform/resolvers/zod';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../../../../ui/select';
-import { Input } from '../../../../ui/input';
-import { jobTypes } from '../../../../constants/jobTypes';
-import SelectInput from '../../../form/multiSelectInput/SelectInput';
-import { skillData } from '../../../../constants/skillData';
-import { useState } from 'react';
-import { Button } from '../../../../ui/button';
-import { useAddUserExpMutation } from '../../../../features/user/post/AddUserExpApiSlice';
-import { useToast } from '../../../../ui/use-toast';
-import { TApiError } from '../../../../@types/TApiError';
-type TAddUserEducationProps = {
-    isOpen: boolean;
-    setIsOpen: (item: boolean) => void;
-};
+import { Input } from '../../../../ui/input'
+import SelectInput from '../../../form/multiSelectInput/SelectInput'
+import { skillData } from '../../../../constants/skillData'
+import { useState } from 'react'
+import Loader from '../../../loader/Loader'
+import { useToast } from '../../../../ui/use-toast'
+import { TApiError } from '../../../../@types/TApiError'
+import { TUserProject } from '../../../../@types/user/TUserProject'
+import { useUpdateUserProjectMutation } from '../../../../features/user/put/UpdateUserProjectApiSlice'
+import UserProjectSchema from '../../../../@types/zod/UserProjectSchema'
+import { ProjectFormValue } from './AddUserProject'
+import { Textarea } from '../../../../ui/textarea'
 
-export type ExpFormValue = {
-    companyName: string,
-    designation: string,
-    experience: string,
-    type: string,
-    startDate: string,
-    endDate: string,
-    jobProfile: string,
-    skills: string[]
+type TProps = {
+    data: TUserProject,
+    openDialog: boolean,
+    setOpenDialog: (value: boolean) => void;
+
 }
-const AddUserExp = ({ isOpen, setIsOpen }: TAddUserEducationProps) => {
-    const [skill, setSkill] = useState([skillData[0]]);
-    const [AddUserExp] = useAddUserExpMutation();
+
+const UpdateUserProject = ({ data, openDialog, setOpenDialog }: TProps) => {
+    const [skill, setSkill] = useState([...data?.skills || skillData[0]]);
+    const [updateUserProject] = useUpdateUserProjectMutation();
     const { toast } = useToast();
-    const form = useForm<z.infer<typeof UserExpSchema>>({
-        resolver: zodResolver(UserExpSchema),
+
+    const getDate = (srcDate: string) => {
+        if (srcDate === "") return "";
+        const originalDate = new Date(srcDate);
+        const day = originalDate.getDate().toString().padStart(2, '0');
+        const month = (originalDate.getMonth() + 1).toString().padStart(2, '0');
+        const year = originalDate.getFullYear();
+        return `${year}-${month}-${day}`
+    };
+    const form = useForm<z.infer<typeof UserProjectSchema>>({
+        resolver: zodResolver(UserProjectSchema),
         defaultValues: {
-            companyName: "",
-            designation: "",
-            experience: "",
-            type: "",
-            startDate: "",
-            endDate: "",
-            jobProfile: "",
-            skills: []
+            name: data?.name || "",
+            description: data?.description || "",
+            startDate: getDate(data?.startDate || ""),
+            endDate: getDate(data?.endDate || ""),
+            associate: data?.associate || "",
+            skills: [...data?.skills || ""]
         },
     });
 
-    const submitUserExp = async (values: ExpFormValue) => {
+    const updateProject = async (values: ProjectFormValue) => {
         try {
-            await AddUserExp(values).unwrap();
+            const id = data?._id;
+            await updateUserProject({ id, val: values }).unwrap();
             toast({
-                description: "Your experience added successfully"
+                description: "User project added successfully"
             });
-            setIsOpen(false);
+            setOpenDialog(false);
         } catch (err) {
             const apiError = err as TApiError;
             toast({
@@ -62,24 +65,24 @@ const AddUserExp = ({ isOpen, setIsOpen }: TAddUserEducationProps) => {
             });
         }
     }
-
+    if (!data) return <Loader />
     return (
-        <Dialog open={isOpen} onOpenChange={setIsOpen}>
+        <Dialog open={openDialog} onOpenChange={setOpenDialog}>
             <DialogContent className="sm:max-w-[50%] rounded scrollbar-hide overflow-y-scroll max-h-full">
                 <DialogHeader>
-                    <DialogTitle>Edit profile</DialogTitle>
+                    <DialogTitle>Edit Experience</DialogTitle>
                     <DialogDescription>
                         Make changes to your profile here. Click save when you're done.
                     </DialogDescription>
                 </DialogHeader>
                 <Form {...form}>
-                    <form onSubmit={form.handleSubmit(submitUserExp)} className="space-y-8">
+                    <form onSubmit={form.handleSubmit(updateProject)} className="space-y-8">
                         <FormField
                             control={form.control}
-                            name="companyName"
+                            name="name"
                             render={({ field }) => (
                                 <FormItem className="">
-                                    <FormLabel> Company name</FormLabel>
+                                    <FormLabel> Project Name</FormLabel>
                                     <FormControl>
                                         <Input
                                             placeholder="Enter company name"
@@ -92,59 +95,16 @@ const AddUserExp = ({ isOpen, setIsOpen }: TAddUserEducationProps) => {
                         />
                         <FormField
                             control={form.control}
-                            name="designation"
+                            name="description"
                             render={({ field }) => (
                                 <FormItem className="">
-                                    <FormLabel> Company Designation</FormLabel>
+                                    <FormLabel> Project Description</FormLabel>
                                     <FormControl>
-                                        <Input
-                                            placeholder="Enter designation"
+                                        <Textarea
+                                            placeholder="Enter project description"
                                             {...field}
                                         />
                                     </FormControl>
-                                    <FormMessage />
-                                </FormItem>
-                            )}
-                        />
-                        <FormField
-                            control={form.control}
-                            name="experience"
-                            render={({ field }) => (
-                                <FormItem className="">
-                                    <FormLabel> Company experience</FormLabel>
-                                    <FormControl>
-                                        <Input
-                                            placeholder="Enter experience"
-                                            {...field}
-                                        />
-                                    </FormControl>
-                                    <FormMessage />
-                                </FormItem>
-                            )}
-                        />
-                        <FormField
-                            control={form.control}
-                            name="type"
-                            render={({ field }) => (
-                                <FormItem className="">
-                                    <FormLabel>Type</FormLabel>
-                                    <Select
-                                        onValueChange={field.onChange}
-                                        defaultValue={field.value}
-                                    >
-                                        <FormControl>
-                                            <SelectTrigger>
-                                                <SelectValue placeholder="Select job type" />
-                                            </SelectTrigger>
-                                        </FormControl>
-                                        <SelectContent>
-                                            {jobTypes.map((item, index) => (
-                                                <SelectItem key={index} value={item}>
-                                                    {item}
-                                                </SelectItem>
-                                            ))}
-                                        </SelectContent>
-                                    </Select>
                                     <FormMessage />
                                 </FormItem>
                             )}
@@ -154,10 +114,10 @@ const AddUserExp = ({ isOpen, setIsOpen }: TAddUserEducationProps) => {
                             name="startDate"
                             render={({ field }) => (
                                 <FormItem className="">
-                                    <FormLabel> Company experience</FormLabel>
+                                    <FormLabel> Project Start Date</FormLabel>
                                     <FormControl>
                                         <Input
-                                            type='date'
+                                            type="date"
                                             {...field}
                                         />
                                     </FormControl>
@@ -170,10 +130,10 @@ const AddUserExp = ({ isOpen, setIsOpen }: TAddUserEducationProps) => {
                             name="endDate"
                             render={({ field }) => (
                                 <FormItem className="">
-                                    <FormLabel> Company End Date</FormLabel>
+                                    <FormLabel> Project End Date</FormLabel>
                                     <FormControl>
                                         <Input
-                                            type='date'
+                                            type="date"
                                             {...field}
                                         />
                                     </FormControl>
@@ -183,13 +143,13 @@ const AddUserExp = ({ isOpen, setIsOpen }: TAddUserEducationProps) => {
                         />
                         <FormField
                             control={form.control}
-                            name="jobProfile"
+                            name="associate"
                             render={({ field }) => (
                                 <FormItem className="">
-                                    <FormLabel>Enter Job Profile</FormLabel>
+                                    <FormLabel> Project Associate</FormLabel>
                                     <FormControl>
                                         <Input
-                                            placeholder='Enter Job Profile'
+                                            placeholder="associate"
                                             {...field}
                                         />
                                     </FormControl>
@@ -224,13 +184,13 @@ const AddUserExp = ({ isOpen, setIsOpen }: TAddUserEducationProps) => {
                                 </FormItem>
                             )}
                         />
-                        <Button type='submit' className='float-right'>Submit</Button>
+                        <Button className='float-right' type='submit' disabled={!form.formState.isDirty}
+                        >Update</Button>
                     </form>
                 </Form>
             </DialogContent>
         </Dialog>
-
     )
 }
 
-export default AddUserExp
+export default UpdateUserProject

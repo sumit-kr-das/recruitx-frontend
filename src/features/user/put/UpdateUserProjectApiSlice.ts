@@ -5,7 +5,7 @@ export const updateUserProjectApiSlice = apiSlice.injectEndpoints({
         updateUserProject: builder.mutation({
             query: ({ id, val }) => ({
                 url: `/user/project/update/${id}`,
-                method: "POST",
+                method: "PUT",
                 body: val,
             }),
             invalidatesTags: ["UserProject"]
