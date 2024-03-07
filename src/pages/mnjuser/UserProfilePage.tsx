@@ -6,6 +6,7 @@ import OtherInfo from "./_components/OtherInfo";
 // import UserCareer from "./_components/UserCareer";
 import UserEducation from "./_components/UserEducation";
 import UserCareer from "./_components/UserCareer";
+import UserExprience from "./_components/UserExprience";
 
 const UserProfilePage = () => {
   return (
@@ -16,6 +17,7 @@ const UserProfilePage = () => {
         <OtherInfo />
         <UserEducation />
         <UserCareer />
+        <UserExprience />
         {/* <UserCareer /> */}
       </Container>
       <Footer />
