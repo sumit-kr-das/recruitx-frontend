@@ -34,7 +34,8 @@ export const apiSlice = createApi({
     "Review",
     "GlobalUser",
     "Apply",
-    "UserExp"
+    "UserExp",
+    "UserProject"
   ],
   endpoints: () => ({}),
 });
