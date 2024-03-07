@@ -5,7 +5,10 @@ import BasicInfo from "./_components/BasicInfo";
 import OtherInfo from "./_components/OtherInfo";
 // import UserCareer from "./_components/UserCareer";
 import UserEducation from "./_components/UserEducation";
-
+import UserCareer from "./_components/UserCareer";
+import UserExprience from "./_components/UserExprience";
+import UserProject from "./_components/UserProject";
+import UserCertificate from "./_components/UserCertificate";
 const UserProfilePage = () => {
   return (
     <div className="bg-[#FAFAFA]">
@@ -14,6 +17,11 @@ const UserProfilePage = () => {
         <BasicInfo />
         <OtherInfo />
         <UserEducation />
+        <UserCareer />
+        <UserExprience />
+
+        <UserProject />
+        <UserCertificate />
         {/* <UserCareer /> */}
       </Container>
       <Footer />

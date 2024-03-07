@@ -1,23 +1,13 @@
 import { apiSlice } from "../../../app/api/apiSlice";
-
-interface userCareer{
-    userId:string,
-    industry:string,
-    role:string,
-    jobRole:string,
-    jobType:string,
-    employmentType:string,
-    // shift:string,
-    location:[string],
-    expectedSalary?:number
-}
+import { TUserCareer } from "../../../@types/user/TUserCareer";
 
 export const getCareerData = apiSlice.injectEndpoints({
-	endpoints: (builder) => ({
-		userCareerData: builder.query<userCareer[], void>({
-			query: () => "/user/carrer/view",
-		}),
-	}),
+    endpoints: (builder) => ({
+        userCareerData: builder.query<TUserCareer, void>({
+            query: () => "/user/carrer/view",
+            providesTags: ["UserCareer"]
+        }),
+    }),
 });
 
 export const { useUserCareerDataQuery } = getCareerData;
