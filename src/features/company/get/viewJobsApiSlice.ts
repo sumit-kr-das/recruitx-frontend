@@ -1,10 +1,11 @@
 import { apiSlice } from "../../../app/api/apiSlice";
 
- interface job {
+interface job {
   _id: string,
   title: string,
   category: string,
   description: string,
+  shortDescription: string,
   tags: [string],
   active: boolean,
   comapanyId: {

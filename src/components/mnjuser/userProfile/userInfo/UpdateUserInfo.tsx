@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import {
   Dialog,
   DialogContent,
@@ -41,7 +41,7 @@ import { languageData } from "../../../../constants/languageData";
 import { TSetUserInfoProps } from "./ViewInfo";
 import Loader from "../../../loader/Loader";
 
-const UpdateUserInfo = ({ data, setTags, setLang }: TSetUserInfoProps) => {
+const UpdateUserInfo = ({ data }: TSetUserInfoProps) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [value, setValue] = useState([...data[0]?.skills || tagsData[0]]);
   const [language, setLanguage] = useState([...data[0]?.language || languageData[0]])

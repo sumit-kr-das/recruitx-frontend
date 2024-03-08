@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { TUserExp } from '../../../../@types/user/TUserExp'
 import Loader from '../../../loader/Loader'
 import { convertDate } from '../../../../pages/company/MyJobs'

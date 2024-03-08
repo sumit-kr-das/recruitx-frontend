@@ -20,6 +20,7 @@ type jobType = {
     description: string,
     tags: [string],
     active: boolean,
+    shortDescription: string,
     comapanyId: {
         _id: string,
         companyName: string,

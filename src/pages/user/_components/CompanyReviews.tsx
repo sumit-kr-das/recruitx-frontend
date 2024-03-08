@@ -1,5 +1,4 @@
 import { Star } from 'lucide-react'
-import React, { useEffect } from 'react'
 import { useReviewsDataQuery } from '../../../features/user/get/GetReviewApiSlice'
 import { useParams } from 'react-router-dom'
 import Loader from '../../../components/loader/Loader'

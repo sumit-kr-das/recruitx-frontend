@@ -1,8 +1,5 @@
-import { useState } from "react";
-import { skillData } from "../../../../constants/skillData";
 import { useToast } from "../../../../ui/use-toast";
-import { Controller, useForm } from "react-hook-form";
-import UserProjectSchema from "../../../../@types/zod/UserProjectSchema";
+import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import { TApiError } from "../../../../@types/TApiError";
@@ -10,7 +7,6 @@ import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } f
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "../../../../ui/form";
 import { Input } from "../../../../ui/input";
 import { Textarea } from "../../../../ui/textarea";
-import SelectInput from "../../../form/multiSelectInput/SelectInput";
 import { Button } from "../../../../ui/button";
 import { useSetUserCertificateMutation } from "../../../../features/user/post/AddUserCertificateApiSlice";
 import UserCertificateSchema from "../../../../@types/zod/UserCertificareSchema";

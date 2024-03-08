@@ -25,7 +25,7 @@ const UpdateUserCareer = ({ data }: { data: TUserCareer }) => {
     const [isOpen, setIsOpen] = useState(false);
     const [value, setValue] = useState([...data?.skills] || [skillData[0]])
     const { toast } = useToast();
-    const [updateUserCareer, { isLoading }] = useUpdateUserCareerMutation();
+    const [updateUserCareer] = useUpdateUserCareerMutation();
     const form = useForm<z.infer<typeof UserCareerSchema>>({
         resolver: zodResolver(UserCareerSchema),
         defaultValues: {

@@ -1,14 +1,9 @@
-import { Pen, Plus } from "lucide-react"
 import { useUserCareerDataQuery } from "../../../../features/user/get/getCareerDataApiSlice";
-import ListCarrer from "./ListCarrer";
-import UpdateUserInfo from "../userInfo/UpdateUserInfo";
 import UpdateUserCareer from "./UpdateUserCareer";
-type TViewUserCareerProps = {
-    setIsOpen: (val: boolean) => void;
-};
 
-const ViewUserCareer = ({ setIsOpen }: TViewUserCareerProps) => {
-    const { data, isLoading, isSuccess } = useUserCareerDataQuery();
+
+const ViewUserCareer = () => {
+    const { data, isSuccess } = useUserCareerDataQuery();
 
     return (
         <>

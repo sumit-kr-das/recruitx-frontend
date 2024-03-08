@@ -1,13 +1,14 @@
 import { apiSlice } from "../../../app/api/apiSlice";
 
 interface userCertification {
+    _id: string,
     userId: string,
     title: string,
     source: string,
     description: string,
     // certificate:string,
-    startDate: Date,
-    endDate?: Date
+    startDate: string,
+    endDate?: string
 }
 
 export const getCertificationData = apiSlice.injectEndpoints({
