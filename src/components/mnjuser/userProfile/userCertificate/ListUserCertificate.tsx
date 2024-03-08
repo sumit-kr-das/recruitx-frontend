@@ -29,7 +29,7 @@ const ListUserCertificate = ({ item }: { item: TUserCertificate }) => {
     if (!item) return <Loader />
     return (
         <>
-            <div className="mb-4 flex items-center justify-between p-5 bg-[#FAFAFA] rounded-lg border mt-4">
+            <div className="mb-4 sm:flex sm:items-center sm:justify-between p-5 bg-[#FAFAFA] rounded-lg border mt-4">
                 <div>
                     <div className="flex items-center gap-2">
                         <h2 className="font-bold text-lg"> {item?.title}</h2>
@@ -40,7 +40,7 @@ const ListUserCertificate = ({ item }: { item: TUserCertificate }) => {
                         {convertDate(item?.startDate)} - {item?.endDate ? convertDate(item?.endDate) : "Continue"}
                     </h3>
                 </div>
-                <div className="flex items-center gap-5">
+                <div className="flex items-center gap-5 mt-2 sm:mt-0">
                     <div
                         onClick={() => setOpenDialog(true)}
                         className="bg-green-100 px-3 py-2 rounded-lg cursor-pointer hover:bg-green-200 "

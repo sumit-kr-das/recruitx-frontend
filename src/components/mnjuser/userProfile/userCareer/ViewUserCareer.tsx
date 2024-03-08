@@ -42,10 +42,10 @@ const ViewUserCareer = ({ setIsOpen }: TViewUserCareerProps) => {
                             </div>
                             <div className="p-5 bg-[#FAFAFA] rounded-lg border mt-4">
                                 <h2 className="text-xl font-semibold mb-1">Key skills</h2>
-                                <ul className="flex items-center gap-x-5">
+                                <ul className="flex items-center gap-x-5 flex-wrap">
                                     {data?.skills.map((item) => (
                                         <li
-                                            className="px-4 py-1 bg-white border rounded-full capitalize"
+                                            className="px-4 py-1 bg-white border rounded-full capitalize mt-2"
                                             key={item}
                                         >
                                             {item}
