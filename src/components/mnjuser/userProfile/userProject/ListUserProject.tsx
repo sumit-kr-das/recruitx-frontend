@@ -28,17 +28,17 @@ const ListUserProject = ({ item }: { item: TUserProject }) => {
     if (!item) return <Loader />
     return (
         <>
-            <div className="mb-4 flex items-center justify-between p-5 bg-[#FAFAFA] rounded-lg border mt-4">
+            <div className="mb-4 sm:flex sm:items-center sm:justify-between p-5 bg-[#FAFAFA] rounded-lg border mt-4">
                 <div>
                     <div className="flex items-center gap-2">
                         <h2 className="font-bold text-lg"> {item?.name}</h2>
                     </div>
                     <h3 className="font-semibold">{item?.associate} </h3>
                     <p>{item?.description}</p>
-                    <ul className="flex items-center gap-x-5 mt-3 mb-3">
+                    <ul className="flex items-center gap-x-5 mt-3 mb-3 flex-wrap">
                         {item?.skills.map((item) => (
                             <li
-                                className="px-4 py-1 bg-white border rounded-full capitalize"
+                                className="px-4 py-1 bg-white border rounded-full capitalize mt-2"
                                 key={item}
                             >
                                 {item}
@@ -49,7 +49,7 @@ const ListUserProject = ({ item }: { item: TUserProject }) => {
                         {convertDate(item?.startDate)} - {item?.endDate ? convertDate(item?.endDate) : "Continue"}
                     </h3>
                 </div>
-                <div className="flex items-center gap-5">
+                <div className="flex items-center gap-5 mt-2 sm:mt-0">
                     <div
                         onClick={() => setOpenDialog(true)}
                         className="bg-green-100 px-3 py-2 rounded-lg cursor-pointer hover:bg-green-200 "

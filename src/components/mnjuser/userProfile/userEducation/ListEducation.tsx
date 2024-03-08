@@ -43,7 +43,7 @@ const ListEducation = ({ item }: TListEducationProps) => {
 
   return (
     <>
-      <div className="mb-4 flex items-center justify-between p-5 bg-[#FAFAFA] rounded-lg border mt-4">
+      <div className="mb-4 sm:flex sm:items-center sm:justify-between p-5 bg-[#FAFAFA] rounded-lg border mt-4">
         <div>
           <div className="flex items-center gap-2">
             <h2 className="font-bold text-lg"> {item?.course}</h2>
@@ -53,7 +53,7 @@ const ListEducation = ({ item }: TListEducationProps) => {
             {item?.passYear} | {item?.courseType}
           </h3>
         </div>
-        <div className="flex items-center gap-5">
+        <div className="flex items-center gap-5 mt-2">
           <div
             onClick={() => setOpenDialog(true)}
             className="bg-green-100 px-3 py-2 rounded-lg cursor-pointer hover:bg-green-200 "

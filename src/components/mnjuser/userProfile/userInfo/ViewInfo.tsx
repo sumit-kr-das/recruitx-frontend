@@ -37,7 +37,7 @@ const ViewInfo = ({ data, setTags, setLang }: TSetUserInfoProps) => {
             <p className="mt-1 text-sm leading-6 text-gray-600 mb-2">
               This key can optimize your profile & boost your creer
             </p>
-            <ul className="flex items-center gap-x-5">
+            <ul className="flex items-center gap-x-5 flex-wrap">
               {data[0]?.skills.map((item) => (
                 <li
                   className="px-4 py-1 bg-white border rounded-full capitalize"
@@ -56,7 +56,7 @@ const ViewInfo = ({ data, setTags, setLang }: TSetUserInfoProps) => {
           </div>
           <div className=" p-5 bg-[#FAFAFA] rounded-lg border mt-4">
             <h2 className="text-xl font-semibold mb-2">Personal details</h2>
-            <div className="flex items-center gap-x-20">
+            <div className="sm:flex sm:items-center sm:gap-x-20">
               <div>
                 <div className="mb-4">
                   <h2 className="text-sm font-semibold mb-1">Full address</h2>
@@ -72,7 +72,7 @@ const ViewInfo = ({ data, setTags, setLang }: TSetUserInfoProps) => {
                 </div>
               </div>
               <div>
-                <div className="mb-4">
+                <div className="mb-4 mt-4 sm:mt-0">
                   <h2 className="text-sm font-semibold mb-1">Age</h2>
                   <p className="text-gray-700 text-sm capitalize">
                     {data[0]?.age} years

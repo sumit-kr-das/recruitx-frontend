@@ -28,31 +28,31 @@ const BasicInfo = () => {
 
   const basicInfo = (
     <>
-      <div className="relative flex items-center justify-between bg-white p-10 rounded-lg gap-10 border shadow">
-        <div className="flex items-start justify-start flex-col">
+      <div className="relative md:flex md:items-center md:justify-between bg-white p-5 md:p-10 rounded-lg gap-10 border shadow">
+        <div className="md:flex items-center md:items-start md:justify-between flex-col text-center">
           <img
             src={info?.photo || UserDefault}
             // width={180}
             alt="user_default"
-            className="w-[120px] h-[120px] rounded-full border"
+            className="w-[120px] h-[120px] rounded-full border mx-auto"
           />
           <Button
             onClick={() => setProfile((prev) => !prev)}
             variant="outline"
-            className="mt-2"
+            className="mt-2 mx-auto"
           >
             Change Profile
           </Button>
         </div>
         <div className="w-full">
-          <div className="border-b flex items-end justify-between mb-4 pb-4">
+          <div className="border-b md:flex md:items-end md:justify-between mb-4 pb-4 mt-3 md:mt-0">
             <div>
-              <h2 className="text-2xl font-bold capitalize">{user?.name}</h2>
-              <p className="text-lg text-slate-600 capitalize">
+              <h2 className="text-2xl font-bold capitalize text-center">{user?.name}</h2>
+              <p className="text-lg text-slate-600 capitalize text-center">
                 {user?.workStatus}
               </p>
             </div>
-            <div className="flex items-center gap-4">
+            <div className="md:flex md:items-center gap-4 text-center">
               <p className="text-sm">
                 <span className="text-slate-500 ">Profile Created - </span>
                 {user?.createdAt && convertDate(user?.createdAt)}
@@ -63,9 +63,9 @@ const BasicInfo = () => {
               </p>
             </div>
           </div>
-          <div className="flex items-center justify-between">
-            <div className="flex-1 flex gap-5">
-              <div className="flex items-center gap-2">
+          <div className="flex flex-col md:flex-row items-center justify-between">
+            <div className="flex-1 md:flex md:gap-5">
+              <div className="flex items-center gap-2 mb-2">
                 <Phone className="w-[50px] h-[50px] bg-slate-200 p-4 rounded-md" />
                 <div>
                   <h3 className="text-slate-500 text-sm">Call</h3>
@@ -80,7 +80,7 @@ const BasicInfo = () => {
                 </div>
               </div>
             </div>
-            <Button variant="outline">
+            <Button variant="outline" className="mt-5 md:mt-0">
               <PDFDownloadLink
                 document={<ResumeDoc data={data} />}
                 fileName="resume.pdf"
