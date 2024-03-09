@@ -28,7 +28,7 @@ const CompanySlider: React.FC<PropType> = ({ options, data }) => {
 
   return (
     <section className="embla">
-      <div className="embla__controls absolute top-4 right-10">
+      <div className="embla__controls absolute top-4 right-0">
         <div className="embla__buttons mt-4 flex items-center gap-x-2">
           <PrevButton onClick={onPrevButtonClick} disabled={prevBtnDisabled} />
           <NextButton onClick={onNextButtonClick} disabled={nextBtnDisabled} />
@@ -38,7 +38,7 @@ const CompanySlider: React.FC<PropType> = ({ options, data }) => {
         <div className="embla__container">
           {data?.map((item, index) => (
             <div className="embla__slide" key={index}>
-              <div className="bg-white w-[280px] h-[220px] md:h-[300px] flex items-center flex-col justify-center text-center p-6 shadow border rounded-xl mt-8">
+              <div className="bg-white w-full sm:w-[280px] h-[220px] md:h-[300px] flex items-center flex-col justify-center text-center p-6 shadow border rounded-xl mt-8">
                 <img
                   className="relative -top-[30px] w-[80px] md:w-[100px] h-[80px] md:h-[100px] rounded-full object-cover border bg-gray-50"
                   src={item?.companyProfileId?.logo || DefaultCompany}

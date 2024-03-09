@@ -14,7 +14,7 @@ const RecommendedJobs = () => {
 
   return (
     <div className="relative mt-4 md:bg-white md:p-8 md:rounded-xl md:border">
-      <div>
+      <div className="w-[70%] sm:w-full">
         <p className="font-semibold md:text-xl">Recommanded jobs ony for you</p>
         <p className="text-sm">Top result based on your profile</p>
       </div>

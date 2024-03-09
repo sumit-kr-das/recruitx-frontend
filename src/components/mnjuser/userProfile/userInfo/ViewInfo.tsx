@@ -14,7 +14,7 @@ const ViewInfo = ({ data, setTags, setLang }: TSetUserInfoProps) => {
   if (!data) return <Loader />;
   return (
     <>
-      <div className="relative mt-4 bg-white p-10 rounded-lg border shadow">
+      <div className="relative mt-4 bg-white p-4 sm:p-10 rounded-lg border shadow">
         <div className="mb-5">
           <h2 className="text-2xl font-semibold leading-7 text-gray-900">
             Basic information

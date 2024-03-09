@@ -19,7 +19,6 @@ const UserProfilePage = () => {
         <UserEducation />
         <UserCareer />
         <UserExprience />
-
         <UserProject />
         <UserCertificate />
         {/* <UserCareer /> */}
