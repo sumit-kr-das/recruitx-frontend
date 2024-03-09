@@ -53,7 +53,7 @@ const JobSlider: React.FC<PropType> = ({ options, data }) => {
 
   return (
     <section className="embla">
-      <div className="embla__controls absolute -top-0  sm:-top-4 md:top-4 right-0 md:right-10">
+      <div className="embla__controls absolute -top-4 md:top-4 right-0 md:right-10">
         <div className="embla__buttons mt-4 flex items-center gap-x-2">
           <PrevButton onClick={onPrevButtonClick} disabled={prevBtnDisabled} />
           <NextButton onClick={onNextButtonClick} disabled={nextBtnDisabled} />
