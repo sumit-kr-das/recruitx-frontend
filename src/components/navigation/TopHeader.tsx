@@ -46,7 +46,7 @@ const TopHeader = () => {
             className="absolute top-5 left-1/2 -translate-x-1/2  mx-auto cursor-pointer"
             onClick={() => setSearch((prev) => !prev)}
           >
-            <div className="text-gray-400 flex items-center border border-gray-300 bg-white h-10 px-5 pr-16 rounded-full text-sm focus:outline-none">
+            <div className="text-gray-400 hidden sm:block flex items-center border border-gray-300 bg-white h-10 px-5 pr-16 rounded-full text-sm focus:outline-none">
               Search jobs
             </div>
             <button type="button" className="absolute right-0 top-0 mt-2 mr-4">

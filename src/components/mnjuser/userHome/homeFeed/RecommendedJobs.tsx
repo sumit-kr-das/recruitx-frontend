@@ -15,8 +15,8 @@ const RecommendedJobs = () => {
   return (
     <div className="relative mt-4 md:bg-white md:p-8 md:rounded-xl md:border">
       <div className="w-[70%] sm:w-full">
-        <p className="font-semibold md:text-xl">Recommanded jobs ony for you</p>
-        <p className="text-sm">Top result based on your profile</p>
+        <p className="font-semibold md:text-xl line-clamp-1">Recommanded jobs ony for you</p>
+        <p className="text-sm line-clamp-1">Top result based on your profile</p>
       </div>
       <div className="w-[100%] pt-4">
         {data || !isLoading ? (

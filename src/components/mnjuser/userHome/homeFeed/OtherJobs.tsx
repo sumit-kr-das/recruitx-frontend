@@ -18,10 +18,10 @@ const OtherJobs = () => {
       <div className="flex gap-2 w-[70%] sm:w-full">
         <img src={RocketImg} width={40} height={40} alt="rocket_default" />
         <div>
-          <p className="font-semibold md:text-xl">
+          <p className="font-semibold md:text-xl line-clamp-1">
             {isSuccess && data?.length} Early access roles from top companies
           </p>
-          <p className="text-xs">
+          <p className="text-xs line-clamp-1">
             See what recruiters are searching for, even before they post a job
           </p>
         </div>
