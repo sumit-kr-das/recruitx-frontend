@@ -15,7 +15,7 @@ const OtherJobs = () => {
 
   return (
     <div className="relative mt-8 md:mt-4 md:bg-white md:p-8 md:rounded-xl md:border">
-      <div className="flex gap-2">
+      <div className="flex gap-2 w-[70%] sm:w-full">
         <img src={RocketImg} width={40} height={40} alt="rocket_default" />
         <div>
           <p className="font-semibold md:text-xl">

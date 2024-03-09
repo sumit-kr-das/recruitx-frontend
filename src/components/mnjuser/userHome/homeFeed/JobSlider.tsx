@@ -53,7 +53,7 @@ const JobSlider: React.FC<PropType> = ({ options, data }) => {
 
   return (
     <section className="embla">
-      <div className="embla__controls absolute -top-4 md:top-4 right-0 md:right-10">
+      <div className="embla__controls absolute -top-0  sm:-top-4 md:top-4 right-0 md:right-10">
         <div className="embla__buttons mt-4 flex items-center gap-x-2">
           <PrevButton onClick={onPrevButtonClick} disabled={prevBtnDisabled} />
           <NextButton onClick={onNextButtonClick} disabled={nextBtnDisabled} />
@@ -63,7 +63,7 @@ const JobSlider: React.FC<PropType> = ({ options, data }) => {
         <div className="embla__container">
           {data?.map((item, index) => (
             <div className="embla__slide" key={index}>
-              <div className="bg-white w-[280px] h-[220px] md:h-[320px] p-6 shadow border rounded-xl">
+              <div className="bg-white w-full sm:w-[280px] h-[220px] md:h-[320px] p-6 shadow border rounded-xl">
                 <div className="flex items-center gap-2">
                   <img
                     className="w-[40px] md:w-[60px] h-[40px] md:h-[60px] rounded-full object-cover border bg-gray-50"

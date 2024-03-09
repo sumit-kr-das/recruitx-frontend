@@ -11,7 +11,7 @@ const Company = () => {
 
   return (
     <div className="relative mt-8 md:mt-4 md:bg-white md:p-8 md:rounded-xl md:border">
-      <div>
+      <div className="w-[70%] sm:w-full">
         <p className="font-semibold md:text-xl">Top companies</p>
         <p className="text-sm">Hiring for Software Development</p>
       </div>
