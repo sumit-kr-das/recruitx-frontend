@@ -20,22 +20,6 @@ export default defineConfig({
           },
         ],
       },
-      workbox: {
-        runtimeCaching: [
-          {
-            urlPattern: ({ url }) => {
-              return url.pathname.startsWith("/api");
-            },
-            handler: "CacheFirst" as const,
-            options: {
-              cacheName: "recruitx-api-cache",
-              cacheableResponse: {
-                statuses: [0, 200, 201],
-              },
-            },
-          },
-        ],
-      },
     }),
   ],
   define: {
