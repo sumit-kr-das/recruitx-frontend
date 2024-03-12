@@ -6,20 +6,15 @@ import Loader from "../../../loader/Loader";
 const CompanyProfileDetails = () => {
   const { data, isSuccess, isLoading } = useViewCompanyProfileQuery();
 
-  if (isLoading) return (<Loader />);
+  if (isLoading) return <Loader />;
 
-  return isSuccess ? (
+  return isSuccess && data ? (
     <>
-      <ViewCompanyProfile
-        data={data}
-      />
+      <ViewCompanyProfile data={data} />
     </>
   ) : (
     <>
-      <SetCompanyProfile
-
-      />
-      ;
+      <SetCompanyProfile />
     </>
   );
 };

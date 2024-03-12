@@ -47,8 +47,10 @@ const BasicInfo = () => {
         <div className="w-full">
           <div className="border-b md:flex md:items-end md:justify-between mb-4 pb-4 mt-3 md:mt-0">
             <div>
-              <h2 className="text-2xl font-bold capitalize text-center">{user?.name}</h2>
-              <p className="text-lg text-slate-600 capitalize text-center">
+              <h2 className="text-2xl font-bold capitalize text-center md:text-left">
+                {user?.name}
+              </h2>
+              <p className="text-lg text-slate-600 capitalize text-center md:text-left">
                 {user?.workStatus}
               </p>
             </div>
