@@ -12,9 +12,9 @@ import PublicStats from "./_components/PublicStats";
 
 const HomePage = () => {
   return (
-    <div className="bg-[#FAFAFA]">
+    <div className="bg-[#FAFAFA] relative z-10">
       <TopHeader />
-      <Container className="pt-32">
+      <Container className="pt-32 ">
         <UserHero />
         <Search />
         <Categories />
