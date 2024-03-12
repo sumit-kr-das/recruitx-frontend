@@ -22,11 +22,13 @@ const Search = () => {
   };
 
   useEffect(() => {
+    setTitleData([]);
       trigger({
         title: debounceSearch,
       });
       setTitleData(searchData);
-  }, [debounceSearch]);
+  }, [debounceSearch, searchData]);
+
 
   return (
     <div className="w-full flex items-center justify-center">
@@ -42,7 +44,7 @@ const Search = () => {
           />
         </div>
         {
-            titleData?.length >= 0 &&
+            titleData?.length > 0 &&
             <div className="w-full mb-2 absolute z-50 top-16 left-0 bg-white rounded-lg border">
               {
                 titleData?.map((item, index) => (
