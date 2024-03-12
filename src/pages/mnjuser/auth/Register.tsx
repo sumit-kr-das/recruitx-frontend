@@ -3,7 +3,6 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import * as z from "zod";
-import { TApiError } from "../../../@types/TApiError";
 import { setCredentials } from "../../../features/auth/authSlice";
 import { useUserRegisterMutation } from "../../../features/auth/user/userRegisterApiSlice";
 import {
@@ -62,10 +61,9 @@ const Register = () => {
       });
       navigate("/mnjuser/home");
     } catch (err) {
-      const apiError = err as TApiError;
       toast({
         variant: "destructive",
-        description: apiError?.data.message,
+        description: "Please try something else",
       });
     }
   };
