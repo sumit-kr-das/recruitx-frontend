@@ -11,6 +11,13 @@ export default defineConfig({
     react(),
     VitePWA({
       manifest: {
+        short_name: "RecruitX",
+        name: "Jobs - Recruitment - Job Search -  Employment - Job Vacancies - RecruitX",
+        start_url: "https://recruitx.vercel.app",
+        display: "standalone",
+        theme_color: "#ffffff",
+        description:
+          "Recruitx connects skilled candidates with the suitable recruiters from different companies. Explore the jobs for you.",
         icons: [
           {
             src: "/logo512.png",
