@@ -1,15 +1,15 @@
 import { apiSlice } from "../../../app/api/apiSlice";
 
 export const deleteUserExpApiSlice = apiSlice.injectEndpoints({
-    endpoints: (builder) => ({
-        deleteUserExp: builder.mutation({
-            query: (id) => ({
-                url: `/user/exprience/delete/${id}`,
-                method: "DELETE"
-            }),
-            invalidatesTags: ["UserExp"]
-        })
-    })
-})
+  endpoints: (builder) => ({
+    deleteUserExp: builder.mutation({
+      query: (id) => ({
+        url: `/user/exprience/delete/${id}`,
+        method: "DELETE",
+      }),
+      invalidatesTags: ["UserExp", "UserAllInfo"],
+    }),
+  }),
+});
 
-export const { useDeleteUserExpMutation } = deleteUserExpApiSlice
+export const { useDeleteUserExpMutation } = deleteUserExpApiSlice;

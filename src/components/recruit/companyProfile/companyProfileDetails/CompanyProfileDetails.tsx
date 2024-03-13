@@ -8,7 +8,7 @@ const CompanyProfileDetails = () => {
 
   if (isLoading) return <Loader />;
 
-  return isSuccess && data ? (
+  return isSuccess && data && data?.logo !== "" ? (
     <>
       <ViewCompanyProfile data={data} />
     </>
