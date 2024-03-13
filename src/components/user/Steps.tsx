@@ -1,4 +1,5 @@
 import { Briefcase, FileMinus, SearchCheck, UserCheck } from "lucide-react";
+import {Card, CardContent, CardHeader} from "../../ui/card.tsx";
 
 const stepsData = [
   {
@@ -31,14 +32,18 @@ const Steps = () => {
   return (
     <div className="flex items-center justify-between flex-col md:flex-row gap-4">
       {stepsData.map((item, index) => (
-        <div
+        <Card
           key={index}
-          className={`bg-white border rounded-lg shadow p-6 flex-1 h-80 `}
+          className={`bg-white border rounded-lg flex-1 h-80 `}
         >
-          <item.icon.type className={item.styles} />
-          <h2 className="my-4 mb-2 text-xl font-semibold">{item.title}</h2>
-          <p>{item.des}</p>
-        </div>
+          <CardHeader>
+            <item.icon.type className={item.styles}/>
+          </CardHeader>
+          <CardContent>
+            <h2 className="mb-2 text-xl font-semibold">{item.title}</h2>
+            <p>{item.des}</p>
+          </CardContent>
+        </Card>
       ))}
     </div>
   );

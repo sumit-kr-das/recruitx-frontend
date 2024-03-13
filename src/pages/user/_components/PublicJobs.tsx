@@ -3,7 +3,6 @@ import { BaseSkeletonCard } from "../../../components/skeleton/BaseSkeletonCard"
 import JobContainer from "../../../components/user/JobContainer";
 import UserTitleWrapper from "../../../components/user/UserTitleWrapper";
 import { useGetAllJobsQuery } from "../../../features/user/get/getAllJobsApiSlice";
-import { Button } from "../../../ui/button";
 
 const PublicJobs = () => {
   const [loadjobs, setloadJobs] = useState<number>(6);
@@ -37,7 +36,7 @@ const PublicJobs = () => {
         )}
       </UserTitleWrapper>
       <div className="mt-8 flex items-center justify-center">
-        <Button onClick={handleLoadJobs}>Load more</Button>
+        <p className="underline cursor-pointer font-semibold text-cyan-500" onClick={handleLoadJobs}>Load more</p>
       </div>
     </>
   );

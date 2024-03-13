@@ -1,15 +1,20 @@
 import { useEffect, useState } from "react";
 
-export const useDebounce = <T>(value: T, delay = 500) => {
-  const [debouncedValue, setDebouncedValue] = useState<T>(value);
+export const useDebounce = <T extends string>(value: T, delay = 500) => {
+    const [debouncedValue, setDebouncedValue] = useState<string | T>(value);
 
-  useEffect(() => {
-    const timeout = setTimeout(() => {
-      setDebouncedValue(value);
-    }, delay);
+    useEffect(() => {
+        const hasWhitespace = /\S/.test(value);
+        const withoutWhitespace = value.replace(/\s/g, "");
 
-    return () => clearTimeout(timeout);
-  }, [value, delay]);
+        if (hasWhitespace) {
+            const timeout = setTimeout(() => {
+                setDebouncedValue(withoutWhitespace);
+            }, delay);
 
-  return debouncedValue;
+            return () => clearTimeout(timeout);
+        }
+    }, [value, delay]);
+
+    return debouncedValue;
 };

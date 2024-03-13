@@ -21,7 +21,7 @@ const UserTitleWrapper = ({
         </h1>
         <p className="mt-4 sm:text-xl/relaxed">{des}</p>
       </div>
-      <div className="flex items-center justify-center flex-wrap md:gap-x-5 gap-y-10">
+      <div className="w-full grid justify-items-center gap-4 grid-cols-[repeat(auto-fill,minmax(300px,1fr))]">
         {children}
       </div>
     </div>
