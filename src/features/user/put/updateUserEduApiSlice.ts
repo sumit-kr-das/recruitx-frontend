@@ -8,7 +8,7 @@ export const updateUserEduApiSlice = apiSlice.injectEndpoints({
         method: "PUT",
         body: val,
       }),
-      invalidatesTags: ["UserEdu"],
+      invalidatesTags: ["UserEdu", "UserAllInfo", "GlobalUser"],
     }),
   }),
 });

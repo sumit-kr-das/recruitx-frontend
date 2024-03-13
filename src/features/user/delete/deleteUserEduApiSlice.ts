@@ -7,7 +7,7 @@ export const deleteUserEduApiSlice = apiSlice.injectEndpoints({
         url: `/user/education/delete/${id}`,
         method: "DELETE",
       }),
-      invalidatesTags: ["UserEdu"],
+      invalidatesTags: ["UserEdu", "UserAllInfo"],
     }),
   }),
 });
