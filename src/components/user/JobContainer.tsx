@@ -7,6 +7,7 @@ import { selectCurrentRole } from "../../features/auth/authSlice";
 import { useSelector } from "react-redux";
 import { useToast } from "../../ui/use-toast";
 import { TApiError } from "../../@types/TApiError";
+import {Card, CardContent, CardFooter, CardHeader} from "../../ui/card.tsx";
 
 type TJobProps = {
   data: TJobs;
@@ -35,8 +36,8 @@ const JobContainer = ({ data }: TJobProps) => {
     }
   };
   return (
-    <div className="bg-white w-[350px] h-[350px] p-6 shadow border rounded-xl">
-      <div className="flex items-center gap-2">
+    <Card className="bg-white w-[350px] h-[360px] flex flex-col justify-between rounded-xl">
+      <CardHeader className="flex items-center flex-row gap-2">
         <img
           className="w-[60px] h-[60px] rounded-full object-cover border bg-gray-50"
           src={data?.companyId?.companyProfileId?.logo || DefaultCompany}
@@ -48,32 +49,31 @@ const JobContainer = ({ data }: TJobProps) => {
           </h2>
           <p className="text-sm">{data.info.location}</p>
         </div>
-      </div>
-
-      <div className="mt-4">
+      </CardHeader>
+      <CardContent>
+      <div>
         <h3 className="font-bold text-xl line-clamp-1">{data.title}</h3>
         <p className="line-clamp-2">{data?.shortDescription}</p>
       </div>
-
-      <div className="flex items-center flex-wrap gap-2 my-4">
-        <p className="bg-blue-50 text-blue-500 text-sm font-semibold px-4 py-2 rounded-xl">
+      <div className="flex items-center flex-wrap gap-2 mt-4">
+        <p className="bg-blue-50 text-blue-500 text-sm font-xs px-2 py-1 rounded-xl">
           {data.info.vacancies} Positions
         </p>
-        <p className="bg-red-50 text-red-500 text-sm font-semibold px-4 py-2 rounded-xl">
+        <p className="bg-red-50 text-red-500 text-sm font-xs px-2 py-1 rounded-xl">
           {data.info.jobType}
         </p>
-        <p className="bg-green-50 text-green-500 text-sm font-semibold px-4 py-2 rounded-xl">
+        <p className="bg-green-50 text-green-500 text-sm font-xs px-2 py-1 rounded-xl">
           {data.info.minExprience} Years
         </p>
-        <p className="bg-cyan-50 text-cyan-500 text-sm font-semibold px-4 py-2 rounded-xl">
+        <p className="bg-cyan-50 text-cyan-500 text-sm font-xs px-2 py-1 rounded-xl">
           {data.info.maxSalary}/Year
         </p>
-        <p className="bg-orange-50 text-orange-500 text-sm font-semibold px-4 py-2 rounded-xl">
+        <p className="bg-orange-50 text-orange-500 text-sm font-xs px-2 py-1 rounded-xl">
           {data.info.workplaceType}
         </p>
       </div>
-
-      <div className="flex items-center gap-4">
+      </CardContent>
+      <CardFooter className="flex items-center gap-4">
         {user ? (
           <Button
             onClick={() => applyForJob(data?._id)}
@@ -89,8 +89,8 @@ const JobContainer = ({ data }: TJobProps) => {
         <Link to={`/jobDetails/${data._id}`}>
           <Button variant="outline" disabled={isLoading}>View Details</Button>
         </Link>
-      </div>
-    </div>
+      </CardFooter>
+    </Card>
   );
 };
 

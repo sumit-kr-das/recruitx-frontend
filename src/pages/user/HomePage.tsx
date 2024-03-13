@@ -4,7 +4,6 @@ import TopHeader from "../../components/navigation/TopHeader";
 import Categories from "../../components/user/Categories";
 import Steps from "../../components/user/Steps";
 import UserHero from "../../components/user/UserHero";
-import UserTitleWrapper from "../../components/user/UserTitleWrapper";
 import Container from "../../layout/Container";
 import PublicCompanies from "./_components/PublicCompanies";
 import PublicJobs from "./_components/PublicJobs";
@@ -18,18 +17,20 @@ const HomePage = () => {
         <UserHero />
         <Search />
         <Categories />
-        <UserTitleWrapper
-          title="Get Hired in"
-          titleVariant="4 Quick Easy Steps"
-          des="The quickest and most effective way to get hired by the top firm working in your career interest areas."
-        >
-          <Steps />
-        </UserTitleWrapper>
-        <PublicJobs />
-        <PublicCompanies />
-        <PublicStats />
+          <div>
+              <div className="mx-auto max-w-xl text-center mt-20 mb-10">
+                  <h1 className="text-2xl md:text-4xl font-extrabold">
+                      Get Hired in <span className="text-cyan-500">4 Quick Easy Steps</span>
+                  </h1>
+                  <p className="mt-4 sm:text-xl/relaxed">The quickest and most effective way to get hired by the top firm working in your career interest areas.</p>
+              </div>
+              <Steps/>
+          </div>
+          <PublicJobs/>
+          <PublicCompanies/>
+          <PublicStats/>
       </Container>
-      <Footer />
+        <Footer/>
     </div>
   );
 };

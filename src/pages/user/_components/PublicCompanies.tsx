@@ -3,10 +3,9 @@ import { BaseSkeletonCard } from "../../../components/skeleton/BaseSkeletonCard"
 import CompanyContainer from "../../../components/user/CompanyContainer";
 import UserTitleWrapper from "../../../components/user/UserTitleWrapper";
 import { useViewAllCompaniesQuery } from "../../../features/company/get/viewAllCompanies";
-import { Button } from "../../../ui/button";
 
 const PublicCompanies = () => {
-  const [loadcompanies, setLoadCompanies] = useState<number>(8);
+  const [loadcompanies, setLoadCompanies] = useState<number>(6);
 
   const { data, isLoading } = useViewAllCompaniesQuery({
     limit: loadcompanies,
@@ -38,9 +37,9 @@ const PublicCompanies = () => {
           </>
         )}
       </UserTitleWrapper>
-      <div className="mt-8 flex items-center justify-center">
-        <Button onClick={handleLoadCompanyes}>Load more</Button>
-      </div>
+        <div className="mt-8 flex items-center justify-center">
+            <p className="underline cursor-pointer font-semibold text-cyan-500" onClick={handleLoadCompanyes}>Load more</p>
+        </div>
     </>
   );
 };
