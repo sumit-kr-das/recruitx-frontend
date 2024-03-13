@@ -76,16 +76,17 @@ const JobSlider: React.FC<PropType> = ({ options, data }) => {
                     <h2 className="font-bold line-clamp-1">
                       {item.companyId.companyName}
                     </h2>
-                    <p className="text-sm line-clamp-1">{item.info.location}</p>
+                    <p className="text-sm line-clamp-1 capitalize">
+                      {item.info.location}
+                    </p>
                   </div>
                 </div>
-
                 <div className="mt-4">
                   <h3 className="font-bold text-base md:text-lg line-clamp-1">
                     {item.title}
                   </h3>
                   <p className="line-clamp-2 text-xs md:text-sm">
-                    {item.description}
+                    {item.shortDescription}
                   </p>
                 </div>
                 <div className="hidden md:block">

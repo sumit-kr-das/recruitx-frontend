@@ -75,7 +75,7 @@ const Search = () => {
           <MapPin className="w-4  h-4 text-gray-400"/>
           <input
               type="text"
-              placeholder="London, United Kingdom"
+              placeholder="Bengaluru, Karnataka"
               className="block w-1/2 rounded-md border-0 py-1.5 focus:outline-none focus:ring-transparent"
               value={data.location}
               onChange={(e) => setData({...data, location: e.target.value})}
