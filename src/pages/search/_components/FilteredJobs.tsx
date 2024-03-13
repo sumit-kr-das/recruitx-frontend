@@ -12,6 +12,7 @@ type TJob = {
   title: string;
   category: string;
   description: string;
+  shortDescription: string;
   tags: string[];
   active: boolean;
   info: {
@@ -69,7 +70,7 @@ const FilteredJobs = ({ job }: JobProps) => {
     }
   };
   return (
-    <Card className="w-full h-full flex flex-col justify-between bg-white rounded-lg border shadow">
+    <Card className="w-full h-full flex flex-col justify-between bg-white rounded-lg">
       <CardHeader className="flex items-center flex-row gap-4">
         <img
           className="w-16 h-16 rounded-full  object-cover border"
@@ -96,10 +97,10 @@ const FilteredJobs = ({ job }: JobProps) => {
             {job?.info?.workplaceType}
           </p>
         </div>
-        <p className="line-clamp-2 mt-2">{job?.description}</p>
+        <p className="line-clamp-2 mt-2">{job?.shortDescription}</p>
       </CardContent>
       <CardFooter className="w-full flex items-center flex-col justify-between">
-        <Separator className="my-4" />
+        <Separator className="mb-4" />
         <div className="w-full flex items-center justify-between">
           <div className="flex items-center gap-1">
             <IndianRupee className="w-4 h-4" />

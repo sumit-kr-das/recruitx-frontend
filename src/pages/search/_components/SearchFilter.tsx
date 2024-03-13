@@ -30,7 +30,7 @@ const SearchFilter = () => {
       title: debounceSearch,
     });
     setTitleData(data);
-  }, [debounceSearch]);
+  }, [debounceSearch, data]);
 
   const setInputSearch = (title: string) => {
     setSearch(title);
@@ -56,7 +56,7 @@ const SearchFilter = () => {
 
   return (
     <>
-      <div className="relative p-8 rounded-lg border shadow bg-gradient-to-r from-cyan-500 to-blue-500">
+      <div className="relative p-8 rounded-lg border bg-gradient-to-r from-cyan-500 to-blue-500">
         <h1 className="text-2xl md:text-4xl font-bold text-white">
           Find your dream job here!
         </h1>
@@ -80,7 +80,7 @@ const SearchFilter = () => {
           >
             Search
           </Button>
-          {show && (
+          {titleData?.length > 0 && (
             <div className="w-full h-fit absolute top-12 left-0 bg-white border border-t-0 rounded-bl-lg rounded-br-lg">
               {titleData?.map((item: { title: string }, index) => (
                 <p

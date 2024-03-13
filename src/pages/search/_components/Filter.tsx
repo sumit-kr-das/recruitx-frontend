@@ -47,7 +47,7 @@ const Filter = () => {
     });
 
     navigate(
-      `?search=${paramsTitle}&location=${value}&jobTypes=${jobType}&workplaceType=${workplaceType}&minSalary=${salary}&minExprience=${exp}`
+      `?search=${paramsTitle}&location=${value}&jobTypes=${jobType}&workplaceType=${workplaceType}&minSalary=${salary}&minExprience=${exp}`,
     );
   };
 
@@ -60,7 +60,7 @@ const Filter = () => {
   }, [data]);
 
   return (
-    <aside className="md:w-[300px] h-fit bg-white p-8 md:rounded-lg md:border md:shadow ">
+    <aside className="md:w-[300px] h-fit bg-white p-8 md:rounded-lg md:border">
       <h1 className="text-lg font-semibold">Filter</h1>
       <div className="mt-8">
         <div className="grid w-full max-w-sm items-center gap-1.5">
