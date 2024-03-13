@@ -60,7 +60,7 @@ const CompanySearch = () => {
             </Button>
           </div>
         </div>
-        <div className="grid gap-x-4 gap-y-8 grid-cols-[repeat(auto-fill,minmax(300px,1fr))] mt-4">
+        <div className="grid justify-items-center gap-x-4 gap-y-8 grid-cols-[repeat(auto-fill,minmax(300px,1fr))] mt-4">
           {isSuccess &&
             data &&
             data.companies.length > 0 &&
@@ -77,7 +77,6 @@ const CompanySearch = () => {
         )}
       </Container>
       <Footer />
-
     </div>
   );
 };
