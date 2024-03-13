@@ -1,10 +1,11 @@
 import { MapPin, Search as SearchIcn } from "lucide-react";
-import {useEffect, useState} from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "../../../../ui/button";
-import {useLazySearchJobsTitleQuery} from "../../../../features/user/get/searchJobsTitleApiSlice.ts";
-import {useDebounce} from "../../../../customHooks/useDebounce.ts";
-import {citiesArray} from "../../../../constants/citiesArray.ts";
+import { useLazySearchJobsTitleQuery } from "../../../../features/user/get/searchJobsTitleApiSlice.ts";
+import { useDebounce } from "../../../../customHooks/useDebounce.ts";
+import { citiesArray } from "../../../../constants/citiesArray.ts";
+import { Separator } from "../../../../ui/separator.tsx";
 
 const Search = () => {
   const navigate = useNavigate();
@@ -19,87 +20,86 @@ const Search = () => {
 
   const search = () => {
     navigate(
-      `../../mnjuser/jobs?search=${data.skill}&location=${data.location}`
+      `../../mnjuser/jobs?search=${data.skill}&location=${data.location}`,
     );
   };
 
   useEffect(() => {
     setTitleData([]);
-      trigger({
-        title: debounceSearch,
-      });
-      setTitleData(searchData);
+    trigger({
+      title: debounceSearch,
+    });
+    setTitleData(searchData);
   }, [debounceSearch, searchData]);
 
-  function setSkills (skillData: string) {
-    setData({...data, skill: skillData})
+  function setSkills(skillData: string) {
+    setData({ ...data, skill: skillData });
     setTitleData([]);
   }
 
-  function setCities (locationData: string) {
-    setData({...data, location: locationData})
+  function setCities(locationData: string) {
+    setData({ ...data, location: locationData });
     setShowCitySuggestions(false);
   }
 
   return (
     <div className="w-full flex items-center justify-center">
-      <div className="relative bg-white md:w-8/12 flex items-center justify-center gap-4 border-2 rounded-lg shadow px-3 py-2">
+      <div className="relative bg-white w-[90%] md:w-8/12 flex md:items-center justify-center flex-col md:flex-row md:gap-4 border-2 rounded-lg shadow px-3 py-2">
         <div className="flex items-center justify-center gap-1 flex-1">
-          <SearchIcn className="w-4 h-4 text-gray-400"/>
+          <SearchIcn className="w-4 h-4 text-gray-400" />
           <input
-              type="text"
-              placeholder="Business Development Manager"
-              className="block w-full rounded-md border-0 py-1.5 focus:outline-none focus:ring-transparent"
-              value={data.skill}
-              onChange={(e) => setData({...data, skill: e.target.value})}
+            type="text"
+            placeholder="Business Development Manager"
+            className="block w-full rounded-md border-0 py-1.5 focus:outline-none focus:ring-transparent"
+            value={data.skill}
+            onChange={(e) => setData({ ...data, skill: e.target.value })}
           />
         </div>
-        {
-            titleData?.length > 0 &&
-            <div className="w-full mb-2 absolute z-50 top-16 left-0 bg-white rounded-lg border">
-              {
-                titleData?.map((item: {title: string}, index) => (
-                    <div key={index}
-                         onClick={() =>setSkills(item?.title)}
-                         className="text-gray-500 flex items-center gap-2 px-3 py-2 hover:bg-gray-200 cursor-pointer"
-                    >
-                      <SearchIcn className="w-5 h-5 text-gray-400"/>
-                      <p className="md:text-lg">{item?.title}</p>
-                    </div>
-                ))
-              }
-            </div>
-        }
-
+        {titleData?.length > 0 && (
+          <div className="w-full mb-2 absolute z-50 top-10 md:top-16 left-0 bg-white rounded-lg border">
+            {titleData?.map((item: { title: string }, index) => (
+              <div
+                key={index}
+                onClick={() => setSkills(item?.title)}
+                className="text-gray-500 flex items-center gap-2 px-3 py-2 hover:bg-gray-200 cursor-pointer"
+              >
+                <SearchIcn className="w-5 h-5 text-gray-400" />
+                <p className="md:text-lg">{item?.title}</p>
+              </div>
+            ))}
+          </div>
+        )}
+        <Separator className="py-0 md:hidden" />
         <div className="flex items-center justify-center gap-1 flex-1">
-          <MapPin className="w-4  h-4 text-gray-400"/>
+          <MapPin className="w-4 h-4 text-gray-400" />
           <input
-              type="text"
-              placeholder="Bengaluru, Karnataka"
-              className="block w-1/2 rounded-md border-0 py-1.5 focus:outline-none focus:ring-transparent"
-              value={data.location}
-              onChange={(e) => setData({...data, location: e.target.value})}
+            type="text"
+            placeholder="Bengaluru, Karnataka"
+            className="block w-full md:w-1/2 rounded-md border-0 py-1.5 focus:outline-none focus:ring-transparent"
+            value={data.location}
+            onChange={(e) => setData({ ...data, location: e.target.value })}
           />
         </div>
         {showCitySuggestions && data.location && (
-            <div className="w-full mb-2 absolute z-50 top-16 left-0 bg-white rounded-lg border">
-              {citiesArray
-                  .filter((city) =>
-                      city.label.toLowerCase().includes(data.location.toLowerCase())
-                  )
-                  .map((item, index) => (
-                      <div
-                          key={index}
-                          className="text-gray-500 flex items-center gap-2 px-3 py-2 hover:bg-gray-200 cursor-pointer"
-                          onClick={() => setCities(item.label)}
-                      >
-                        <MapPin className="w-5 h-5 text-gray-400" />
-                        <p className="md:text-lg">{item.label}</p>
-                      </div>
-                  ))}
-            </div>
+          <div className="w-full mb-2 absolute z-50 top-20 md:top-16 left-0 bg-white rounded-lg border">
+            {citiesArray
+              .filter((city) =>
+                city.label.toLowerCase().includes(data.location.toLowerCase()),
+              )
+              .map((item, index) => (
+                <div
+                  key={index}
+                  className="text-gray-500 flex items-center gap-2 px-3 py-2 hover:bg-gray-200 cursor-pointer"
+                  onClick={() => setCities(item.label)}
+                >
+                  <MapPin className="w-5 h-5 text-gray-400" />
+                  <p className="md:text-lg">{item.label}</p>
+                </div>
+              ))}
+          </div>
         )}
-        <Button className="bg-cyan-500 hover:bg-cyan-600" onClick={search}>
+        <Separator className="py-0 md:hidden" />
+        <Button className="mt-4 md:mt-0" onClick={search}>
           Search
         </Button>
       </div>

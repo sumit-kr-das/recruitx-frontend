@@ -43,10 +43,10 @@ const TopHeader = () => {
         {/* search */}
         {role && role === "user" && (
           <div
-            className="absolute top-5 left-1/2 -translate-x-1/2  mx-auto cursor-pointer"
+            className="absolute top-5 left-1/2 -translate-x-1/2  mx-auto cursor-pointer hidden lg:block"
             onClick={() => setSearch((prev) => !prev)}
           >
-            <div className="text-gray-400 hidden sm:block flex items-center border border-gray-300 bg-white h-10 px-5 pr-16 rounded-full text-sm focus:outline-none leading-9">
+            <div className="text-gray-400 flex items-center border border-gray-300 bg-white h-10 px-5 pr-16 rounded-full text-sm focus:outline-none leading-9">
               Search jobs
             </div>
             <button type="button" className="absolute right-0 top-0 mt-2 mr-4">
@@ -56,14 +56,14 @@ const TopHeader = () => {
         )}
         {/* show/hide search */}
         {search && (
-          <div className="absolute top-0 left-0 w-full z-30">
+          <div className="pt-4 md:pt-0 absolute top-0 left-0 w-full z-30">
             <div className="bg-white py-5">
               <SearchComponent />
             </div>
             <div className="bg-gradient-to-b from-white to-transparent h-[100px]"></div>
             <div
               onClick={() => setSearch((prev) => !prev)}
-              className="absolute top-[20%] right-[10%] cursor-pointer"
+              className="absolute top-[2%] md:top-[20%] right-[1%] md:right-[10%] cursor-pointer"
             >
               <X className="w-[40px]" />
             </div>
@@ -93,13 +93,19 @@ const TopHeader = () => {
             </div>
           </>
         ) : (
-          <>
-            <>
-              <div className="lg:hidden">
-                <Sidebar />
-              </div>
-            </>
-          </>
+          <div className="flex items-center justify-center gap-2 lg:hidden">
+            {role && role === "user" && (
+              <Button
+                onClick={() => setSearch((prev) => !prev)}
+                variant="outline"
+                size="icon"
+                className="rounded-full "
+              >
+                <Search className="w-5 text-gray-500" />
+              </Button>
+            )}
+            <Sidebar />
+          </div>
         )}
       </nav>
     </header>
