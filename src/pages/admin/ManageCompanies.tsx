@@ -48,7 +48,7 @@ const ManageCompanies = () => {
               <div className="flex items-center gap-5">
                 <img
                   className="w-[80px] h-[80px] rounded-full"
-                  src={DefaultUser}
+                  src={company?.companyProfileId?.logo || DefaultUser}
                   alt="user"
                 />
                 <div>
