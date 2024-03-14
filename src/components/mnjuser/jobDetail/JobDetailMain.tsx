@@ -39,7 +39,6 @@ const JobDetailMain = ({ job }: { job: TJobDetails }) => {
           className="rounded-full h-28 w-28 bg-white  shadow "
           alt=""
         />
-
         <div className="md:ms-4 md:mt-0 mt-6">
           <h5 className="text-xl font-semibold">{job?.title}</h5>
           <div className="mt-2">
@@ -58,7 +57,6 @@ const JobDetailMain = ({ job }: { job: TJobDetails }) => {
       <h5 className="text-lg font-semibold mt-6">Job Description:</h5>
       <div dangerouslySetInnerHTML={{ __html: job?.description }} />
 
-
       <div className="mt-5">
         {user && user == "user" ? (
           <Button
@@ -69,14 +67,10 @@ const JobDetailMain = ({ job }: { job: TJobDetails }) => {
           </Button>
         ) : (
           <Button>
-            <Link
-              to="/login"
-              className=""
-            >
+            <Link to="/login" className="">
               Login to Apply
             </Link>
           </Button>
-
         )}
       </div>
     </div>

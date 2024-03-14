@@ -11,12 +11,11 @@ const JobDetailsPage = () => {
   const { jobId } = useParams();
   const { data, isLoading, isSuccess } = useGetJobDetailQuery({ id: jobId });
 
-  if (!data && isLoading && !isSuccess) return <Loader />
+  if (!data && isLoading && !isSuccess) return <Loader />;
 
   return (
     <div className="bg-[#FAFAFA]">
       <TopHeader />
-      {/* <Conta className="max-w-screen-xl mx-auto pb-10 flex justify-between"> */}
       <Container>
         <section className=" md:py-24 py-16">
           <div className="container mt-10">
