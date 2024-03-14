@@ -135,7 +135,7 @@ const SubmitJob = () => {
       const apiError = err as TApiError;
       toast({
         variant: "destructive",
-        description: apiError.data.message
+        description: apiError?.data?.message
       })
     }
   };

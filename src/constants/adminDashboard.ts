@@ -15,6 +15,11 @@ export const adminDashboard = [
     src: "/dashboard/admin/approved_companies",
   },
   {
+    menu: "Restricted Companies",
+    icon: "",
+    src: "/dashboard/admin/restricted_companies"
+  },
+  {
     menu: "Change Password",
     icon: "",
     src: "/dashboard/change_password",
