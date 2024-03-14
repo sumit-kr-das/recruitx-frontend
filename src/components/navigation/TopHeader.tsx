@@ -56,7 +56,7 @@ const TopHeader = () => {
         )}
         {/* show/hide search */}
         {search && (
-          <div className="pt-4 md:pt-0 absolute top-0 left-0 w-full z-30">
+          <div className="pt-4 md:pt-0 px-4 absolute top-0 left-0 w-full z-30">
             <div className="bg-white py-5">
               <SearchComponent />
             </div>

@@ -1,10 +1,12 @@
 import React from "react";
+import { cn } from "../../lib/utils.ts.ts";
 
 type TUserTitleProps = {
   children: React.ReactNode;
   title: string;
   titleVariant: string;
   des: string;
+  className?: string;
 };
 
 const UserTitleWrapper = ({
@@ -12,6 +14,7 @@ const UserTitleWrapper = ({
   title,
   titleVariant,
   des,
+  className,
 }: TUserTitleProps) => {
   return (
     <div>
@@ -21,7 +24,12 @@ const UserTitleWrapper = ({
         </h1>
         <p className="mt-4 sm:text-xl/relaxed">{des}</p>
       </div>
-      <div className="w-full grid justify-items-center gap-4 grid-cols-[repeat(auto-fill,minmax(300px,1fr))]">
+      <div
+        className={cn(
+          "w-full grid justify-items-center gap-4 grid-cols-[repeat(auto-fill,minmax(300px,1fr))]",
+          className,
+        )}
+      >
         {children}
       </div>
     </div>
