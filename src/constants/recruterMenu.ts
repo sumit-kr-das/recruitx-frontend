@@ -16,6 +16,24 @@ export const recruiterMenu = [
 	},
 ];
 
+export const adminMenu = [
+	{
+		title: "Dashboard",
+		src: "/dashboard",
+		shortHand: "⌘+D",
+	},
+	{
+		title: "View Companies",
+		src: "/dashboard/admin/approved_companies",
+		shortHand: "⌘+V",
+	},
+	// {
+	// 	title: "Post Job",
+	// 	src: "/dashboard/submit_jobs",
+	// 	shortHand: "⌘+P",
+	// },
+];
+
 export const userMenu = [
 	{
 		title: "My Dashboard",

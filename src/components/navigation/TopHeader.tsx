@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import MainLogo from "../../assets/logo.svg";
-import { recruiterMenu, userMenu } from "../../constants/recruterMenu";
+import { adminMenu, recruiterMenu, userMenu } from "../../constants/recruterMenu";
 import {
   selectCurrentRole,
   selectCurrentUser,
@@ -90,7 +90,13 @@ const TopHeader = () => {
           ) : role && role === "user" ? (
             <DropDownMenu menu={userMenu} />
           ) : (
-            <DropDownMenu menu={recruiterMenu} />
+            role === "company" ? (<>
+              <DropDownMenu menu={recruiterMenu} />
+            </>) : (
+              <>
+                <DropDownMenu menu={adminMenu} />
+              </>
+            )
           )}
         </div>
         {role && (role === "company" || role === "admin") ? (
