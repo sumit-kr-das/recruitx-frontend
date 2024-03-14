@@ -91,11 +91,11 @@ const Login = () => {
             {/* select options */}
             {formStep === 0 && (
               <>
-                <p className="mt-2 mb-5 md:mb-10 text-center">
+                <p className="mt-2 mb-5 text-center">
                   Choose according to your usability
                 </p>
                 <section>
-                  <p className="text-xs mt-6">Login Type</p>
+                  <p className="text-xs">Login Type</p>
                   {userRoles?.map((item, index) => (
                     <div
                       key={index}
