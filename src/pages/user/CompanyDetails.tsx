@@ -49,7 +49,7 @@ const CompanyDetails = () => {
                           <span className="ml-2 flex text-orange-300">
                             <Star fill="orange" size={20} />
                             <span className="ml-1">
-                              {(ratings && ratings.rating) || "No ratings yet"}
+                              {(ratings && ratings?.rating) || "No ratings yet"}
                             </span>
                           </span>
                         </div>
@@ -266,7 +266,7 @@ const CompanyDetails = () => {
                           <h2 className="font-bold line-clamp-1">
                             {data?.companyDetail?.companyName}
                           </h2>
-                          <p className="text-sm">{item.info.location}</p>
+                          <p className="text-sm">{item?.info?.location}</p>
                         </div>
                       </div>
 
@@ -279,19 +279,19 @@ const CompanyDetails = () => {
 
                       <div className="flex items-center flex-wrap gap-2 my-4">
                         <p className="bg-blue-50 text-blue-500 text-sm font-semibold px-4 py-2 rounded-xl">
-                          {item?.info.vacancies} Positions
+                          {item?.info?.vacancies} Positions
                         </p>
                         <p className="bg-red-50 text-red-500 text-sm font-semibold px-4 py-2 rounded-xl">
-                          {item?.info.jobType}
+                          {item?.info?.jobType}
                         </p>
                         <p className="bg-green-50 text-green-500 text-sm font-semibold px-4 py-2 rounded-xl">
-                          {item?.info.minExprience} Years
+                          {item?.info?.minExprience} Years
                         </p>
                         <p className="bg-cyan-50 text-cyan-500 text-sm font-semibold px-4 py-2 rounded-xl">
-                          {item?.info.maxSalary}/Year
+                          {item?.info?.maxSalary}/Year
                         </p>
                         <p className="bg-orange-50 text-orange-500 text-sm font-semibold px-4 py-2 rounded-xl">
-                          {item?.info.workplaceType}
+                          {item?.info?.workplaceType}
                         </p>
                       </div>
 

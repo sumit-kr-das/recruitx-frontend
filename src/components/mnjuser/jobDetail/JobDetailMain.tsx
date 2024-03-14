@@ -44,11 +44,11 @@ const JobDetailMain = ({ job }: { job: TJobDetails }) => {
           <div className="mt-2">
             <span className="text-slate-400 font-medium me-2 inline-block">
               <i className="uil uil-building text-[18px] text-emerald-600 me-1"></i>{" "}
-              {job?.companyId.companyName}
+              {job?.companyId?.companyName}
             </span>
             <span className="text-slate-400 font-medium me-2 inline-block">
               <i className="uil uil-map-marker text-[18px] text-emerald-600 me-1"></i>{" "}
-              {job?.companyId.address}, {job?.companyId.pin}
+              {job?.companyId?.address}, {job?.companyId?.pin}
             </span>
           </div>
         </div>
