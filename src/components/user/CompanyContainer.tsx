@@ -18,9 +18,9 @@ const CompanyContainer = ({ data }: TCompanyProps) => {
           alt="company icon"
         />
         <div>
-          <h2 className="font-bold line-clamp-1">{data.companyName}</h2>
-          <p className="text-sm line-clamp-1 capitalize">{data.address}</p>
-          <p className="text-sm line-clamp-2">{data.industry}</p>
+          <h2 className="font-bold line-clamp-1">{data?.companyName}</h2>
+          <p className="text-sm line-clamp-1 capitalize">{data?.address}</p>
+          <p className="text-sm line-clamp-2">{data?.industry}</p>
         </div>
       </CardHeader>
       <CardContent className="flex items-center flex-wrap gap-2">
@@ -31,14 +31,14 @@ const CompanyContainer = ({ data }: TCompanyProps) => {
           Verified
         </p>
         <p className="bg-green-50 text-green-500 text-sm font-xs px-2 py-1 rounded-xl">
-          {data.address}
+          {data?.address}
         </p>
         <p className="bg-cyan-50 text-cyan-500 text-sm font-xs px-2 py-1 rounded-xl">
           {data?.companyProfileId?.type}
         </p>
       </CardContent>
       <CardFooter>
-        <Link className="block w-full" to={`/mnjuser/company/${data._id}`}>
+        <Link className="block w-full" to={`/mnjuser/company/${data?._id}`}>
           <Button className="w-full">View more </Button>
         </Link>
       </CardFooter>
