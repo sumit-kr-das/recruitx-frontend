@@ -25,19 +25,26 @@ const TopHeader = () => {
           <Link to="/">
             <img className="w-24 md:w-32" src={MainLogo} alt="main logo" />
           </Link>
-          <div className="hidden md:block">
-            <ul className="flex items-center justify-center gap-x-8">
-              <li>
-                <Link to="/">Home</Link>
-              </li>
-              <li>
-                <Link to="/mnjuser/jobs">Jobs</Link>
-              </li>
-              <li>
-                <Link to="/mnjuser/companies">Company</Link>
-              </li>
-            </ul>
-          </div>
+          {
+            role !== "company" && role !== "admin" && (
+              <>
+                <div className="hidden md:block">
+                  <ul className="flex items-center justify-center gap-x-8">
+                    <li>
+                      <Link to="/">Home</Link>
+                    </li>
+                    <li>
+                      <Link to="/mnjuser/jobs">Jobs</Link>
+                    </li>
+                    <li>
+                      <Link to="/mnjuser/companies">Company</Link>
+                    </li>
+                  </ul>
+                </div>
+              </>
+            )
+          }
+
         </div>
 
         {/* search */}
