@@ -44,7 +44,7 @@ const Search = () => {
 
   return (
     <div className="w-full flex items-center justify-center">
-      <div className="relative bg-white w-[90%] md:w-8/12 flex md:items-center justify-center flex-col md:flex-row md:gap-4 border-2 rounded-lg shadow px-3 py-2">
+      <div className="relative bg-white w-full md:w-8/12 flex md:items-center justify-center flex-col md:flex-row md:gap-4 border-2 rounded-lg shadow px-3 py-2">
         <div className="flex items-center justify-center gap-1 flex-1">
           <SearchIcn className="w-4 h-4 text-gray-400" />
           <input
@@ -69,7 +69,7 @@ const Search = () => {
             ))}
           </div>
         )}
-        <Separator className="py-0 md:hidden" />
+        <Separator className="mb-2 md:hidden" />
         <div className="flex items-center justify-center gap-1 flex-1">
           <MapPin className="w-4 h-4 text-gray-400" />
           <input
