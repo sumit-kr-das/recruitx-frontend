@@ -13,24 +13,28 @@ const HomePage = () => {
   return (
     <div className="bg-[#FAFAFA] relative z-10">
       <TopHeader />
-      <Container className="pt-32 ">
+      <Container className="pt-28 md:pt-32">
         <UserHero />
         <Search />
         <Categories />
-          <div>
-              <div className="mx-auto max-w-xl text-center mt-20 mb-10">
-                  <h1 className="text-2xl md:text-4xl font-extrabold">
-                      Get Hired in <span className="text-cyan-500">4 Quick Easy Steps</span>
-                  </h1>
-                  <p className="mt-4 sm:text-xl/relaxed">The quickest and most effective way to get hired by the top firm working in your career interest areas.</p>
-              </div>
-              <Steps/>
+        <div>
+          <div className="mx-auto max-w-xl text-center mt-20 mb-10">
+            <h1 className="text-2xl md:text-4xl font-extrabold">
+              Get Hired in{" "}
+              <span className="text-cyan-500">4 Quick Easy Steps</span>
+            </h1>
+            <p className="mt-4 sm:text-xl/relaxed">
+              The quickest and most effective way to get hired by the top firm
+              working in your career interest areas.
+            </p>
           </div>
-          <PublicJobs/>
-          <PublicCompanies/>
-          <PublicStats/>
+          <Steps />
+        </div>
+        <PublicJobs />
+        <PublicCompanies />
+        <PublicStats />
       </Container>
-        <Footer/>
+      <Footer />
     </div>
   );
 };
