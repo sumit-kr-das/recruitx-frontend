@@ -20,6 +20,7 @@ const PublicJobs = () => {
         titleVariant="hiring no"
         des="Some recent comapnies are finding candidates for their urgent
               roles here."
+        className="md:gap-y-12"
       >
         {data || !isLoading ? (
           <>
@@ -36,7 +37,12 @@ const PublicJobs = () => {
         )}
       </UserTitleWrapper>
       <div className="mt-8 flex items-center justify-center">
-        <p className="underline cursor-pointer font-semibold text-cyan-500" onClick={handleLoadJobs}>Load more</p>
+        <p
+          className="underline cursor-pointer font-semibold text-cyan-500"
+          onClick={handleLoadJobs}
+        >
+          Load more
+        </p>
       </div>
     </>
   );
