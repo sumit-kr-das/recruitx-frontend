@@ -152,7 +152,7 @@ const UpdateCertificate = ({ data, openDialog, setOpenDialog }: TProps) => {
                                 </FormItem>
                             )}
                         />
-                        <Button type="submit" className="float-right">Update</Button>
+                        <Button type="submit" className="float-right" disabled={!form.formState.isDirty}>Update</Button>
                     </form>
                 </Form>
             </DialogContent>

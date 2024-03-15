@@ -124,7 +124,7 @@ const ChangeProfile = ({ setProfile, profile, type }: Props) => {
             className="hidden"
           />
         </div>
-        <Button onClick={handleUpload} className="float-right" type="submit">
+        <Button onClick={handleUpload} className="float-right" type="submit" >
           Update Profile
         </Button>
       </DialogContent>

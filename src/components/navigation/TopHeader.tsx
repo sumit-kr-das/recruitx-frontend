@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import MainLogo from "../../assets/logo.svg";
-import { recruiterMenu, userMenu } from "../../constants/recruterMenu";
+import { adminMenu, recruiterMenu, userMenu } from "../../constants/recruterMenu";
 import {
   selectCurrentRole,
   selectCurrentUser,
@@ -25,19 +25,26 @@ const TopHeader = () => {
           <Link to="/">
             <img className="w-24 md:w-32" src={MainLogo} alt="main logo" />
           </Link>
-          <div className="hidden md:block">
-            <ul className="flex items-center justify-center gap-x-8">
-              <li>
-                <Link to="/">Home</Link>
-              </li>
-              <li>
-                <Link to="/mnjuser/jobs">Jobs</Link>
-              </li>
-              <li>
-                <Link to="/mnjuser/companies">Company</Link>
-              </li>
-            </ul>
-          </div>
+          {
+            role !== "company" && role !== "admin" && (
+              <>
+                <div className="hidden md:block">
+                  <ul className="flex items-center justify-center gap-x-8">
+                    <li>
+                      <Link to="/">Home</Link>
+                    </li>
+                    <li>
+                      <Link to="/mnjuser/jobs">Jobs</Link>
+                    </li>
+                    <li>
+                      <Link to="/mnjuser/companies">Company</Link>
+                    </li>
+                  </ul>
+                </div>
+              </>
+            )
+          }
+
         </div>
 
         {/* search */}
@@ -83,7 +90,13 @@ const TopHeader = () => {
           ) : role && role === "user" ? (
             <DropDownMenu menu={userMenu} />
           ) : (
-            <DropDownMenu menu={recruiterMenu} />
+            role === "company" ? (<>
+              <DropDownMenu menu={recruiterMenu} />
+            </>) : (
+              <>
+                <DropDownMenu menu={adminMenu} />
+              </>
+            )
           )}
         </div>
         {role && (role === "company" || role === "admin") ? (

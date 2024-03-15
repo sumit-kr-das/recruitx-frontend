@@ -47,7 +47,7 @@ const DropDownMenu = ({ menu }: { menu: TMenu[] }) => {
             />
             <AvatarFallback>CN</AvatarFallback>
           </Avatar>
-          <h2 className="text-md text-700">{user.name || company?.company?.name}</h2>
+          <h2 className="text-md text-700">{user?.name || company?.company?.name || "Admin"}</h2>
           <ChevronDown className="w-[18px]" />
         </DropdownMenuTrigger>
         <DropdownMenuContent className="w-56">

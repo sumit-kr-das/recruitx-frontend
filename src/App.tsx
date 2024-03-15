@@ -61,6 +61,7 @@ import {
   VerifyCompanyRoute,
   VerifyUserRoutes,
 } from "./protectedRoutes";
+import RestrictedCompanies from "./pages/admin/RestrictedCompanies";
 
 const App = () => {
   const role = useSelector(selectCurrentRole);
@@ -338,6 +339,15 @@ const App = () => {
             element={
               <AdminRoute>
                 <ApprovedCompanies />
+              </AdminRoute>
+            }
+          />
+
+          <Route
+            path="/dashboard/admin/restricted_companies"
+            element={
+              <AdminRoute>
+                <RestrictedCompanies />
               </AdminRoute>
             }
           />

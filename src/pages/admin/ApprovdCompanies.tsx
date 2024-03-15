@@ -3,11 +3,34 @@ import TitleBar from "../../components/recruit/titleBar/TitleBar";
 import { useViewAllCompanyQuery } from "../../features/admin/get/viewAllCompanyApiSlice";
 import Container from "../../layout/Container";
 import { TApprovedCompanies } from "../../@types/admin/TApprovedCompanies";
-
+import { CircleSlash2 } from "lucide-react";
+import { useRestrictCompanyMutation } from "../../features/admin/put/RestrictCompanyApiSlice";
+import { useToast } from "../../ui/use-toast";
+import { TApiError } from "../../@types/TApiError";
+import { useNavigate } from "react-router-dom";
 const ApprovedCompanies = () => {
+  const navigate = useNavigate();
   const { data } = useViewAllCompanyQuery({
     approve: 'approved',
   });
+  const { toast } = useToast();
+  const [restrictCompany] = useRestrictCompanyMutation();
+
+  const handelRestrictCompany = async (companyId: string) => {
+    try {
+      await restrictCompany(companyId).unwrap();
+      toast({
+        description: "Company restricted successfully"
+      })
+      navigate("/dashboard/admin/restricted_companies");
+    } catch (error) {
+      const apiError = error as TApiError;
+      toast({
+        variant: "destructive",
+        description: apiError?.data?.message
+      })
+    }
+  }
 
 
   return (
@@ -32,13 +55,17 @@ const ApprovedCompanies = () => {
               <div className="flex items-center gap-5">
                 <img
                   className="w-[80px] h-[80px] rounded-full"
-                  src={DefaultUser}
+                  src={company?.companyProfileId?.logo || DefaultUser}
                   alt="user"
                 />
                 <div>
                   <div>
                     <h2 className="font-bold text-slate-600 text-lg">
-                      {company?.companyName}
+                      {company?.companyName} {
+                        company?.status === "block" && (
+                          <CircleSlash2 className="bg-red-500" />
+                        )
+                      }
                     </h2>
                   </div>
                   <div className="flex items-center">
@@ -52,18 +79,12 @@ const ApprovedCompanies = () => {
                 </div>
               </div>
               <div className="flex items-center gap-x-5">
-                {/* <span className="bg-teal-100 px-3 py-2 rounded-lg cursor-pointer">
-                  <CheckCheck className="w-[20px] text-teal-600" />
-                </span> */}
-                {/* <span className="bg-blue-100 px-3 py-2 rounded-lg cursor-pointer">
-                  <RotateCw className="w-[20px] text-blue-600" />
+                <span
+                  onClick={() => handelRestrictCompany(company?._id)}
+                  className="bg-red-500 px-3 py-2 rounded-lg cursor-pointer"
+                >
+                  <CircleSlash2 className="w-[20px] bg-red-500" />
                 </span>
-                <span className="bg-orange-100 px-3 py-2 rounded-lg cursor-pointer">
-                  <ArrowDownToLine className="w-[20px] text-orange-600" />
-                </span>
-                <span className="bg-red-100 px-3 py-2 rounded-lg cursor-pointer">
-                  <Trash2 className="w-[20px] text-red-600" />
-                </span> */}
               </div>
             </div>
           ))}

@@ -48,7 +48,7 @@ const ManageCompanies = () => {
               <div className="flex items-center gap-5">
                 <img
                   className="w-[80px] h-[80px] rounded-full"
-                  src={DefaultUser}
+                  src={company?.companyProfileId?.logo || DefaultUser}
                   alt="user"
                 />
                 <div>
@@ -74,15 +74,6 @@ const ManageCompanies = () => {
                 >
                   <CheckCheck className="w-[20px] text-teal-600" />
                 </span>
-                {/* <span className="bg-blue-100 px-3 py-2 rounded-lg cursor-pointer">
-                  <RotateCw className="w-[20px] text-blue-600" />
-                </span>
-                <span className="bg-orange-100 px-3 py-2 rounded-lg cursor-pointer">
-                  <ArrowDownToLine className="w-[20px] text-orange-600" />
-                </span>
-                <span className="bg-red-100 px-3 py-2 rounded-lg cursor-pointer">
-                  <Trash2 className="w-[20px] text-red-600" />
-                </span> */}
               </div>
             </div>
           ))}

@@ -49,7 +49,7 @@ const CompanyDetails = () => {
                           <span className="ml-2 flex text-orange-300">
                             <Star fill="orange" size={20} />
                             <span className="ml-1">
-                              {(ratings && ratings.rating) || "No ratings yet"}
+                              {(ratings && ratings?.rating) || "No ratings yet"}
                             </span>
                           </span>
                         </div>
@@ -245,65 +245,69 @@ const CompanyDetails = () => {
                     </div>
                   </div>
                 </div>
-
-                <UserTitleWrapper
-                  title="Available Jobs"
-                  titleVariant="hiring now"
-                  des="This company has the available jobs for now"
-                >
-                  {data?.jobs?.map((item: TJobs, index: number) => (
-                    <div
-                      className="bg-white w-[350px] h-[350px] p-6 shadow border rounded-xl"
-                      key={index}
+                {
+                  data?.jobs?.length > 0 && (<>
+                    <UserTitleWrapper
+                      title="Available Jobs"
+                      titleVariant="hiring now"
+                      des="This company has the available jobs for now"
                     >
-                      <div className="flex items-center gap-2">
-                        <img
-                          className="w-[60px] h-[60px] rounded-full object-cover"
-                          src={data?.companyDetail?.companyProfileId.logo}
-                          alt="company icon"
-                        />
-                        <div>
-                          <h2 className="font-bold line-clamp-1">
-                            {data?.companyDetail?.companyName}
-                          </h2>
-                          <p className="text-sm">{item.info.location}</p>
+                      {data?.jobs?.map((item: TJobs, index: number) => (
+                        <div
+                          className="bg-white w-[350px] h-[350px] p-6 shadow border rounded-xl"
+                          key={index}
+                        >
+                          <div className="flex items-center gap-2">
+                            <img
+                              className="w-[60px] h-[60px] rounded-full object-cover"
+                              src={data?.companyDetail?.companyProfileId?.logo || DefaultCompany}
+                              alt="company icon"
+                            />
+                            <div>
+                              <h2 className="font-bold line-clamp-1">
+                                {data?.companyDetail?.companyName}
+                              </h2>
+                              <p className="text-sm">{item?.info?.location}</p>
+                            </div>
+                          </div>
+
+                          <div className="mt-4">
+                            <h3 className="font-bold text-xl line-clamp-1">
+                              {item?.title}
+                            </h3>
+                            <p className="line-clamp-2">{item?.description}</p>
+                          </div>
+
+                          <div className="flex items-center flex-wrap gap-2 my-4">
+                            <p className="bg-blue-50 text-blue-500 text-sm font-semibold px-4 py-2 rounded-xl">
+                              {item?.info?.vacancies} Positions
+                            </p>
+                            <p className="bg-red-50 text-red-500 text-sm font-semibold px-4 py-2 rounded-xl">
+                              {item?.info?.jobType}
+                            </p>
+                            <p className="bg-green-50 text-green-500 text-sm font-semibold px-4 py-2 rounded-xl">
+                              {item?.info?.minExprience} Years
+                            </p>
+                            <p className="bg-cyan-50 text-cyan-500 text-sm font-semibold px-4 py-2 rounded-xl">
+                              {item?.info?.maxSalary}/Year
+                            </p>
+                            <p className="bg-orange-50 text-orange-500 text-sm font-semibold px-4 py-2 rounded-xl">
+                              {item?.info?.workplaceType}
+                            </p>
+                          </div>
+
+                          <div className="flex items-center gap-4">
+                            <Button className="bg-cyan-500 hover:bg-cyan-600">
+                              Apply Now
+                            </Button>
+                            <Button variant="outline">View Details</Button>
+                          </div>
                         </div>
-                      </div>
+                      ))}
+                    </UserTitleWrapper>
+                  </>)
+                }
 
-                      <div className="mt-4">
-                        <h3 className="font-bold text-xl line-clamp-1">
-                          {item?.title}
-                        </h3>
-                        <p className="line-clamp-2">{item?.description}</p>
-                      </div>
-
-                      <div className="flex items-center flex-wrap gap-2 my-4">
-                        <p className="bg-blue-50 text-blue-500 text-sm font-semibold px-4 py-2 rounded-xl">
-                          {item?.info.vacancies} Positions
-                        </p>
-                        <p className="bg-red-50 text-red-500 text-sm font-semibold px-4 py-2 rounded-xl">
-                          {item?.info.jobType}
-                        </p>
-                        <p className="bg-green-50 text-green-500 text-sm font-semibold px-4 py-2 rounded-xl">
-                          {item?.info.minExprience} Years
-                        </p>
-                        <p className="bg-cyan-50 text-cyan-500 text-sm font-semibold px-4 py-2 rounded-xl">
-                          {item?.info.maxSalary}/Year
-                        </p>
-                        <p className="bg-orange-50 text-orange-500 text-sm font-semibold px-4 py-2 rounded-xl">
-                          {item?.info.workplaceType}
-                        </p>
-                      </div>
-
-                      <div className="flex items-center gap-4">
-                        <Button className="bg-cyan-500 hover:bg-cyan-600">
-                          Apply Now
-                        </Button>
-                        <Button variant="outline">View Details</Button>
-                      </div>
-                    </div>
-                  ))}
-                </UserTitleWrapper>
               </div>
             </Container>
             <Footer />
