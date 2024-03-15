@@ -45,7 +45,7 @@ const ManageCompanies = () => {
               key={index}
               className="flex items-center justify-between p-4 mt-5 rounded-lg border bg-white gap-2"
             >
-              <div className="flex items-center gap-5">
+              <div className="md:flex items-center gap-5">
                 <img
                   className="w-[80px] h-[80px] rounded-full"
                   src={company?.companyProfileId?.logo || DefaultUser}
@@ -58,7 +58,7 @@ const ManageCompanies = () => {
                     </h2>
                   </div>
                   <div className="flex items-center">
-                    <p className="mt-2 text-sm text-slate-600">
+                    <p className="mt-2 mr-2 text-sm text-slate-600">
                       {company?.industry}
                     </p>
                     <p className="mt-2 text-sm text-slate-600">

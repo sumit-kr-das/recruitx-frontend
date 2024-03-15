@@ -53,9 +53,9 @@ const ManageUsers = () => {
 								{data?.map((user: TUsers, index: number) => (
 									<div
 										key={index}
-										className="flex items-center justify-between p-4 mt-5 rounded-lg border bg-white gap-2"
+										className="md:flex items-center justify-between p-4 mt-5 rounded-lg border bg-white gap-2"
 									>
-										<div className="flex items-center gap-5">
+										<div className="md:flex items-center gap-5">
 											<img
 												className="w-[80px] h-[80px] rounded-full m-auto"
 												src={DefaultUser}
@@ -64,27 +64,27 @@ const ManageUsers = () => {
 
 											<div>
 												<div>
-													<h2 className="font-bold text-slate-600 text-lg">
+													<h2 className="font-bold text-slate-600 text-lg text-center md:text-left">
 														{user?.name}
 													</h2>
 												</div>
-												<div className="flex items-center">
-													<p className="mt-2 text-sm text-slate-600">
+												<div className="md:flex items-center">
+													<p className="mt-2 text-center md:text-left mr-2 text-sm text-slate-600">
 														{user?.email}
 													</p>
-													<p className="mt-2 text-sm text-slate-600">
+													<p className="mt-2 text-center md:text-left text-sm text-slate-600">
 														{user?.phoneNo}
 													</p>
 												</div>
-												<div className="flex items-center">
-													<p className="mt-2 text-sm text-slate-600">
+												<div className="md:flex items-center">
+													<p className="mt-2 text-center md:text-left text-sm text-slate-600">
 														{user?.workStatus}
 													</p>
 
 												</div>
 											</div>
 										</div>
-										<div className="flex items-center gap-x-5">
+										<div className="flex items-center gap-x-5 justify-center mt-2 md:justify-right md:mt-0">
 											<span
 												onClick={() => handelRestrictUser(user?._id)}
 												className="bg-red-500 px-3 py-2 rounded-lg cursor-pointer"
