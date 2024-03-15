@@ -20,6 +20,16 @@ export const adminDashboard = [
     src: "/dashboard/admin/restricted_companies"
   },
   {
+    menu: "Users",
+    icon: "",
+    src: "/dashboard/admin/users"
+  },
+  {
+    menu: "Restricted Users",
+    icon: "",
+    src: "/dashboard/admin/restricted_users"
+  },
+  {
     menu: "Change Password",
     icon: "",
     src: "/dashboard/change_password",
