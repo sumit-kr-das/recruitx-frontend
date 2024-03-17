@@ -74,7 +74,7 @@ const JobSlider: React.FC<PropType> = ({ options, data }) => {
                   />
                   <div>
                     <h2 className="font-bold line-clamp-1">
-                      {item.companyId.companyName}
+                      {item.companyId?.companyName}
                     </h2>
                     <p className="text-sm line-clamp-1 capitalize">
                       {item.info.location}
