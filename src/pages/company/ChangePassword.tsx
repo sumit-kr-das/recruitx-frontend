@@ -13,15 +13,20 @@ import { Button } from "../../ui/button";
 import { useToast } from "../../ui/use-toast";
 import { Card } from "../../ui/card";
 import ApproveAlert from "../../components/recruit/ApproveAlert";
-
+import { useChangeAdminPassMutation } from "../../features/admin/put/ChangePasswordApiSlice";
+import { useSelector } from "react-redux";
+import { selectCurrentRole } from "../../features/auth/authSlice";
+import { TApiError } from "../../@types/TApiError";
 type FormValue = {
   newPassword: string,
   oldPassword: string
 }
 const ChangePassword = () => {
   const [changePass] = useChangePassMutation();
+  const [changeAdminPass] = useChangeAdminPassMutation();
   const dispatch = useDispatch();
   const { toast } = useToast();
+  const role = useSelector(selectCurrentRole);
 
   const form = useForm<z.infer<typeof ChangePasswordSchema>>({
     resolver: zodResolver(ChangePasswordSchema),
@@ -35,15 +40,20 @@ const ChangePassword = () => {
   const UpdatePassword = async (data: FormValue) => {
     console.log(data)
     try {
-      await changePass(data).unwrap();
+      if (role === "company") {
+        await changePass(data).unwrap();
+      } else if (role === "admin") {
+        await changeAdminPass(data).unwrap();
+      }
       toast({
         description: "Password update successfull"
       })
       dispatch(logout());
     } catch (error: any) {
+      const apiError = error as TApiError;
       toast({
         variant: "destructive",
-        description: error.message
+        description: apiError?.data?.message
       })
     }
   }

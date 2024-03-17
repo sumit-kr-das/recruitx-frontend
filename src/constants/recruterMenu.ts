@@ -27,11 +27,11 @@ export const adminMenu = [
 		src: "/dashboard/admin/approved_companies",
 		shortHand: "⌘+V",
 	},
-	// {
-	// 	title: "Post Job",
-	// 	src: "/dashboard/submit_jobs",
-	// 	shortHand: "⌘+P",
-	// },
+	{
+		title: "View Users",
+		src: "/dashboard/admin/users",
+		shortHand: "⌘+P",
+	},
 ];
 
 export const userMenu = [

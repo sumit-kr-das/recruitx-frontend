@@ -62,6 +62,7 @@ import {
   VerifyUserRoutes,
 } from "./protectedRoutes";
 import RestrictedCompanies from "./pages/admin/RestrictedCompanies";
+import RestrictedUsers from "./pages/admin/RestrictedUsers";
 
 const App = () => {
   const role = useSelector(selectCurrentRole);
@@ -351,6 +352,18 @@ const App = () => {
               </AdminRoute>
             }
           />
+
+          <Route path="/dashboard/admin/users" element={
+            <AdminRoute>
+              <ManageUsers />
+            </AdminRoute>
+          } />
+
+          <Route path="/dashboard/admin/restricted_users" element={
+            <AdminRoute>
+              <RestrictedUsers />
+            </AdminRoute>
+          } />
 
           {/* company & admin */}
           <Route
