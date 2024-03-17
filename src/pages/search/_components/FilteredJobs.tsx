@@ -5,8 +5,8 @@ import { Card, CardContent, CardFooter, CardHeader } from "../../../ui/card";
 import { Separator } from "../../../ui/separator";
 import { useSetUserApplyMutation } from "../../../features/user/post/setUserApplyAPiSlice";
 import { useToast } from "../../../ui/use-toast";
-import { useNavigate } from "react-router-dom";
-import { TApiError } from "../../../@types/TApiError";
+import { Link, useNavigate } from "react-router-dom";
+
 type TJob = {
   _id: string;
   title: string;
@@ -50,6 +50,11 @@ type JobProps = {
   job: TJob;
 };
 
+function convertSalaryToLPA(salary: number): string {
+  const convertedSalary: number = salary / 100000;
+  return `${convertedSalary} LPA`;
+}
+
 const FilteredJobs = ({ job }: JobProps) => {
   const [setApply] = useSetUserApplyMutation();
   const { toast } = useToast();
@@ -62,10 +67,9 @@ const FilteredJobs = ({ job }: JobProps) => {
       });
       navigate("/mnjuser/appliedJobs");
     } catch (err) {
-      const apiError = err as TApiError;
       toast({
         variant: "destructive",
-        description: apiError.data.message,
+        description: "Login before apply",
       });
     }
   };
@@ -104,16 +108,14 @@ const FilteredJobs = ({ job }: JobProps) => {
         <div className="w-full flex items-center justify-between">
           <div className="flex items-center gap-1">
             <IndianRupee className="w-4 h-4" />
-            <p>
-              <span className="font-semibold">{job?.info?.minSalary} </span>LPA
-            </p>
+            <p>{convertSalaryToLPA(job?.info?.minSalary)} </p>
           </div>
-          <Button
-            className="bg-cyan-500 hover:bg-cyan-600"
-            onClick={() => applyForJob(job?._id)}
-          >
-            Apply Now
-          </Button>
+          <div className="flex items-center gap-2">
+            <Link to={`/jobDetails/${job._id}`}>
+              <Button variant="outline">View Details</Button>
+            </Link>
+            <Button onClick={() => applyForJob(job?._id)}>Apply Now</Button>
+          </div>
         </div>
       </CardFooter>
     </Card>
