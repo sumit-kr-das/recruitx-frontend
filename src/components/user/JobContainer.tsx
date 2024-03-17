@@ -44,10 +44,10 @@ const JobContainer = ({ data }: TJobProps) => {
           alt="company icon"
         />
         <div>
-          <h2 className="font-bold line-clamp-1">
+          <h2 className="font-bold capitalize line-clamp-1">
             {data?.companyId?.companyName}
           </h2>
-          <p className="text-sm">{data?.info?.location}</p>
+          <p className="text-sm capitalize">{data?.info?.location}</p>
         </div>
       </CardHeader>
       <CardContent>
@@ -87,7 +87,9 @@ const JobContainer = ({ data }: TJobProps) => {
           </Link>
         )}
         <Link to={`/jobDetails/${data?._id}`}>
-          <Button variant="outline" disabled={isLoading}>View Details</Button>
+          <Button variant="outline" disabled={isLoading}>
+            View Details
+          </Button>
         </Link>
       </CardFooter>
     </Card>
