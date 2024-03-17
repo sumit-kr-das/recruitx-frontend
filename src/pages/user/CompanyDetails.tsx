@@ -12,6 +12,7 @@ import CompanyReviewForm from "./_components/CompanyReviewForm";
 import CompanyReviews from "./_components/CompanyReviews";
 import { useAvgRatingDataQuery } from "../../features/user/get/getAvgReviewApiSlice";
 import DefaultCompany from "../../assets/default-company-logo.png";
+import convertSalaryToLPA from "../../lib/convertSalaryToLPA.tsx";
 
 const CompanyDetails = () => {
   const { companyId } = useParams();
@@ -245,8 +246,8 @@ const CompanyDetails = () => {
                     </div>
                   </div>
                 </div>
-                {
-                  data?.jobs?.length > 0 && (<>
+                {data?.jobs?.length > 0 && (
+                  <>
                     <UserTitleWrapper
                       title="Available Jobs"
                       titleVariant="hiring now"
@@ -260,7 +261,10 @@ const CompanyDetails = () => {
                           <div className="flex items-center gap-2">
                             <img
                               className="w-[60px] h-[60px] rounded-full object-cover"
-                              src={data?.companyDetail?.companyProfileId?.logo || DefaultCompany}
+                              src={
+                                data?.companyDetail?.companyProfileId?.logo ||
+                                DefaultCompany
+                              }
                               alt="company icon"
                             />
                             <div>
@@ -275,7 +279,9 @@ const CompanyDetails = () => {
                             <h3 className="font-bold text-xl line-clamp-1">
                               {item?.title}
                             </h3>
-                            <p className="line-clamp-2">{item?.description}</p>
+                            <p className="line-clamp-2">
+                              {item?.shortDescription}
+                            </p>
                           </div>
 
                           <div className="flex items-center flex-wrap gap-2 my-4">
@@ -289,7 +295,7 @@ const CompanyDetails = () => {
                               {item?.info?.minExprience} Years
                             </p>
                             <p className="bg-cyan-50 text-cyan-500 text-sm font-semibold px-4 py-2 rounded-xl">
-                              {item?.info?.maxSalary}/Year
+                              {convertSalaryToLPA(item?.info?.maxSalary)}
                             </p>
                             <p className="bg-orange-50 text-orange-500 text-sm font-semibold px-4 py-2 rounded-xl">
                               {item?.info?.workplaceType}
@@ -305,9 +311,8 @@ const CompanyDetails = () => {
                         </div>
                       ))}
                     </UserTitleWrapper>
-                  </>)
-                }
-
+                  </>
+                )}
               </div>
             </Container>
             <Footer />

@@ -8,6 +8,7 @@ import { useSelector } from "react-redux";
 import { useToast } from "../../ui/use-toast";
 import { TApiError } from "../../@types/TApiError";
 import { Card, CardContent, CardFooter, CardHeader } from "../../ui/card.tsx";
+import convertSalaryToLPA from "../../lib/convertSalaryToLPA.tsx";
 
 type TJobProps = {
   data: TJobs;
@@ -66,7 +67,7 @@ const JobContainer = ({ data }: TJobProps) => {
             {data?.info?.minExprience} Years
           </p>
           <p className="bg-cyan-50 text-cyan-500 text-sm font-xs px-2 py-1 rounded-xl">
-            {data?.info?.maxSalary}/Year
+            {convertSalaryToLPA(data?.info?.maxSalary)}
           </p>
           <p className="bg-orange-50 text-orange-500 text-sm font-xs px-2 py-1 rounded-xl">
             {data?.info?.workplaceType}

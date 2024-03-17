@@ -6,6 +6,7 @@ import { Separator } from "../../../ui/separator";
 import { useSetUserApplyMutation } from "../../../features/user/post/setUserApplyAPiSlice";
 import { useToast } from "../../../ui/use-toast";
 import { Link, useNavigate } from "react-router-dom";
+import convertSalaryToLPA from "../../../lib/convertSalaryToLPA.tsx";
 
 type TJob = {
   _id: string;
@@ -49,11 +50,6 @@ type TJob = {
 type JobProps = {
   job: TJob;
 };
-
-function convertSalaryToLPA(salary: number): string {
-  const convertedSalary: number = salary / 100000;
-  return `${convertedSalary} LPA`;
-}
 
 const FilteredJobs = ({ job }: JobProps) => {
   const [setApply] = useSetUserApplyMutation();
