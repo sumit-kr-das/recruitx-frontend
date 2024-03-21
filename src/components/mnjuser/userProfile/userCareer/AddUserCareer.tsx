@@ -30,6 +30,15 @@ import { useState } from "react";
 import { useSetUserCareerMutation } from "../../../../features/user/post/AddUserCareerApiSlice";
 import { TApiError } from "../../../../@types/TApiError";
 
+const INITIAL_CAREER = {
+    industry: "",
+    role: "",
+    jobRole: "",
+    jobType: "",
+    employmentType: "",
+    skills: [],
+    expectedSalary: ""
+}
 export type CarrerFormValue = {
     industry: string,
     role: string,
@@ -47,15 +56,7 @@ const AddUserCareer = () => {
 
     const form = useForm<z.infer<typeof UserCareerSchema>>({
         resolver: zodResolver(UserCareerSchema),
-        defaultValues: {
-            industry: "",
-            role: "",
-            jobRole: "",
-            jobType: "",
-            employmentType: "",
-            skills: [],
-            expectedSalary: ""
-        }
+        defaultValues: INITIAL_CAREER
     });
 
     const submitForm: SubmitHandler<CarrerFormValue> = async (value) => {
@@ -69,6 +70,7 @@ const AddUserCareer = () => {
             toast({
                 description: "User career data submitted."
             })
+            form.reset(INITIAL_CAREER)
         } catch (error) {
             const apiError = error as TApiError;
             toast({

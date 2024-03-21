@@ -65,7 +65,7 @@ const UpdateCertificate = ({ data, openDialog, setOpenDialog }: TProps) => {
         <Dialog open={openDialog} onOpenChange={setOpenDialog}>
             <DialogContent className="sm:max-w-[50%] rounded scrollbar-hide overflow-y-scroll max-h-full">
                 <DialogHeader>
-                    <DialogTitle>Edit Experience</DialogTitle>
+                    <DialogTitle>Edit Certificate</DialogTitle>
                     <DialogDescription>
                         Make changes to your profile here. Click save when you're done.
                     </DialogDescription>

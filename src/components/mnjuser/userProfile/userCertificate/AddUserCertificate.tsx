@@ -11,6 +11,14 @@ import { Button } from "../../../../ui/button";
 import { useSetUserCertificateMutation } from "../../../../features/user/post/AddUserCertificateApiSlice";
 import UserCertificateSchema from "../../../../@types/zod/UserCertificareSchema";
 
+const INITIAL_CERTIFICATE = {
+    title: "",
+    source: "",
+    description: "",
+    startDate: "",
+    endDate: ""
+}
+
 type TProps = {
     isOpen: boolean;
     setIsOpen: (item: boolean) => void;
@@ -28,13 +36,7 @@ const AddUserCertificate = ({ isOpen, setIsOpen }: TProps) => {
     const { toast } = useToast();
     const form = useForm<z.infer<typeof UserCertificateSchema>>({
         resolver: zodResolver(UserCertificateSchema),
-        defaultValues: {
-            title: "",
-            source: "",
-            description: "",
-            startDate: "",
-            endDate: ""
-        },
+        defaultValues: INITIAL_CERTIFICATE
     });
 
     const submitUserCertificate = async (values: CertificateFormValue) => {
@@ -44,6 +46,7 @@ const AddUserCertificate = ({ isOpen, setIsOpen }: TProps) => {
                 description: "Your certificate added successfully"
             });
             setIsOpen(false);
+            form.reset(INITIAL_CERTIFICATE);
         } catch (err) {
             const apiError = err as TApiError;
             toast({

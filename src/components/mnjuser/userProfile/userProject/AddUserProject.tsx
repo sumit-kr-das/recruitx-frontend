@@ -18,6 +18,15 @@ type TProps = {
     setIsOpen: (item: boolean) => void;
 };
 
+const INITIAL_PROJECT = {
+    name: "",
+    description: "",
+    startDate: "",
+    endDate: "",
+    associate: "",
+    skills: []
+};
+
 export type ProjectFormValue = {
     name: string,
     description: string,
@@ -33,14 +42,7 @@ const AddUserProject = ({ isOpen, setIsOpen }: TProps) => {
     const { toast } = useToast();
     const form = useForm<z.infer<typeof UserProjectSchema>>({
         resolver: zodResolver(UserProjectSchema),
-        defaultValues: {
-            name: "",
-            description: "",
-            startDate: "",
-            endDate: "",
-            associate: "",
-            skills: []
-        },
+        defaultValues: INITIAL_PROJECT
     });
 
     const submitUserProject = async (values: ProjectFormValue) => {
@@ -50,6 +52,7 @@ const AddUserProject = ({ isOpen, setIsOpen }: TProps) => {
                 description: "Your experience added successfully"
             });
             setIsOpen(false);
+            form.reset(INITIAL_PROJECT)
         } catch (err) {
             const apiError = err as TApiError;
             toast({

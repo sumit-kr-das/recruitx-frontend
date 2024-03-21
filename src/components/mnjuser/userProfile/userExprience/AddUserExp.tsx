@@ -19,6 +19,17 @@ type TAddUserEducationProps = {
     setIsOpen: (item: boolean) => void;
 };
 
+const INITIAL_EXP = {
+    companyName: "",
+    designation: "",
+    experience: "",
+    type: "",
+    startDate: "",
+    endDate: "",
+    jobProfile: "",
+    skills: []
+}
+
 export type ExpFormValue = {
     companyName: string,
     designation: string,
@@ -35,16 +46,7 @@ const AddUserExp = ({ isOpen, setIsOpen }: TAddUserEducationProps) => {
     const { toast } = useToast();
     const form = useForm<z.infer<typeof UserExpSchema>>({
         resolver: zodResolver(UserExpSchema),
-        defaultValues: {
-            companyName: "",
-            designation: "",
-            experience: "",
-            type: "",
-            startDate: "",
-            endDate: "",
-            jobProfile: "",
-            skills: []
-        },
+        defaultValues: INITIAL_EXP
     });
 
     const submitUserExp = async (values: ExpFormValue) => {
@@ -54,6 +56,7 @@ const AddUserExp = ({ isOpen, setIsOpen }: TAddUserEducationProps) => {
                 description: "Your experience added successfully"
             });
             setIsOpen(false);
+            form.reset(INITIAL_EXP)
         } catch (err) {
             const apiError = err as TApiError;
             toast({

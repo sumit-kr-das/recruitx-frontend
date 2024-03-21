@@ -33,6 +33,16 @@ import {
 import { useToast } from "../../../../ui/use-toast";
 import { EduFormData } from "./UpateUserEducation";
 
+const INITIAL_EDUCATION = {
+  degree: "",
+  college: "",
+  course: "",
+  courseType: "",
+  admissionYear: "",
+  passYear: "",
+  marks: "",
+};
+
 type TAddUserEducationProps = {
   isOpen: boolean;
   setIsOpen: (item: boolean) => void;
@@ -45,15 +55,7 @@ const AddUserEducation = ({ isOpen, setIsOpen }: TAddUserEducationProps) => {
 
   const form = useForm<z.infer<typeof userEducationSchema>>({
     resolver: zodResolver(userEducationSchema),
-    defaultValues: {
-      degree: "",
-      college: "",
-      course: "",
-      courseType: "",
-      admissionYear: "",
-      passYear: "",
-      marks: "",
-    },
+    defaultValues: INITIAL_EDUCATION
   });
 
   useEffect(() => {
@@ -70,7 +72,7 @@ const AddUserEducation = ({ isOpen, setIsOpen }: TAddUserEducationProps) => {
       });
       setIsFormDirty(false);
       setIsOpen(false);
-      form.reset();
+      form.reset(INITIAL_EDUCATION);
     } catch (err) {
       const apiError = err as TApiError;
       toast({
