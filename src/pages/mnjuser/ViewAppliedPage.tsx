@@ -6,6 +6,7 @@ import Container from "../../layout/Container";
 import AppliedJob from "../../components/mnjuser/AppliedJob";
 import { useViewAppliedJobsQuery } from "../../features/user/get/viewAppliedJobs";
 import Loader from "../../components/loader/Loader";
+import { Link } from "react-router-dom";
 
 const ViewAppliedPage = () => {
   const { data, isLoading } = useViewAppliedJobsQuery();
@@ -21,9 +22,22 @@ const ViewAppliedPage = () => {
           <Loader />
         ) : (
           <section className="flex-1 h-fit mt-24 px-4 w-7/12">
-            {data?.map((item, index) => (
-              <AppliedJob job={item} key={index} />
-            ))}
+            {data?.length ? (
+              <>
+                {data?.map((item, index) => (
+                  <AppliedJob job={item} key={index} />
+                ))}
+              </>
+            ) : (
+              <div className="h-fit pt-32 flex items-center justify-center">
+                <p>
+                  No job found{" "}
+                  <Link to="/mnjuser/jobs" className="text-blue-600">
+                    apply now
+                  </Link>
+                </p>
+              </div>
+            )}
           </section>
         )}
         <section className="w-[240px] mt-24">
