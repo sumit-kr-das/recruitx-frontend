@@ -1,7 +1,10 @@
 import { Suspense, lazy, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import { selectCurrentRole, selectCurrentToken } from "./features/auth/authSlice";
+import {
+  selectCurrentRole,
+  selectCurrentToken,
+} from "./features/auth/authSlice";
 import Layout from "./layout/Layout";
 import UserProfilePage from "./pages/mnjuser/UserProfilePage";
 import SearchPage from "./pages/search/SearchPage";
@@ -66,7 +69,7 @@ import RestrictedUsers from "./pages/admin/RestrictedUsers";
 
 const App = () => {
   const role = useSelector(selectCurrentRole);
-  const access_token = useSelector(selectCurrentToken)
+  const access_token = useSelector(selectCurrentToken);
   const [trigger, user] = useLazyGetUserGlobalQuery();
   const [compnayTrigger, company] = useLazyGetCompanyGlobalQuery();
   const dispatch = useDispatch();
@@ -185,9 +188,9 @@ const App = () => {
         <Route
           path="/mnjuser/appliedJobs"
           element={
-            <Suspense fallback={<Loader />}>
+            <UserRoute>
               <ViewAppliedPage />
-            </Suspense>
+            </UserRoute>
           }
         />
         {/* <Route
@@ -353,17 +356,23 @@ const App = () => {
             }
           />
 
-          <Route path="/dashboard/admin/users" element={
-            <AdminRoute>
-              <ManageUsers />
-            </AdminRoute>
-          } />
+          <Route
+            path="/dashboard/admin/users"
+            element={
+              <AdminRoute>
+                <ManageUsers />
+              </AdminRoute>
+            }
+          />
 
-          <Route path="/dashboard/admin/restricted_users" element={
-            <AdminRoute>
-              <RestrictedUsers />
-            </AdminRoute>
-          } />
+          <Route
+            path="/dashboard/admin/restricted_users"
+            element={
+              <AdminRoute>
+                <RestrictedUsers />
+              </AdminRoute>
+            }
+          />
 
           {/* company & admin */}
           <Route
