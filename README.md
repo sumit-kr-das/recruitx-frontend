@@ -89,9 +89,13 @@ Experience Next-Gen Employment Solutions with Our MERN Stack Job Portal!
     <td><img src="./preview/User_dashboard-5.png" alt="user-dashboard" /></td>
     <td><img src="./preview/User_Profile-6.png" alt="user-profile" /></td>
   </tr>
+    <tr>
+    <td><img src="./preview/company-1.png" alt="company-dashboard" /></td>
+    <td><img src="./preview/company-2.png" alt="company-profile" /></td>
+  </tr>
   <tr>
-    <td><img src="./preview/Company-7.png" alt="company" /></td>
-    <td><img src="./preview/Company-7.png" alt="admin" /></td>
+    <td><img src="./preview/company-3.png" alt="company-manage-jobs" /></td>
+    <td><img src="./preview/admin-dashboard-8.png" alt="admin" /></td>
   </tr>
  </table>
 
