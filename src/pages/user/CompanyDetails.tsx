@@ -1,5 +1,5 @@
 import { Star } from "lucide-react";
-import { useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { TJobs } from "../../@types/publicTypes/TJobs";
 import Footer from "../../components/footer/Footer";
 import Loader from "../../components/loader/Loader";
@@ -13,16 +13,40 @@ import CompanyReviews from "./_components/CompanyReviews";
 import { useAvgRatingDataQuery } from "../../features/user/get/getAvgReviewApiSlice";
 import DefaultCompany from "../../assets/default-company-logo.png";
 import convertSalaryToLPA from "../../lib/convertSalaryToLPA.tsx";
+import { useSelector } from "react-redux";
+import { selectCurrentRole } from "../../features/auth/authSlice.ts";
+import { useToast } from "../../ui/use-toast.ts";
+import { useSetUserApplyMutation } from "../../features/user/post/setUserApplyAPiSlice.ts";
+import { TApiError } from "../../@types/TApiError.ts";
 
 const CompanyDetails = () => {
   const { companyId } = useParams();
+  const navigate = useNavigate();
+  const [setApply] = useSetUserApplyMutation();
+  const user = useSelector(selectCurrentRole);
+  const { toast } = useToast();
   const { data, isLoading, isSuccess } = useGetCompanyDetailQuery({
     id: companyId,
   });
   const { data: ratings } = useAvgRatingDataQuery(companyId);
 
+  const applyForJob = async (jobId: string) => {
+    try {
+      await setApply(jobId).unwrap();
+      toast({
+        description: "Job Applied Successfully",
+      });
+      navigate("/mnjuser/appliedJobs");
+    } catch (err) {
+      const apiError = err as TApiError;
+      toast({
+        variant: "destructive",
+        description: apiError.data.message,
+      });
+    }
+  };
+
   if (!data && isLoading) return <Loader />;
-  console.log(data);
   return (
     <>
       {isSuccess && (
@@ -211,7 +235,7 @@ const CompanyDetails = () => {
                                     >
                                       {item}
                                     </p>
-                                  ),
+                                  )
                                 ) || "Not set yet"}
                               </div>
                             </div>
@@ -303,10 +327,23 @@ const CompanyDetails = () => {
                           </div>
 
                           <div className="flex items-center gap-4">
-                            <Button className="bg-cyan-500 hover:bg-cyan-600">
-                              Apply Now
-                            </Button>
-                            <Button variant="outline">View Details</Button>
+                            {user && user == "user" ? (
+                              <Button
+                                className="bg-cyan-500 text-white text-sm px-5 py-2 rounded-md hover:bg-cyan-600"
+                                onClick={() => applyForJob(item?._id)}
+                              >
+                                Apply
+                              </Button>
+                            ) : (
+                              <Button>
+                                <Link to="/login" className="">
+                                  Login to Apply
+                                </Link>
+                              </Button>
+                            )}
+                            <Link to={`/jobDetails/${item?._id}`}>
+                              <Button variant="outline">View Details</Button>
+                            </Link>
                           </div>
                         </div>
                       ))}
