@@ -39,7 +39,7 @@ const AppliedJob = ({ job }: { job: TAppliedJobDetail }) => {
         </div>
         <p className="mx-2 text-sm font-semibold text-gray-300">&#124;</p>
         <div className="flex items-center gap-1">
-          <MdLocationOn className="text-slate-400" />
+          <MdLocationOn className="text-slate-400 w-5 h-5" />
           <p className="text-sm font-semibold text-slate-400">
             {job?.jobId?.info.jobType}
           </p>
@@ -47,7 +47,7 @@ const AppliedJob = ({ job }: { job: TAppliedJobDetail }) => {
       </div>
       <div className="flex items-center gap-1">
         <MdDescription className="text-2xl" />
-        <p className="text-sm my-1 truncate">{job?.jobId?.description}</p>
+        <p className="text-sm my-1 truncate">{job?.jobId?.shortDescription}</p>
       </div>
 
       <div className="flex items-center gap-2 flex-wrap my-2">
