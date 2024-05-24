@@ -35,9 +35,9 @@ const JobDetailMain = ({ job }: { job: TJobDetails }) => {
     <div className="lg:col-span-8 md:col-span-6">
       <div className="md:flex items-center p-6 shadow  rounded-md bg-white">
         <img
-          src={DefaultJob}
-          className="rounded-full h-28 w-28 bg-white  shadow "
-          alt=""
+          src={job?.companyId.companyProfileId.logo || DefaultJob}
+          className="rounded-full h-28 w-28 bg-white shadow "
+          alt="company_logo"
         />
         <div className="md:ms-4 md:mt-0 mt-6">
           <h5 className="text-xl font-semibold">{job?.title}</h5>
