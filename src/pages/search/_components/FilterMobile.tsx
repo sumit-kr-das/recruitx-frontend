@@ -15,7 +15,7 @@ const FilterMobile = () => {
           <p>Filter</p>
         </Button>
       </SheetTrigger>
-      <SheetContent side="left">
+      <SheetContent side="left" className="h-full overflow-y-scroll">
         <Filter />
       </SheetContent>
     </Sheet>

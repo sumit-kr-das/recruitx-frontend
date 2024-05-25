@@ -47,7 +47,7 @@ const Filter = () => {
     });
 
     navigate(
-      `?search=${paramsTitle}&location=${value}&jobTypes=${jobType}&workplaceType=${workplaceType}&minSalary=${salary}&minExprience=${exp}`,
+      `?search=${paramsTitle}&location=${value}&jobTypes=${jobType}&workplaceType=${workplaceType}&minSalary=${salary}&minExprience=${exp}`
     );
   };
 
