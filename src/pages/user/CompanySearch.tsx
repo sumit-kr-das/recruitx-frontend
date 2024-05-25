@@ -19,6 +19,7 @@ const CompanySearch = () => {
     trigger({
       search,
       page: page,
+      limit: 9,
     });
   };
 
@@ -26,6 +27,7 @@ const CompanySearch = () => {
     trigger({
       search: "",
       page: 1,
+      limit: 9,
     });
   }, []);
 
@@ -36,10 +38,10 @@ const CompanySearch = () => {
       <TopHeader />
       <Container className="pt-28 relative">
         <div className="relative p-8 rounded-lg border shadow bg-gradient-to-r from-cyan-500 to-blue-500">
-          <h1 className="text-4xl font-bold text-white">
+          <h1 className="text-2xl md:text-4xl font-bold text-white">
             Find your dream company here!
           </h1>
-          <p className="text-white text-lg my-2">
+          <p className="text-white text-sm lg:text-lg my-2">
             Explore the latest companies and their job openings for the best
             opportunities available today!
           </p>
@@ -60,7 +62,7 @@ const CompanySearch = () => {
             </Button>
           </div>
         </div>
-        <div className="grid justify-items-center gap-x-4 gap-y-8 grid-cols-[repeat(auto-fill,minmax(300px,1fr))] mt-4">
+        <div className="grid justify-items-center gap-4 grid-cols-[repeat(auto-fill,minmax(300px,1fr))] mt-4">
           {isSuccess &&
             data &&
             data.companies.length > 0 &&

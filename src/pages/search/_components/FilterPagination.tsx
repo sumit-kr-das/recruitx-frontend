@@ -22,7 +22,9 @@ const FilterPagination = () => {
   const paramsSalary = searchParams.get("minSalary") || "";
   const paramsExp = searchParams.get("minExprience") || "";
 
-  const { page, total } = useSelector(selectCurrentUserJobsData);
+  const { page, limit, total } = useSelector(selectCurrentUserJobsData);
+  console.log(total, limit);
+
   const totalPages = Math.ceil(total / 6);
   const [trigger, { data }] = useLazyWithFilterJobsQuery();
   const dispatch = useDispatch();
@@ -51,9 +53,6 @@ const FilterPagination = () => {
     <div className="mt-8 flex items-center justify-center">
       <Pagination>
         <PaginationContent>
-          {/* <PaginationItem>
-            <PaginationPrevious href="#" />
-          </PaginationItem> */}
           {[...Array(totalPages)].map((_, index) => (
             <PaginationItem
               key={index}
@@ -65,20 +64,6 @@ const FilterPagination = () => {
               </PaginationLink>
             </PaginationItem>
           ))}
-          {/* <PaginationItem>
-            <PaginationLink href="#" isActive={false}>
-              2
-            </PaginationLink>
-          </PaginationItem>
-          <PaginationItem>
-            <PaginationLink href="#">3</PaginationLink>
-          </PaginationItem> */}
-          {/* <PaginationItem>
-            <PaginationEllipsis />
-          </PaginationItem> */}
-          {/* <PaginationItem>
-            <PaginationNext href="#" />
-          </PaginationItem> */}
         </PaginationContent>
       </Pagination>
     </div>

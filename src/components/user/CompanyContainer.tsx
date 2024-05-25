@@ -10,8 +10,8 @@ type TCompanyProps = {
 
 const CompanyContainer = ({ data }: TCompanyProps) => {
   return (
-    <Card className="bg-white w-[320px] h-[280px] flex flex-col justify-between rounded-xl mt-8">
-      <CardHeader className="flex items-center flex-row gap-2">
+    <Card className="bg-white w-full h-fit flex flex-col justify-between rounded-xl">
+      <CardHeader className="flex items-center flex-row gap-2 ">
         <img
           className="w-[80px] h-[80px] rounded-full object-cover border bg-gray-50"
           src={data?.companyProfileId?.logo || DefaultCompany}
@@ -27,9 +27,9 @@ const CompanyContainer = ({ data }: TCompanyProps) => {
         <p className="bg-blue-50 text-blue-500 text-sm font-xs px-2 py-1 rounded-xl">
           {data?.industry?.split(" ")[0]}
         </p>
-        <p className="bg-red-50 text-red-500 text-sm font-xs px-2 py-1 rounded-xl">
+        {/* <p className="bg-red-50 text-red-500 text-sm font-xs px-2 py-1 rounded-xl">
           Verified
-        </p>
+        </p> */}
         <p className="bg-green-50 text-green-500 text-sm font-xs px-2 py-1 rounded-xl">
           {data?.address}
         </p>
@@ -39,7 +39,7 @@ const CompanyContainer = ({ data }: TCompanyProps) => {
       </CardContent>
       <CardFooter>
         <Link className="block w-full" to={`/mnjuser/company/${data?._id}`}>
-          <Button className="w-full">View more </Button>
+          <Button className="w-full">View Details</Button>
         </Link>
       </CardFooter>
     </Card>

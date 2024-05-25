@@ -134,7 +134,7 @@ const Footer = () => {
         </div>
       </div>
       <p className="mt-8 ml-1 md:text-center">
-        All rights reserved ©2024 <b> RecruitX</b>
+        All rights reserved ©2024 <b> RecruitX</b> | An educational project
       </p>
     </footer>
   );

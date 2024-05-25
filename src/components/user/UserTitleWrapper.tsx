@@ -27,7 +27,7 @@ const UserTitleWrapper = ({
       <div
         className={cn(
           "w-full grid justify-items-center gap-4 grid-cols-[repeat(auto-fill,minmax(300px,1fr))]",
-          className,
+          className
         )}
       >
         {children}

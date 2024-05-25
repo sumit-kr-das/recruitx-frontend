@@ -27,9 +27,9 @@ const SearchPage = () => {
       title: searchParams.get("search") || "",
       value: "",
       location: searchParams.get("location") || "",
-      workplaceType: "On-site",
-      jobType: "Full-time",
-      salary: 100000,
+      workplaceType: "",
+      jobType: "",
+      salary: 0,
       exp: 0,
       page: 1,
     });

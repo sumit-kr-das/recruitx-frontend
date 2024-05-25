@@ -18,10 +18,10 @@ const Filter = () => {
   const paramsTitle = searchParams.get("search") || "";
 
   const [value, setValue] = useState(paramsLocation);
-  const [salary, setSalary] = useState<number[]>([100000]);
+  const [salary, setSalary] = useState<number[]>([0]);
   const [exp, setExp] = useState<number[]>([0]);
-  const [jobType, setJobType] = useState<string>("Full-time");
-  const [workplaceType, setWorkplaceType] = useState<string>("On-site");
+  const [jobType, setJobType] = useState<string>("");
+  const [workplaceType, setWorkplaceType] = useState<string>("");
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
