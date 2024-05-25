@@ -37,7 +37,7 @@ const JobContainer = ({ data }: TJobProps) => {
     }
   };
   return (
-    <Card className="bg-white w-[350px] h-[360px] flex flex-col justify-between rounded-xl">
+    <Card className="bg-white w-full h-[360px] flex flex-col justify-between rounded-xl">
       <CardHeader className="flex items-center flex-row gap-2">
         <img
           className="w-[60px] h-[60px] rounded-full object-cover border bg-gray-50"
