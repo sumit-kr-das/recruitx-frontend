@@ -3,6 +3,8 @@ import * as z from "zod";
 const CompanyRegisterSchema = z.object({
     name: z.string().min(4, {
         message: "Name must be at least 4 characters.",
+    }).max(40, {
+        message: "Name should not be more than 40 characters."
     }),
     email: z.string().min(4, {
         message: "Email must be 4 characters"
@@ -22,6 +24,8 @@ const CompanyRegisterSchema = z.object({
     }),
     designation: z.string({
         required_error: "Please enter designation"
+    }).min(3, {
+        message: "Designation should be more than 3 characters"
     }),
     pin: z.string().min(6, {
         message: "Pin must be 6 characters"
