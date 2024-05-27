@@ -74,7 +74,7 @@ const ForgotPassword = () => {
       const apiError = err as TApiError;
       toast({
         variant: "destructive",
-        description: apiError?.data.message,
+        description: apiError?.data.msg,
       });
     }
 
@@ -108,7 +108,7 @@ const ForgotPassword = () => {
       const apiError = err as TApiError;
       toast({
         variant: "destructive",
-        description: apiError?.data.message,
+        description: apiError?.data.msg,
       });
     }
   }

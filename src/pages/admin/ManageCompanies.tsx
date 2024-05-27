@@ -23,7 +23,7 @@ const ManageCompanies = () => {
       navigate("/dashboard/admin/approved_companies");
     } catch (err) {
       const apiError = err as TApiError;
-      toast.error(apiError.data.message);
+      toast.error(apiError?.data?.message);
     }
   };
 

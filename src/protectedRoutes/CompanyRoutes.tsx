@@ -9,7 +9,7 @@ const CompanyRoutes = ({ children }: TReactNodeProps) => {
   const role = useSelector(selectCurrentRole);
   const isVarified = useSelector(selectCurrentStatus);
   return role === "company" ? (
-    isVarified === "verified" || isVarified === "approved" ? (
+    isVarified === "verified" || isVarified === "approved" || isVarified === "block" ? (
       <>
         <Suspense fallback={<Loader />}>{children}</Suspense>
       </>

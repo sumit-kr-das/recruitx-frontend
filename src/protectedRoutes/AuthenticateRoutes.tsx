@@ -24,7 +24,7 @@ const AuthenticateRoutes = ({ children }: TReactNodeProps) => {
     ) : (
       <Navigate to="/verify-user" />
     )
-  ) : isVarified === "verified" || isVarified === "approved" ? (
+  ) : isVarified === "verified" || isVarified === "approved" || isVarified === "block" ? (
     <Navigate to="/dashboard" />
   ) : (
     <Navigate to="/verify-user" />

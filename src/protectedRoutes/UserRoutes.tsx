@@ -11,7 +11,6 @@ import Loader from "../components/loader/Loader";
 const UserRoutes = ({ children }: TReactNodeProps) => {
   const role = useSelector(selectCurrentRole);
   const isVarified = useSelector(selectCurrentStatus);
-
   return role === "user" ? (
     isVarified === "verified" ? (
       <>
