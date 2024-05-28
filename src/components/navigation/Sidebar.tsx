@@ -107,14 +107,25 @@ const Sidebar = () => {
             </Button>
           </Link>
           {role && (
-            <Button
-              onClick={handleLogout}
-              className="w-full justify-start text-lg gap-2"
-              variant="ghost"
-            >
-              <LogOut className="w-5 h-5" />
-              Log out
-            </Button>
+            <>
+              <Link to="/mnjuser/appliedJobs">
+                <Button
+                  className="w-full justify-start text-lg gap-2 mb-2"
+                  variant="ghost"
+                >
+                  <Building2 className="w-5 h-5" />
+                  Applied Jobs
+                </Button>
+              </Link>
+              <Button
+                onClick={handleLogout}
+                className="w-full justify-start text-lg gap-2"
+                variant="ghost"
+              >
+                <LogOut className="w-5 h-5" />
+                Log out
+              </Button>
+            </>
           )}
         </div>
       </SheetContent>
