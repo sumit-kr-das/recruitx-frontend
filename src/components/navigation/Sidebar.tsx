@@ -110,7 +110,7 @@ const Sidebar = () => {
           </Link>
           {role && (
             <>
-              <Link to="/mnjuser/jobs">
+              <Link to="/mnjuser/profile">
                 <Button
                   className="w-full justify-start text-lg gap-2 mb-2"
                   variant="ghost"
