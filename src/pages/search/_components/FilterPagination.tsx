@@ -22,7 +22,7 @@ const FilterPagination = () => {
   const paramsSalary = searchParams.get("minSalary") || "";
   const paramsExp = searchParams.get("minExprience") || "";
 
-  const { page, limit, total } = useSelector(selectCurrentUserJobsData);
+  const { page, total } = useSelector(selectCurrentUserJobsData);
 
   const totalPages = Math.ceil(total / 6);
   const [trigger, { data }] = useLazyWithFilterJobsQuery();
