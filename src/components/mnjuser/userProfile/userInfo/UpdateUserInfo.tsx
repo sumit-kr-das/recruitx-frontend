@@ -54,7 +54,7 @@ const UpdateUserInfo = ({ data }: TSetUserInfoProps) => {
       github: data[0]?.github || "",
       linkedIn: data[0]?.linkedIn || "",
       dateOfBirth: data[0]?.dateOfBirth || "",
-      age: data[0]?.age.toString() || "",
+      age: data[0]?.age?.toString() || "",
       address: data[0]?.address || "",
       bio: data[0]?.bio || "",
       objective: data[0]?.objective || "",

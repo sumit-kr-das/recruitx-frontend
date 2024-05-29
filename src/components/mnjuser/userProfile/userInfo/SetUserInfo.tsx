@@ -5,7 +5,6 @@ import OtherInfoSchema from "../../../../@types/zod/OtherInfoSchema";
 import { languageData } from "../../../../constants/languageData";
 import { qualificationData } from "../../../../constants/qualificationData";
 import { tagsData } from "../../../../constants/tagsData";
-import { useSetUserMutation } from "../../../../features/user/post/setUserInfoDataApiSlice";
 import { FormValue } from "../../../../pages/mnjuser/_components/OtherInfo";
 import { Button } from "../../../../ui/button";
 import {
@@ -28,6 +27,7 @@ import {
 import { Textarea } from "../../../../ui/textarea";
 import { useToast } from "../../../../ui/use-toast";
 import SelectInput from "../../../form/multiSelectInput/SelectInput";
+import { useUpdateUserInfoMutation } from "../../../../features/user/put/updateUserInfoDataApiSlice";
 
 type TSetUserInfoProps = {
   lang: string[];
@@ -37,8 +37,8 @@ type TSetUserInfoProps = {
 };
 
 const SetUserInfo = ({ lang, setLang, tags, setTags }: TSetUserInfoProps) => {
-  const [setUser] = useSetUserMutation();
   const { toast } = useToast();
+  const [updateUserInfo] = useUpdateUserInfoMutation();
 
   const form = useForm<z.infer<typeof OtherInfoSchema>>({
     resolver: zodResolver(OtherInfoSchema),
@@ -59,7 +59,8 @@ const SetUserInfo = ({ lang, setLang, tags, setTags }: TSetUserInfoProps) => {
 
   const submitForm: SubmitHandler<FormValue> = async (value) => {
     try {
-      await setUser(value).unwrap();
+      // await setUser(value).unwrap();
+      await updateUserInfo(value).unwrap();
       toast({
         description: "User information update success",
       });

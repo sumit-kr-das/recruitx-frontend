@@ -48,7 +48,7 @@ const OtherInfo = () => {
 
   return (
     <>
-      {data?.length !== 0 ? (
+      {data?.length !== 0 && data[0]?.age ? (
         <ViewInfo data={data} setTags={setTags} setLang={setLang} />
       ) : (
         <SetUserInfo
