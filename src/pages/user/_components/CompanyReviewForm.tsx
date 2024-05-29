@@ -22,7 +22,6 @@ const CompanyReviewForm = () => {
       description: desc,
       rates: currentValue,
     };
-    console.log(data);
     try {
       await setReview({ ...data }).unwrap();
       setCurrentValue(0);

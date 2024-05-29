@@ -60,7 +60,6 @@ const SetCompanyProfile = () => {
       ...values,
       teamSize: parseInt(values.teamSize),
     };
-    console.log(convertedData);
     try {
       await updateCompanyProfile(convertedData).unwrap();
       toast({

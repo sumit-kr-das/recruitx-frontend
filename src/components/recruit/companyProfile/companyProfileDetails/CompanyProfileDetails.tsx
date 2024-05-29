@@ -7,7 +7,6 @@ const CompanyProfileDetails = () => {
   const { data, isSuccess, isLoading } = useViewCompanyProfileQuery();
 
   if (isLoading) return <Loader />;
-  console.log(data);
   return isSuccess && data && data?.description ? (
     <ViewCompanyProfile data={data} />
   ) : (

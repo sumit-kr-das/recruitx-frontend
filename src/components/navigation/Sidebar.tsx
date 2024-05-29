@@ -1,11 +1,13 @@
 import {
   BadgeAlert,
+  Book,
   Briefcase,
   Building2,
   Home,
   LogOut,
   Menu,
   ShieldCheck,
+  UserCog,
 } from "lucide-react";
 import { Link } from "react-router-dom";
 import DefaultImg from "../../assets/user-default-profile.png";
@@ -108,12 +110,21 @@ const Sidebar = () => {
           </Link>
           {role && (
             <>
+              <Link to="/mnjuser/jobs">
+                <Button
+                  className="w-full justify-start text-lg gap-2 mb-2"
+                  variant="ghost"
+                >
+                  <UserCog className="w-5 h-5" />
+                  My Profile
+                </Button>
+              </Link>
               <Link to="/mnjuser/appliedJobs">
                 <Button
                   className="w-full justify-start text-lg gap-2 mb-2"
                   variant="ghost"
                 >
-                  <Building2 className="w-5 h-5" />
+                  <Book className="w-5 h-5" />
                   Applied Jobs
                 </Button>
               </Link>

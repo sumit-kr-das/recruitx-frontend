@@ -23,7 +23,6 @@ const FilterPagination = () => {
   const paramsExp = searchParams.get("minExprience") || "";
 
   const { page, limit, total } = useSelector(selectCurrentUserJobsData);
-  console.log(total, limit);
 
   const totalPages = Math.ceil(total / 6);
   const [trigger, { data }] = useLazyWithFilterJobsQuery();

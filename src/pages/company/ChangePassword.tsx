@@ -6,8 +6,15 @@ import { logout } from "../../features/auth/authSlice";
 import ChangePasswordSchema from "../../@types/zod/ChangePasswordSchema";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import * as z from "zod"
-import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "../../ui/form";
+import * as z from "zod";
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "../../ui/form";
 import { Input } from "../../ui/input";
 import { Button } from "../../ui/button";
 import { useToast } from "../../ui/use-toast";
@@ -18,9 +25,9 @@ import { useSelector } from "react-redux";
 import { selectCurrentRole } from "../../features/auth/authSlice";
 import { TApiError } from "../../@types/TApiError";
 type FormValue = {
-  newPassword: string,
-  oldPassword: string
-}
+  newPassword: string;
+  oldPassword: string;
+};
 const ChangePassword = () => {
   const [changePass] = useChangePassMutation();
   const [changeAdminPass] = useChangeAdminPassMutation();
@@ -32,13 +39,12 @@ const ChangePassword = () => {
     resolver: zodResolver(ChangePasswordSchema),
     defaultValues: {
       newPassword: "",
-      oldPassword: ""
+      oldPassword: "",
     },
-    mode: "onSubmit"
+    mode: "onSubmit",
   });
 
   const UpdatePassword = async (data: FormValue) => {
-    console.log(data)
     try {
       if (role === "company") {
         await changePass(data).unwrap();
@@ -46,17 +52,17 @@ const ChangePassword = () => {
         await changeAdminPass(data).unwrap();
       }
       toast({
-        description: "Password update successfull"
-      })
+        description: "Password update successfull",
+      });
       dispatch(logout());
     } catch (error: any) {
       const apiError = error as TApiError;
       toast({
         variant: "destructive",
-        description: apiError?.data?.message
-      })
+        description: apiError?.data?.message,
+      });
     }
-  }
+  };
 
   return (
     <Container>
@@ -67,7 +73,7 @@ const ChangePassword = () => {
       />
       <Card className="p-5 mt-5 w-full">
         <Form {...form}>
-          <form className="" onSubmit={form.handleSubmit(UpdatePassword)} >
+          <form className="" onSubmit={form.handleSubmit(UpdatePassword)}>
             <FormField
               control={form.control}
               name="newPassword"
@@ -95,7 +101,9 @@ const ChangePassword = () => {
               )}
             />
             <Button
-              type="submit" className="mt-4" disabled={!form.formState.isDirty}
+              type="submit"
+              className="mt-4"
+              disabled={!form.formState.isDirty}
             >
               Update
             </Button>

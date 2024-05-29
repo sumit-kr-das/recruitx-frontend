@@ -8,12 +8,15 @@ import {
   removeUserData,
   selectCurrentUserData,
 } from "../features/user/userSlice";
-import { selectCurrentCompanyData, removeCompanyData } from "../features/company/companySlice";
+import {
+  selectCurrentCompanyData,
+  removeCompanyData,
+} from "../features/company/companySlice";
 type TMenu = {
-  title: string,
-  src: string,
-  shortHand: string
-}
+  title: string;
+  src: string;
+  shortHand: string;
+};
 const RadixMenu = ({ menu }: { menu: TMenu[] }) => {
   const name = useSelector(selectCurrentUser);
   const { info } = useSelector(selectCurrentUserData);
@@ -21,12 +24,8 @@ const RadixMenu = ({ menu }: { menu: TMenu[] }) => {
   const dispatch = useDispatch();
 
   const handleLogOut = () => {
-    console.log("start");
-
     dispatch(logout());
     dispatch(removeUserData());
-    console.log("User remove");
-
     dispatch(removeCompanyData());
   };
   return (

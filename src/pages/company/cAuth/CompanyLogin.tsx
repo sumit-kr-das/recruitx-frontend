@@ -49,7 +49,6 @@ const CompanyLogin = () => {
       }
     } catch (err) {
       toast.error("Enter valid credentials");
-      console.log("Error on company login", err);
     }
   };
   return (
@@ -106,19 +105,21 @@ const CompanyLogin = () => {
                   <nav className="-mb-px flex items-center justify-center gap-6">
                     <div
                       onClick={() => setTab(false)}
-                      className={`${!tab
-                        ? "rounded-t-lg border text-sky-600 border-gray-300 border-b-white"
-                        : "border-transparent"
-                        } shrink-0 border  p-3 text-sm font-semibold text-gray-500  cursor-pointer`}
+                      className={`${
+                        !tab
+                          ? "rounded-t-lg border text-sky-600 border-gray-300 border-b-white"
+                          : "border-transparent"
+                      } shrink-0 border  p-3 text-sm font-semibold text-gray-500  cursor-pointer`}
                     >
                       Company
                     </div>
                     <div
                       onClick={() => setTab(true)}
-                      className={`${tab
-                        ? "rounded-t-lg border text-sky-600 border-gray-300 border-b-white"
-                        : "border-transparent"
-                        } font-semibold shrink-0 text-gray-500 p-3 text-sm cursor-pointer`}
+                      className={`${
+                        tab
+                          ? "rounded-t-lg border text-sky-600 border-gray-300 border-b-white"
+                          : "border-transparent"
+                      } font-semibold shrink-0 text-gray-500 p-3 text-sm cursor-pointer`}
                     >
                       Admin
                     </div>
